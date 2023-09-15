@@ -13,7 +13,7 @@
                 <ul class="navMenu">
                     <li><a href="#">메인</a></li>
                     <li><a href="#">이벤트</a></li>
-                    <li><a href="#">여행정보</a></li>
+                    <li><a href="/travel/list.tp">여행정보</a></li>
                     <li><a href="#">여행지도</a></li>
                     <li><a href="#">커뮤니티</a></li>
                     <li><a href="#">회원</a></li>

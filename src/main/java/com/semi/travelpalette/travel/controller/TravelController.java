@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.semi.travelpalette.common.domain.PageInfo;
 import com.semi.travelpalette.travel.domain.Travel;
-import com.semi.travelpalette.travel.domain.TravelPageInfo;
 import com.semi.travelpalette.travel.service.TravelService;
 
 @Controller
@@ -55,7 +55,7 @@ public class TravelController {
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
 		try {
 			int totalCount = tService.getTotalCount();
-			TravelPageInfo pageInfo = getPageInfo(currentPage, totalCount);
+			PageInfo pageInfo = getPageInfo(currentPage, totalCount);
 			List<Travel> tList = tService.travelAllListByNew(pageInfo);
 			if(tList.size() > 0) {
 				mv.addObject("pageInfo", pageInfo);
@@ -98,7 +98,7 @@ public class TravelController {
 	}
 	
 	
-	private TravelPageInfo getPageInfo(Integer currentPage, int totalCount) {
+	private PageInfo getPageInfo(Integer currentPage, int totalCount) {
 		//네비게이터 필요변수 : recordCountPerPage, naviCountPerPage, naviTotalCount, startNavi, endNavi
 		//고정변수
 		int recordCountPerPage = 10;
@@ -110,7 +110,7 @@ public class TravelController {
 		if (endNavi > naviTotalCount) {
 			endNavi = naviTotalCount;
 		}
-		TravelPageInfo pageInfo = new TravelPageInfo(naviTotalCount, currentPage, recordCountPerPage, naviCountPerPage, naviTotalCount, startNavi, endNavi);
+		PageInfo pageInfo = new PageInfo(naviTotalCount, currentPage, recordCountPerPage, naviCountPerPage, naviTotalCount, startNavi, endNavi);
 		return pageInfo;
 	}
 }

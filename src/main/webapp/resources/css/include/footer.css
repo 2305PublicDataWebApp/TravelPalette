@@ -3,6 +3,7 @@
         color: #E38B29;
     }
     .footerContainer{
+    	float: left;
         width: 100%;
         height: 330px;
         background-color: #FDEEDC;

@@ -2,8 +2,8 @@ package com.semi.travelpalette.travel.service;
 
 import java.util.List;
 
+import com.semi.travelpalette.common.domain.PageInfo;
 import com.semi.travelpalette.travel.domain.Travel;
-import com.semi.travelpalette.travel.domain.TravelPageInfo;
 
 public interface TravelService {
 
@@ -12,7 +12,7 @@ public interface TravelService {
 	 * @param tInfo 
 	 * @return
 	 */
-	List<Travel> travelAllListByNew(TravelPageInfo pageInfo);
+	List<Travel> travelAllListByNew(PageInfo pageInfo);
 
 	/**
 	 * 전체 레코드 개수 Service

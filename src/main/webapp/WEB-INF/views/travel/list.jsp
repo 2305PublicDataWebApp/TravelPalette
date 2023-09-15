@@ -9,9 +9,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>여행리스트</title>
         <link rel="stylesheet" href="../resources/css/travel/list.css" />
-        
+        <link rel="stylesheet" href="../resources/css/travel/header.css" />
+        <link rel="stylesheet" href="../resources/css/travel/nav.css" />
+        <link rel="stylesheet" href="../resources/css/travel/footer.css" />
     </head>
     <body>
+    	<!-- 헤더 -->
+        <jsp:include page="/include/header.jsp"></jsp:include>
+        
+        <!-- 네비 -->
+        <jsp:include page="/include/nav.jsp"></jsp:include>
+        
         <main>
             <div class="leftBox">
                 <div class="ListTitle">
@@ -121,7 +129,8 @@
                 </div>
             </div>
         </main>
-        
+        <!-- 푸터 -->
+        <jsp:include page="/include/footer.jsp"></jsp:include>
 		<script>
 			function travelRegGo() {
 				location.href = "/travel/insert.tp";

@@ -9,6 +9,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>상세페이지</title>
         <link rel="stylesheet" href="../resources/css/travel/detail.css" />
+        <link rel="stylesheet" href="../resources/css/travel/header.css" />
+        <link rel="stylesheet" href="../resources/css/travel/nav.css" />
+        <link rel="stylesheet" href="../resources/css/travel/footer.css" />
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -17,6 +20,12 @@
         />
     </head>
     <body>
+    	<!-- 헤더 -->
+        <jsp:include page="/include/header.jsp"></jsp:include>
+        
+        <!-- 네비 -->
+        <jsp:include page="/include/nav.jsp"></jsp:include>
+        
         <main>
             <div>
                 <h1 style="padding: 20px">${travel.travelName}</h1>
@@ -228,6 +237,8 @@
             </div>
         </main>
     </body>
+    <!-- 푸터 -->
+    <jsp:include page="/include/footer.jsp"></jsp:include>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d52709ffacc68e58aa4c5df1743f8ea"></script>
     <script>

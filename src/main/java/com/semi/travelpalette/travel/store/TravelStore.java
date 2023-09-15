@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.semi.travelpalette.common.domain.PageInfo;
 import com.semi.travelpalette.travel.domain.Travel;
-import com.semi.travelpalette.travel.domain.TravelPageInfo;
 
 public interface TravelStore {
 
@@ -15,7 +15,7 @@ public interface TravelStore {
 	 * @param tInfo 
 	 * @return
 	 */
-	List<Travel> travelAllListByNew(SqlSession sqlSession, TravelPageInfo pageInfo);
+	List<Travel> travelAllListByNew(SqlSession session, PageInfo pageInfo);
 
 	/**
 	 * 전체 레코드 개수 Store
@@ -30,7 +30,7 @@ public interface TravelStore {
 	 * @param travelNo
 	 * @return
 	 */
-	Travel selectTravelByNo(SqlSession sqlSession, int travelNo);
+	Travel selectTravelByNo(SqlSession session, int travelNo);
 
 	/**
 	 * 여행정보 등록 Store
@@ -38,6 +38,6 @@ public interface TravelStore {
 	 * @param travel
 	 * @return
 	 */
-	int insertTravel(SqlSession sqlSession, Travel travel);
+	int insertTravel(SqlSession session, Travel travel);
 
 }
