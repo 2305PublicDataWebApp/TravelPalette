@@ -2,4 +2,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CommunityMapper">
+	<resultMap type="Community" id="CommunityResultMap">
+		<id property="boardNo" column="BOARD_NO"/>
+		<result property="boardTitle" column="BOARD_TITLE" />	
+		<result property="boardType" column="BOARD_TYPE" />
+	</resultMap>
+	<select id="selectCommunityList" resultType="CommunityResultMap">
+		SELECT * FROM COMMUNITY_TBL WHERE BOARD_TYPE = #{boardType}
+	</select>
 </mapper>
