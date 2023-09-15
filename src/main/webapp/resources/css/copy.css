@@ -1,0 +1,238 @@
+header, nav, footer{
+    font-family: 'SUITE-Regular';
+}
+a:link, a:visited{
+    list-style: none;
+    text-decoration: none;
+}
+/* 애매할때 쓰는 글씨체 */
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+/* 네비 메뉴 글씨체*/
+@font-face {
+    font-family: 'HakgyoansimWoojuR';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/* 로고 및 두꺼운 동글동글 글씨 */
+@font-face {
+    font-family: 'KCC-Ganpan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/KCC-Ganpan.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/* 진한 메뉴글씨 */
+@font-face {
+    font-family: 'TmoneyRoundWindExtraBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindExtraBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+    ul{
+        list-style: none;
+        padding: 0;
+    }
+    /* 헤더 */
+    /* /////////////////////////////////////////////////////////////// */
+    .headerContainer{
+        margin:0 auto;
+        width: 1000px;
+        height: 120px;
+        padding-top: 30px;
+    }
+        .logoImg{
+            width: 45px;
+            float: left;
+            margin-top: 4px;
+        }
+        header h1{
+            font-family: 'KCC-Ganpan';
+            font-weight: 100;
+        }
+        .searchForm{
+            float: right;
+            text-align: center;
+            width:75px
+        }
+            .searchInput{
+                margin-top: 5px;
+                width: 260px;
+                height:34px;
+                border: 0px;
+                border-bottom: 1px solid #222;
+                background-color: inherit;
+            }
+    /* 네비 */
+    /* /////////////////////////////////////////////////////////////// */
+    .navContainer{
+        width: 100%;
+        height: 80px;
+        margin: 0 auto;
+        box-shadow: 0px 6px 5px rgba(0, 0, 0, 0.16);
+    }
+        nav ul {
+            margin: 0 auto;
+            width: 1000px;
+            height: 80px;
+            text-align: center;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+            nav .navMenu li {
+                display: inline-block;
+                width: 100px;
+                text-align: center;
+                font-family: 'HakgyoansimWoojuR';
+                font-size: 22px;
+                font-weight: 600;
+                padding: 25px 0px;
+                margin: 0px 22px;
+            }
+                nav ul li a:visited, nav ul li a:link{
+                    text-decoration: none;
+                    color: black;
+                }
+    .animatedNav {
+        width: 100%;
+        height: 0;
+        border-bottom: 2px solid #ccc;
+        overflow: hidden;
+        transition: height 0.8s, visibility 0.6s; /* 높이와 가시성에 대한 애니메이션 적용 */
+        visibility: hidden; /* 초기에는 숨김 상태로 설정 */
+        position: absolute;
+        top: 200px;
+        margin: 0 auto;
+        text-align: center;
+        background-color: white;
+        border-top: 1px solid #ccc;
+    }
+        .animatedNav ul li{
+            float: left;
+            width: 130px;
+            height: 100px;
+            font-size: 17px;
+            margin: 0px 5px;
+            line-height: 33px;
+        }
+            nav .menuContent {
+                padding: 5px;
+            }
+    .show {
+        height: 200px; /* 나타날 높이 */
+        visibility: visible; /* 나타날 때 가시성 변경 */
+    }
+    /* 푸터 */
+    footer a:link, footer a:visited{
+        color: #E38B29;
+    }
+    .footerContainer{
+        width: 100%;
+        height: 330px;
+        background-color: #FDEEDC;
+    }
+        .footerMenu{
+            width: 1000px;
+            height: 100%;
+            margin: 0 auto;
+        }
+            .footerMenu p{
+                font-size: 14px;
+                padding: 10px;
+                color: #E38B29;
+            }
+        footer ul li{
+            margin-left: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #E38B29;
+            padding-top: 38px;
+            /* float: left; */
+        }
+        footer ul li:not(:nth-of-type(5)) {
+            float: left;
+        }
+    .left{
+        float: left;
+    }
+    .footerIconContainer{
+        width: 35%;
+        height: 40px;
+        float: left;
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 52px;
+    }
+        .footerIconBG{
+            width: 46px; 
+            height: 46px; 
+            background-color: white; 
+            border-radius: 100%; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+            .footerIcon{
+                width: 40px;
+                float: left;
+            }
+
+    /* 참고사이트 */
+        .footerWebContainer{
+            width: 100%;
+            height: 150px;
+            float: left;
+            background-color: #FFD8A9;
+            border-radius: 10px;
+        }
+            .footerWebContainer p{
+                font-size: 18px;
+                padding: 10px;
+                color: #E38B29;
+                font-weight: 600;
+                float: left;
+                margin-left: 4px;
+            }
+        .tripAdvisor{
+            width: 230px;
+            float: left;
+            padding: 20px;
+            margin-top: 35px;
+        }
+        .naverContainer{
+            width: 220px;
+            height: 50px;
+            margin-top: 46px;
+            margin-left: 14px;
+            border-radius: 10px;
+        }
+            .naverLogo{
+                width: 120px;
+                padding-left: 3px;
+                margin-top: 10px;
+                padding-top: 6px;
+                float: left;
+            }
+            .naverText{
+                width: 84px;
+                margin-top: 14px;
+                float: left;
+                margin-left: 5px;
+            }
+        .interPartTour{
+            width: 230px;
+            padding: 21px;
+            margin-left: 3px;
+            margin-top: 29px;
+        }
+        .myRealTrip{
+            width: 130px;
+            margin-top: 33px;
+            margin-left: 13px;
+        }

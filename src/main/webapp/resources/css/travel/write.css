@@ -1,0 +1,53 @@
+@charset "UTF-8";
+body {
+    font-family: Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+}
+form {
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #fff;
+}
+input[type="text"],
+textarea {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+input[type="submit"]{
+    background-color: #000000b1;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+input[type="submit"]:hover{
+    background-color: #000000;
+}
+.button-container {
+    text-align: center; /* 우측 정렬 */
+    margin-top: 20px;
+    padding-top: 10px; /* 위 여백 추가 */
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+li {
+    margin-bottom: 10px;
+}
+
+.tagsCheck {
+    padding-right: 20px;
+}

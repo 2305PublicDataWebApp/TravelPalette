@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TravelMapper">
+	<resultMap type="Travel" id="TravelResutMap">
+		<id 	property="travelNo" 		column="TRAVEL_NO"/>
+		<result property="travelName" 		column="TRAVEL_NAME"/>
+		<result property="travelAddr" 		column="TRAVEL_ADDR"/>
+		<result property="travelInfo" 		column="TRAVEL_INFO"/>
+		<result property="travelUrl" 		column="TRAVEL_URL"/>
+		<result property="travelTel" 		column="TRAVEL_TEL"/>
+		<result property="travelUsingTime"  column="TRAVEL_USING_TIME"/>
+		<result property="travelHoliday"    column="TRAVEL_HOLIDAY"/>
+		<result property="travelParking" 	column="TRAVEL_PARKING"/>
+		<result property="travelLocation" 	column="TRAVEL_LOCATION"/>
+		<result property="travelTags" 		column="TRAVEL_TAGS"/>
+		<result property="travelCreateDate" column="TRAVEL_CREATE_DATE"/>
+		<result property="travelUpdateDate" column="TRAVEL_UPDATE_DATE"/>
+		<result property="travelViewCount"  column="TRAVEL_VIEW_COUNT"/>
+		<result property="travelStatus"  	column="TRAVEL_STATUS"/>
+		<result property="BoardType" 		column="BOARD_TYPE"/>
+	</resultMap>
+	
+	<select id="travelAllListByNew" resultMap="TravelResutMap">
+		SELECT	 * 
+		FROM 	 TRAVEL_TBL 
+		ORDER BY TRAVEL_CREATE_DATE DESC
+	</select>
+	
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM TRAVEL_TBL
+	</select>
+	
+	<select id="selectTravelByNo" resultMap="TravelResutMap">
+		SELECT	* 
+		FROM 	TRAVEL_TBL 
+		WHERE	TRAVEL_NO = #{travelNo}
+	</select>
+	
+	<insert id="insertTravel">
+		INSERT INTO TRAVEL_TBL 
+		VALUES (SEQ_TRAVEL_NO.NEXTVAL, #{travelName}, #{travelAddr}, #{travelInfo}, #{travelUrl}, #{travelTel}, #{travelUsingTime}
+				, #{travelHoliday} , #{travelParking}, #{travelLocation}, #{travelTags}, DEFAULT, DEFAULT, 0, DEFAULT, DEFAULT )
+	</insert>
+</mapper>

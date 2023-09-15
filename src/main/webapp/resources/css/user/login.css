@@ -1,0 +1,69 @@
+@charset "UTF-8";
+a {
+    text-decoration: none;
+    color: black;
+}  
+input {
+    border : thin solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+}
+.flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}      
+label {
+    width: 150px;
+}
+
+.link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.link > a {
+    width: 110px;
+}
+.btnBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.w-line {
+    border-left : thin solid #ccc;
+    border: thin solid #ccc;
+    width : 135px;  
+    height: 1px;        
+    margin: 10px;            
+}
+#or {
+    display: flex;
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    align-items: center;
+    /* height: 10vh; */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#or > p {
+    text-align: center; /* 텍스트를 가로로 가운데 정렬 */
+    line-height: 100%; /* 화면 높이를 기준으로 세로 가운데 정렬 */
+    margin: 0; /* 기본 마진 제거 */
+}
+.loginBox {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 250px;
+    justify-content: space-around;
+}
+.loginBtn {
+    width: 100%;
+}
+input::placeholder {
+    font-size: 80%;
+    padding: 5px;
+}

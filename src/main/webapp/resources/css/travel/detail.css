@@ -1,0 +1,267 @@
+* {
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 0;
+    text-decoration: none;
+}
+main {
+    width: 1000px;
+    --border: 1px solid black;
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+#like, #view {
+    display: inline-block;
+    padding: 10px;
+}
+
+.menuTab ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    list-style-type: none;
+}
+
+.menuTab li {
+    flex: 1;
+    text-align: center;
+}
+
+.menuTab a {
+    display: block; /* 링크를 블록 수준 요소로 설정하여 전체 li 영역에 링크를 확장 */
+    margin-top: 20px;
+    padding: 10px 20px; /* 원하는 패딩 설정 */
+    background-color: #f0f0f0; /* 배경색 설정 */
+    color: #333; /* 텍스트 색상 설정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+}
+
+
+.carousel-inner .carousel-item img {
+    height: 500px; /* 원하는 높이로 설정 */
+    width: auto; /* 가로 크기를 자동으로 조정하여 원래 비율을 유지 */
+}
+
+#detailInfo {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+#detailInfo p {
+    text-align: left;
+}
+
+#infoList {
+    width: 100%;
+    float: left;
+}
+#infoList ul {
+    padding: 0;
+    list-style-type: square;
+}
+#infoList li {
+    display: flex; /* li 요소를 flex 컨테이너로 설정하여 가로 정렬 */
+    justify-content: flex-start; /* 내용물을 왼쪽 정렬 */
+    align-items: center; /* 내용물을 수직 가운데 정렬 */
+    margin-bottom: 10px; /* 각 li 요소 아래에 여백 추가 */
+}
+
+#infoList label {
+    flex: 0 0 120px; /* 레이블 요소의 공통 가로 크기 설정 */
+    text-align: left; /* 레이블 텍스트를 오른쪽 정렬 */
+    padding-right: 10px; /* 레이블과 내용물 사이의 여백 추가 */
+}
+
+#infoList span {
+    flex: 1; /* 내용물을 남은 공간을 모두 채우도록 설정 */
+    text-align: left;
+}
+#keyWord {
+    text-align: left; 
+    font-weight: bolder;
+    font-size: 20px;
+}
+#infoMap, .infoLike {
+    margin-bottom: 40px;
+}
+/* 리뷰등록칸(미작성) */
+.reviewRegister {
+    margin-top: 40px;
+    width: 100%;
+    height: 250px;
+    background-color: #eee;
+}
+
+#selectedRating {
+    font-size: 35px;
+    padding-right: 10px;
+    font-weight: 600;
+}
+.reviewRegister .reviewContent {
+    height: 140px;
+}
+.reviewRegister textarea {
+    width: 80%;
+    height: 140px;
+    float: left;
+    border: none; /* 테두리 제거 */
+    outline: none; /* 선택 시 테두리 제거 */
+    resize: none; /* 크기 조절 비활성화 */
+    padding: 15px;
+    margin-left: 50px;
+}
+/*별점(공통으로 일단 써둠)*/
+.starRating, .myStarRating {
+    direction: rtl; /*Right to Left : 별점이 반대로 찍히는 것을 반전해줌*/
+    margin-bottom: 10px;
+    width: 100%;
+    height: 70px;
+}
+.starRating input[type=radio], .myStarRating input[type=radio], .infoLike input[type=radio]{
+    display: none; /*라디오박스 감추기*/
+}
+.starRating label, .myStarRating label{
+    font-size: 2.8em;
+    color: transparent;
+    text-shadow: 0 0 0 #ccc;
+}
+.starRating label:hover, .myStarRating label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+.starRating label:hover ~ label, .myStarRating label:hover ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+.starRating input[type=radio]:checked ~ label, .myStarRating input[type=radio]:checked ~ label {
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+
+/* 등록한 나의 리뷰칸(작성완) */
+.myReview {
+    margin-top: 40px;
+    width: 100%;
+    height: 260px;
+    background-color: #eee;
+    
+}
+
+.myReviewContent {
+    width: 100%;
+    height: 140px;
+}
+.myReview textarea, .reviewList textarea {
+    float: left;
+    border: none; /* 테두리 제거 */
+    outline: none; /* 선택 시 테두리 제거 */
+    resize: none; /* 크기 조절 비활성화 */
+}
+.myReview textarea{
+    background-color: transparent;
+    width: 80%;
+    height: 140px;
+    margin-left: 50px;
+}
+.myReviewReg {
+    width: 100%;
+    text-align: left;
+    padding-left: 50px;
+}
+
+/*회원들의 리뷰 리스트*/
+.reviewList {
+    margin-top: 40px;
+    padding: 10px;
+}
+
+.reviewList ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.reviewList ul li {
+    border-bottom: 1px solid black;
+    padding: 15px 0 15px 0;
+}
+.revStarRating {
+    display: flex;
+    align-items: left;
+    padding-left: 10px;
+}
+
+.revStarRating label {
+    margin: 0; /* 별표 간격 제거 */
+    padding: 0; /* 별표 padding 제거 */
+    color: gold; /* 선택된 별표를 다른 색으로 표시 */
+    float: left; /*왼쪽정렬안됨 추후 확인*/
+}
+
+.reviewList textarea{
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+}
+
+.reviewContent {
+    width: 100%;
+    height: 100px;
+}
+
+.reviewReg {
+    width: 100%;
+    height: 25px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.reviewReg span {
+    float: left;
+    padding-right: 25px;
+}
+
+/*리뷰네비게이터*/
+.reviewNav ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    height: 50px;
+    padding: 0;
+    justify-content: center;
+}
+
+.reviewNav ul li{
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
+.reviewNav li a {
+    margin: 10px;
+    padding: 5px 10px 5px 10px;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+/* 정보글 평가 */
+.infoLike {
+    margin-top: 40px;
+    width: 100%;
+}
+
+.infoLike label{
+    font-size: 3em;
+}
+.likeDislike {
+    display: flex;
+    justify-content: center;
+}
+.like {
+    float: left;
+    padding: 5px 15px 5px 15px;
+}
+.like span {
+    font-size: 30px;
+    font-weight: bold;
+}

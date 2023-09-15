@@ -1,0 +1,108 @@
+@charset "EUC-KR";
+	footer a:link, footer a:visited{
+        color: #E38B29;
+    }
+    .footerContainer{
+        width: 100%;
+        height: 330px;
+        background-color: #FDEEDC;
+    }
+        .footerMenu{
+            width: 1000px;
+            height: 100%;
+            margin: 0 auto;
+        }
+            .footerMenu p{
+                font-size: 14px;
+                padding: 10px;
+                color: #E38B29;
+            }
+        footer ul li{
+            margin-left: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #E38B29;
+            padding-top: 38px;
+            /* float: left; */
+        }
+        footer ul li:not(:nth-of-type(5)) {
+            float: left;
+        }
+    .left{
+        float: left;
+    }
+    .footerIconContainer{
+        width: 35%;
+        height: 40px;
+        float: left;
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 52px;
+    }
+        .footerIconBG{
+            width: 46px; 
+            height: 46px; 
+            background-color: white; 
+            border-radius: 100%; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+            .footerIcon{
+                width: 40px;
+                float: left;
+            }
+
+   		/* 참고사이트 */
+        .footerWebContainer{
+            width: 100%;
+            height: 150px;
+            float: left;
+            background-color: #FFD8A9;
+            border-radius: 10px;
+        }
+            .footerWebContainer p{
+                font-size: 18px;
+                padding: 10px;
+                color: #E38B29;
+                font-weight: 600;
+                float: left;
+                margin-left: 4px;
+            }
+        .tripAdvisor{
+            width: 230px;
+            float: left;
+            padding: 20px;
+            margin-top: 35px;
+        }
+        .naverContainer{
+            width: 220px;
+            height: 50px;
+            margin-top: 46px;
+            margin-left: 14px;
+            border-radius: 10px;
+        }
+            .naverLogo{
+                width: 120px;
+                padding-left: 3px;
+                margin-top: 10px;
+                padding-top: 6px;
+                float: left;
+            }
+            .naverText{
+                width: 84px;
+                margin-top: 14px;
+                float: left;
+                margin-left: 5px;
+            }
+        .interPartTour{
+            width: 230px;
+            padding: 21px;
+            margin-left: 3px;
+            margin-top: 29px;
+        }
+        .myRealTrip{
+            width: 130px;
+            margin-top: 33px;
+            margin-left: 13px;
+        }

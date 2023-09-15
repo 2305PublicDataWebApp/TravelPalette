@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <link rel="stylesheet" href="../resources/css/copy.css">
+    </head>
+    <body>
+        <!-- 헤더 -->
+        <jsp:include page="/include/header.jsp"></jsp:include>
+        
+        <!-- 네비 -->
+        <jsp:include page="/include/nav.jsp"></jsp:include>
+  
+        <!-- 메인 -->
+        <main>
+            <div></div>
+        </main>
+        <!-- 푸터 -->
+        <footer>
+            <div class="footerContainer">
+                <div class="footerMenu">
+                    <div style="width: 65%;height: 150px;float: left;">
+                        <ul>
+                            <li><a href="#">개인정보 처리방침</a> &nbsp;&nbsp;|</li>
+                            <li><a href="#">저작권 안내</a> &nbsp;&nbsp;|</li>
+                            <li><a href="#">이용약관</a> &nbsp;&nbsp;|</li>
+                            <li><a href="#">고객센터</a> &nbsp;&nbsp;|</li>
+                            <li style="padding-left: 440px;"><a href="#">회사 소개</a></li>
+                        </ul>
+                        <p>COPYRIGHT ⓒ TRAVEL PALLETE BACK-END JSH. ALL RIGHTS RESERVED.</p>
+                    </div>
+                    <div class="footerIconContainer">
+                        <div class="footerIconBG">
+                            <a href="#">
+                                <img class="footerIcon" src="../resources/images/main/instagram.png" alt="">
+                            </a>
+                        </div>
+                        <div class="footerIconBG">
+                            <a href="#">
+                                <img class="footerIcon" src="../resources/images/main/youtube.png" alt="">
+                            </a>
+                        </div>
+                        <div class="footerIconBG">
+                            <a href="#">
+                                <img class="footerIcon" src="../resources/images/main/kakao-talk.png" alt="">
+                            </a>
+                        </div>
+                        <div class="footerIconBG">
+                            <a href="#">
+                                <img class="footerIcon" src="../resources/images/main/naver.png" alt="">
+                            </a>
+                        </div>
+                        <div class="footerIconBG">
+                            <a href="#">
+                                <img class="footerIcon" src="../resources/images/main/facebook.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footerWebContainer">
+                        <p>참고한 사이트</p>
+                        <div>
+                            <a href="#">
+                                <img class="tripAdvisor" src="../resources/images/main/tripadvisor.svg" alt="">
+                            </a>
+                            <div class="left naverContainer">
+                                <a href="#">
+                                    <img class="naverLogo" src="../resources/images/main/naver_pc.svg" alt="">
+                                    <img class="naverText" src="../resources/images/main/naver_traveltext_pc.svg" alt="">
+                                </a>
+                            </div>
+                            <a href="#">
+                                <img class="interPartTour" src="../resources/images/main/logo_tour.png" alt="">
+                            </a>
+                            <a href="#">
+                                <img class="myRealTrip" src="../resources/images/main/myrealtrip.svg" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+			    const liElements = document.querySelectorAll('nav ul li');
+			    const navArea = document.getElementById('navArea');
+			
+			    let hoverIntent = false;
+			
+			    liElements.forEach(li => {
+			        li.addEventListener('mouseenter', () => {
+			            hoverIntent = true;
+			            navArea.classList.add('show');
+			            navArea.style.zIndex = 2;
+			        });
+			
+			        li.addEventListener('mouseleave', () => {
+			            hoverIntent = false;
+			            setTimeout(() => {
+			                if (!hoverIntent) {
+			                    navArea.classList.remove('show');
+                            }
+                            // navArea.style.zIndex = -1;
+				            }, ); // Add a delay before hiding to allow time for moving to menu_text
+				        });
+				    });
+			
+                    navArea.addEventListener('mouseenter', () => {
+			        hoverIntent = true;
+			    });
+			
+			    navArea.addEventListener('mouseleave', () => {
+			        hoverIntent = false;
+			        setTimeout(() => {
+			            if (!hoverIntent) {
+			                navArea.classList.remove('show');
+			            }
+                        // navArea.style.zIndex = -1;
+			        }, ); // Add a delay before hiding to allow time for moving to menu_text
+			    });
+			});
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    </body>
+</html>
