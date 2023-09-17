@@ -40,7 +40,7 @@
                 </div>
                 <div style="width: 100%;float: left;border-top: 1px solid #ccc;margin-top: 15px;padding: 10px 0px">
                     <p style="float:left;font-size: 18px;margin: 0;padding: 5px;font-weight: 600;font-family: 'SUITE-Regular';letter-spacing: 2px;padding-left: 15px;">#12건</p>
-                    <button type="button" style="float: right;width: 80px;" class="btn btn-primary">글 등록</button>
+                    <button id="goInsertBoardPage" type="button" style="float: right;width: 80px;" class="btn btn-primary">글 등록</button>
                     <p style="margin: 0;padding: 7px 13px 0px 8px;margin-left: 3px;float: right;">
                         <a href="#">최신순 </a>|
                         <a href="#">추천순</a> 
@@ -159,6 +159,11 @@
 			        }, ); // Add a delay before hiding to allow time for moving to menu_text
 			    });
 			});
+            
+            document.getElementById("goInsertBoardPage").addEventListener("click", function() {
+                location.href= "/community/insert.tp";
+            });
+            
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     </body>

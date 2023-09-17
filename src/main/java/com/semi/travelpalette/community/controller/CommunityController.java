@@ -88,11 +88,11 @@ public class CommunityController {
             ,@ModelAttribute Community community) {
         
         try {
-            int totalCount = cService.getListCountByBoardType(community.getBoardTitle());
+            int maxNo = cService.selectMaxNo();
             int result = cService.insertBoard(community);
             
             if(result > 0) {
-                mv.setViewName("redirect:/community/detail.tp?boardType="+community.getBoardType()+"&boardNo="+(totalCount+1));
+                mv.setViewName("redirect:/community/detail.tp?boardType="+community.getBoardType()+"&boardNo="+(maxNo+1));
                 return mv;
             }else {
                 mv.addObject("msg", "게시물 등록에 실패하였습니다.");

@@ -24,33 +24,33 @@
                 <button id="goBackButton" style="float: right;margin: 49px 10px 0px 0px;" type="button" class="btn btn-primary">목록으로</button>
                 <!-- <button style="float: right;margin: 47px 10px 0px 0px;" type="button" class="btn btn-info">수정하기</button> -->
             </div>
-            <form action="/community/insert.tp" method="post">
+            <form name="insertForm" action="/community/insert.tp" method="post">
                 <div style="width: 100%;margin: 0 auto;">
                     <div class="form-floating mb-3">
-                        <input name="boardTitle" type="text" style="border: 1px solid #ccc;" class="form-control" id="floatingInput" placeholder="제목을 입력해주세요">
-                        <label for="floatingInput">제목</label>
+	                    <input name="boardTitle" type="text" style="border: 1px solid #ccc;" class="form-control" id="floatingInput" placeholder="제목을 입력해주세요">
+	                    <label for="floatingInput" id="boardTitleLable">제목</label>
                       </div>
                 </div>
                    <div class="form-floating" style="margin-top: 25px;">
-                   <select name="boardType" class="form-select" id="floatingSelect" aria-label="Floating label select example" style="border: 1px solid #ccc;">
+                   <select id="boardSelect" name="boardType" class="form-select" aria-label="Floating label select example" style="border: 1px solid #ccc;">
                       <option selected>게시판을 선택해주세요!</option>
                       <option value="QnABoard">질의문답 게시판</option>
                       <option value="travelCompanion">동행 구인 게시판</option>
                       <option value="travelVerification">여행 인증 게시판</option>
                     </select>
-                    <label for="floatingSelect">게시판 종류</label>
+                    <label>게시판 종류</label>
                  </div>
-                 <div class="input-group mb-3" style="margin-top: 25px;">
-                    <img src="../resources/images/community/fileadd.png" style="width: 25px;height: 25px;margin-top: 6px;margin-right: 10px;" alt="">
-                    <input type="file" class="form-control" id="inputGroupFile02" style="border: 1px solid #ccc;">
+                 <div id="imageFile" class="input-group mb-3" style="margin-top: 25px;display:none;">
+                    <img src="../resources/images/community/fileadd.png" style="width: 25px;height: 25px;margin-top: 6px;margin-right: 10px;float:left" alt="">
+                    <input type="file" class="form-control" id="inputGroupFile02" style="border: 1px solid #ccc;width: 925px;">
                     <!-- <label class="input-group-text" for="inputGroupFile02">Upload</label> -->
                  </div>
                  <div class="form-floating">
-                    <textarea name="boardContent" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;border: 1px solid #ccc;margin-top: 25px;height: 500px;resize: none;"></textarea>
-                    <label for="floatingTextarea2">내용을 입력해주세요</label>
+                    <textarea name="boardContent" class="form-control" placeholder="Leave a comment here" style="height: 100px;border: 1px solid #ccc;margin-top: 25px;height: 500px;resize: none;"></textarea>
+                    <label id="boardContentLable">내용을 입력해주세요</label>
                  </div>
                 <div style="width: 1000px;margin: 0 auto;text-align: center;margin-top: 70px;">
-                    <button class="btn btn-primary btn-lg">글 등록</button>
+                    <button id="insertBtn" type="button" class="btn btn-primary btn-lg">글 등록</button>
                 </div>
             </form>
         </main>
@@ -100,6 +100,62 @@
             
             document.getElementById("goBackButton").addEventListener("click", function() {
                 history.go(-1); // 뒤로가기
+            });
+            
+            //select에 따른 자바스크립트
+            var selectBoard = document.getElementById("boardSelect");
+            selectBoard.addEventListener("change", function () {
+                // 선택한 옵션 값 가져오기
+                var selectedOption = selectBoard.value;
+
+                // 제목과 textarea의 요소 가져오기
+                var boardTitleInput = document.getElementById("boardTitleLable");
+                var boardContentLable = document.getElementById("boardContentLable");
+                var boardContentTextarea = document.getElementsByName("boardContent")[0];
+                
+                // 선택한 값에 따라 다른 내용 설정
+                if (selectedOption === "QnABoard") {
+                    boardTitleInput.textContent = "질문을 입력해주세요";
+                    boardContentLable.textContent = "궁금한 질문을 적어주세요";
+                    document.getElementById("imageFile").style.display = "none";
+                    boardContentTextarea.value = "";
+                } else if (selectedOption === "travelCompanion") {
+                    boardTitleInput.textContent = "동행 구인 글 제목을 입력해주세요";
+                    boardContentTextarea.value = "예상 동행 인원 :\n\n주로 활동하는 날 :\n\n모임의 특징 :\n\n예상 회비 :\n\n전화번호 :";
+                    document.getElementById("imageFile").style.display = "none";
+                } else if (selectedOption === "travelVerification") {
+                    boardTitleInput.textContent = "여행 인증 글 제목을 입력해주세요";
+                    boardContentLable.textContent = "신나는 여행 일기를 적어보세요";
+                    document.getElementById("imageFile").style.display = "block";
+                    boardContentTextarea.value = "";
+                } else {
+                    boardTitleInput.textContent = "제목을 입력해주세요";
+                    boardContentLable.textContent = "내용을 입력해주세요";
+                    document.getElementById("imageFile").style.display = "none";
+                    boardContentTextarea.value = "";
+                }
+            });
+            
+            // 유효성 체크
+            var submitButton = document.querySelector("#insertBtn"); // 버튼 선택
+            submitButton.addEventListener("click", function(event) {
+                var boardTitleInput = document.querySelector("input[name='boardTitle']");
+                var boardSelect = document.querySelector("select[name='boardType']");
+                var boardContentTextarea = document.querySelector("textarea[name='boardContent']");
+                // 버튼 클릭 시 실행되는 함수
+                if (boardTitleInput.value.trim() === "") {
+                    alert("제목을 입력해주세요.");
+                    return; // submit 막기
+                } else if (boardSelect.value === "게시판을 선택해주세요!") {
+                    alert("게시판을 선택해주세요.");
+                    return; // submit 막기
+                } else if (boardContentTextarea.value.trim() === "") {
+                    alert("내용을 입력해주세요.");
+                    return; // submit 막기
+                }
+                // 모든 조건이 충족되면 폼을 제출
+                const form = document.insertForm;
+                form.submit();
             });
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

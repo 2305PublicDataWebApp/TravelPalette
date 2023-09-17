@@ -55,4 +55,11 @@ public interface CommunityStore {
      */
     int deleteBoard(SqlSession session, Community community);
 
+    /**
+     * 게시물 max 번호 불러오기 Store
+     * @param session
+     * @return
+     */
+	int selectMaxNo(SqlSession session);
+
 }

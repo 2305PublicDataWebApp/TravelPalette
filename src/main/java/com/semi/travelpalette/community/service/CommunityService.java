@@ -49,4 +49,10 @@ public interface CommunityService {
      */
     int deleteBoard(Community community);
 
+    /**
+     * max 게시물 번호 불러오기 Service
+     * @return
+     */
+	int selectMaxNo();
+
 }

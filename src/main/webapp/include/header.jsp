@@ -12,9 +12,11 @@
 		<header style="border-bottom: 1px solid #ccc;">
             <div class="headerContainer">
                 <div style="float:left;position: relative;">
-                    <img class="logoImg" src="../resources/images/main/pallete.png" alt="">
-                    <h1 style="width: 250px;">여행팔레트</h1>
-                    <img style="position: absolute;z-index: -1;top: -52px;width: 300px;opacity: 0.8;" src="../resources/images/main/수채화1.png" alt="">
+                	<a href="/">
+	                    <img class="logoImg" src="../resources/images/main/pallete.png" alt="">
+	                    <h1 style="width: 250px;">여행팔레트</h1>
+	                    <img style="position: absolute;z-index: -1;top: -52px;width: 300px;opacity: 0.8;" src="../resources/images/main/수채화1.png" alt="">
+                	</a>
                 </div>
                 <div style="float:right;">
                     <input type="text" class="searchInput" placeholder="가보고 싶은 여행지 있으신가요?">

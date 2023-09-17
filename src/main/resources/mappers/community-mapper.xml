@@ -27,6 +27,9 @@
     <select id="selectOneByClass" resultMap="CommunityResultMap">
         SELECT * FROM COMMUNITY_TBL WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y'
     </select>
+    <select id="selectMaxNo">
+    	SELECT MAX(BOARD_NO) FROM COMMUNITY_TBL;
+    </select>
     <insert id="insertBoard">
         INSERT INTO COMMUNITY_TBL VALUES(SEQ_BOARD_NO.NEXTVAL, #{boardTitle}, #{boardType}, #{boardContent}, 'id', 'nickname', DEFAULT, DEFAULT, DEFAULT, DEFAULT, #{boardFileName}, #{boardFileRename}, #{boardFilePath}, #{BoardFileLength})
     </insert>

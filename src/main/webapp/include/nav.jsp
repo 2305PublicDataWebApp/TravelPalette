@@ -42,16 +42,16 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/community/qList.tp">
+                            <a href="/community/qList.tp?boardType=travelVerification">
                                 커뮤니티 홈<br>
                             </a>
-                            <a href="/community/qList.tp">
+                            <a href="/community/qList.tp?boardType=travelVerification">
                                 여행 인증 게시판<br>
                             </a>
                             <a href="/community/qList.tp">
                                 질의문답 게시판<br>
                             </a>
-                            <a href="/community/qList.tp">
+                            <a href="/community/qList.tp?boardType=travelCompanion">
                                 동행 구인 게시판
                             </a>
                         </li>

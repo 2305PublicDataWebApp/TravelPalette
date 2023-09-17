@@ -55,4 +55,10 @@ public class CommunityServiceImpl implements CommunityService{
         return result;
     }
 
+	@Override
+	public int selectMaxNo() {
+		int max = cStore.selectMaxNo(session);
+		return max;
+	}
+
 }

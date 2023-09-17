@@ -54,4 +54,10 @@ public class CommunityStoreLogic implements CommunityStore{
         return result;
     }
 
+	@Override
+	public int selectMaxNo(SqlSession session) {
+		int maxNo = session.selectOne("CommunityMapper.selectMaxNo");
+        return maxNo;
+	}
+
 }

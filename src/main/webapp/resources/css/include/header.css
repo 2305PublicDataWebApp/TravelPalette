@@ -33,6 +33,7 @@ header, nav, footer{
 a:link, a:visited{
     list-style: none;
     text-decoration: none;
+    color: black;
 }
 ul{
     list-style: none;

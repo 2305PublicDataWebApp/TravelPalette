@@ -169,7 +169,7 @@
             });
             document.getElementById("deleteButton").addEventListener("click", function() {
             	if(confirm("게시물을 삭제하시겠습니까?")){            		
-                	location.href= "/community/modify.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
+                	location.href= "/community/delete.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
             	}
             });
         </script>
