@@ -21,49 +21,52 @@
         <!-- 메인 -->
         <main>
             <div style="width: 1000px;margin: 0 auto;">
-                <div style="width: 100%;height: 135px;">
-                    <h4 style="float: left;font-family: 'TmoneyRoundWindExtraBold';font-size: 28px;padding: 20px;margin-top: 30px;">
-                        <c:if test="${community.boardType eq 'QnABoard'}">                
-                            질의문답 게시판
-                        </c:if>
-                        <c:if test="${community.boardType eq 'travelCompanion'}">                
-                            동행 구인 게시판
-                        </c:if>
-                        <c:if test="${community.boardType eq 'travelVerification'}">                
-                            여행 인증 게시판
-                        </c:if>
-                    </h4>
-                    <button id="goBackButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-primary">목록으로</button>
-                    <button style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-info">수정하기</button>
-                </div>
-                <table class="table caption-top" style="padding: 0px 20px;font-family: 'SUITE-Regular';font-size: 18px;">
-                    <thead style="--bs-table-bg: rgba(224, 224, 224, 0.32);border: 1px solid #eee;border-bottom: 2px solid #ccc;">
-                      <tr>
-                        <th scope="col" style="text-align: left;width: 600px;padding-left: 20px;">
-                            제목 : ${community.boardTitle}
-                        </th>
-                        <th scope="col" style="text-align: center;width: 170px;">
-                            날짜 : 
-                            <fmt:formatDate pattern="20YY-MM-dd" value="${community.boardCreateDate}" />
-                        </th>
-                        <th scope="col" style="text-align: center;width: 150px;">조회수 : ${community.viewCount}&nbsp;</th>
-                      </tr>
-                    </thead>
-                    <tbody style="text-align: left;height: 600px;border: 1px solid #ccc;border-bottom-left-radius: 10px;">
-                      <tr>
-                        <td colspan="3" style="padding: 20px;">
-                            <c:if test="${community.boardType eq 'travelVerification'}">                
-                                <div style="width: 200px;height: 120px;border: 1px solid red;border-radius: 5px;float: left;margin: 10px;"></div>
-                                <div style="width: 200px;height: 120px;border: 1px solid red;border-radius: 5px;float: left;margin: 10px;margin-left: 10px;"></div>
-                                <div style="width: 200px;height: 120px;border: 1px solid red;border-radius: 5px;margin: 10px;margin-left: 450px;"></div>
-                            </c:if>
-                            <span style="padding: 0px 10px;">
-                                ${community.boardContent}
-                            </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+	        	<form action="/community/modify.tp" method="get">
+	                <div style="width: 100%;height: 135px;">
+	                    <h4 style="float: left;font-family: 'TmoneyRoundWindExtraBold';font-size: 28px;padding: 20px;margin-top: 30px;">
+	                        <c:if test="${community.boardType eq 'QnABoard'}">                
+	                            질의문답 게시판
+	                        </c:if>
+	                        <c:if test="${community.boardType eq 'travelCompanion'}">                
+	                            동행 구인 게시판
+	                        </c:if>
+	                        <c:if test="${community.boardType eq 'travelVerification'}">                
+	                            여행 인증 게시판
+	                        </c:if>
+	                    </h4>
+	                    <button id="goBackButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-primary">목록으로</button>
+	                    <button id="goModifyButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-secondary">수정하기</button>
+	                    <button id="deleteButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-dark">수정하기</button>
+	                </div>
+	                <table class="table caption-top" style="padding: 0px 20px;font-family: 'SUITE-Regular';font-size: 18px;">
+	                    <thead style="--bs-table-bg: rgba(224, 224, 224, 0.32);border: 1px solid #eee;border-bottom: 2px solid #ccc;">
+	                      <tr>
+	                        <th scope="col" style="text-align: left;width: 600px;padding-left: 20px;">
+	                            제목 : ${community.boardTitle}
+	                        </th>
+	                        <th scope="col" style="text-align: center;width: 170px;">
+	                            날짜 : 
+	                            <fmt:formatDate pattern="20YY-MM-dd" value="${community.boardCreateDate}" />
+	                        </th>
+	                        <th scope="col" style="text-align: center;width: 150px;">조회수 : ${community.viewCount}&nbsp;</th>
+	                      </tr>
+	                    </thead>
+	                    <tbody style="text-align: left;height: 600px;border: 1px solid #ccc;border-bottom-left-radius: 10px;">
+	                      <tr>
+	                        <td colspan="3" style="padding: 20px;">
+	                            <c:if test="${community.boardType eq 'travelVerification'}">                
+	                                <div style="width: 200px;height: 120px;border: 1px solid red;border-radius: 5px;float: left;margin: 10px;"></div>
+	                                <div style="width: 200px;height: 120px;border: 1px solid red;border-radius: 5px;float: left;margin: 10px;margin-left: 10px;"></div>
+	                                <div style="width: 200px;height: 120px;border: 1px solid red;border-radius: 5px;margin: 10px;margin-left: 450px;"></div>
+	                            </c:if>
+	                            <span style="padding: 0px 10px;">
+	                                ${community.boardContent}
+	                            </span>
+	                        </td>
+	                      </tr>
+	                    </tbody>
+	                </table>
+	        	</form>
                 <div style="width: 100%;height: 80px;border-bottom: 2px solid #ccc;">
                 <h4 style="font-family: 'TmoneyRoundWindExtraBold';font-size: 28px;padding: 20px;margin-top: 80px;">해당 게시물이 마음에 드셨나요?</h4>
                 </div>
@@ -160,6 +163,14 @@
             
             document.getElementById("goBackButton").addEventListener("click", function() {
                 history.go(-1); // 뒤로가기
+            });
+            document.getElementById("goModifyButton").addEventListener("click", function() {
+                location.href= "/community/modify.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
+            });
+            document.getElementById("deleteButton").addEventListener("click", function() {
+            	if(confirm("게시물을 삭제하시겠습니까?")){            		
+                	location.href= "/community/modify.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
+            	}
             });
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

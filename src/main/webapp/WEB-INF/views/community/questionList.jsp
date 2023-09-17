@@ -22,10 +22,10 @@
         <main>
             <div style="width: 100%; height: 135px;">
                 <h2 style="font-family: 'TmoneyRoundWindExtraBold'; font-size: 28px; padding: 20px; margin-top: 30px; float: left;">
-                    <c:if test="${boardType eq 'Q&ABoard'}">                
+                    <c:if test="${pInfo.boardType eq 'QnABoard'}">                
                         질의문답 게시판
                     </c:if>
-                    <c:if test="${boardType eq 'travelCompanion'}">                
+                    <c:if test="${pInfo.boardType eq 'travelCompanion'}">                
                         동행 구인 게시판
                     </c:if>
                 </h2>
@@ -35,7 +35,7 @@
                         <option value="1">제목</option>
                         <option value="2">닉네임</option>
                       </select>
-                    <input style="width: 200px;border: 1px solid #adb5bd;" class="form-control me-2" type="search" placeholder="�˻�� �Է��غ�����" aria-label="Search">
+                    <input style="width: 200px;border: 1px solid #adb5bd;" class="form-control me-2" type="search" placeholder="검색어를 입력해주세요." aria-label="Search">
                     <button class="btn btn-outline-success" style="border-bottom-right-radius: 5px;border-top-right-radius: 5px;z-index: 1;width: 80px;" type="submit" >Search</button>
                 </div>
                 <div style="width: 100%;float: left;border-top: 1px solid #ccc;margin-top: 15px;padding: 10px 0px">
@@ -62,8 +62,9 @@
                     <c:forEach var="community" items="${cList}" varStatus="i">
                         <tr>
                             <th scope="row">${i.count }</th>
-                            <c:url var="detailUrl" value="/community/Q&ADetail.tp">
+                            <c:url var="detailUrl" value="/community/detail.tp">
                                 <c:param name="boardNo" value="${community.boardNo }"></c:param>
+                                <c:param name="boardType" value="${community.boardType }"></c:param>
                             </c:url>
                             <td id="tr">
                                 <a href="${detailUrl}">${community.boardTitle}</a>
