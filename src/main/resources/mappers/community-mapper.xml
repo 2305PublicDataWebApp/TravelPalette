@@ -2,12 +2,38 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CommunityMapper">
-	<resultMap type="Community" id="CommunityResultMap">
-		<id property="boardNo" column="BOARD_NO"/>
-		<result property="boardTitle" column="BOARD_TITLE" />	
-		<result property="boardType" column="BOARD_TYPE" />
-	</resultMap>
-	<select id="selectCommunityList" resultType="CommunityResultMap">
-		SELECT * FROM COMMUNITY_TBL WHERE BOARD_TYPE = #{boardType}
-	</select>
+    <resultMap type="Community" id="CommunityResultMap">
+        <id property="boardNo" column="BOARD_NO"/>
+        <result property="boardTitle" column="BOARD_TITLE" />    
+        <result property="boardType" column="BOARD_TYPE" />
+        <result property="boardContent" column="BOARD_CONTENT" />
+        <result property="userId" column="USER_ID" />
+        <result property="userNickName" column="USER_NICKNAME" />
+        <result property="boardCreateDate" column="BOARD_CREATE_DATE" />
+        <result property="boardUpdateDate" column="BOARD_UPDATE_DATE" />
+        <result property="viewCount" column="VIEW_COUNT" />
+        <result property="boardStatus" column="BOARD_STATUS" />
+        <result property="boardFileName" column="BOARD_FILE_NAME" />
+        <result property="boardFileRename" column="BOARD_FILE_RENAME" />
+        <result property="boardFilePath" column="BOARD_FILE_PATH" />
+        <result property="BoardFileLength" column="BOARD_FILE_LENGTH" />
+    </resultMap>
+    <select id="selectListByBoardType" resultMap="CommunityResultMap">
+        SELECT * FROM COMMUNITY_TBL WHERE BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y' ORDER BY BOARD_CREATE_DATE DESC
+    </select>
+    <select id="getListCountByBoardType" resultType="_int">
+         SELECT COUNT(*) FROM COMMUNITY_TBL WHERE BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y'
+    </select>
+    <select id="selectOneByClass" resultMap="CommunityResultMap">
+        SELECT * FROM COMMUNITY_TBL WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y'
+    </select>
+    <insert id="insertBoard">
+        INSERT INTO COMMUNITY_TBL VALUES(SEQ_BOARD_NO.NEXTVAL, #{boardTitle}, #{boardType}, #{boardContent}, 'id', 'nickname', DEFAULT, DEFAULT, DEFAULT, DEFAULT, #{boardFileName}, #{boardFileRename}, #{boardFilePath}, #{BoardFileLength})
+    </insert>
+    <update id="updateBoard">
+        UPDATE COMMUNITY_TBL SET BOARD_TITLE = #{boardTitle}, BOARD_TYPE = #{boardType} , BOARD_CONTENT = #{boardContent} WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType}
+    </update>
+    <update id="deleteBoard">
+        UPDATE COMMUNITY_TBL SET BOARD_STATUS = 'N' WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y'
+    </update>
 </mapper>

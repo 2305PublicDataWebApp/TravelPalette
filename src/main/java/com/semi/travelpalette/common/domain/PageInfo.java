@@ -10,6 +10,7 @@ public class PageInfo {
 	private int endNavi;
 	private int totalCount;
 	private int naviTotalCount;
+	private String boardType;
 	
 	public PageInfo() {
 		// TODO Auto-generated constructor stub
@@ -25,6 +26,19 @@ public class PageInfo {
 		this.endNavi = endNavi;
 		this.totalCount = totalCount;
 		this.naviTotalCount = naviTotalCount;
+	}
+
+	public PageInfo(int curruntPage, int recordCountPerPage, int naviCountPerPage, int startNavi, int endNavi,
+			int totalCount, int naviTotalCount, String boardType) {
+		super();
+		this.curruntPage = curruntPage;
+		this.recordCountPerPage = recordCountPerPage;
+		this.naviCountPerPage = naviCountPerPage;
+		this.startNavi = startNavi;
+		this.endNavi = endNavi;
+		this.totalCount = totalCount;
+		this.naviTotalCount = naviTotalCount;
+		this.boardType = boardType;
 	}
 
 	public int getCurruntPage() {
@@ -83,11 +97,20 @@ public class PageInfo {
 		this.naviTotalCount = naviTotalCount;
 	}
 
+	public String getBoardType() {
+		return boardType;
+	}
+
+	public void setBoardType(String boardType) {
+		this.boardType = boardType;
+	}
+
 	@Override
 	public String toString() {
 		return "PageInfo [curruntPage=" + curruntPage + ", recordCountPerPage=" + recordCountPerPage
 				+ ", naviCountPerPage=" + naviCountPerPage + ", startNavi=" + startNavi + ", endNavi=" + endNavi
-				+ ", totalCount=" + totalCount + ", naviTotalCount=" + naviTotalCount + "]";
+				+ ", totalCount=" + totalCount + ", naviTotalCount=" + naviTotalCount + 
+				", boardType=" + boardType +"]";
 	}
 	
 	

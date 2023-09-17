@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 	<html>
 	<head>
@@ -13,13 +13,13 @@
                 <div class="footerMenu">
                     <div style="width: 65%;height: 150px;float: left;">
                         <ul>
-                            <li><a href="#">∞≥¿Œ¡§∫∏ √≥∏ÆπÊƒß</a> &nbsp;&nbsp;|</li>
-                            <li><a href="#">¿˙¿€±« æ»≥ª</a> &nbsp;&nbsp;|</li>
-                            <li><a href="#">¿ÃøÎæ‡∞¸</a> &nbsp;&nbsp;|</li>
-                            <li><a href="#">∞Ì∞¥ºæ≈Õ</a> &nbsp;&nbsp;|</li>
-                            <li style="padding-left: 440px;"><a href="#">»∏ªÁ º“∞≥</a></li>
+                            <li><a href="#">Í∞úÏù∏Ï†ïÎ≥¥ Ï≤òÎ¶¨Î∞©Ïπ®</a> &nbsp;&nbsp;|</li>
+                            <li><a href="#">Ï†ÄÏûëÍ∂å ÏïàÎÇ¥</a> &nbsp;&nbsp;|</li>
+                            <li><a href="#">Ïù¥Ïö©ÏïΩÍ¥Ä</a> &nbsp;&nbsp;|</li>
+                            <li><a href="#">Í≥†Í∞ùÏÑºÌÑ∞</a> &nbsp;&nbsp;|</li>
+                            <li style="padding-left: 440px;"><a href="#">ÌöåÏÇ¨ ÏÜåÍ∞ú</a></li>
                         </ul>
-                        <p>COPYRIGHT ®œ TRAVEL PALLETE BACK-END JSH. ALL RIGHTS RESERVED.</p>
+                        <p>COPYRIGHT ‚ìí TRAVEL PALLETE BACK-END JSH. ALL RIGHTS RESERVED.</p>
                     </div>
                     <div class="footerIconContainer">
                         <div class="footerIconBG">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div class="footerWebContainer">
-                        <p>¬¸∞Ì«— ªÁ¿Ã∆Æ</p>
+                        <p>Ï∞∏Í≥†Ìïú ÏÇ¨Ïù¥Ìä∏</p>
                         <div>
                             <a href="#">
                                 <img class="tripAdvisor" src="../resources/images/main/tripadvisor.svg" alt="">

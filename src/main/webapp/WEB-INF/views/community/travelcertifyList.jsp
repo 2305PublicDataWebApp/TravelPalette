@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -10,32 +10,32 @@
         <link rel="stylesheet" href="../resources/css/community/travelcertify.css">
     </head>
     <body>
-        <!-- ��� -->
+        <!-- 헤더 -->
         <jsp:include page="/include/header.jsp"></jsp:include>
         
-        <!-- �׺� -->
+        <!-- 네비 -->
         <jsp:include page="/include/nav.jsp"></jsp:include>
   
-        <!-- ���� -->
+        <!-- 메인 -->
         <main>
             <div style="width: 100%; height: 135px;">
-                <h2 style="font-family: 'TmoneyRoundWindExtraBold'; font-size: 28px; padding: 20px; margin-top: 30px; float: left;">���� ���� �Խ���</h2>
+                <h2 style="font-family: 'TmoneyRoundWindExtraBold'; font-size: 28px; padding: 20px; margin-top: 30px; float: left;">여행 인증 게시판</h2>
                 <div class="input-group" style="width: 600px;float: right;margin-top: 90px;">
                     <select class="form-select" aria-label="Default select example" style="margin-right: 8px;border: 1px solid #adb5bd;">
-                        <option selected>��ü</option>
-                        <option value="1">����</option>
-                        <option value="2">�г���</option>
-                        <option value="3">�۹�ȣ</option>
+                        <option selected>전체</option>
+                        <option value="1">제목</option>
+                        <option value="2">닉네임</option>
+                        <option value="3">글번호</option>
                       </select>
-                    <input style="width: 200px;border: 1px solid #adb5bd;" class="form-control me-2" type="search" placeholder="�˻�� �Է��غ�����" aria-label="Search">
+                    <input style="width: 200px;border: 1px solid #adb5bd;" class="form-control me-2" type="search" placeholder="검색어를 입력해보세요" aria-label="Search">
                     <button class="btn btn-outline-success" style="border-bottom-right-radius: 5px;border-top-right-radius: 5px;z-index: 1;width: 80px;" type="submit" >Search</button>
                 </div>
                 <div style="width: 100%;float: left;border-top: 1px solid #ccc;margin-top: 15px;padding: 10px 0px">
-                    <p style="float:left;font-size: 18px;margin: 0;padding: 5px;font-weight: 600;font-family: 'SUITE-Regular';letter-spacing: 2px;padding-left: 15px;">#12��</p>
-                    <button type="button" style="float: right;" class="btn btn-primary">�� ���</button>
+                    <p style="float:left;font-size: 18px;margin: 0;padding: 5px;font-weight: 600;font-family: 'SUITE-Regular';letter-spacing: 2px;padding-left: 15px;">#12건</p>
+                    <button type="button" style="float: right;" class="btn btn-primary">글 등록</button>
                     <p style="margin: 0;padding: 7px 13px 0px 8px;margin-left: 3px;float: right;">
-                        <a href="#">�ֽż� </a>|
-                        <a href="#">��õ��</a> 
+                        <a href="#">최신순 </a>|
+                        <a href="#">추천순</a> 
                     </p>
                 </div>
             </div>
@@ -52,9 +52,9 @@
                         </div>
                     </td >
                     <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">������ �� �ڸ��Դϴ�</h4> <br>
-                        �г��� : <br>
-                        �ۼ���¥ :
+                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
+                        닉네임 : <br>
+                        작성날짜 :
                     </td>
                     <td style="width: 100px;">
                         <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
@@ -70,9 +70,9 @@
                         </div>
                     </td >
                     <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">������ �� �ڸ��Դϴ�</h4> <br>
-                        �г��� : <br>
-                        �ۼ���¥ :
+                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
+                        닉네임 : <br>
+                        작성날짜 :
                     </td>
                     <td style="width: 100px;">
                         <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
@@ -88,9 +88,9 @@
                         </div>
                     </td >
                     <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">������ �� �ڸ��Դϴ�</h4> <br>
-                        �г��� : <br>
-                        �ۼ���¥ :
+                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
+                        닉네임 : <br>
+                        작성날짜 :
                     </td>
                     <td style="width: 100px;">
                         <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
@@ -106,9 +106,9 @@
                         </div>
                     </td >
                     <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">������ �� �ڸ��Դϴ�</h4> <br>
-                        �г��� : <br>
-                        �ۼ���¥ :
+                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
+                        닉네임 : <br>
+                        작성날짜 :
                     </td>
                     <td style="width: 100px;">
                         <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
@@ -124,9 +124,9 @@
                         </div>
                     </td >
                     <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">������ �� �ڸ��Դϴ�</h4> <br>
-                        �г��� : <br>
-                        �ۼ���¥ :
+                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
+                        닉네임 : <br>
+                        작성날짜 :
                     </td>
                     <td style="width: 100px;">
                         <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
@@ -142,9 +142,9 @@
                         </div>
                     </td >
                     <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">������ �� �ڸ��Դϴ�</h4> <br>
-                        �г��� : <br>
-                        �ۼ���¥ :
+                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
+                        닉네임 : <br>
+                        작성날짜 :
                     </td>
                     <td style="width: 100px;">
                         <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
@@ -160,9 +160,9 @@
                         </div>
                     </td >
                     <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">������ �� �ڸ��Դϴ�</h4> <br>
-                        �г��� : <br>
-                        �ۼ���¥ :
+                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
+                        닉네임 : <br>
+                        작성날짜 :
                     </td>
                     <td style="width: 100px;">
                         <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
@@ -178,9 +178,9 @@
                         </div>
                     </td >
                     <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">������ �� �ڸ��Դϴ�</h4> <br>
-                        �г��� : <br>
-                        �ۼ���¥ :
+                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
+                        닉네임 : <br>
+                        작성날짜 :
                     </td>
                     <td style="width: 100px;">
                         <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
@@ -196,9 +196,9 @@
                         </div>
                     </td >
                     <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">������ �� �ڸ��Դϴ�</h4> <br>
-                        �г��� : <br>
-                        �ۼ���¥ :
+                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
+                        닉네임 : <br>
+                        작성날짜 :
                     </td>
                     <td style="width: 100px;">
                         <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
@@ -222,7 +222,7 @@
             </ul>
         </div>
         </main>
-        <!-- Ǫ�� -->
+        <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script>
             document.addEventListener("DOMContentLoaded", function() {

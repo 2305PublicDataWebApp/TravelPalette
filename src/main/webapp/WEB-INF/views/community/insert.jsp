@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -10,90 +11,96 @@
         <link rel="stylesheet" href="../resources/css/community/insert.css">
     </head>
     <body>
-        <!-- Çì´õ -->
+        <!-- í—¤ë” -->
         <jsp:include page="/include/header.jsp"></jsp:include>
         
-        <!-- ³×ºñ -->
+        <!-- ë„¤ë¹„ -->
         <jsp:include page="/include/nav.jsp"></jsp:include>
   
-        <!-- ¸ŞÀÎ -->
+        <!-- ë©”ì¸ -->
         <main>
             <div style="width: 100%;height: 135px;">
-                <h4 style="float: left;font-family: 'TmoneyRoundWindExtraBold';font-size: 28px;padding: 20px;margin-top: 30px;">°Ô½ÃÆÇ ±Û µî·Ï</h4>
-                <button style="float: right;margin: 49px 10px 0px 0px;" type="button" class="btn btn-primary">¸ñ·ÏÀ¸·Î</button>
-                <!-- <button style="float: right;margin: 47px 10px 0px 0px;" type="button" class="btn btn-info">¼öÁ¤ÇÏ±â</button> -->
+                <h4 style="float: left;font-family: 'TmoneyRoundWindExtraBold';font-size: 28px;padding: 20px;margin-top: 30px;">ê²Œì‹œíŒ ê¸€ ë“±ë¡</h4>
+                <button id="goBackButton" style="float: right;margin: 49px 10px 0px 0px;" type="button" class="btn btn-primary">ëª©ë¡ìœ¼ë¡œ</button>
+                <!-- <button style="float: right;margin: 47px 10px 0px 0px;" type="button" class="btn btn-info">ìˆ˜ì •í•˜ê¸°</button> -->
             </div>
-            <div style="width: 100%;margin: 0 auto;">
-                <div class="form-floating mb-3">
-                    <input type="text" style="border: 1px solid #ccc;" class="form-control" id="floatingInput" placeholder="Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä">
-                    <label for="floatingInput">Á¦¸ñ</label>
-                  </div>
-            </div>
-            <div class="form-floating" style="margin-top: 25px;">
-                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" style="border: 1px solid #ccc;">
-                  <option selected>°Ô½ÃÆÇÀ» ¼±ÅÃÇØÁÖ¼¼¿ä!</option>
-                  <option value="1">ÁúÀÇ¹®´ä °Ô½ÃÆÇ</option>
-                  <option value="2">µ¿Çà ±¸ÀÎ °Ô½ÃÆÇ</option>
-                  <option value="3">¿©Çà ÀÎÁõ °Ô½ÃÆÇ</option>
-                </select>
-                <label for="floatingSelect">°Ô½ÃÆÇ Á¾·ù</label>
-              </div>
-              <div class="input-group mb-3" style="margin-top: 25px;">
-                <img src="../resources/images/community/fileadd.png" style="width: 25px;height: 25px;margin-top: 6px;margin-right: 10px;" alt="">
-                <input type="file" class="form-control" id="inputGroupFile02" style="border: 1px solid #ccc;">
-                <!-- <label class="input-group-text" for="inputGroupFile02">Upload</label> -->
-              </div>
-              <div class="form-floating">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;border: 1px solid #ccc;margin-top: 25px;height: 500px;resize: none;"></textarea>
-                <label for="floatingTextarea2">Comments</label>
-              </div>
+            <form action="/community/insert.tp" method="post">
+                <div style="width: 100%;margin: 0 auto;">
+                    <div class="form-floating mb-3">
+                        <input name="boardTitle" type="text" style="border: 1px solid #ccc;" class="form-control" id="floatingInput" placeholder="ì œëª©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”">
+                        <label for="floatingInput">ì œëª©</label>
+                      </div>
+                </div>
+                   <div class="form-floating" style="margin-top: 25px;">
+                   <select name="boardType" class="form-select" id="floatingSelect" aria-label="Floating label select example" style="border: 1px solid #ccc;">
+                      <option selected>ê²Œì‹œíŒì„ ì„ íƒí•´ì£¼ì„¸ìš”!</option>
+                      <option value="QnABoard">ì§ˆì˜ë¬¸ë‹µ ê²Œì‹œíŒ</option>
+                      <option value="travelCompanion">ë™í–‰ êµ¬ì¸ ê²Œì‹œíŒ</option>
+                      <option value="travelVerification">ì—¬í–‰ ì¸ì¦ ê²Œì‹œíŒ</option>
+                    </select>
+                    <label for="floatingSelect">ê²Œì‹œíŒ ì¢…ë¥˜</label>
+                 </div>
+                 <div class="input-group mb-3" style="margin-top: 25px;">
+                    <img src="../resources/images/community/fileadd.png" style="width: 25px;height: 25px;margin-top: 6px;margin-right: 10px;" alt="">
+                    <input type="file" class="form-control" id="inputGroupFile02" style="border: 1px solid #ccc;">
+                    <!-- <label class="input-group-text" for="inputGroupFile02">Upload</label> -->
+                 </div>
+                 <div class="form-floating">
+                    <textarea name="boardContent" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;border: 1px solid #ccc;margin-top: 25px;height: 500px;resize: none;"></textarea>
+                    <label for="floatingTextarea2">ë‚´ìš©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”</label>
+                 </div>
+                <div style="width: 1000px;margin: 0 auto;text-align: center;margin-top: 70px;">
+                    <button class="btn btn-primary btn-lg">ê¸€ ë“±ë¡</button>
+                </div>
+            </form>
         </main>
-        <div style="width: 1000px;margin: 0 auto;text-align: center;margin-top: 70px;">
-            <button type="button" class="btn btn-primary btn-lg">±Û µî·Ï</button>
-        </div>
         <div style="width: 100%;height: 80px;margin: 0 auto;">
         </div>
-        <!-- ÇªÅÍ -->
+        <!-- í‘¸í„° -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-			    const liElements = document.querySelectorAll('nav ul li');
-			    const navArea = document.getElementById('navArea');
-			
-			    let hoverIntent = false;
-			
-			    liElements.forEach(li => {
-			        li.addEventListener('mouseenter', () => {
-			            hoverIntent = true;
-			            navArea.classList.add('show');
-			            navArea.style.zIndex = 2;
-			        });
-			
-			        li.addEventListener('mouseleave', () => {
-			            hoverIntent = false;
-			            setTimeout(() => {
-			                if (!hoverIntent) {
-			                    navArea.classList.remove('show');
+                const liElements = document.querySelectorAll('nav ul li');
+                const navArea = document.getElementById('navArea');
+            
+                let hoverIntent = false;
+            
+                liElements.forEach(li => {
+                    li.addEventListener('mouseenter', () => {
+                        hoverIntent = true;
+                        navArea.classList.add('show');
+                        navArea.style.zIndex = 2;
+                    });
+            
+                    li.addEventListener('mouseleave', () => {
+                        hoverIntent = false;
+                        setTimeout(() => {
+                            if (!hoverIntent) {
+                                navArea.classList.remove('show');
                             }
                             // navArea.style.zIndex = -1;
-				            }, ); // Add a delay before hiding to allow time for moving to menu_text
-				        });
-				    });
-			
+                            }, ); // Add a delay before hiding to allow time for moving to menu_text
+                        });
+                    });
+            
                     navArea.addEventListener('mouseenter', () => {
-			        hoverIntent = true;
-			    });
-			
-			    navArea.addEventListener('mouseleave', () => {
-			        hoverIntent = false;
-			        setTimeout(() => {
-			            if (!hoverIntent) {
-			                navArea.classList.remove('show');
-			            }
+                    hoverIntent = true;
+                });
+            
+                navArea.addEventListener('mouseleave', () => {
+                    hoverIntent = false;
+                    setTimeout(() => {
+                        if (!hoverIntent) {
+                            navArea.classList.remove('show');
+                        }
                         // navArea.style.zIndex = -1;
-			        }, ); // Add a delay before hiding to allow time for moving to menu_text
-			    });
-			});
+                    }, ); // Add a delay before hiding to allow time for moving to menu_text
+                });
+            });
+            
+            document.getElementById("goBackButton").addEventListener("click", function() {
+                history.go(-1); // ë’¤ë¡œê°€ê¸°
+            });
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     </body>

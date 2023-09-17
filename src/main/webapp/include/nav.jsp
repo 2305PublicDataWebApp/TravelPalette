@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 	<html>
 	<head>
@@ -11,12 +11,12 @@
 		<nav>
             <div class="navContainer">
                 <ul class="navMenu">
-                    <li><a href="#">¸ÞÀÎ</a></li>
-                    <li><a href="#">ÀÌº¥Æ®</a></li>
-                    <li><a href="#">¿©ÇàÁ¤º¸</a></li>
-                    <li><a href="#">¿©ÇàÁöµµ</a></li>
-                    <li><a href="#">Ä¿¹Â´ÏÆ¼</a></li>
-                    <li><a href="#">È¸¿ø</a></li>
+                    <li><a href="#">ë©”ì¸</a></li>
+                    <li><a href="#">ì´ë²¤íŠ¸</a></li>
+                    <li><a href="#">ì—¬í–‰ì •ë³´</a></li>
+                    <li><a href="#">ì—¬í–‰ì§€ë„</a></li>
+                    <li><a href="#">ì»¤ë®¤ë‹ˆí‹°</a></li>
+                    <li><a href="#">íšŒì›</a></li>
                 </ul>
             </div>
             <div id="navArea" class="animatedNav" >
@@ -25,42 +25,42 @@
                         <li></li>
                         <li>
                             <a href="#">
-                                ÁøÇàÁßÀÎ ¸®½ºÆ®<br>
+                                ì§„í–‰ì¤‘ì¸ ë¦¬ìŠ¤íŠ¸<br>
                             </a>
                             <a href="#">
-                                Á¾·áµÈ ÀÌº¥Æ®<br>
+                                ì¢…ë£Œëœ ì´ë²¤íŠ¸<br>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                ¿©ÇàÁ¤º¸ °Ô½ÃÆÇ<br>
+                                ì—¬í–‰ì •ë³´ ê²Œì‹œíŒ<br>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                Áöµµ ¹Ù·Î°¡±â
+                                ì§€ë„ ë°”ë¡œê°€ê¸°
                             </a>
                         </li>
                         <li>
                             <a href="/community/qList.tp">
-                                Ä¿¹Â´ÏÆ¼ È¨<br>
+                                ì»¤ë®¤ë‹ˆí‹° í™ˆ<br>
                             </a>
                             <a href="/community/qList.tp">
-                                ¿©Çà ÀÎÁõ °Ô½ÃÆÇ<br>
+                                ì—¬í–‰ ì¸ì¦ ê²Œì‹œíŒ<br>
                             </a>
                             <a href="/community/qList.tp">
-                                ÁúÀÇ¹®´ä °Ô½ÃÆÇ<br>
+                                ì§ˆì˜ë¬¸ë‹µ ê²Œì‹œíŒ<br>
                             </a>
                             <a href="/community/qList.tp">
-                                µ¿Çà ±¸ÀÎ °Ô½ÃÆÇ
+                                ë™í–‰ êµ¬ì¸ ê²Œì‹œíŒ
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                ¸¶ÀÌÆäÀÌÁö<br>
+                                ë§ˆì´íŽ˜ì´ì§€<br>
                             </a>
                             <a href="#">
-                                1 : 1 ¹®ÀÇ»çÇ×
+                                1 : 1 ë¬¸ì˜ì‚¬í•­
                             </a>
                         </li>
                     </ul>
