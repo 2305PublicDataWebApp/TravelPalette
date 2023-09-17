@@ -7,7 +7,9 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +50,7 @@ public class KakaoServiceImpl implements KakaoService{
 		StringBuilder sb = new StringBuilder();
 		sb.append("grant_type=authorization_code");
 		sb.append("&client_id=285ffb5126eb1037de78602651c709a9");
-		sb.append("&redirect_uri=http://127.0.0.1:8888/user/kakao-login.do");
+		sb.append("&redirect_uri=http://127.0.0.1:8888/user/kakao-login.tp");
 		sb.append("&code=" + code);
 		bw.write(sb.toString());
 		bw.flush();
@@ -78,8 +80,8 @@ public class KakaoServiceImpl implements KakaoService{
 	}
 
 	@Override
-	public List<Object> getUserInfo(String access_token) throws Exception{
-		List<Object> list = new ArrayList<Object>();
+	public Map<String, Object> getUserInfo(String access_token) throws Exception{
+		Map<String, Object> userInfo = new HashMap<>();
 		
 		final String requestUrl = "https://kapi.kakao.com/v2/user/me";
 		
@@ -107,23 +109,82 @@ public class KakaoServiceImpl implements KakaoService{
         System.out.println("----------kakao_account"+kakao_account);
         
 //        String thumbnail_image = properties.getAsJsonObject().get("thumbnail_image").getAsString();
-        String userNinkname = properties.getAsJsonObject().get("nickname").getAsString();
+        String userNickname = properties.getAsJsonObject().get("nickname").getAsString();
         String userEmail = kakao_account.getAsJsonObject().get("email").getAsString();
         String userGender = kakao_account.getAsJsonObject().get("gender").getAsString();
 //        String birthday = kakao_account.getAsJsonObject().get("birthday").getAsString();
         
-//        list.add(thumbnail_image);
-        list.add(userNinkname);
-        list.add(userEmail);
-//        list.add(birthday);
+        userInfo.put("userNickname", userNickname);
+        userInfo.put("userEmail", userEmail);
+        userInfo.put("userGender", userGender);
         
-        //DB 저장
-        User kakaouser = new User(userEmail, userNinkname, userNinkname, userGender, userEmail);
-        uStore.kakaoUserInsert(session, kakaouser);
-        uStore.kakaoUserInfoInser(session, kakaouser);
         
-        return list;
+        User user = uStore.selectKakaoUser(session, userEmail);
+        if(user == null) {
+//        //DB 저장
+        	User kakaoUser = new User(userEmail, userNickname, userNickname, userGender, userEmail);
+//        	User2 kakaouser = new User2(userEmail);
+//        	UserInfo kakaoUserInfo = new UserInfo(userNickname, userNickname, userGender, userEmail);
+        	uStore.kakaoUserInsert(session, kakaoUser);
+        	uStore.kakaoUserInfoInsert(session, kakaoUser);
+        }
+        
+        
+        return userInfo;
 	}
+//	@Override
+//	public List<Object> getUserInfo(String access_token) throws Exception{
+//		List<Object> list = new ArrayList<Object>();
+//		
+//		final String requestUrl = "https://kapi.kakao.com/v2/user/me";
+//		
+//		URL url = new URL(requestUrl);
+//		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+//		con.setRequestMethod("GET");
+//		con.setRequestProperty("Authorization", "Bearer " + access_token);
+//		
+//		BufferedReader bf = new BufferedReader(new InputStreamReader(con.getInputStream()));
+//		String line = "";
+//		String result = "";
+//		
+//		while ((line = bf.readLine()) != null) {
+//			result +=line;
+//		}
+//		
+//		JsonParser parser = new JsonParser();
+//		JsonElement element = parser.parse(result);
+//		
+//		JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+//		JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+//		
+//		//콘솔창 확인 후 필요한 정보 추출
+//		System.out.println("----------properties"+properties);
+//		System.out.println("----------kakao_account"+kakao_account);
+//		
+////        String thumbnail_image = properties.getAsJsonObject().get("thumbnail_image").getAsString();
+//		String userNinkname = properties.getAsJsonObject().get("nickname").getAsString();
+//		String userEmail = kakao_account.getAsJsonObject().get("email").getAsString();
+//		String userGender = kakao_account.getAsJsonObject().get("gender").getAsString();
+////        String birthday = kakao_account.getAsJsonObject().get("birthday").getAsString();
+//		
+////        list.add(thumbnail_image);
+//		list.add(userNinkname);
+//		list.add(userEmail);
+//		list.add(userGender);
+////        list.add(birthday);
+//		
+//		
+//		User user = uStore.selectKakaoUser(session, userEmail);
+//		if(user == null) {
+////        //DB 저장
+//			User kakaouser = new User(userEmail, userNinkname, userNinkname, userGender, userEmail);
+//			uStore.kakaoUserInsert(session, kakaouser);
+//			uStore.kakaoUserInfoInser(session, kakaouser);
+//		}
+//		
+//		
+//		return list;
+//	}
 	
 	
 }

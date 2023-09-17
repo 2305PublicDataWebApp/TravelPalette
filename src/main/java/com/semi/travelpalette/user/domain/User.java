@@ -21,7 +21,6 @@ public class User {
 		super();
 	}
 	
-	
 	public User(String userId, String userName, String userNickname, String userGender, String userEmail) {
 		super();
 		this.userId = userId;
@@ -29,6 +28,13 @@ public class User {
 		this.userNickname = userNickname;
 		this.userGender = userGender;
 		this.userEmail = userEmail;
+	}
+	
+	
+	public User(String userId, String userPw) {
+		super();
+		this.userId = userId;
+		this.userPw = userPw;
 	}
 
 	public int getUserNo() {
