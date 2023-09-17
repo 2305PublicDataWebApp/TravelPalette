@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="EventMapper">
+  	<resultMap id="EventResultMap" type="Event">
+	    <id 	property="eventNo" 			column="EVENT_NO" />
+	    <result property="boardType" 		column="BOARD_TYPE" />
+	    <result property="eventTitle" 		column="EVENT_TITLE" />
+	    <result property="eventFileName" 	column="EVENT_FILE_NAME" />
+	    <result property="eventFileRename" 	column="EVENT_FILE_RENAME" />
+	    <result property="eventFilePath" 	column="EVENT_FILE_PATH" />
+	    <result property="eventFileLength" 	column="EVENT_FILE_LENGTH" />
+	    <result property="eventStartDate" 	column="EVENT_START_DATE" />
+	    <result property="eventEndDate" 	column="EVENT_END_DATE" />
+	    <result property="eventPrecautions" column="EVENT_PRECAUTIONS" />
+	    <result property="eventInquiries" 	column="EVENT_INQUIRIES" />
+	    <result property="eventCreateDate" 	column="EVENT_CREATE_DATE" />
+	    <result property="eventUpdateDate" 	column="EVENT_UPDATE_DATE" />
+	    <result property="eventStatus" 		column="EVENT_STATUS" />
+	</resultMap>
+		<select id="eventAllListByNew" resultMap="EventResultMap">
+		SELECT	 * 
+		FROM 	 EVENT_TBL 
+		ORDER BY EVENT_CREATE_DATE DESC
+	</select>
+	
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM EVENT_TBL
+	</select>
+	
+	<select id="selectEventByNo" resultMap="EventResultMap">
+		SELECT	* 
+		FROM 	EVENT_TBL 
+		WHERE	EVENT_NO = #{eventNo}
+	</select>
+	
+	<insert id="insertEvent">
+		INSERT INTO EVENT_TBL 
+		VALUES (SEQ_EVENT_NO.NEXTVAL, DEFAULT, #{eventTitle}, #{eventFileName}, #{eventFileRename}, #{eventFilePath}, #{eventFileLength}
+				,#{eventStartDate}, #{eventEndDate}, #{eventPrecautions}, #{eventInquiries}, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+  </mapper>

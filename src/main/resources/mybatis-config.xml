@@ -9,9 +9,11 @@
 	<typeAliases>
 		<typeAlias type="com.semi.travelpalette.travel.domain.Travel" alias="Travel"/>
 		<typeAlias type="com.semi.travelpalette.community.domain.Community" alias="Community"/>
+		<typeAlias type="com.semi.travelpalette.event.domain.Event" alias="Event"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/travel-mapper.xml"/>
 		<mapper resource="mappers/community-mapper.xml"/>
+		<mapper resource="mappers/event-mapper.xml"/>
 	</mappers>
 </configuration>
