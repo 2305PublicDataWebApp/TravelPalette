@@ -13,18 +13,16 @@
         <div class="flex">
             <p>${titleMsg }</p>
             <div class="loginBox">
-            	<form name="normalPwForm" action="" method="post">
-	                <div class="inputDiv">
-	                    <!-- <label for="">아이디</label> -->
-	                    <input type="password" class="input" name="userPw" id="userPw" placeholder="비밀번호를 입력해주세요">
-	                </div>
-	                <span id="failMsg" style="display: none; text-align: center;">
-	    				비밀번호가 다릅니다.
-					</span>
-	                <div class="btnBox">
-	                    <button type="button" class="btn btn-info loginBtn" onclick="formBtn()">${btnMsg }</button>
-	                </div>
-            	</form>
+                <div class="inputDiv">
+                    <!-- <label for="">아이디</label> -->
+                    <input type="password" class="input" name="userPw" id="userPw" placeholder="비밀번호를 입력해주세요">
+                </div>
+                <span id="failMsg" style="display: none; text-align: center;">
+    				비밀번호가 다릅니다.
+				</span>
+                <div class="btnBox">
+                    <button type="button" class="btn btn-info loginBtn" onclick="formBtn()">${btnMsg }</button>
+                </div>
             </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
         <script type="text/javascript">

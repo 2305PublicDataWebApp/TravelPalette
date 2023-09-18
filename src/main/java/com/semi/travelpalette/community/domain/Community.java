@@ -19,6 +19,14 @@ public class Community {
 	private String boardFilePath;
 	private long BoardFileLength;
 	
+	public Community() {}
+	public Community(int boardNo, String boardType) {
+		super();
+		this.boardNo = boardNo;
+		this.boardType = boardType;
+	}
+
+
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -105,11 +113,11 @@ public class Community {
 	}
 	@Override
 	public String toString() {
-		return "Ä¿¹Â´ÏÆ¼ [°Ô½Ã±Û ¹øÈ£=" + boardNo + ", °Ô½Ã±Û Á¦¸ñ=" + boardTitle + ", °Ô½ÃÆÇ Á¾·ù=" + boardType
-				+ ", °Ô½ÃÆÇ ³»¿ë=" + boardContent + ", ÀÛ¼ºÀÚ ¾ÆÀÌµð=" + userId + ", ÀÛ¼º ³¯Â¥=" + boardCreateDate
-				+ ", ¼öÁ¤ ³¯Â¥=" + boardUpdateDate + ", Á¶È¸¼ö=" + viewCount + ", »óÅÂ=" + boardStatus
-				+ ", ´Ð³×ÀÓ=" + userNickName + ", Ã·ºÎÆÄÀÏ¸í=" + boardFileName + ", Ã·ºÎ¸®³×ÀÓ="
-				+ boardFileRename + ", Ã·ºÎ°æ·Î=" + boardFilePath + ", Ã·ºÎÅ©±â=" + BoardFileLength + "]";
+		return "Ä¿ï¿½Â´ï¿½Æ¼ [ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£=" + boardNo + ", ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½=" + boardTitle + ", ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½=" + boardType
+				+ ", ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½=" + boardContent + ", ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½=" + userId + ", ï¿½Û¼ï¿½ ï¿½ï¿½Â¥=" + boardCreateDate
+				+ ", ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥=" + boardUpdateDate + ", ï¿½ï¿½È¸ï¿½ï¿½=" + viewCount + ", ï¿½ï¿½ï¿½ï¿½=" + boardStatus
+				+ ", ï¿½Ð³ï¿½ï¿½ï¿½=" + userNickName + ", Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½=" + boardFileName + ", Ã·ï¿½Î¸ï¿½ï¿½ï¿½ï¿½ï¿½="
+				+ boardFileRename + ", Ã·ï¿½Î°ï¿½ï¿½=" + boardFilePath + ", Ã·ï¿½ï¿½Å©ï¿½ï¿½=" + BoardFileLength + "]";
 	}
 	
 	

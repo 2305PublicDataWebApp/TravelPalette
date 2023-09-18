@@ -24,19 +24,24 @@
                 <button id="goBackButton" style="float: right;margin: 49px 10px 0px 0px;" type="button" class="btn btn-primary">목록으로</button>
                 <!-- <button style="float: right;margin: 47px 10px 0px 0px;" type="button" class="btn btn-info">수정하기</button> -->
             </div>
-            <form name="insertForm" action="/community/insert.tp" method="post">
-                <div style="width: 100%;margin: 0 auto;">
+            <form action="/community/modify.tp" method="post">
+            	<div style="width: 100%;margin: 0 auto;">
                     <div class="form-floating mb-3">
 	                    <input name="boardTitle" type="text" style="border: 1px solid #ccc;" class="form-control" id="floatingInput" placeholder="제목을 입력해주세요">
-	                    <label for="floatingInput" id="boardTitleLable">제목</label>
+	                    <label for="floatingInput" id="boardTitleLable">${community.boardTitle }</label>
                       </div>
                 </div>
                    <div class="form-floating" style="margin-top: 25px;">
                    <select id="boardSelect" name="boardType" class="form-select" aria-label="Floating label select example" style="border: 1px solid #ccc;">
-                      <option selected>게시판을 선택해주세요!</option>
-                      <option value="QnABoard">질의문답 게시판</option>
-                      <option value="travelCompanion">동행 구인 게시판</option>
-                      <option value="travelVerification">여행 인증 게시판</option>
+                   	  <c:if test="${community.boardType eq 'QnABoard'}">
+	                      <option value="QnABoard" selected>질의문답 게시판</option>
+                   	  </c:if>
+                   	   <c:if test="${community.boardType eq 'travelCompanion'}">
+	                      <option value="travelCompanion" selected>동행 구인 게시판</option>
+                   	  </c:if>
+                   	  <c:if test="${community.boardType eq 'travelVerification'}">
+	                      <option value="travelVerification" selected>여행 인증 게시판</option>
+                   	  </c:if>
                     </select>
                     <label>게시판 종류</label>
                  </div>
@@ -46,11 +51,11 @@
                     <!-- <label class="input-group-text" for="inputGroupFile02">Upload</label> -->
                  </div>
                  <div class="form-floating">
-                    <textarea name="boardContent" class="form-control" placeholder="Leave a comment here" style="height: 100px;border: 1px solid #ccc;margin-top: 25px;height: 500px;resize: none;"></textarea>
-                    <label id="boardContentLable">내용을 입력해주세요</label>
+                    <textarea name="boardContent" class="form-control" placeholder="내용을 입력해주세요." style="height: 100px;border: 1px solid #ccc;margin-top: 25px;height: 500px;resize: none;"></textarea>
+                    <label id="boardContentLable">${community.boardContent }</label>
                  </div>
                 <div style="width: 1000px;margin: 0 auto;text-align: center;margin-top: 70px;">
-                    <button id="insertBtn" type="button" class="btn btn-primary btn-lg">글 등록</button>
+                    <button id="modifyBtn" type="button" class="btn btn-primary btn-lg">수정 완료</button>
                 </div>
             </form>
         </main>
@@ -102,41 +107,7 @@
                 history.go(-1); // 뒤로가기
             });
             
-            //select에 따른 자바스크립트
-            var selectBoard = document.getElementById("boardSelect");
-            selectBoard.addEventListener("change", function () {
-                // 선택한 옵션 값 가져오기
-                var selectedOption = selectBoard.value;
-
-                // 제목과 textarea의 요소 가져오기
-                var boardTitleInput = document.getElementById("boardTitleLable");
-                var boardContentLable = document.getElementById("boardContentLable");
-                var boardContentTextarea = document.getElementsByName("boardContent")[0];
-                
-                // 선택한 값에 따라 다른 내용 설정
-                if (selectedOption === "QnABoard") {
-                    boardTitleInput.textContent = "질문을 입력해주세요";
-                    boardContentLable.textContent = "궁금한 질문을 적어주세요";
-                    document.getElementById("imageFile").style.display = "none";
-                    boardContentTextarea.value = "";
-                } else if (selectedOption === "travelCompanion") {
-                    boardTitleInput.textContent = "동행 구인 글 제목을 입력해주세요";
-                    boardContentTextarea.value = "예상 동행 인원 :\n\n주로 활동하는 날 :\n\n모임의 특징 :\n\n예상 회비 :\n\n전화번호 :";
-                    document.getElementById("imageFile").style.display = "none";
-                } else if (selectedOption === "travelVerification") {
-                    boardTitleInput.textContent = "여행 인증 글 제목을 입력해주세요";
-                    boardContentLable.textContent = "신나는 여행 일기를 적어보세요";
-                    document.getElementById("imageFile").style.display = "block";
-                    boardContentTextarea.value = "";
-                } else {
-                    boardTitleInput.textContent = "제목을 입력해주세요";
-                    boardContentLable.textContent = "내용을 입력해주세요";
-                    document.getElementById("imageFile").style.display = "none";
-                    boardContentTextarea.value = "";
-                }
-            });
-            
-            // 유효성 체크
+         // 유효성 체크
             var submitButton = document.querySelector("#insertBtn"); // 버튼 선택
             submitButton.addEventListener("click", function(event) {
                 var boardTitleInput = document.querySelector("input[name='boardTitle']");
@@ -145,9 +116,6 @@
                 // 버튼 클릭 시 실행되는 함수
                 if (boardTitleInput.value.trim() === "") {
                     alert("제목을 입력해주세요.");
-                    return; // submit 막기
-                } else if (boardSelect.value === "게시판을 선택해주세요!") {
-                    alert("게시판을 선택해주세요.");
                     return; // submit 막기
                 } else if (boardContentTextarea.value.trim() === "") {
                     alert("내용을 입력해주세요.");

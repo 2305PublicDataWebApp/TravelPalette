@@ -267,7 +267,7 @@ public class TravelController {
 		if (endNavi > naviTotalCount) {
 			endNavi = naviTotalCount;
 		}
-		PageInfo pageInfo = new PageInfo(naviTotalCount, currentPage, recordCountPerPage, naviCountPerPage, naviTotalCount, startNavi, endNavi);
+		PageInfo pageInfo = new PageInfo(currentPage, recordCountPerPage, naviCountPerPage, startNavi, endNavi, totalCount, naviTotalCount);
 		return pageInfo;
 	}
 }

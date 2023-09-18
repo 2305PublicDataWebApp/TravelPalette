@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
@@ -12,17 +12,21 @@
 		<header style="border-bottom: 1px solid #ccc;">
             <div class="headerContainer">
                 <div style="float:left;position: relative;">
-                    <img class="logoImg" src="../resources/images/main/pallete.png" alt="">
-                    <h1 style="width: 250px;">ø©«‡∆»∑π∆Æ</h1>
-                    <img style="position: absolute;z-index: -1;top: -52px;width: 300px;opacity: 0.8;" src="../resources/images/main/ºˆ√§»≠1.png" alt="">
+                	<a href="/">
+	                    <img class="logoImg" src="../resources/images/main/pallete.png" alt="">
+	                    <h1 style="width: 250px;">Ïó¨ÌñâÌåîÎ†àÌä∏</h1>
+	                    <img style="position: absolute;z-index: -1;top: -52px;width: 300px;opacity: 0.8;" src="../resources/images/main/ÏàòÏ±ÑÌôî1.png" alt="">
+                	</a>
                 </div>
                 <div style="float:right;">
-                    <input type="text" class="searchInput" placeholder="∞°∫∏∞Ì ΩÕ¿∫ ø©«‡¡ˆ ¿÷¿∏Ω≈∞°ø‰?">
+                    <input type="text" class="searchInput" placeholder="Í∞ÄÎ≥¥Í≥† Ïã∂ÏùÄ Ïó¨ÌñâÏßÄ ÏûàÏúºÏã†Í∞ÄÏöî?">
                     <div class="searchForm">
-                        <img src="../resources/images/main/user.png" alt="∞Àªˆ æ∆¿Ãƒ‹" style="width:25px">
-                        <p>∑Œ±◊¿Œ</p>
+	                    <a href="/user/login.tp">
+	                        <img src="../resources/images/main/user.png" alt="Í≤ÄÏÉâ ÏïÑÏù¥ÏΩò" style="width:25px">
+	                        <p>Î°úÍ∑∏Ïù∏</p>
+	                    </a>
                     </div>
-                    <img src="../resources/images/main/searchicon.png" alt="∞Àªˆ æ∆¿Ãƒ‹" style="width:20px;float: right;padding: 14px 0px 0px 0px;">
+                    <img src="../resources/images/main/searchicon.png" alt="Í≤ÄÏÉâ ÏïÑÏù¥ÏΩò" style="width:20px;float: right;padding: 14px 0px 0px 0px;">
                 </div>
             </div>
         </header>

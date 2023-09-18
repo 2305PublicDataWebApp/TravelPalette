@@ -248,6 +248,12 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+<!--             오류 방지를 위한 plugin 추가 -->
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-war-plugin</artifactId>
+              <version>3.3.2</version>
+            </plugin>
         </plugins>
     </build>
 </project>
