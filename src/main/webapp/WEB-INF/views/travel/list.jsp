@@ -9,22 +9,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>여행리스트</title>
         <link rel="stylesheet" href="../resources/css/travel/list.css" />
-        
+        <link rel="stylesheet" href="../resources/css/travel/header.css" />
+        <link rel="stylesheet" href="../resources/css/travel/nav.css" />
+        <link rel="stylesheet" href="../resources/css/travel/footer.css" />
     </head>
     <body>
-        <main>
+    	<!-- 헤더 -->
+        <jsp:include page="/include/header.jsp"></jsp:include>
+        
+        <!-- 네비 -->
+        <jsp:include page="/include/nav.jsp"></jsp:include>
+        
+        <main>      	
             <div class="leftBox">
                 <div class="ListTitle">
-                    <span style="font-size: 24px; font-weight: bold">#전체</span>
-
-	                    <button style="float: right" onClick="travelRegGo();">관리자글등록</button>
+	    			<button style="float: right" onClick="travelRegGo();">관리자글등록</button><br>
+                    <p style="font-size: 24px; font-weight: bold">#전체</p>
                 </div>
                 <div class="totalCheck">
                     <b>총<span id="totalCount">${totalCount }</span>건</b>
                     <ul style="float: right">
-                        <li>최신순</li>
-                        <li>인기순</li>
-                        <li>조회순</li>
+                        <li><a href="/travel/list.tp?order=latest">최신순</a></li>
+        				<li><a href="/travel/list.tp?order=views">조회순</a></li>
+        				<li><a href="/travel/list.tp?order=popular">인기순</a></li>
                     </ul>
                 </div>
                 <!-- 리스트출력 -->
@@ -33,6 +40,7 @@
                     <c:forEach items="${tList}" var="travel" >
                         <li>
                             <div class="photo">
+                            	<img src="../resources/uploadFiles/${travel.thumbnail}">
                                 <a href="/travel/detail.tp?travelNo=${travel.travelNo }"></a>
                             </div>
                             <div class="area">
@@ -121,11 +129,16 @@
                 </div>
             </div>
         </main>
-        
+        <!-- 푸터 -->
+        <jsp:include page="/include/footer.jsp"></jsp:include>
 		<script>
 			function travelRegGo() {
 				location.href = "/travel/insert.tp";
             }
+			
+
+			
+	      
 		</script>
     </body>
 </html>

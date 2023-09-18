@@ -1,24 +1,55 @@
 package com.semi.travelpalette.travel.service;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.travelpalette.travel.domain.Travel;
-import com.semi.travelpalette.travel.domain.TravelPageInfo;
+import com.semi.travelpalette.travel.domain.TravelFile;
 
 public interface TravelService {
 
-	/**
-	 * 등록최신순 조회 Service
-	 * @param tInfo 
-	 * @return
-	 */
-	List<Travel> travelAllListByNew(TravelPageInfo pageInfo);
 
 	/**
-	 * 전체 레코드 개수 Service
+	 * 여행정보 등록 Service
+	 * @param travel
+	 * @param uploadFiles 
+	 * @param request 
 	 * @return
 	 */
-	int getTotalCount();
+	int insertTravel(Travel travel, MultipartFile[] uploadFiles, HttpServletRequest request);
+
+	/**
+	 * 여행정보 수정 Service
+	 * @param travel
+	 * @param uploadFiles
+	 * @param request
+	 * @return
+	 */
+	int updateTravel(Travel travel, MultipartFile[] uploadFiles, HttpServletRequest request);
+
+	/**
+	 * 조회수 증가 Service
+	 * @param travelNo
+	 */
+	void updateViewCount(int travelNo);
+
+	/**
+	 * 여행정보 삭제 Service
+	 * @param travelNo
+	 * @return
+	 */
+	int deleteByNo(Integer travelNo);
+
+	/**
+	 * 첨부파일 삭제 Service
+	 * @param travelFileNo
+	 * @return
+	 */
+	int deleteFileByNo(int travelFileNo);
 
 	/**
 	 * 여행정보 상세조회 Service
@@ -28,10 +59,25 @@ public interface TravelService {
 	Travel selectTravelByNo(int travelNo);
 
 	/**
-	 * 여행정보 등록 Service
-	 * @param travel
+	 * 첨부파일 리스트 Service
+	 * @param travelNo
 	 * @return
 	 */
-	int insertTravel(Travel travel);
+	List<TravelFile> selectTravelFileByNo(int travelNo);
+
+	/**
+	 * 여행정보 정렬 Service
+	 * @param sortMap
+	 * @return
+	 */
+	List<Travel> travelSortList(Map<String, Object> sortMap);
+
+	/**
+	 * 전체 레코드 개수 Service
+	 * @return
+	 */
+	int getTotalCount();
+
+	
 
 }

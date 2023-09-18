@@ -1,6 +1,7 @@
 package com.semi.travelpalette.travel.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Travel {
 	private int travelNo;
@@ -20,11 +21,9 @@ public class Travel {
 	private String travelStatus;
 	private String BoardType;
 	
-	
-	public Travel() {
-		super();
-	}
-	
+	//썸네일용 필드->컬럼은 없음
+	private TravelFile thumbnail;
+
 	public int getTravelNo() {
 		return travelNo;
 	}
@@ -125,6 +124,16 @@ public class Travel {
 		BoardType = boardType;
 	}
 
+	//썸네일용 getter, setter
+	public TravelFile getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(TravelFile thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "여행정보 [여행지번호=" + travelNo + ", 여행지명=" + travelName + ", 주소=" + travelAddr

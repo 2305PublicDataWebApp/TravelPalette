@@ -1,6 +1,6 @@
-package com.semi.travelpalette.travel.domain;
+package com.semi.travelpalette.common.domain;
 
-public class TravelPageInfo {
+public class PageInfo {
 	private int totalCount;
 	private int currentPage;
 	private int recordCountPerPage;
@@ -10,11 +10,11 @@ public class TravelPageInfo {
 	private int endNavi;
 	
 	
-	public TravelPageInfo() {
+	public PageInfo() {
 		super();
 	}
 
-	public TravelPageInfo(int totalCount, int currentPage, int recordCountPerPage, int naviCountPerPage,
+	public PageInfo(int totalCount, int currentPage, int recordCountPerPage, int naviCountPerPage,
 			int naviTotalCount, int startNavi, int endNavi) {
 		super();
 		this.totalCount = totalCount;
@@ -70,7 +70,7 @@ public class TravelPageInfo {
 	}
 	@Override
 	public String toString() {
-		return "여행정보페이지 [전체개수=" + totalCount + ", 현재페이지=" + currentPage + ", 페이지당게시물수="
+		return "페이징 [전체개수=" + totalCount + ", 현재페이지=" + currentPage + ", 페이지당게시물수="
 				+ recordCountPerPage + ", 페이지당네비수=" + naviCountPerPage + ", 네비전체개수=" + naviTotalCount
 				+ ", 시작네비=" + startNavi + ", 끝네비=" + endNavi + "]";
 	}
