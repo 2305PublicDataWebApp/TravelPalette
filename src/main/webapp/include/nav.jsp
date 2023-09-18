@@ -14,7 +14,7 @@
                     <li><a href="/">메인</a></li>
                     <li><a href="/event/list.tp">이벤트</a></li>
                     <li><a href="/travel/list.tp">여행정보</a></li>
-                    <li><a href="/map/view.t">여행지도</a></li>
+                    <li><a href="/map/view.tp">여행지도</a></li>
                     <li><a href="/community/qList.tp?boardType=travelVerification">커뮤니티</a></li>
                     <li><a href="/user/mypage.tp">회원</a></li>
                 </ul>

@@ -9,9 +9,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>여행리스트</title>
         <link rel="stylesheet" href="../resources/css/travel/list.css" />
-        <link rel="stylesheet" href="../resources/css/travel/header.css" />
-        <link rel="stylesheet" href="../resources/css/travel/nav.css" />
-        <link rel="stylesheet" href="../resources/css/travel/footer.css" />
     </head>
     <body>
     	<!-- 헤더 -->
