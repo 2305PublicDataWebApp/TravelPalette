@@ -39,7 +39,7 @@
                     <button class="btn btn-outline-success" style="border-bottom-right-radius: 5px;border-top-right-radius: 5px;z-index: 1;width: 80px;" type="submit" >Search</button>
                 </div>
                 <div style="width: 100%;float: left;border-top: 1px solid #ccc;margin-top: 15px;padding: 10px 0px">
-                    <p style="float:left;font-size: 18px;margin: 0;padding: 5px;font-weight: 600;font-family: 'SUITE-Regular';letter-spacing: 2px;padding-left: 15px;">#12건</p>
+                    <p style="float:left;font-size: 18px;margin: 0;padding: 5px;font-weight: 600;font-family: 'SUITE-Regular';letter-spacing: 2px;padding-left: 15px;">#${pInfo.totalCount }건</p>
                     <button id="goInsertBoardPage" type="button" style="float: right;width: 80px;" class="btn btn-primary">글 등록</button>
                     <p style="margin: 0;padding: 7px 13px 0px 8px;margin-left: 3px;float: right;">
                         <a href="#">최신순 </a>|
@@ -69,7 +69,7 @@
                             <td id="tr">
                                 <a href="${detailUrl}">${community.boardTitle}</a>
                             </td>
-                            <td class="tr">${community.userNickName }</td>
+                            <td class="tr">${community.userNickname }</td>
                             <td class="tr">
                                 <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${community.boardCreateDate }" />
                             </td>
@@ -79,14 +79,6 @@
                             </td>
                         </tr>
                     </c:forEach>
-<!--                   <tr> -->
-<!--                     <th scope="row">10</th> -->
-<!--                     <td>Jacob</td> -->
-<!--                     <td>Thornton</td> -->
-<!--                     <td>@fat</td> -->
-<!--                     <td>2</td> -->
-<!--                     <td>1</td> -->
-<!--                   </tr> -->
                 </tbody>
             </table>
             <div aria-label="Page navigation example">

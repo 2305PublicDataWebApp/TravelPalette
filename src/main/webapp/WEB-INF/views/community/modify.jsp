@@ -24,11 +24,16 @@
                 <button id="goBackButton" style="float: right;margin: 49px 10px 0px 0px;" type="button" class="btn btn-primary">목록으로</button>
                 <!-- <button style="float: right;margin: 47px 10px 0px 0px;" type="button" class="btn btn-info">수정하기</button> -->
             </div>
-            <form action="/community/modify.tp" method="post">
+            <form name="modifyForm" action="/community/modify.tp" method="post" enctype="multipart/form-data">
+            	<input name="boardNo" type="hidden" value="${community.boardNo}">
+            	<input type="hidden" name="boardFileName" value="${community.boardFileName }">
+				<input type="hidden" name="boardFileRename" value="${community.boardFileRename }">
+				<input type="hidden" name="boardFilePath" value="${community.boardFilePath }">
+				<input type="hidden" name="boardFileLength" value="${community.boardFileLength }">
             	<div style="width: 100%;margin: 0 auto;">
                     <div class="form-floating mb-3">
-	                    <input name="boardTitle" type="text" style="border: 1px solid #ccc;" class="form-control" id="floatingInput" placeholder="제목을 입력해주세요">
-	                    <label for="floatingInput" id="boardTitleLable">${community.boardTitle }</label>
+	                    <input name="boardTitle" type="text" style="border: 1px solid #ccc;" class="form-control" id="floatingInput" placeholder="제목을 입력해주세요" value="${community.boardTitle }">
+	                    <label for="floatingInput" id="boardTitleLable" style="z-index: 1;">제목을 입력해주세요</label>
                       </div>
                 </div>
                    <div class="form-floating" style="margin-top: 25px;">
@@ -39,20 +44,22 @@
                    	   <c:if test="${community.boardType eq 'travelCompanion'}">
 	                      <option value="travelCompanion" selected>동행 구인 게시판</option>
                    	  </c:if>
-                   	  <c:if test="${community.boardType eq 'travelVerification'}">
-	                      <option value="travelVerification" selected>여행 인증 게시판</option>
+                   	  <c:if test="${community.boardType eq 'travelcertify'}">
+	                      <option value="travelcertify" selected>여행 인증 게시판</option>
                    	  </c:if>
                     </select>
                     <label>게시판 종류</label>
                  </div>
-                 <div id="imageFile" class="input-group mb-3" style="margin-top: 25px;display:none;">
-                    <img src="../resources/images/community/fileadd.png" style="width: 25px;height: 25px;margin-top: 6px;margin-right: 10px;float:left" alt="">
-                    <input type="file" class="form-control" id="inputGroupFile02" style="border: 1px solid #ccc;width: 925px;">
-                    <!-- <label class="input-group-text" for="inputGroupFile02">Upload</label> -->
-                 </div>
+                 <c:if test="${community.boardType eq 'travelcertify' }">
+	                 <div id="imageFile" class="input-group mb-3" style="width:1000px;margin-top: 25px;">
+	                    <img src="../resources/images/community/fileadd.png" style="width: 25px;height: 25px;margin-top: 6px;margin-right: 10px;float:left" alt="">
+	                    <input name="uploadFile" type="file" class="form-control" id="inputGroupFile02" style="border: 1px solid #ccc;width: 925px;">
+	                    <!-- <label class="input-group-text" for="inputGroupFile02">Upload</label> -->
+	                 </div>
+                 </c:if>
                  <div class="form-floating">
-                    <textarea name="boardContent" class="form-control" placeholder="내용을 입력해주세요." style="height: 100px;border: 1px solid #ccc;margin-top: 25px;height: 500px;resize: none;"></textarea>
-                    <label id="boardContentLable">${community.boardContent }</label>
+                    <textarea name="boardContent" class="form-control" placeholder="내용을 입력해주세요." style="height: 100px;border: 1px solid #ccc;margin-top: 25px;height: 500px;resize: none;">${community.boardContent }</textarea>
+                    <label id="boardContentLable">내용을 입력해주세요.</label>
                  </div>
                 <div style="width: 1000px;margin: 0 auto;text-align: center;margin-top: 70px;">
                     <button id="modifyBtn" type="button" class="btn btn-primary btn-lg">수정 완료</button>
@@ -67,12 +74,12 @@
         <jsp:include page="/include/navjs.jsp"></jsp:include>
             
             document.getElementById("goBackButton").addEventListener("click", function() {
-                history.go(-1); // 뒤로가기
+                location.href = "/community/certify.tp"
             });
             
          // 유효성 체크
-            var submitButton = document.querySelector("#insertBtn"); // 버튼 선택
-            submitButton.addEventListener("click", function(event) {
+            var modifyButton = document.querySelector("#modifyBtn"); // 버튼 선택
+            modifyButton.addEventListener("click", function(event) {
                 var boardTitleInput = document.querySelector("input[name='boardTitle']");
                 var boardSelect = document.querySelector("select[name='boardType']");
                 var boardContentTextarea = document.querySelector("textarea[name='boardContent']");
@@ -89,7 +96,7 @@
                 }
                 if(document.getElementsByName("boardContent")[0])
                 // 모든 조건이 충족되면 폼을 제출
-                var form = document.insertForm;
+                var form = document.modifyForm;
                 form.submit();
             });
         </script>
