@@ -21,10 +21,18 @@
                 <div style="float:right;">
                     <input type="text" class="searchInput" placeholder="가보고 싶은 여행지 있으신가요?">
                     <div class="searchForm">
-	                    <a href="/user/login.tp">
-	                        <img src="../resources/images/main/user.png" alt="검색 아이콘" style="width:25px">
-	                        <p>로그인</p>
-	                    </a>
+                    	<c:if test="${empty sessionScope.userId}">
+	                        <a href="/user/login.tp">
+		                        <img src="../resources/images/main/user.png" alt="검색 아이콘" style="width:25px">
+		                        <p>로그인</p>
+		                    </a>
+						</c:if>
+						<c:if test="${not empty sessionScope.userId}">
+							<a href="/user/logout.tp">
+		                        <img src="../resources/images/main/user.png" alt="검색 아이콘" style="width:25px">
+		                        <p>로그아웃</p>
+		                    </a>
+						</c:if>
                     </div>
                     <img src="../resources/images/main/searchicon.png" alt="검색 아이콘" style="width:20px;float: right;padding: 14px 0px 0px 0px;">
                 </div>

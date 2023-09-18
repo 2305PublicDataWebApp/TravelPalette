@@ -87,8 +87,6 @@
                 <div style="width: 100%;height: 110px;margin-top: 80px;">
                     <h4 style="font-family: 'TmoneyRoundWindExtraBold';font-size: 28px;padding: 20px;margin-top: 30px;">댓글 남기기</h4>
                 </div>
-<!--                 댓글 add 폼 -->
-				<!--                 댓글 add 폼 -->
                 <form action="/reply/add.tp" method="post">
 					<input type="hidden" name="boardNo" value="${community.boardNo}">
 					<input type="hidden" name="boardType" value="${community.boardType}">
@@ -97,12 +95,12 @@
 	                        <textarea name="replyContent" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;border: 1px solid #ccc;margin-top: 25px;resize: none;height: 150px;"></textarea>                        
 	                        <label for="floatingTextarea2" style="margin-top: 18px;">댓글을 입력해주세요~</label>
 	                    </div>
-	                    <button class="btn btn-secondary" style="float: right;margin-right: 50px;margin-top: 15px;">
+	                    <button onclick="insertReplyBtn()" type="button" class="btn btn-secondary" style="float: right;margin-right: 50px;margin-top: 15px;">
 	                        글 등록
 	                    </button>
 	                    <div class="form-check" style="float: right;margin-right: 15px;margin-top: 21px;">
-	                        <input name="replySecretType" class="form-check-input" type="checkbox" value="Y" id="flexCheckDefault">
-	                        <label class="form-check-label" for="flexCheckDefault">
+	                        <input id="secretCheck" name="replySecretType" class="form-check-input" type="checkbox" value="Y" id="flexCheckDefault">
+	                        <label class="form-check-label" for="secretCheck">
 	                          비밀 댓글
 	                        </label>
 	                      </div>
@@ -111,35 +109,42 @@
                 <div style="width: 100%;height: 110px;margin-top: 80px;">
                     <h4 style="font-family: 'TmoneyRoundWindExtraBold';font-size: 28px;padding: 20px;margin-top: 30px;">댓글 목록</h4>
                 </div>
-                <div style="width: 1000px;margin: 0 auto;font-family: 'SUITE-Regular';position: relative;">
-                    <div style="width: 100%;height: 200px;background-color: #FDF6F0;">
-                        <div style="float: left;padding: 20px;">
-                            <h4 style="float: left;font-weight: 600;">닉네임이 들어갈 자리</h4>
-                            <p style="float: left;padding: 5px;padding-left: 8px;">2023.09.14</p>
-                            <div style="width: 800px;height: 100px;background-color: #FCECDD;float: left;padding: 10px;border-radius: 10px;">
-                                <p>댓글 내용이 들어갈 자리입니다.</p>
-                            </div>
-                        </div>
-                        <div style="padding: 10px;margin-top: 27px;position: absolute;right: 10px;top: 36px;">
-                            <span style="float: right;font-size: 23px;font-weight: 600;margin-top: 12px;margin-left: 5px;">1</span>
-                            <img style="width: 40px;float: right;" src="../resources/images/community/likeoff.png" alt="">
-                        </div>
-                    </div>
-                </div>
+                <c:forEach var="reply" items="${rList }" >				
+	                <div style="width: 1000px;margin: 0 auto;font-family: 'SUITE-Regular';position: relative;">
+	                    <div style="width: 100%;height: 200px;background-color: #FDF6F0;border-bottom: 2px solid #eedecf;">
+	                        <div style="float: left;padding: 20px;">
+	                            <h4 style="float: left;font-weight: 600;">${reply.userNickname }</h4>
+	                            <p style="float: left;padding: 5px;padding-left: 8px;">
+									<fmt:formatDate pattern="yyyy-MM-dd" value="${reply.replyCreateDate }"/>
+								</p>
+	                            <div style="width: 800px;height: 100px;background-color: #FCECDD;float: left;padding: 10px;border-radius: 10px;">
+	                                <p>${reply.replyContent }.</p>
+	                            </div>
+								<a href="javascript:void(0);" onclick="showModifyForm(this);">수정하기</a>
+								<a href="javascript:void(0);" onclick="deleteReply(event);" data-reply-no="${reply.replyNo}">삭제하기</a>
+	                        </div>
+	                        <div style="padding: 10px;margin-top: 27px;position: absolute;right: 50px;top: 36px;">
+	                            <span style="float: right;font-size: 23px;font-weight: 600;margin-top: 12px;margin-left: 5px;">1</span>
+	                            <img style="width: 40px;float: right;" src="../resources/images/community/likeoff.png" alt="">
+	                        </div>
+	                    </div>
+	                </div>
+				</c:forEach>
             </div>
             <div style="width: 100%;height: 100px;"></div>
         </main>
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
         	<jsp:include page="/include/navjs.jsp"></jsp:include>
             
 	        document.getElementById("goBackButton").addEventListener("click", function() {
 	            location.href = "/community/certify.tp"
 	        });
-            document.getElementById("goModifyButton").addEventListener("click", function() {
-                location.href= "/community/modify.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
-            });
+//             document.getElementById("goModifyButton").addEventListener("click", function() {
+//                 location.href= "/community/modify.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
+//             });
             document.getElementById("deleteButton").addEventListener("click", function() {
             	if(confirm("게시물을 삭제하시겠습니까?")){            		
                 	location.href= "/community/delete.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
@@ -170,6 +175,53 @@
 				        modal.style.display = 'none';
 				    }
 				});
+            }
+            //댓글 등록 ajax
+            function insertReplyBtn() {
+            	var boardNo = "${community.boardNo}";
+            	var boardType = "${community.boardType}";
+                let replyContent = document.getElementById('floatingTextarea2').value;
+                // 값의 길이를 확인하고 5보다 작으면 경고창을 띄웁니다.
+                if (replyContent.length < 5) {
+                  alert('댓글 내용은 5자 이상이어야 합니다');
+                }
+                // 체크되었는지 여부를 확인합니다.
+                var replySecretType = document.getElementById('secretCheck').checked ? 'Y' : 'N';
+                // AJAX 요청 보내기
+                $.ajax({
+                    type: "POST", // 또는 "GET"에 맞게 변경
+                    url: "/reply/add.tp", // 로그인 처리를 하는 URL로 변경
+                    data: {
+                    	boardNo: boardNo,
+                    	boardType: boardType,
+                    	replyContent: replyContent,
+                    	replySecretType: replySecretType
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            alert("댓글 작성을 성공하였습니다.");
+                            location.reload();
+                        } else {
+                        	alert("댓글 작성을 실패하였습니다.");
+                        }
+                    },
+                    error: function () {
+                    	console.error("서버 요청에 실패했습니다. 상태 코드: " + status);
+                        console.error("에러 내용: " + error);
+                    }
+                });                
+                
+            }
+            
+            function deleteReply(event) {
+			    var button = event.target; // 클릭된 버튼 요소
+			    var boardNo = "${community.boardNo}";
+			    var boardType = "${community.boardType}";
+			    var replyNo = button.getAttribute("data-reply-no");
+
+			    if (confirm("리뷰를 삭제하시겠습니까?")) {
+			        location.href = "/reply/delete.tp?replyNo=" + replyNo + "&boardNo=" + boardNo+ "&boardType=" + boardType;
+			    }
             }
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

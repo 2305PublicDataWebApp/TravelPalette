@@ -25,7 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.semi.travelpalette.common.domain.PageInfo;
 import com.semi.travelpalette.community.domain.Community;
+import com.semi.travelpalette.community.domain.Reply;
 import com.semi.travelpalette.community.service.CommunityService;
+import com.semi.travelpalette.community.service.ReplyService;
 
 @Controller
 @RequestMapping("/community")
@@ -33,6 +35,8 @@ public class CommunityController {
     
     @Autowired
     private CommunityService cService;
+    @Autowired
+    private ReplyService rService;
     
     @RequestMapping(value="/qList.tp", method=RequestMethod.GET)
     public ModelAndView goBoardListPage(ModelAndView mv
@@ -98,9 +102,10 @@ public class CommunityController {
         try {
             Community cOne = new Community(boardNo, boardType);
             Community community = cService.selectOneByClass(cOne);
+            List<Reply> rList = rService.selectReplyList(cOne);
 
             if (!community.getBoardTitle().equals("")) {
-                mv.addObject("community", community);
+                mv.addObject("community", community).addObject("rList", rList);
                 mv.setViewName("community/detail");
                 return mv;
             } else {
