@@ -59,44 +59,7 @@
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const liElements = document.querySelectorAll('nav ul li');
-                const navArea = document.getElementById('navArea');
-            
-                let hoverIntent = false;
-            
-                liElements.forEach(li => {
-                    li.addEventListener('mouseenter', () => {
-                        hoverIntent = true;
-                        navArea.classList.add('show');
-                        navArea.style.zIndex = 2;
-                    });
-            
-                    li.addEventListener('mouseleave', () => {
-                        hoverIntent = false;
-                        setTimeout(() => {
-                            if (!hoverIntent) {
-                                navArea.classList.remove('show');
-                            }
-                            // navArea.style.zIndex = -1;
-                            }, ); // Add a delay before hiding to allow time for moving to menu_text
-                        });
-                    });
-            
-                    navArea.addEventListener('mouseenter', () => {
-                    hoverIntent = true;
-                });
-            
-                navArea.addEventListener('mouseleave', () => {
-                    hoverIntent = false;
-                    setTimeout(() => {
-                        if (!hoverIntent) {
-                            navArea.classList.remove('show');
-                        }
-                        // navArea.style.zIndex = -1;
-                    }, ); // Add a delay before hiding to allow time for moving to menu_text
-                });
-            });
+        <jsp:include page="/include/navjs.jsp"></jsp:include>
             
             document.getElementById("goBackButton").addEventListener("click", function() {
                 history.go(-1); // 뒤로가기
