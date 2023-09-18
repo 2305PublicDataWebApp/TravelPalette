@@ -4,21 +4,27 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="TravelFileMapper">
 	<resultMap type="TravelFile" id="TravelFileResultMap">
+		<id		property="travelNo" 		column="TRAVEL_NO"/>
 		<id 	property="travelFileNo" 	column="TRAVEL_FILE_NO"/>
 		<result property="travelFileName" 	column="TRAVEL_FILE_NAME"/>
 		<result property="travelFileRename" column="TRAVEL_FILE_RENAME"/>
 		<result property="travelFilePath" 	column="TRAVEL_FILE_PATH"/>
-		<result property="travelNo" 		column="TRAVEL_NO"/>
 	</resultMap>
 	
 	<insert id="insertTravelFile">
-		INSERT INTO TRAVEL_FILE_TBL
-		VALUES (SEQ_TRAVEL_FILE_NO.NEXTVAL, #{travelFileName}, #{travelFileRename}, #{travelFilePath}, #{travelNo})
+	    INSERT INTO TRAVEL_FILE_TBL (TRAVEL_NO, TRAVEL_FILE_NO, TRAVEL_FILE_NAME, TRAVEL_FILE_RENAME, TRAVEL_FILE_PATH)
+	    VALUES (
+	        #{travelNo},
+	        (SELECT NVL(MAX(TRAVEL_FILE_NO)+1, 1) FROM TRAVEL_FILE_TBL WHERE TRAVEL_NO = #{travelNo}),
+	        #{travelFileName},
+	        #{travelFileRename},
+	        #{travelFilePath}
+	    )
 	</insert>
 	
 	<delete id="deleteFileByNo">
 		DELETE FROM TRAVEL_FILE_TBL
-		WHERE  TRAVEL_FILE_NO = #{travelFileNo}
+		WHERE  TRAVEL_NO = #{travelNo} AND TRAVEL_FILE_NO = #{travelFileNo}
 	</delete>
 	
 	<select id="selectTravelFileByNo" resultMap="TravelFileResultMap">

@@ -20,7 +20,9 @@
         <main>      	
             <div class="leftBox">
                 <div class="ListTitle">
-	    			<button style="float: right" onClick="travelRegGo();">관리자글등록</button><br>
+                	<c:if test="${userId eq 'admin' }">
+	    				<button style="float: right" onClick="travelRegGo();">관리자글등록</button><br>
+                	</c:if>
                     <p style="font-size: 24px; font-weight: bold">#전체</p>
                 </div>
                 <div class="totalCheck">
@@ -37,7 +39,7 @@
                     <c:forEach items="${tList}" var="travel" >
                         <li>
                             <div class="photo">
-                            	<img src="../resources/uploadFiles/${travel.thumbnail}">
+                            	<img src="../resources/tUploadFiles/${travel.travelFileRename}" style="width: 130px; height: 90px;">
                                 <a href="/travel/detail.tp?travelNo=${travel.travelNo }"></a>
                             </div>
                             <div class="area">

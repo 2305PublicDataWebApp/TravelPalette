@@ -22,7 +22,7 @@ public class Travel {
 	private String BoardType;
 	
 	//썸네일용 필드->컬럼은 없음
-	private TravelFile thumbnail;
+	private String travelFileRename;
 
 	public int getTravelNo() {
 		return travelNo;
@@ -125,14 +125,13 @@ public class Travel {
 	}
 
 	//썸네일용 getter, setter
-	public TravelFile getThumbnail() {
-		return thumbnail;
+	public String getTravelFileRename() {
+		return travelFileRename;
 	}
-	public void setThumbnail(TravelFile thumbnail) {
-		this.thumbnail = thumbnail;
+	public void setTravelFileRename(String travelFileRename) {
+		this.travelFileRename = travelFileRename;
 	}
-	
-	
+
 	
 	@Override
 	public String toString() {

@@ -69,7 +69,7 @@ public class TravelController {
 	@RequestMapping(value="/modify.tp", method=RequestMethod.GET)
 	public ModelAndView showModifyForm(
 			ModelAndView mv
-			, @RequestParam(value="travelNo") int travelNo) {
+			, @RequestParam(value="travelNo") Integer travelNo) {
 		try {
 			Travel tOne = tService.selectTravelByNo(travelNo);
 			List<TravelFile> travelFiles = tService.selectTravelFileByNo(tOne.getTravelNo());
@@ -143,7 +143,8 @@ public class TravelController {
 			, @RequestParam(value="travelFileNo") Integer travelFileNo
 			, @RequestParam(value="travelNo") Integer travelNo) {
 		try {
-			int result = tService.deleteFileByNo(travelFileNo);
+			TravelFile travelFile = new TravelFile(travelNo, travelFileNo);
+			int result = tService.deleteFileByNo(travelFile);
 			if(result > 0) {
 				mv.addObject("msg", "파일삭제가 완료되었습니다");
 				mv.addObject("url", "/travel/modify.tp?travelNo="+travelNo);

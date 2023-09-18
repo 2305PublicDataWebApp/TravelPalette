@@ -50,8 +50,8 @@ public class TravelStoreLogic implements TravelStore{
 
 
 	@Override
-	public int deleteFileByNo(SqlSession session, int travelFileNo) {
-		int result = session.delete("TravelFileMapper.deleteFileByNo", travelFileNo);
+	public int deleteFileByNo(SqlSession session, TravelFile travelFile) {
+		int result = session.delete("TravelFileMapper.deleteFileByNo", travelFile);
 		return result;
 	}
 

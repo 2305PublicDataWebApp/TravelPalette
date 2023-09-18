@@ -1,15 +1,21 @@
 package com.semi.travelpalette.travel.domain;
 
 public class TravelFile {
+	private int travelNo;
 	private int travelFileNo;
 	private String travelFileName;
 	private String travelFileRename;
 	private String travelFilePath;
-	private int travelNo;
 	
 	
 	public TravelFile() {
 		super();
+	}
+
+	public TravelFile(int travelNo, int travelFileNo) {
+		super();
+		this.travelNo = travelNo;
+		this.travelFileNo = travelFileNo;
 	}
 
 	public TravelFile(int travelNo, String travelFileName, String travelFileRename,
@@ -51,6 +57,8 @@ public class TravelFile {
 	public void setTravelFilePath(String travelFilePath) {
 		this.travelFilePath = travelFilePath;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "여행첨부파일 [첨부번호=" + travelFileNo + ", 여행지번호=" + travelNo + ", 첨부파일명="

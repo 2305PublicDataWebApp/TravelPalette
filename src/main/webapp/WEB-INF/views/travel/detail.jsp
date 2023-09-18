@@ -21,8 +21,10 @@
         <!-- 네비 -->
         <jsp:include page="/include/nav.jsp"></jsp:include>        
         <main>
-        	<button style="float:right" onClick="travelModifyGo();">관리자글수정</button>
-        	<button style="float:right" onClick="travelDeleteGo();">관리자글삭제</button>
+        	<c:if test="${userId eq 'admin' }">
+	        	<button style="float:right" onClick="travelModifyGo(${travel.travelNo});">관리자글수정</button>
+	        	<button style="float:right" onClick="travelDeleteGo(${travel.travelNo});">관리자글삭제</button>
+	        </c:if>
         	<div>
 	            <div>
 	                <h1 style="padding: 20px">${travel.travelName}</h1>
@@ -221,7 +223,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d52709ffacc68e58aa4c5df1743f8ea"></script>
     <script>
-        const travelNo = "${travel.travelNo}";
         
         //지도 api
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -232,12 +233,14 @@
 		    }; 
 		// 지도를 생성한다 
 		var map = new kakao.maps.Map(mapContainer, mapOption);
+        
+		const travelNo = "${travel.travelNo}";
 		
-		function travelModifyGo(){
+		function travelModifyGo(travelNo){
 			location.href = "/travel/modify.tp?travelNo="+travelNo;
 		}
 		
-		function travelDeleteGo() {
+		function travelDeleteGo(travelNo) {
 			if (confirm("여행정보글을 삭제하시겠습니까?")) { 
 		        location.href = "/travel/delete.tp?travelNo=" + travelNo;
 		    }
@@ -251,11 +254,6 @@
 		function selectedRating(rating) {
 			var selectedRating = rating;
 			document.getElementById('selectedRating').innerText = selectedRating;
-		}
-		
-		function likeMouseOver() {
-			document.
-			
 		}
 		
 	</script>

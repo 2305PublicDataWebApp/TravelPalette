@@ -113,8 +113,8 @@ public class TravelServiceImpl implements TravelService{
 	}
 
 	@Override
-	public int deleteFileByNo(int travelFileNo) {
-		int result = tStore.deleteFileByNo(session, travelFileNo);
+	public int deleteFileByNo(TravelFile travelFile) {
+		int result = tStore.deleteFileByNo(session, travelFile);
 		return result;
 	}
 
