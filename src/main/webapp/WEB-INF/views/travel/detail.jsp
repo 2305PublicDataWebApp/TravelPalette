@@ -10,9 +10,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>상세페이지</title>
         <link rel="stylesheet" href="../resources/css/travel/detail.css" />
-        <link rel="stylesheet" href="../resources/css/travel/header.css" />
-        <link rel="stylesheet" href="../resources/css/travel/nav.css" />
-        <link rel="stylesheet" href="../resources/css/travel/footer.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     </head>
     <body>
@@ -105,18 +102,17 @@
                	<c:if test="${myReview eq null}">
 					<form action="/review/insert.tp" method="POST" onsubmit="return confirmSubmit();">
 					<input type="hidden" name="travelNo" value="${travel.travelNo}" >
-					<!-- <input type="hidden" name="userNickname" value="TEST" > -->
+					<input type="hidden" name="userNickname" value="${userNickname }" >
 	                    <div class="reviewRegister">
 	                        <div class="starRating">
-	                            <input type="radio" name="reviewRating" value="1" id="rate1" onclick="selectedRating(5);"><label for="rate1">★</label>
-	                            <input type="radio" name="reviewRating" value="2" id="rate2" onclick="selectedRating(4);"><label for="rate2">★</label>
+	                            <input type="radio" name="reviewRating" value="5" id="rate1" onclick="selectedRating(5);"><label for="rate1">★</label>
+	                            <input type="radio" name="reviewRating" value="4" id="rate2" onclick="selectedRating(4);"><label for="rate2">★</label>
 	                            <input type="radio" name="reviewRating" value="3" id="rate3" onclick="selectedRating(3);"><label for="rate3">★</label>
-	                            <input type="radio" name="reviewRating" value="4" id="rate4" onclick="selectedRating(2);"><label for="rate4">★</label>
-	                            <input type="radio" name="reviewRating" value="5" id="rate5" onclick="selectedRating(1);"><label for="rate5">★</label>
+	                            <input type="radio" name="reviewRating" value="2" id="rate4" onclick="selectedRating(2);"><label for="rate4">★</label>
+	                            <input type="radio" name="reviewRating" value="1" id="rate5" onclick="selectedRating(1);"><label for="rate5">★</label>
 	                            <span id="selectedRating">0</span>
 	                        </div>
 	                        <div class="reviewContent">
-	                        	<input type="text" name="userNickname">
 	                            <textarea name="reviewContent" placeholder="리뷰를 작성해주세요."></textarea>
 	                            <button type="submit">등록하기</button>
 	                        </div>
@@ -126,20 +122,32 @@
                	<c:if test="${myReview ne null}">
                    <div class="myReview">
                        <div class="myStarRating">
-                           <input type="radio" name="reviewRating" value="1" id="rate1" onclick="selectedRating(5);"><label for="rate1">★</label>
-                           <input type="radio" name="reviewRating" value="2" id="rate2" onclick="selectedRating(4);"><label for="rate2">★</label>
-                           <input type="radio" name="reviewRating" value="3" id="rate3" onclick="selectedRating(3);"><label for="rate3">★</label>
-                           <input type="radio" name="reviewRating" value="4" id="rate4" onclick="selectedRating(2);"><label for="rate4">★</label>
-                           <input type="radio" name="reviewRating" value="5" id="rate5" onclick="selectedRating(1);"><label for="rate5">★</label>
-                           <span id="selectedRating">0</span>
+                           <span id="selectedRating">${myReview.reviewRating }</span>
+                           <label>
+							    <script>
+							        var myRating = parseInt("${myReview.reviewRating}");
+							        for (var i = 1; i <= 5; i++) {
+							            if (i <= myRating) {
+							                document.write('<span style="color: rgba(250, 208, 0, 0.99);">★</span>');
+							            } else {
+							                document.write("★");
+							            }
+							        }
+							    </script>
+							</label>
                        </div>
                        <div class="myReviewContent">
-                           <textarea readonly></textarea>
-                           <button id="submitRating">삭제하기</button>
+                           <textarea readonly>${myReview.reviewContent }</textarea>
+                           <c:url var="delReviewUrl" value="/review/delete.tp">
+								<c:param name="reviewNo" value="${myReview.reviewNo }"></c:param>
+								<c:param name="userNickname" value="${myReview.userNickname }"></c:param>
+								<c:param name="travelNo" value="${myReview.travelNo }"></c:param>
+							</c:url>
+                           <a href="javascript:void(0);" onclick="deleteReview('${delReviewUrl}');">삭제하기</a>
                        </div>
                        <div class="myReviewReg">
-                           <span>2023-01-01</span>
-                           <span style="padding-left: 10px;">닉네임</span>
+                           <span>${myReview.reviewCreateDate }</span>
+                           <span style="padding-left: 10px;">${myReview.userNickname }</span>
                        </div>
                    </div>
 				</c:if>
@@ -178,27 +186,29 @@
             </div>
             <div class="reviewNav">
                 <ul>
-                    <c:if test="${reviewPageInfo.startNavi != 1 }">
-                  			<c:url var="pageUrl" value="/travel/detail.tp">
-                  				<c:param name="page" value="${reviewPageInfo.startNavi -1 }"></c:param>
-                  				<c:param name="travelNo" value="${travel.travelNo}"/>
-                  			</c:url>
-                  			<a href="${pageUrl }">이전</a>
-                  		</c:if>
-                   	<c:forEach begin="${reviewPageInfo.startNavi}" end="${reviewPageInfo.endNavi}" var="p">
-                   		<c:url var="pageUrl" value="/travel/detail.tp">
-                   			<c:param name="page" value="${p }"></c:param>
-                   			<c:param name="travelNo" value="${travel.travelNo}"/>
-                   		</c:url>
-                   		<a href="${pageUrl }">${p }</a>
-                   	</c:forEach>
-                   	<c:if test="${reviewPageInfo.endNavi != reviewPageInfo.naviTotalCount }">
-                   		<c:url var="pageUrl" value="/travel/detail.tp">
-                   			<c:param name="page" value="${reviewPageInfo.endNavi +1 }"></c:param>
-                   			<c:param name="travelNo" value="${travel.travelNo}"/>
-                   		</c:url>
-                   		<a href="${pageUrl }">다음</a>
-                   	</c:if>
+	                <c:if test="${reviewPageInfo ne null }">
+	                    <c:if test="${reviewPageInfo.startNavi != 1 }">
+	                  			<c:url var="prevUrl" value="/travel/detail.tp">
+	                  				<c:param name="page" value="${reviewPageInfo.startNavi -1 }"></c:param>
+	                  				<c:param name="travelNo" value="${travel.travelNo}"/>
+	                  			</c:url>
+	                  			<a href="${prevUrl }">이전</a>
+	                  		</c:if>
+	                   	<c:forEach begin="${reviewPageInfo.startNavi}" end="${reviewPageInfo.endNavi}" var="p">
+	                   		<c:url var="pageUrl" value="/travel/detail.tp">
+	                   			<c:param name="page" value="${p }"></c:param>
+	                   			<c:param name="travelNo" value="${travel.travelNo}"/>
+	                   		</c:url>
+	                   		<a href="${pageUrl }">${p }</a>
+	                   	</c:forEach>
+	                   	<c:if test="${reviewPageInfo.endNavi != reviewPageInfo.naviTotalCount }">
+	                   		<c:url var="nextUrl" value="/travel/detail.tp">
+	                   			<c:param name="page" value="${reviewPageInfo.endNavi +1 }"></c:param>
+	                   			<c:param name="travelNo" value="${travel.travelNo}"/>
+	                   		</c:url>
+	                   		<a href="${nextUrl }">다음</a>
+	                   	</c:if>
+	                </c:if>
                 </ul>
             </div>
             <div class="infoLike">
@@ -256,5 +266,11 @@
 			document.getElementById('selectedRating').innerText = selectedRating;
 		}
 		
+		function deleteReview(url) {
+			if(confirm("리뷰를 삭제하시겠습니까? 삭제 후에는 복구가 불가합니다.")) {
+				location.href = url;				
+			}
+		}
+
 	</script>
 </html>

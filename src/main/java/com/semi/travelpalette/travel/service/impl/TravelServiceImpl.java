@@ -2,6 +2,7 @@ package com.semi.travelpalette.travel.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -132,8 +133,25 @@ public class TravelServiceImpl implements TravelService{
 
 	@Override
 	public List<Travel> travelSortList(Map<String, Object> sortMap) {
-		List<Travel> tList = tStore.travelSortList(session, sortMap);
-		return tList;
+		try {
+			String selectedLocation = (String)sortMap.get("selectedLocation");
+			List<Travel> AllTravelList = tStore.travelSortList(session, sortMap);
+			if(selectedLocation == null) {
+				return AllTravelList;
+			} else {
+				List<Travel> filteredList = new ArrayList<Travel>();
+				for(Travel travel : AllTravelList) {
+					String travelLocation = travel.getTravelLocation();
+					if(travelLocation.equals(selectedLocation)) {
+						filteredList.add(travel);
+					}
+				}			
+				return filteredList;
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ArrayList<Travel>();
+		}
 	}
 
 	@Override
@@ -181,6 +199,7 @@ public class TravelServiceImpl implements TravelService{
 			file.delete();
 		}
 	}
+
 
 
 	

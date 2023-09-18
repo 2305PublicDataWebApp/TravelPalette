@@ -78,6 +78,7 @@ public interface TravelService {
 	 */
 	int getTotalCount();
 
+
 	
 
 }

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -60,23 +61,25 @@
                 <div class="navi">
                     <ul>
 	                    <li>
-                    		<c:if test="${pageInfo.startNavi != 1 }">
-                    			<c:url var="pageUrl" value="/travel/list.tp">
-                    				<c:param name="page" value="${pageInfo.startNavi -1 }"></c:param>
-                    			</c:url>
-                    			<a href="${pageUrl }">이전</a>
-                    		</c:if>
-	                    	<c:forEach begin="${pageInfo.startNavi}" end="${pageInfo.endNavi}" var="p">
-	                    		<c:url var="pageUrl" value="/travel/list.tp">
-	                    			<c:param name="page" value="${p }"></c:param>
-	                    		</c:url>
-	                    		<a href="${pageUrl }">${p }</a>
-	                    	</c:forEach>
-	                    	<c:if test="${pageInfo.endNavi != pageInfo.naviTotalCount }">
-	                    		<c:url var="pageUrl" value="/travel/list.tp">
-	                    			<c:param name="page" value="${pageInfo.endNavi +1 }"></c:param>
-	                    		</c:url>
-	                    		<a href="${pageUrl }">다음</a>
+	                    	<c:if test="${pageInfo ne null }">
+	                    		<c:if test="${pageInfo.startNavi != 1 }">
+	                    			<c:url var="pageUrl" value="/travel/list.tp">
+	                    				<c:param name="page" value="${pageInfo.startNavi -1 }"></c:param>
+	                    			</c:url>
+	                    			<a href="${pageUrl }">이전</a>
+	                    		</c:if>
+		                    	<c:forEach begin="${pageInfo.startNavi}" end="${pageInfo.endNavi}" var="p">
+		                    		<c:url var="pageUrl" value="/travel/list.tp">
+		                    			<c:param name="page" value="${p }"></c:param>
+		                    		</c:url>
+		                    		<a href="${pageUrl }">${p }</a>
+		                    	</c:forEach>
+		                    	<c:if test="${pageInfo.endNavi != pageInfo.naviTotalCount }">
+		                    		<c:url var="pageUrl" value="/travel/list.tp">
+		                    			<c:param name="page" value="${pageInfo.endNavi +1 }"></c:param>
+		                    		</c:url>
+		                    		<a href="${pageUrl }">다음</a>
+		                    	</c:if>
 	                    	</c:if>
 	                    </li>
                     </ul>
@@ -86,31 +89,14 @@
                 <div class="selectTag">
                     <span style="font-size: 24px; font-weight: bold">지역</span>
                     <button style="float: right">새고</button>
-                    <ul>
+                    <ul id="regionList">
                         <li><a href="#">#전체</a></li>
-                        <li><a href="#">#서울</a></li>
-                        <li><a href="#">#부산</a></li>
-                        <li><a href="#">#대구</a></li>
-                        <li><a href="#">#인천</a></li>
-                        <li><a href="#">#광주</a></li>
-                        <li><a href="#">#대전</a></li>
-                        <li><a href="#">#울산</a></li>
-                        <li><a href="#">#세종</a></li>
-                        <li><a href="#">#경기</a></li>
-                        <li><a href="#">#강원</a></li>
-                        <li><a href="#">#충북</a></li>
-                        <li><a href="#">#충남</a></li>
-                        <li><a href="#">#경북</a></li>
-                        <li><a href="#">#경남</a></li>
-                        <li><a href="#">#전북</a></li>
-                        <li><a href="#">#전남</a></li>
-                        <li><a href="#">#제주</a></li>
                     </ul>
                 </div>
                 <div class="selectTag">
                     <span style="font-size: 24px; font-weight: bold">테마</span>
                     <button style="float: right">새고</button>
-                    <ul>
+                    <ul id="keywordList">
                         <li><a href="#">#전체</a></li>
                         <li><a href="#">#스포츠</a></li>
                         <li><a href="#">#동물</a></li>
@@ -136,8 +122,18 @@
             }
 			
 
-			
-	      
+	    // 지역 목록 생성
+	    const regions = ["서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기", "강원", "충북", "충남", "경북", "경남", "전북", "전남", "제주"];
+	    const regionList = document.getElementById("regionList");
+	
+	    regions.forEach(region => {
+	        const listItem = document.createElement("li");
+	        const link = document.createElement("a");
+	        link.href = "/travel/list.tp?region=" + encodeURIComponent("#" + region);
+	        link.textContent = "#" + region;
+	        listItem.appendChild(link);
+	        regionList.appendChild(listItem);
+	    });
 		</script>
     </body>
 </html>

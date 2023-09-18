@@ -9,12 +9,19 @@
 	<body>
 		<h1>${error }</h1>
 		<script>
-			const msg= "${msg }";
-			const url= "${url}";
+			const msg = "${msg }";
+			const url = "${url}";
+			const backUrl = "${back}";
+			
 			if(msg != "") alert(msg);
+			
 			if (url) {
 				location.href = url;
 			}
+			
+		    if (backUrl === 'true') {
+		        window.history.back();
+		    }
 		</script>
 	</body>
 </html>

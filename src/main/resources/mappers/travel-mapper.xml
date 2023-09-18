@@ -21,38 +21,39 @@
 		<result property="travelStatus"  	column="TRAVEL_STATUS"/>
 		<result property="travelFileRename" column="TRAVEL_FILE_RENAME"/>
 		<result property="BoardType" 		column="BOARD_TYPE"/>
-		
-		<!-- 이미지를 가져오기 위해 TravelFile과 연결 -->
-<!-- 		<association property="travelFileRename" javaType="com.semi.travelpalette.travel.domain.TravelFile"> -->
-<!-- 			<result property="travelFileRename" column="TRAVEL_FILE_RENAME"/> -->
-<!-- 		</association> -->
 	</resultMap>
 	
 	<insert id="insertTravel">
-		INSERT INTO TRAVEL_TBL 
-		VALUES (SEQ_TRAVEL_NO.NEXTVAL, #{travelName}, #{travelAddr}, #{travelInfo}, #{travelUrl}, #{travelTel}, #{travelUsingTime}, #{travelHoliday}, #{travelParking}, #{travelLocation}, #{travelTags}, DEFAULT, DEFAULT, 0, DEFAULT, DEFAULT)
+		INSERT	INTO TRAVEL_TBL 
+		VALUES	(SEQ_TRAVEL_NO.NEXTVAL, #{travelName}, #{travelAddr}, #{travelInfo}, #{travelUrl}, #{travelTel}, #{travelUsingTime}, #{travelHoliday}, #{travelParking}, #{travelLocation}, #{travelTags}, DEFAULT, DEFAULT, 0, DEFAULT, DEFAULT)
 	</insert>
 	
 	<update id="updateTravel">
-		UPDATE TRAVEL_TBL
-		SET TRAVEL_NAME = #{travelName}, TRAVEL_ADDR = #{travelAddr}, TRAVEL_INFO = #{travelInfo}, TRAVEL_URL = #{travelUrl}, TRAVEL_TEL = #{travelTel}, TRAVEL_USING_TIME = #{travelUsingTime}, TRAVEL_HOLIDAY = #{travelHoliday}, TRAVEL_PARKING = #{travelParking}, TRAVEL_LOCATION = #{travelLocation}, TRAVEL_TAGS = #{travelTags}, TRAVEL_UPDATE_DATE = DEFAULT
-		WHERE TRAVEL_NO = #{travelNo}
+		UPDATE	TRAVEL_TBL
+		SET		TRAVEL_NAME = #{travelName}, TRAVEL_ADDR = #{travelAddr}, TRAVEL_INFO = #{travelInfo}, TRAVEL_URL = #{travelUrl}, TRAVEL_TEL = #{travelTel}, TRAVEL_USING_TIME = #{travelUsingTime}, TRAVEL_HOLIDAY = #{travelHoliday}, TRAVEL_PARKING = #{travelParking}, TRAVEL_LOCATION = #{travelLocation}, TRAVEL_TAGS = #{travelTags}, TRAVEL_UPDATE_DATE = DEFAULT
+		WHERE	TRAVEL_NO = #{travelNo}
 	</update>
 	
 	<update id="updateViewCount">
-		UPDATE TRAVEL_TBL
-		SET TRAVEL_VIEW_COUNT = TRAVEL_VIEW_COUNT+1
-		WHERE TRAVEL_NO = #{travelNo}
+		UPDATE	TRAVEL_TBL
+		SET		TRAVEL_VIEW_COUNT = TRAVEL_VIEW_COUNT+1
+		WHERE	TRAVEL_NO = #{travelNo}
 	</update>
 	
 	<update id="deleteByNo">
-		UPDATE TRAVEL_TBL
-		SET TRAVEL_STATUS = 'N'
-		WHERE TRAVEL_NO = #{travelNo}
+		UPDATE	TRAVEL_TBL
+		SET 	TRAVEL_STATUS = 'N'
+		WHERE	TRAVEL_NO = #{travelNo}
 	</update>
 	
 	<select id="getTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM TRAVEL_TBL WHERE TRAVEL_STATUS = 'Y'
+		<!-- SELECT COUNT(*) FROM TRAVEL_TBL WHERE TRAVEL_STATUS = 'Y' -->
+		<!-- 썸네일이 없으면 조회안됨 -->
+		SELECT  COUNT (*)
+		FROM    TRAVEL_TBL A, TRAVEL_FILE_TBL B
+		WHERE   A.TRAVEL_NO = B.TRAVEL_NO
+		AND 	A.TRAVEL_STATUS = 'Y' 
+		AND 	B.TRAVEL_FILE_NO = (SELECT max(TRAVEL_FILE_NO) FROM TRAVEL_FILE_TBL WHERE TRAVEL_NO = A.TRAVEL_NO)
 	</select>
 	
 	<select id="selectTravelByNo" resultMap="TravelResultMap">
@@ -66,7 +67,7 @@
 	</select>
 	
 	<select id="sortTravelList" resultMap="TravelResultMap">
-		SELECT  A.TRAVEL_NO, A.TRAVEL_NAME,  A.TRAVEL_ADDR,  A.TRAVEL_TAGS, A.TRAVEL_VIEW_COUNT, B.TRAVEL_FILE_RENAME
+		SELECT  A.TRAVEL_NO, A.TRAVEL_NAME,  A.TRAVEL_ADDR, A.TRAVEL_LOCATION, A.TRAVEL_TAGS, A.TRAVEL_VIEW_COUNT, B.TRAVEL_FILE_RENAME
 		FROM    TRAVEL_TBL A, TRAVEL_FILE_TBL B
 		WHERE 	A.TRAVEL_NO = B.TRAVEL_NO
 		AND 	A.TRAVEL_STATUS = 'Y' 

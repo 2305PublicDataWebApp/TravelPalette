@@ -1,5 +1,6 @@
 package com.semi.travelpalette.travel.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -177,15 +178,15 @@ public class TravelController {
 				//조회수 증가
 				tService.updateViewCount(travelNo);
 				
-//				 String userNickname = (String) session.getAttribute("userNickname");
-//				 if(userNickname != null && userNickname != "") {
-//					 //닉네임과 여행지번호로 리뷰조회
-//					 Review review = new Review(userNickname, travelNo);
-//					 Review	myReview = rService.selectMyReview(review);
-//					 if(myReview != null) {
-//						 mv.addObject("myReview", myReview);
-//					 }
-//				 }
+				 String userNickname = (String) session.getAttribute("userNickname");
+				 if(userNickname != null && userNickname != "") {
+					 //닉네임과 여행지번호로 리뷰조회
+					 Review review = new Review(userNickname, travelNo);
+					 Review	myReview = rService.selectMyReview(review);
+					 if(myReview != null) {
+						 mv.addObject("myReview", myReview);
+					 }
+				 }
 				 
 				//리뷰목록 페이징
 				int totalCount = rService.getReviewTotalCount(travelNo);
@@ -200,7 +201,7 @@ public class TravelController {
 				
 				//전체리뷰 조회
 				List<Review> rList = rService.selectReviewByTNo(reviewMap);
-				if(!rList.isEmpty()) { 
+				if(rList.size() > 0) { 
 					mv.addObject("reviewPageInfo", pageInfo);					
 					mv.addObject("review", rList);					
 				}
@@ -224,7 +225,8 @@ public class TravelController {
 	public ModelAndView sortList(
 			ModelAndView mv
 			, @RequestParam(value = "order", required=false) String order
-			, @RequestParam(value = "page", required=false, defaultValue="1") Integer currentPage) {
+			, @RequestParam(value = "page", required=false, defaultValue="1") Integer currentPage
+			, @RequestParam(value = "region", required = false) String selectedLocation) {
 		try {
 			int totalCount = tService.getTotalCount();
 			int recordCountPerPage = 10;
@@ -235,9 +237,10 @@ public class TravelController {
 			Map<String, Object> sortMap = new HashMap<String, Object>();
 			sortMap.put("pageInfo", pageInfo);
 			sortMap.put("order", order);
-			
-			List<Travel> tList = tService.travelSortList(sortMap);
-			
+			sortMap.put("selectedLocation", selectedLocation);
+			System.out.println("******************selectedLocation :" + selectedLocation);
+			List<Travel> tList = tService.travelSortList(sortMap);				
+
 			if(tList.size() > 0) {
 				mv.addObject("pageInfo", pageInfo);
 				mv.addObject("totalCount", totalCount);
@@ -245,8 +248,10 @@ public class TravelController {
 				mv.setViewName("travel/list");
 			} else {
 				mv.addObject("msg", "[서비스실패] 목록을 조회할 수 없습니다.");
+				mv.addObject("back", true);
 				mv.setViewName("common/errorPage");
 			}	
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("error", e.getMessage());
@@ -255,15 +260,20 @@ public class TravelController {
 		}
 		return mv;
 	}
-
+	
 	private PageInfo getPageInfo(Integer currentPage, int totalCount, int recordCountPerPage, int naviCountPerPage) {
 		//네비게이터 필요변수 : recordCountPerPage, naviCountPerPage, naviTotalCount, startNavi, endNavi
 		//고정변수를 파라미터로 받아서 처리
 		//int recordCountPerPage = 10;
 		//int naviCountPerPage = 5;
 		//계산변수
-		int naviTotalCount = (int)((double)totalCount / recordCountPerPage + 0.9);
-		int startNavi = (((int)((double)currentPage / naviCountPerPage + 0.9)) -1) * naviCountPerPage +1 ;
+		int naviTotalCount = 0;
+		if(totalCount % recordCountPerPage > 0) {
+			naviTotalCount = totalCount / recordCountPerPage +1;
+		} else {
+			naviTotalCount = totalCount / recordCountPerPage;		
+		}
+		int startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
 		int endNavi = startNavi + naviCountPerPage -1;
 		if (endNavi > naviTotalCount) {
 			endNavi = naviTotalCount;

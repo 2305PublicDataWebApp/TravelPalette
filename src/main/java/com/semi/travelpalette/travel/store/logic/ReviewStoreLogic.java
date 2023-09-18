@@ -47,5 +47,12 @@ public class ReviewStoreLogic implements ReviewStore{
 	}
 
 
+	@Override
+	public int deleteReview(SqlSession session, Review review) {
+		int result = session.update("ReviewMapper.deleteReview", review);
+		return result;
+	}
+
+
 	
 }
