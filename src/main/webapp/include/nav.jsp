@@ -11,12 +11,12 @@
 		<nav>
             <div class="navContainer">
                 <ul class="navMenu">
-                    <li><a href="#">메인</a></li>
-                    <li><a href="#">이벤트</a></li>
-                    <li><a href="#">여행정보</a></li>
-                    <li><a href="#">여행지도</a></li>
-                    <li><a href="#">커뮤니티</a></li>
-                    <li><a href="#">회원</a></li>
+                    <li><a href="/">메인</a></li>
+                    <li><a href="/event/list.tp">이벤트</a></li>
+                    <li><a href="/travel/list.tp">여행정보</a></li>
+                    <li><a href="/map/view.t">여행지도</a></li>
+                    <li><a href="/community/qList.tp?boardType=travelVerification">커뮤니티</a></li>
+                    <li><a href="/user/mypage.tp">회원</a></li>
                 </ul>
             </div>
             <div id="navArea" class="animatedNav" >
@@ -24,20 +24,20 @@
                     <ul>
                         <li></li>
                         <li>
-                            <a href="#">
+                            <a href="/event/list.tp">
                                 진행중인 리스트<br>
                             </a>
-                            <a href="#">
+                            <a href="/event/list.tp">
                                 종료된 이벤트<br>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/travel/list.tp">
                                 여행정보 게시판<br>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/map/view.tp">
                                 지도 바로가기
                             </a>
                         </li>
@@ -56,7 +56,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/user/mypage.tp">
                                 마이페이지<br>
                             </a>
                             <a href="#">

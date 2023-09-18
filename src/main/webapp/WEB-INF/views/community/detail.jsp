@@ -36,7 +36,7 @@
 	                    </h4>
 	                    <button id="goBackButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-primary">목록으로</button>
 	                    <button id="goModifyButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-secondary">수정하기</button>
-	                    <button id="deleteButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-dark">수정하기</button>
+	                    <button id="deleteButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-dark">삭제하기</button>
 	                </div>
 	                <table class="table caption-top" style="padding: 0px 20px;font-family: 'SUITE-Regular';font-size: 18px;">
 	                    <thead style="--bs-table-bg: rgba(224, 224, 224, 0.32);border: 1px solid #eee;border-bottom: 2px solid #ccc;">
