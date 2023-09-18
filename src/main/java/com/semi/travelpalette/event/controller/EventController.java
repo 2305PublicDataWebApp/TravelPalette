@@ -1,14 +1,16 @@
 package com.semi.travelpalette.event.controller;
 
 import java.io.File;
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.*;
 import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,53 +36,45 @@ public class EventController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/insert.tp", method=RequestMethod.POST)
-	public ModelAndView insertEvent(
-			ModelAndView mv
-			, @ModelAttribute Event event
-			, @RequestParam(value = "uploadFile", required=false) MultipartFile uploadFile
-			, HttpServletRequest request) {
-		// 입력 형식을 지정
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
-		try {
-		    // 입력 문자열을 날짜로 변환
-		    Date parsedStartDate = dateFormat.parse(request.getParameter("eventStartDate"));
-		    Date parsedEndDate = dateFormat.parse(request.getParameter("eventEndDate"));
-		    
-		    // java.sql.Timestamp로 변환
-		    Timestamp eventStartDate = new Timestamp(parsedStartDate.getTime());
-		    Timestamp eventEndDate = new Timestamp(parsedEndDate.getTime());
-			
-			event.setEventStartDate(eventStartDate);
-			event.setEventEndDate(eventEndDate);
-			
-			if(uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
-				// 파일 정보(이름, 리네임, 경로, 크기) 및 파일 저장
-				Map<String, Object> eMap = this.saveFile(request, uploadFile);
-				event.setEventFileName((String)eMap.get("fileName"));
-				event.setEventFileRename((String)eMap.get("fileRename"));
-				event.setEventFilePath((String)eMap.get("filePath"));
-				event.setEventFileLength((long)eMap.get("fileLength"));
-			}
-			int result = eService.insertEvent(event);
-			if(result > 0) {
-				mv.addObject("msg", "이벤트가 등록되었습니다.");
-				mv.addObject("url", "/event/list.tp");
-				mv.setViewName("common/successPage");
-			} else {
-				mv.addObject("msg", "[서비스실패] 이벤트가 등록되지 않았습니다.");
-				mv.addObject("url", "/event/insert.tp");
-				mv.setViewName("common/errorPage");
-			}	
-		} catch (Exception e) {
-			e.printStackTrace();
-			mv.addObject("error", e.getMessage());
-			mv.addObject("msg", "[서비스실패] 관리자에 문의바랍니다.");
-			mv.setViewName("common/errorPage");
-		}
-		return mv;
-	}
+    @RequestMapping(value = "/insert.tp", method = RequestMethod.POST)
+    public ModelAndView insertEvent(
+            ModelAndView mv,
+            @ModelAttribute Event event,
+            @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile,
+            @RequestParam("eventStartDate") @DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date eventStartDate,
+            @RequestParam("eventEndDate") @DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date eventEndDate,
+            HttpServletRequest request) {
+
+        try {
+            event.setEventStartDate(new java.sql.Date(eventStartDate.getTime()));
+            event.setEventEndDate(new java.sql.Date(eventEndDate.getTime()));
+
+            if (uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
+                // 파일 정보(이름, 리네임, 경로, 크기) 및 파일 저장
+                Map<String, Object> eMap = this.saveFile(request, uploadFile);
+                event.setEventFileName((String) eMap.get("fileName"));
+                event.setEventFileRename((String) eMap.get("fileRename"));
+                event.setEventFilePath((String) eMap.get("filePath"));
+                event.setEventFileLength((long) eMap.get("fileLength"));
+            }
+            int result = eService.insertEvent(event);
+            if (result > 0) {
+                mv.addObject("msg", "이벤트가 등록되었습니다.");
+                mv.addObject("url", "/event/list.tp");
+                mv.setViewName("common/successPage");
+            } else {
+                mv.addObject("msg", "[서비스실패] 이벤트가 등록되지 않았습니다.");
+                mv.addObject("url", "/event/insert.tp");
+                mv.setViewName("common/errorPage");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("error", e.getMessage());
+            mv.addObject("msg", "[서비스실패] 관리자에 문의바랍니다.");
+            mv.setViewName("common/errorPage");
+        }
+        return mv;
+    }
 	
 	private Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws Exception {
 		HashMap<String, Object> fileMap = new HashMap<String, Object>();

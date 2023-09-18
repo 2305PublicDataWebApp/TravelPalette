@@ -1,5 +1,6 @@
 package com.semi.travelpalette.event.domain;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Event {
@@ -10,22 +11,21 @@ public class Event {
     private String eventFileRename;
     private String eventFilePath;
     private long eventFileLength;
-    private Timestamp eventStartDate;
-    private Timestamp eventEndDate;
+    private Date eventStartDate;
+    private Date eventEndDate;
     private String eventPrecautions;
     private String eventInquiries;
     private Timestamp eventCreateDate;
     private Timestamp eventUpdateDate;
     private char eventStatus;
     
-    public Event() {
-    	super();
+	public Event() {
+		super();
 	}
 
 	public Event(int eventNo, String boardType, String eventTitle, String eventFileName, String eventFileRename,
-			String eventFilePath, int eventFileLength, Timestamp eventStartDate, Timestamp eventEndDate,
-			String eventPrecautions, String eventInquiries, Timestamp eventCreateDate, Timestamp eventUpdateDate,
-			char eventStatus) {
+			String eventFilePath, long eventFileLength, Date eventStartDate, Date eventEndDate, String eventPrecautions,
+			String eventInquiries, Timestamp eventCreateDate, Timestamp eventUpdateDate, char eventStatus) {
 		super();
 		this.eventNo = eventNo;
 		this.boardType = boardType;
@@ -99,19 +99,19 @@ public class Event {
 		this.eventFileLength = eventFileLength;
 	}
 
-	public Timestamp getEventStartDate() {
+	public Date getEventStartDate() {
 		return eventStartDate;
 	}
 
-	public void setEventStartDate(Timestamp eventStartDate) {
+	public void setEventStartDate(Date eventStartDate) {
 		this.eventStartDate = eventStartDate;
 	}
 
-	public Timestamp getEventEndDate() {
+	public Date getEventEndDate() {
 		return eventEndDate;
 	}
 
-	public void setEventEndDate(Timestamp eventEndDate) {
+	public void setEventEndDate(Date eventEndDate) {
 		this.eventEndDate = eventEndDate;
 	}
 
