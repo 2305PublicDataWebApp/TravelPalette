@@ -1,24 +1,15 @@
 package com.semi.travelpalette.user.service.impl;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.semi.travelpalette.user.domain.User;
 import com.semi.travelpalette.user.service.UserService;
 import com.semi.travelpalette.user.store.UserStore;
 
+@Transactional
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -27,18 +18,26 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private SqlSession session;
 	
+	
 	@Override
-	public int insertUser(User user) {
+	public void insertUser(User user) {
+		
 		int result = uStore.insertUser(session, user);
-		return result;
+		int userInfoResult =  uStore.insertUserInfo(session, user);
+		if(result + userInfoResult < 3 ) {
+			throw new RuntimeException("회원가입이 제대로 처리되지 않습니다.");
+		}
+		
 	}
 
+	
 	@Override
 	public int insertUserInfo(User user) {
 		int result = uStore.insertUserInfo(session, user);
 		return result;
 	}
-
+	
+	@Transactional(readOnly = true)
 	@Override
 	public User checkUserId(String userId) {
 		User idCheck = uStore.selectOneId(session, userId);
@@ -64,22 +63,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User selectUserNickname(int userNo) {
-		User loginInfo = uStore.selectUserNickname(session, userNo);
+	public User selectUserInfo(int userNo) {
+		User loginInfo = uStore.selectUserInfo(session, userNo);
 		return loginInfo;
 	}
 
-//	@Override
-//	public int kakaoUserInsert(User kakaoUser) {
-//		int result = uStore.kakaoUserInsert(session, kakaoUser);
-//		return result;
-//	}
 
-//	@Override
-//	public int kakaoUserInfoInsert(User kakaouser) {
-//		int result = uStore.kakaoUserInfoInsert(session, kakaouser);
-//		return result;
-//	}
+	@Override
+	public void updateUserNormal(User userInfo) {
+		int result = uStore.updateUserNormal(session, userInfo);
+		int userInfoResult =  uStore.updateUserInfoNormal(session, userInfo);
+		if(result + userInfoResult <3 ) {
+			throw new RuntimeException("회원 정보 수정이 제대로 처리되지 않습니다.");
+		}
+	}
 
 	
 

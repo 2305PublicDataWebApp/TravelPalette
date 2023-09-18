@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>회원가입</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-		<link rel="stylesheet" href="../resources/css/register.css">
+		<link rel="stylesheet" href="../resources/css/user/register.css">
     	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
@@ -81,6 +81,7 @@
 	                    <div class="inputDiv" style="display: flex; align-items: center;">
 	                        <label for="">SMS/메일<br>수신 여부</label>
 	                        <div id="checkDiv">
+	                        
 	                            <input type="checkbox" name="userEmailStatus" class="form-check-input" value="Y" id="mail"><label class="form-check-label" for="mail">메일</label>
 	                            <input type="checkbox" name="userSmsStatus" class="form-check-input" value="Y" id="SMS"><label class="form-check-label" for="SMS">SMS</label>
 	                        </div>
@@ -490,6 +491,28 @@
 		    // Send the request
 		    xhr.send();
 		}    	
+    	
+    	
+			document.addEventListener("DOMContentLoaded", function() {
+			  const mailCheckbox = document.getElementById("mail");
+			  const smsCheckbox = document.getElementById("SMS");
+
+			  mailCheckbox.addEventListener("change", function() {
+			    if (mailCheckbox.checked) {
+			      mailCheckbox.value = "Y";
+			    } else {
+			      mailCheckbox.value = "N";
+			    }
+			  });
+
+			  smsCheckbox.addEventListener("change", function() {
+			    if (smsCheckbox.checked) {
+			      smsCheckbox.value = "Y";
+			    } else {
+			      smsCheckbox.value = "N";
+			    }
+			  });
+			});    	
 
          function registerCheck() {
              let userId = document.querySelector("#userId").value;

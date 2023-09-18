@@ -1,7 +1,5 @@
 package com.semi.travelpalette.user.store.logic;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -66,10 +64,23 @@ public class UserStoreLogic implements UserStore{
 	}
 
 	@Override
-	public User selectUserNickname(SqlSession session, int userNo) {
-		User loginInfo = session.selectOne("UserMapper.selectUserNickname", userNo);
+	public User selectUserInfo(SqlSession session, int userNo) {
+		User loginInfo = session.selectOne("UserMapper.selectUserInfo", userNo);
 		return loginInfo;
 	}
+
+	@Override
+	public int updateUserNormal(SqlSession session, User userInfo) {
+		int result = session.update("UserMapper.updateUserNormal", "userInfo");
+		return result;
+	}
+
+	@Override
+	public int updateUserInfoNormal(SqlSession session, User userInfo) {
+		int result = session.update("UserMapper.updateUserInfoNormal", userInfo);
+		return result;
+	}
+
 
 
 

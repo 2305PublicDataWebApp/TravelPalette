@@ -1,7 +1,5 @@
 package com.semi.travelpalette.user.store;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 
 import com.semi.travelpalette.user.domain.User;
@@ -90,8 +88,23 @@ public interface UserStore {
 	 * @param userNo
 	 * @return
 	 */
-	public User selectUserNickname(SqlSession session, int userNo);
+	public User selectUserInfo(SqlSession session, int userNo);
 
+	/**
+	 * 일반 회원 정보 수정
+	 * @param session
+	 * @param userInfo
+	 * @return
+	 */
+	public int updateUserNormal(SqlSession session, User userInfo);
+
+	/**
+	 * 일반 회원 상세 정보 수정
+	 * @param session
+	 * @param userInfo
+	 * @return
+	 */
+	public int updateUserInfoNormal(SqlSession session, User userInfo);
 
 
 

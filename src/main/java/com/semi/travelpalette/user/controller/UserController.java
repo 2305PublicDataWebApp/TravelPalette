@@ -27,9 +27,18 @@ import com.semi.travelpalette.user.domain.User;
 import com.semi.travelpalette.user.service.KakaoService;
 import com.semi.travelpalette.user.service.UserService;
 
+import oracle.jdbc.proxy.annotation.Post;
+
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
+
+	//권장
+//	private final UserService uService;
+//
+//	private final KakaoService kService;
+//
+//	private final JavaMailSenderImpl mailSender;
 	
 	@Autowired
 	private UserService uService;
@@ -39,7 +48,11 @@ public class UserController {
 	
 	@Autowired
 	private JavaMailSenderImpl mailSender;
+	
 	private int authNumber; 	
+	
+	
+	
 	
 	// *************************** 로그인 관련 ***************************
 	
@@ -59,18 +72,23 @@ public class UserController {
 			, HttpSession session
 			) {
 		Map<String, Object> response = new HashMap<>();
-//		User user = new User(userId, userPw);
+		// 입력받은 로그인 정보(아이디, pw)로 로그인 정보 객체에 저장
 		User login = uService.loginUser(user);
-		System.out.println(login.toString());
 		if(login != null) {
-			User userInfo = uService.selectUserNickname((int) login.getUserNo());
+			// 유저 상세 정보 번호로 조회
+			User userInfo = uService.selectUserInfo((int) login.getUserNo());
 	        if (userInfo != null) {
 	            String userId = login.getUserId();
 	            String userNickname = userInfo.getUserNickname();
-	            System.out.println(userNickname);
+	            // 플랫폼 타입 저장
+	            String platformType = login.getPlatformType();
+	            System.out.println("로그인 닉네임 정보 : " + userNickname);
+	            System.out.println("로그인 플랫폼 정보 : " + platformType);
 
 	            session.setAttribute("userId", userId);
 	            session.setAttribute("userNickname", userNickname);
+	            session.setAttribute("platformType", platformType);
+	            
 	            response.put("success", true);
 	        } else {
 	            // 사용자 정보를 가져올 수 없는 경우에 대한 처리
@@ -94,6 +112,117 @@ public class UserController {
         session.invalidate();
         return "redirect:/index.jsp";
     }
+    
+    
+    
+    // ************************ 회원 기능 관련 ***************************
+	
+	@GetMapping("/mypage.tp")
+	public ModelAndView showMypage (
+			ModelAndView mv
+			, HttpSession session
+			, @ModelAttribute User user
+			) {
+		String userId = (String) session.getAttribute("userId");
+		System.out.println("제발~~!!" + userId);
+		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
+		String userNickname = (String) session.getAttribute("userNickname");
+		if(uOne != null) {
+			mv.addObject("userId", uOne.getUserId()).addObject("userNickname", uOne.getUserNickname());
+			mv.setViewName("/user/mypage");
+		}else {
+			mv.addObject("title", "마이페이지 조회 실패").addObject("msg", "로그인 후 이용 가능합니다.")
+			.addObject("url", "redirect:/index.jsp").addObject("urlBtn", "메인으로 이동");
+			mv.setViewName("common/serviceResult"); 
+		}		
+		return mv;
+	}
+    
+    // 회원 페이지 접속 시 비밀번호 입력하기(회원 정보 수정, 회원 탈퇴)
+	
+	
+	@GetMapping("/userNormalPw.tp")
+    public ModelAndView showUserNormalPw(
+    		ModelAndView mv
+    		, HttpSession session
+    		, @ModelAttribute User user
+    		) {
+		String userId = (String) session.getAttribute("userId");
+		System.out.println("제발~~!!" + userId);
+		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
+		System.out.println();
+		if(uOne != null) {
+			mv.addObject("title", "비밀번호 확인").addObject("titleMsg", "비밀번호 확인")
+			.addObject("btnMsg", "비밀번호 입력");
+			mv.setViewName("/user/normalPw");
+		}else {
+	        mv.addObject("javascript", "alert('로그인 후 이용 가능합니다.'); history.back();");
+	        mv.setViewName("redirect:/index.jsp");
+		}		
+    	return mv;
+    }
+    
+	
+	
+
+    @PostMapping("/userNormalPw.tp")
+    @ResponseBody
+    public Map<String, Object> userNormalPw(@RequestParam("userPw") String userPw
+    		, HttpSession session) {
+        // 요청 처리 로직
+        String userId = (String)session.getAttribute("userId");
+        User user =new User(userId, userPw);
+        User pwCheck = uService.loginUser(user);
+        // 응답 데이터 생성
+        Map<String, Object> response = new HashMap<>();
+        if(pwCheck != null) {
+        	boolean isDuplicate = true;
+        	response.put("success", true);
+        	response.put("isDuplicate", isDuplicate);
+        	response.put("redirectUrl", "/user/modifyNormal.tp"); // 리디렉션할 URL 설정
+        } else {
+        	boolean isDuplicate = false;
+        	response.put("success", false);
+        	response.put("isDuplicate", isDuplicate);
+            response.put("message", "아이디와 비밀번호를 확인해주세요."); // 실패 메시지 설정
+        }
+        return response;
+    }
+    
+    // 회원 정보 수정
+	@GetMapping("/modifyNormal.tp")
+    public ModelAndView showUserModifyNormal(
+    		ModelAndView mv
+    		, HttpSession session
+    		, @ModelAttribute User user
+    		) {
+		String userId = (String) session.getAttribute("userId");
+		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
+		// 유저 정보 검색 후 수정 페이지에 출력
+		User userInfo = uService.selectUserInfo(uOne.getUserNo());
+		if(uOne != null) {
+			mv.addObject("userInfo", userInfo);
+			mv.setViewName("/user/modifyNormal");
+		}else {
+			
+	        mv.addObject("javascript", "alert('로그인 후 이용 가능합니다.'); history.back();");
+	        mv.setViewName("redirect:/index.jsp");
+		}		
+    	return mv;
+    }
+	
+	@PostMapping("/modifyNormal.tp")
+	public ModelAndView UserModifyNormal (
+			ModelAndView mv
+			, HttpSession session
+			, User user) {
+		String userId = (String) session.getAttribute("userId");
+		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
+		User userInfo = uService.selectUserInfo(uOne.getUserNo());
+		uService.updateUserNormal(userInfo);
+		return mv;
+	}
+
 	
 	
 	// ************************ 회원가입 관련 ***************************
@@ -113,9 +242,7 @@ public class UserController {
 			ModelAndView mv
 			, @ModelAttribute User user
 			) {
-		int result = uService.insertUser(user);
-		int resultInfo = uService.insertUserInfo(user);
-		
+		uService.insertUser(user);
 		return mv;
 	}
 	
@@ -152,31 +279,9 @@ public class UserController {
 		
 		return response;
 	}	
+
 	
-	@GetMapping("/mypage.tp")
-	public ModelAndView showMypage (
-			ModelAndView mv
-			, HttpSession session
-			, @ModelAttribute User user
-//			, @ModelAttribute UserInfo userInfo
-			) {
-		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
-		User userNickanme = uService.checkUserNickname((String)session.getAttribute("userNaickname"));
-		System.out.println(uOne.getUserNickname());
-		System.out.println(userNickanme.getUserNickname());
-		if(uOne != null) {
-			mv.addObject("userId", uOne).addObject("userNickname", userNickanme);
-			mv.setViewName("/user/mypage");
-		}else {
-			mv.addObject("title", "마이페이지 조회 실패").addObject("msg", "로그인 후 이용 가능합니다.")
-			.addObject("url", "redirect:/index.jsp").addObject("urlBtn", "메인으로 이동");
-			mv.setViewName("common/serviceResult"); 
-		}		
-		return mv;
-	}
-	
-	
-	
+
 	
 	// ******************** 메일 관련 메소드 **************************
 	
@@ -224,7 +329,7 @@ public class UserController {
 			    "인증 번호는 " + authNumber + "입니다." + 
 			    "<br>" + 
 			    "해당 인증번호를 인증번호 확인란에 기입하여 주세요."; //이메일 내용 삽입
-		mailSend(setFrom, toMail, title, content);
+		this.mailSend(setFrom, toMail, title, content);
 		int code = authNumber; // 인증번호를 code 변수에 저장
 		session.setAttribute("code", code); // 세션에 code 변수의 값을 저장
 //		int code = (int) session.getAttribute("code");
@@ -233,7 +338,7 @@ public class UserController {
 	}
 
 	//이메일 전송 메소드
-	public void mailSend(String setFrom, String toMail, String title, String content) { 
+	private void mailSend(String setFrom, String toMail, String title, String content) { 
 		MimeMessage message = mailSender.createMimeMessage();
 		// true 매개값을 전달하면 multipart 형식의 메세지 전달이 가능.문자 인코딩 설정도 가능하다.
 		try {
@@ -273,7 +378,8 @@ public class UserController {
 	    session.setAttribute("userNickName", userNickName);
 	
 		return "redirect:/index.jsp";
-	}	
+	}
+
 
 
     

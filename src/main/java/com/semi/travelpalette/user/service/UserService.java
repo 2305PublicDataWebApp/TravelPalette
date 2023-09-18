@@ -11,7 +11,7 @@ public interface UserService {
 	 * @param user
 	 * @return
 	 */
-	int insertUser(User user);
+	void insertUser(User user);
 
 	/**
 	 * 일반 회원가입 상세 정보 저장 Service
@@ -53,7 +53,14 @@ public interface UserService {
 	 * @param userNo
 	 * @return
 	 */
-	User selectUserNickname(int userNo);
+	User selectUserInfo(int userNo);
+
+	/**
+	 * 일반 회원 정보 수정
+	 * @param userInfo
+	 */
+	void updateUserNormal(User userInfo);
+
 
 //	int kakaoUserInsert(User kakaouser);
 //
