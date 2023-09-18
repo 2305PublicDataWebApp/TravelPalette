@@ -33,9 +33,15 @@
                 </div>
                    <div class="form-floating" style="margin-top: 25px;">
                    <select id="boardSelect" name="boardType" class="form-select" aria-label="Floating label select example" style="border: 1px solid #ccc;">
-                      <option value="QnABoard" <c:if test="${community.boardType eq 'QnABoard'}">selected</c:if>>질의문답 게시판</option>
-                      <option value="travelCompanion" <c:if test="${community.boardType eq 'travelCompanion'}">selected</c:if>>동행 구인 게시판</option>
-                      <option value="travelVerification" <c:if test="${community.boardType eq 'travelVerification'}">selected</c:if>>여행 인증 게시판</option>
+                   	  <c:if test="${community.boardType eq 'QnABoard'}">
+	                      <option value="QnABoard" selected>질의문답 게시판</option>
+                   	  </c:if>
+                   	   <c:if test="${community.boardType eq 'travelCompanion'}">
+	                      <option value="travelCompanion" selected>동행 구인 게시판</option>
+                   	  </c:if>
+                   	  <c:if test="${community.boardType eq 'travelVerification'}">
+	                      <option value="travelVerification" selected>여행 인증 게시판</option>
+                   	  </c:if>
                     </select>
                     <label>게시판 종류</label>
                  </div>
@@ -101,37 +107,8 @@
                 history.go(-1); // 뒤로가기
             });
             
-          //select에 따른 자바스크립트
-            var selectBoard = document.getElementById("boardSelect");
-            selectBoard.addEventListener("change", function () {
-                // 선택한 옵션 값 가져오기
-                var selectedOption = selectBoard.value;
-
-                // 제목과 textarea의 요소 가져오기
-                var boardTitleInput = document.getElementById("boardTitleLable");
-                var boardContentLable = document.getElementById("boardContentLable");
-                var boardContentTextarea = document.getElementsByName("boardContent")[0];
-                
-                // 선택한 값에 따라 다른 내용 설정
-                if (selectedOption === "QnABoard") {
-                    boardTitleInput.textContent = "질문을 입력해주세요";
-                    boardContentLable.textContent = "궁금한 질문을 적어주세요";
-                    document.getElementById("imageFile").style.display = "none";
-                    boardContentTextarea.value = "";
-                } else if (selectedOption === "travelCompanion") {
-                    boardTitleInput.textContent = "동행 구인 글 제목을 입력해주세요";
-                    boardContentTextarea.value = "예상 동행 인원 :\n\n주로 활동하는 날 :\n\n모임의 특징 :\n\n예상 회비 :\n\n전화번호 :";
-                    document.getElementById("imageFile").style.display = "none";
-                } else if (selectedOption === "travelVerification") {
-                    boardTitleInput.textContent = "여행 인증 글 제목을 입력해주세요";
-                    boardContentLable.textContent = "신나는 여행 일기를 적어보세요";
-                    document.getElementById("imageFile").style.display = "block";
-                    boardContentTextarea.value = "";
-                } 
-            });
-            
-            // 유효성 체크
-            var submitButton = document.querySelector("#modifyBtn"); // 버튼 선택
+         // 유효성 체크
+            var submitButton = document.querySelector("#insertBtn"); // 버튼 선택
             submitButton.addEventListener("click", function(event) {
                 var boardTitleInput = document.querySelector("input[name='boardTitle']");
                 var boardSelect = document.querySelector("select[name='boardType']");
@@ -140,15 +117,16 @@
                 if (boardTitleInput.value.trim() === "") {
                     alert("제목을 입력해주세요.");
                     return; // submit 막기
-                } else if (boardSelect.value === "게시판을 선택해주세요!") {
-                    alert("게시판을 선택해주세요.");
-                    return; // submit 막기
                 } else if (boardContentTextarea.value.trim() === "") {
                     alert("내용을 입력해주세요.");
                     return; // submit 막기
+                } else if(boardContentTextarea.value == "예상 동행 인원 :\n\n주로 활동하는 날 :\n\n모임의 특징 :\n\n예상 회비 :\n\n전화번호 :"){
+                   	alert("양식에 내용을 입력해주세요.");
+                   	return; // submit 막기
                 }
+                if(document.getElementsByName("boardContent")[0])
                 // 모든 조건이 충족되면 폼을 제출
-                const form = document.modifyForm;
+                var form = document.insertForm;
                 form.submit();
             });
         </script>

@@ -151,14 +151,14 @@
                     return; // submit 막기
                 } else if (boardContentTextarea.value.trim() === "") {
                     alert("내용을 입력해주세요.");
-                    if(boardContentTextarea.value == "예상 동행 인원 :\n\n주로 활동하는 날 :\n\n모임의 특징 :\n\n예상 회비 :\n\n전화번호 :"){
-                    	alert("양식에 내용을 입력해주세요.");
-                    }
                     return; // submit 막기
+                } else if(boardContentTextarea.value == "예상 동행 인원 :\n\n주로 활동하는 날 :\n\n모임의 특징 :\n\n예상 회비 :\n\n전화번호 :"){
+                   	alert("양식에 내용을 입력해주세요.");
+                   	return; // submit 막기
                 }
                 if(document.getElementsByName("boardContent")[0])
                 // 모든 조건이 충족되면 폼을 제출
-                const form = document.insertForm;
+                var form = document.insertForm;
                 form.submit();
             });
         </script>
