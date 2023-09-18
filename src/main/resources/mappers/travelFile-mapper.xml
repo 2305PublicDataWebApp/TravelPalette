@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TravelFileMapper">
+	<resultMap type="TravelFile" id="TravelFileResultMap">
+		<id 	property="travelFileNo" 	column="TRAVEL_FILE_NO"/>
+		<result property="travelFileName" 	column="TRAVEL_FILE_NAME"/>
+		<result property="travelFileRename" column="TRAVEL_FILE_RENAME"/>
+		<result property="travelFilePath" 	column="TRAVEL_FILE_PATH"/>
+		<result property="travelNo" 		column="TRAVEL_NO"/>
+	</resultMap>
+	
+	<insert id="insertTravelFile">
+		INSERT INTO TRAVEL_FILE_TBL
+		VALUES (SEQ_TRAVEL_FILE_NO.NEXTVAL, #{travelFileName}, #{travelFileRename}, #{travelFilePath}, #{travelNo})
+	</insert>
+	
+	<delete id="deleteFileByNo">
+		DELETE FROM TRAVEL_FILE_TBL
+		WHERE  TRAVEL_FILE_NO = #{travelFileNo}
+	</delete>
+	
+	<select id="selectTravelFileByNo" resultMap="TravelFileResultMap">
+		SELECT * 
+		FROM   TRAVEL_FILE_TBL
+		WHERE  TRAVEL_NO = #{travelNo}
+	</select>
+	
+	
+</mapper>

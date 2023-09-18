@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReviewMapper">
+	<resultMap type="Review" id="ReviewResultMap">
+		<id 	property="reviewNo" 		column="REVIEW_NO"/>
+		<result property="reviewContent" 	column="REVIEW_CONTENT" />
+		<result property="reviewCreateDate" column="REVIEW_CREATE_DATE" />
+		<result property="reviewRating" 	column="REVIEW_RATING" />
+		<result property="reviewStatus" 	column="REVIEW_STATUS" />
+		<result property="userNickname" 	column="USER_NICKNAME" />
+		<result property="travelNo" 		column="TRAVEL_NO" />
+		<result property="boardType" 		column="BOARD_TYPE" />
+	</resultMap>
+	
+	<insert id="insertReview">
+		INSERT INTO REVIEW_TBL
+		VALUES (SEQ_REVIEW_NO.NEXTVAL, #{reviewContent}, DEFAULT, #{reviewRating}, DEFAULT, #{userNickname}, #{travelNo}, DEFAULT)
+	</insert>
+	
+	<select id="getReviewTotalCount" resultType="int">
+		SELECT COUNT (*) 
+		FROM REVIEW_TBL
+		WHERE TRAVEL_NO = #{travelNo}
+	</select>
+	
+	<select id="selectReviewByTNo" resultMap="ReviewResultMap">
+		SELECT * 
+		FROM REVIEW_TBL
+		WHERE TRAVEL_NO = #{travelNo} AND REVIEW_STATUS = 'Y'
+		ORDER BY REVIEW_CREATE_DATE DESC
+	</select>
+	
+	<select id="selectMyReview" resultMap="ReviewResultMap">
+		SELECT * 
+		FROM REVIEW_TBL
+		WHERE TRAVEL_NO = #{travelNo} AND USER_NICKNAME = #{userNickname} AND REVIEW_STATUS = 'Y'
+	</select>
+</mapper>

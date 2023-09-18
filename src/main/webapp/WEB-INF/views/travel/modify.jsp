@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
     <html lang="ko">
     <head>
@@ -18,40 +19,41 @@
         <!-- 네비 -->
         <jsp:include page="/include/nav.jsp"></jsp:include>
         <main>
-	        <h1>여행 정보 게시판 작성</h1>
-	        <form action="/travel/insert.tp" method="POST" enctype="multipart/form-data">
+	        <h1>여행 정보 게시판 수정</h1>
+	        <form action="/travel/modify.tp" method="POST" enctype="multipart/form-data">
+	        <input type="hidden" name="travelNo" value="${travel.travelNo}"> 
 	            <ul>
 	                <li>
 	                    <label for="tName"><b>여행지명</b></label>
-	                    <input type="text" name="travelName" id="tName">
+	                    <input type="text" name="travelName" id="tName" value="${travel.travelName}">
 	                </li>
 	                <li>
 	                    <label for="tAddr"><b>여행지주소</b></label>
-	                    <input type="text" name="travelAddr" id="tAddr">
+	                    <input type="text" name="travelAddr" id="tAddr" value="${travel.travelAddr}">
 	                </li>
 	                <li>
 	                    <label for="tInfo"><b>여행 소개글</b></label>
-	                    <textarea rows="4" cols="50" id="tInfo" name="travelInfo"></textarea>
+	                    <textarea rows="4" cols="50" id="tInfo" name="travelInfo">${travel.travelInfo}</textarea>
 	                </li>
 	                <li>
 	                    <label for="tUrl"><b>홈페이지</b></label>
-	                    <input type="text" name="travelUrl" id="tUrl">
+	                    <input type="text" name="travelUrl" id="tUrl" value="${travel.travelUrl}">
 	                </li>
 	                <li>
 	                    <label for="tTel"><b>연락처</b></label>
-	                    <input type="text" name="travelTel" id="tTel">
+	                    <input type="text" name="travelTel" id="tTel" value="${travel.travelTel}">
 	                </li>
 	                <li>
 	                    <label for="tTime"><b>이용시간</b></label>
-	                    <input type="text" name="travelUsingTime" id="tTime">
+	                    <input type="text" name="travelUsingTime" id="tTime" value="${travel.travelUsingTime}">
 	                </li>
 	                <li>
 	                    <label for="tHoliday"><b>휴일정보</b></label>
-	                    <input type="text" name="travelHoliday" id="tHoliday">
+	                    <input type="text" name="travelHoliday" id="tHoliday" value="${travel.travelHoliday}">
 	                </li>
 	                <li>
 	                    <label for="tParking"><b>주차정보</b></label>
-	                    <input type="text" name="travelParking" id="tParking">
+	                    <input type="text" name="travelParking" id="tParking" value="${travel.travelParking}">
 	                </li>
 	                <li>
 	                    <label for="tLocation"><b>지역키워드</b></label><br>
@@ -75,7 +77,7 @@
 	                </li>
 	                <li>
 	                    <label for="tTags"><b>테마키워드</b></label>
-	                    <span style="margin-left: 10px; color: red; font-weight: bold;">중복 선택 가능</span><br>
+	                    <span style="color: red; font-weight: bold;">중복 선택 가능</span><br>
 	                    <span class="tagsCheck">#동물       <input type="checkbox" name="travelTags" value="#동물" 		 id="tTags"></span>
 	                    <span class="tagsCheck">#레포츠     <input type="checkbox" name="travelTags" value="#레포츠"  	 id="tTags"></span>
 	                    <span class="tagsCheck">#캠핑       <input type="checkbox" name="travelTags" value="#캠핑"    	 id="tTags"></span>
@@ -89,28 +91,61 @@
 	                    <span class="tagsCheck">#자연여행   <input type="checkbox" name="travelTags" value="#자연여행" 	 id="tTags"></span>
 	                    <span class="tagsCheck">#관광지     <input type="checkbox" name="travelTags" value="#관광지" 	 id="tTags"></span>
 	                </li>
+		            <li>
+		           	 	<label for="tFiles"><b>기존 첨부파일</b></label>
+		                <c:forEach items="${travelFiles}" var="existFile">
+							<span id="tFiles" style="padding-right: 5px;">${existFile.travelFileName}</span>
+							<input type="hidden" value="${existFile.travelFileNo}">
+							<input type="hidden" value="${existFile.travelNo}">
+							<a href="/travel/deleteFile.tp?travelFileNo=${existFile.travelFileNo}&travelNo=${existFile.travelNo}" style="padding-right: 15px;">삭제</a>
+						</c:forEach>
+					</li>
 	                <li>
-	                    <div id="addFile">
-	                    </div>
-	                    <button type="button" onClick="addFileBtn();">사진추가</button>
+	                    <b>첨부파일1</b>
+	                    <input type="file" name="uploadFiles">
+	                </li>
+	                <li>
+	                    <b>첨부파일2</b>
+	                    <input type="file" name="uploadFiles">
+	                </li>
+	                <li>
+	                    <b>첨부파일3</b>
+	                    <input type="file" name="uploadFiles">
 	                </li>
 	            </ul>
 	            <div class="button-container">
-	                <input type="submit" value="등록">
+	                <input type="submit" value="수정">
 	            </div>
 	        </form>
         </main>
-        <script>
-        	function addFileBtn() {
-        		var fileInput = document.createElement("input");
-        	    fileInput.type = "file";
-        	    fileInput.name = "uploadFiles";
-        	    var lineBreak = document.createElement("br");
-        	    document.querySelector("#addFile").appendChild(fileInput);
-        	    document.querySelector("#addFile").appendChild(lineBreak);
-        	}
-        </script>
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
+        <script>
+        	// 라디오버튼 체크
+        	document.addEventListener("DOMContentLoaded", function() {
+        		const selectedLocation = "${travel.travelLocation}";
+        		const radioButton = document.querySelectorAll('input[type="radio"][name="travelLocation"]');
+        		 for (var i = 0; i < radioButton.length; i++) {
+                     if (radioButton[i].value === selectedLocation) {
+                         radioButton[i].checked = true;
+                         break;
+                     }
+                 }
+        	})
+        	
+        	// 체크박스 체크
+        	document.addEventListener("DOMContentLoaded", function() {
+        		const selectedTags = "${travel.travelTags}";
+        		const checkBox = document.querySelectorAll('input[type="checkbox"][name="travelTags"]');
+        		 for (var i = 0; i < checkBox.length; i++) {
+                     if (checkBox[i].value === selectedTags) {
+                    	 checkBox[i].checked = true;
+                         break;
+                     }
+                 }
+        	})
+        	
+
+        </script>
     </body>
 </html>

@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="TravelMapper">
-	<resultMap type="Travel" id="TravelResutMap">
+	<resultMap type="Travel" id="TravelResultMap">
 		<id 	property="travelNo" 		column="TRAVEL_NO"/>
 		<result property="travelName" 		column="TRAVEL_NAME"/>
 		<result property="travelAddr" 		column="TRAVEL_ADDR"/>
@@ -20,27 +20,97 @@
 		<result property="travelViewCount"  column="TRAVEL_VIEW_COUNT"/>
 		<result property="travelStatus"  	column="TRAVEL_STATUS"/>
 		<result property="BoardType" 		column="BOARD_TYPE"/>
+		
+		<!-- 이미지를 가져오기 위해 TravelFile과 연결 -->
+		<association property="thumbnail" javaType="com.semi.travelpalette.travel.domain.TravelFile">
+			<result property="travelFileRename" column="TRAVEL_FILE_RENAME"/>
+		</association>
 	</resultMap>
 	
-	<select id="travelAllListByNew" resultMap="TravelResutMap">
-		SELECT	 * 
-		FROM 	 TRAVEL_TBL 
-		ORDER BY TRAVEL_CREATE_DATE DESC
-	</select>
+	<insert id="insertTravel">
+		INSERT INTO TRAVEL_TBL 
+		VALUES (SEQ_TRAVEL_NO.NEXTVAL, #{travelName}, #{travelAddr}, #{travelInfo}, #{travelUrl}, #{travelTel}, #{travelUsingTime}, #{travelHoliday}, #{travelParking}, #{travelLocation}, #{travelTags}, DEFAULT, DEFAULT, 0, DEFAULT, DEFAULT)
+	</insert>
+	
+	<update id="updateTravel">
+		UPDATE TRAVEL_TBL
+		SET TRAVEL_NAME = #{travelName}, TRAVEL_ADDR = #{travelAddr}, TRAVEL_INFO = #{travelInfo}, TRAVEL_URL = #{travelUrl}, TRAVEL_TEL = #{travelTel}, TRAVEL_USING_TIME = #{travelUsingTime}, TRAVEL_HOLIDAY = #{travelHoliday}, TRAVEL_PARKING = #{travelParking}, TRAVEL_LOCATION = #{travelLocation}, TRAVEL_TAGS = #{travelTags}, TRAVEL_UPDATE_DATE = DEFAULT
+		WHERE TRAVEL_NO = #{travelNo}
+	</update>
+	
+	<update id="updateViewCount">
+		UPDATE TRAVEL_TBL
+		SET TRAVEL_VIEW_COUNT = TRAVEL_VIEW_COUNT+1
+		WHERE TRAVEL_NO = #{travelNo}
+	</update>
+	
+	<update id="deleteByNo">
+		UPDATE TRAVEL_TBL
+		SET TRAVEL_STATUS = 'N'
+		WHERE TRAVEL_NO = #{travelNo}
+	</update>
 	
 	<select id="getTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM TRAVEL_TBL
+		SELECT COUNT(*) FROM TRAVEL_TBL WHERE TRAVEL_STATUS = 'Y'
 	</select>
 	
-	<select id="selectTravelByNo" resultMap="TravelResutMap">
+	<select id="selectTravelByNo" resultMap="TravelResultMap">
 		SELECT	* 
 		FROM 	TRAVEL_TBL 
 		WHERE	TRAVEL_NO = #{travelNo}
 	</select>
 	
-	<insert id="insertTravel">
-		INSERT INTO TRAVEL_TBL 
-		VALUES (SEQ_TRAVEL_NO.NEXTVAL, #{travelName}, #{travelAddr}, #{travelInfo}, #{travelUrl}, #{travelTel}, #{travelUsingTime}
-				, #{travelHoliday} , #{travelParking}, #{travelLocation}, #{travelTags}, DEFAULT, DEFAULT, 0, DEFAULT, DEFAULT )
-	</insert>
+	<select id="selectSeq" resultType="_int">
+		SELECT SEQ_TRAVEL_NO.CURRVAL FROM DUAL
+	</select>
+	
+	<select id="sortTravelList" resultMap="TravelResultMap">
+		SELECT	 * 
+		FROM 	 TRAVEL_TBL
+		WHERE TRAVEL_STATUS = 'Y' 
+<!-- 	    동적 SQL을 사용하여 ORDER BY 구문 조건 설정  -->
+	    <if test="order == 'latest' or order == null">
+	        ORDER BY TRAVEL_CREATE_DATE DESC
+	    </if>
+	    <if test="order == 'views'">
+	        ORDER BY TRAVEL_VIEW_COUNT DESC
+	    </if>
+    	<!-- 좋아요테이블 생성 후 수정 -->
+	    <!-- <if test="order == 'popular'">
+	        ORDER BY likes DESC
+	    </if> -->
+	</select>
+		    
+<!-- 	<select id="sortTravelList" resultMap="TravelResultMap">
+		SELECT DISTINCT t.TRAVEL_NO, t.TRAVEL_NAME, t.TRAVEL_ADDR, t.TRAVEL_TAGS, t.TRAVEL_CREATE_DATE, t.TRAVEL_VIEW_COUNT, tf.TRAVEL_FILE_RENAME
+	    FROM TRAVEL_TBL t
+	    LEFT JOIN TRAVEL_FILE_TBL tf
+	    ON t.TRAVEL_NO = tf.TRAVEL_NO
+	    WHERE t.TRAVEL_STATUS = 'Y'
+	    
+	    동적 SQL을 사용하여 ORDER BY 구문 조건 설정
+	    <if test="order == 'latest' or order == null">
+	        ORDER BY t.TRAVEL_CREATE_DATE DESC
+	    </if>
+	    <if test="order == 'views'">
+	        ORDER BY t.TRAVEL_VIEW_COUNT DESC
+	    </if>	
+	
+		기존 작성코드
+		SELECT	 * 
+		FROM 	 TRAVEL_TBL
+		WHERE TRAVEL_STATUS = 'Y' 
+	    동적 SQL을 사용하여 ORDER BY 구문 조건 설정 
+	    <if test="order == 'latest' or order == null">
+	        ORDER BY TRAVEL_CREATE_DATE DESC
+	    </if>
+	    <if test="order == 'views'">
+	        ORDER BY TRAVEL_VIEW_COUNT DESC
+	    </if>
+	    	좋아요테이블 생성 후 수정
+		    <if test="order == 'popular'">
+		        ORDER BY likes DESC
+		    </if>
+	    
+	</select> -->
 </mapper>
