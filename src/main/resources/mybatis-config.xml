@@ -11,11 +11,15 @@
 		<typeAlias type="com.semi.travelpalette.community.domain.Community" alias="Community"/>
 		<typeAlias type="com.semi.travelpalette.event.domain.Event" alias="Event"/>
 		<typeAlias type="com.semi.travelpalette.user.domain.User" alias="User"/>
+		<typeAlias type="com.semi.travelpalette.travel.domain.TravelFile" alias="TravelFile"/>
+		<typeAlias type="com.semi.travelpalette.travel.domain.Review" alias="Review"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/travel-mapper.xml"/>
 		<mapper resource="mappers/community-mapper.xml"/>
 		<mapper resource="mappers/event-mapper.xml"/>
 		<mapper resource="mappers/user-mapper.xml"/>
+		<mapper resource="mappers/travelFile-mapper.xml"/>
+		<mapper resource="mappers/review-mapper.xml"/>
 	</mappers>
 </configuration>
