@@ -27,8 +27,6 @@ import com.semi.travelpalette.user.domain.User;
 import com.semi.travelpalette.user.service.KakaoService;
 import com.semi.travelpalette.user.service.UserService;
 
-import oracle.jdbc.proxy.annotation.Post;
-
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
@@ -67,8 +65,6 @@ public class UserController {
 	@ResponseBody
 	public Map<String, Object> UserLogin (
 			@ModelAttribute User user
-//			 @RequestParam("userId") String userId
-//			, @RequestParam("userPw") String userPw
 			, HttpSession session
 			) {
 		Map<String, Object> response = new HashMap<>();
@@ -76,15 +72,17 @@ public class UserController {
 		User login = uService.loginUser(user);
 		if(login != null) {
 			// 유저 상세 정보 번호로 조회
-			User userInfo = uService.selectUserInfo((int) login.getUserNo());
+			User userInfo = uService.selectUserAllInfo((int) login.getUserNo());
 	        if (userInfo != null) {
+	        	int userNo = login.getUserNo();
 	            String userId = login.getUserId();
 	            String userNickname = userInfo.getUserNickname();
 	            // 플랫폼 타입 저장
 	            String platformType = login.getPlatformType();
 	            System.out.println("로그인 닉네임 정보 : " + userNickname);
 	            System.out.println("로그인 플랫폼 정보 : " + platformType);
-
+	            
+	            session.setAttribute("userNo", userNo);
 	            session.setAttribute("userId", userId);
 	            session.setAttribute("userNickname", userNickname);
 	            session.setAttribute("platformType", platformType);
@@ -199,29 +197,111 @@ public class UserController {
 		String userId = (String) session.getAttribute("userId");
 		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
 		// 유저 정보 검색 후 수정 페이지에 출력
-		User userInfo = uService.selectUserInfo(uOne.getUserNo());
+		System.out.println("제발" + uOne.toString());
+		System.out.println("되나? : " + uOne.getUserNo());
+		int userNo = uOne.getUserNo();
+		// 검색해온 유저 번호로 유저에 대한 모든 정보 select
+		User userInfo = uService.selectUserAllInfo(userNo);
+		System.out.println("되나??? : " + userInfo.toString());
 		if(uOne != null) {
 			mv.addObject("userInfo", userInfo);
 			mv.setViewName("/user/modifyNormal");
 		}else {
-			
 	        mv.addObject("javascript", "alert('로그인 후 이용 가능합니다.'); history.back();");
-	        mv.setViewName("redirect:/index.jsp");
+	        mv.setViewName("/user/login.tp");
 		}		
     	return mv;
     }
+
 	
 	@PostMapping("/modifyNormal.tp")
 	public ModelAndView UserModifyNormal (
 			ModelAndView mv
 			, HttpSession session
 			, User user) {
+		System.out.println("아!!!!!!!!!!!!!!!");
+		System.out.println(user.toString());
 		String userId = (String) session.getAttribute("userId");
 		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
-		User userInfo = uService.selectUserInfo(uOne.getUserNo());
-		uService.updateUserNormal(userInfo);
+		User userInfo = uService.selectUserAllInfo(uOne.getUserNo());
+		uService.updateUserNormal(user);
+		mv.setViewName("/user/mypage");
 		return mv;
 	}
+	
+	
+	
+    // 회원 정보 수정
+	@GetMapping("/delete.tp")
+    public ModelAndView showDeleteUser(
+    		ModelAndView mv
+    		, HttpSession session
+    		, @ModelAttribute User user
+    		) {
+		String userId = (String) session.getAttribute("userId");
+		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
+		// 유저 정보 검색 후 수정 페이지에 출력
+		int userNo = uOne.getUserNo();
+		// 검색해온 유저 번호로 유저에 대한 모든 정보 select
+		User userInfo = uService.selectUserAllInfo(userNo);
+		if(uOne != null) {
+			mv.addObject("userInfo", userInfo);
+			mv.setViewName("/user/delete");
+		}else {
+	        mv.addObject("javascript", "alert('로그인 후 이용 가능합니다.'); history.back();");
+	        mv.setViewName("/user/login.tp");
+		}		
+    	return mv;
+    }
+	
+	
+	// 탈퇴 시 비밀번호 입력 확인
+    @PostMapping("/delete.tp")
+    @ResponseBody
+    public Map<String, Object> deleteUser(
+    		User user
+    		, HttpSession session) {
+        // 요청 처리 로직
+        String userId = (String)session.getAttribute("userId");
+        User oneUser =new User(userId, user.getUserPw());
+        User pwCheck = uService.loginUser(oneUser);
+        // 응답 데이터 생성
+        Map<String, Object> response = new HashMap<>();
+        if(pwCheck != null) {
+        	response.put("success", true);
+//        	response.put("redirectUrl", "/user/modifyNormal.tp"); // 리디렉션할 URL 설정
+        } else {
+        	response.put("success", false);
+            response.put("message", "비밀번호를 확인해주세요."); // 실패 메시지 설정
+        }
+        return response;
+    }
+    
+    // confirm 누르면 진짜 회원 탈퇴
+    @PostMapping("/deleteExecute.tp")
+    @ResponseBody
+    public Map<String, Object> deleteExecute(
+    		User user
+    		, HttpSession session) {
+    	// 요청 처리 로직
+    	int userNo = (int)session.getAttribute("userNo");
+    	int result = uService.deleteUser(userNo);
+    	// 응답 데이터 생성
+    	Map<String, Object> response = new HashMap<>();
+    	if(result > 0) {
+    		response.put("success", true);
+    		// 탈퇴 후 세션 파괴
+    		session.invalidate();
+    	} else {
+    		response.put("success", false);
+    		response.put("message", "회원 삭제가 제대로 처리되지 않았습니다."); // 실패 메시지 설정
+    	}
+    	return response;
+    }
+    
+    
+	
+	
 
 	
 	
@@ -331,7 +411,11 @@ public class UserController {
 			    "해당 인증번호를 인증번호 확인란에 기입하여 주세요."; //이메일 내용 삽입
 		this.mailSend(setFrom, toMail, title, content);
 		int code = authNumber; // 인증번호를 code 변수에 저장
-		session.setAttribute("code", code); // 세션에 code 변수의 값을 저장
+		
+	    if (session.getAttribute("code") != null) {
+	        session.removeAttribute("code");
+	    }
+	    session.setAttribute("code", code);
 //		int code = (int) session.getAttribute("code");
 		System.out.println("인증번호!!!!!!!!!!!! : " + code);
 		return Integer.toString(authNumber);

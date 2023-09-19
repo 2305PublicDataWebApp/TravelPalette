@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 		
 		int result = uStore.insertUser(session, user);
 		int userInfoResult =  uStore.insertUserInfo(session, user);
-		if(result + userInfoResult < 3 ) {
+		if((result + userInfoResult) > 2 && (result + userInfoResult) < 2) {
 			throw new RuntimeException("회원가입이 제대로 처리되지 않습니다.");
 		}
 		
@@ -63,9 +63,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User selectUserInfo(int userNo) {
-		User loginInfo = uStore.selectUserInfo(session, userNo);
-		return loginInfo;
+	public User selectUserAllInfo(int userNo) {
+		User user = uStore.selectUser(session, userNo);
+		User userInfo = uStore.selectUserInfo(session, userNo);
+	    User result = new User(user.getUserNo(), user.getUserId(), user.getUserPw(), user.getPlatformType(), user.getUserCreateDate()
+	    		, user.getUserDeleteDate(), user.getUserStatus(), user.getAdminCheck(), userInfo.getUserName(), userInfo.getUserNickname()
+	    		, userInfo.getUserGender(), userInfo.getUserEmail(), userInfo.getUserTel(), userInfo.getUserEmailStatus(), userInfo.getUserSmsStatus());
+		return result ;
 	}
 
 
@@ -73,9 +77,29 @@ public class UserServiceImpl implements UserService {
 	public void updateUserNormal(User userInfo) {
 		int result = uStore.updateUserNormal(session, userInfo);
 		int userInfoResult =  uStore.updateUserInfoNormal(session, userInfo);
-		if(result + userInfoResult <3 ) {
+		
+		if((result + userInfoResult) > 2 && (result + userInfoResult) < 2) {
+			System.out.println(result + userInfoResult);
+			System.out.println("실패??");
 			throw new RuntimeException("회원 정보 수정이 제대로 처리되지 않습니다.");
 		}
+	}
+
+
+	@Override
+	public int deleteUser(int userNo) {
+		// USER_TBL 수정
+		int userResult = uStore.deleteUser(session, userNo);
+		// USER_INFO_TBL 삭제
+		int userInfoResult = uStore.deleteUserInfo(session, userNo);
+		
+		int result = userResult + userInfoResult;
+		if(result > 2 && result < 2) {
+			throw new RuntimeException("회원 삭제가 제대로 처리되지 않습니다.");
+		}else {
+			return result;
+			
+		}		
 	}
 
 	

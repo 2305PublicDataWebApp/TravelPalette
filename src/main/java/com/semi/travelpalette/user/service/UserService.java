@@ -1,7 +1,5 @@
 package com.semi.travelpalette.user.service;
 
-import javax.servlet.http.HttpSession;
-
 import com.semi.travelpalette.user.domain.User;
 
 public interface UserService {
@@ -49,17 +47,26 @@ public interface UserService {
 	User loginUser(User user);
 
 	/**
-	 * 유저 번호로 닉네임 검색
+	 * 유저 번호로 유저에 대한 모든 정보 select
 	 * @param userNo
 	 * @return
 	 */
-	User selectUserInfo(int userNo);
+	User selectUserAllInfo(int userNo);
 
 	/**
 	 * 일반 회원 정보 수정
 	 * @param userInfo
 	 */
 	void updateUserNormal(User userInfo);
+
+	/**
+	 * 유저 탈퇴
+	 * (USER_TBL : USER_STATUE -> 'N', DELETE_DATE -> DEFAULT)
+	 * (USER_INFO_TBL : DELETE USER_INFO_TBL WHERE USER_ID=#{userId }
+	 * @param userNo
+	 * @return
+	 */
+	int deleteUser(int userNo);
 
 
 //	int kakaoUserInsert(User kakaouser);

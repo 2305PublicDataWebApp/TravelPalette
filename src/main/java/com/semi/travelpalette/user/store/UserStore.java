@@ -106,6 +106,30 @@ public interface UserStore {
 	 */
 	public int updateUserInfoNormal(SqlSession session, User userInfo);
 
+	/**
+	 * 유저 번호로 유저 정보 조회(모든 정보를 가져오는 메소드 내에 있음)
+	 * @param session
+	 * @param userNo
+	 * @return
+	 */
+	public User selectUser(SqlSession session, int userNo);
+
+	/**
+	 * 유저 번호로 유저 테이블 수정
+	 * @param session
+	 * @param userNo
+	 * @return
+	 */
+	public int deleteUser(SqlSession session, int userNo);
+
+	/**
+	 * 유저 번호로 유저 상세 정보 삭제
+	 * @param session
+	 * @param userNo
+	 * @return
+	 */
+	public int deleteUserInfo(SqlSession session, int userNo);
+
 
 
 

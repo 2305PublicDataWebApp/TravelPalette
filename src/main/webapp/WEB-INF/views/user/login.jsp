@@ -70,8 +70,8 @@
                         console.error("서버 요청에 실패했습니다.");
                     }
                 });                
-                
             }
+            
             
             function kakao() {
             	const clientId = '285ffb5126eb1037de78602651c709a9';	// 자바스크립트 키

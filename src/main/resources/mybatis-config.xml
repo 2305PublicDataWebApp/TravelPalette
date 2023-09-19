@@ -15,6 +15,7 @@
 		<typeAlias type="com.semi.travelpalette.travel.domain.Review" alias="Review"/>
 		<typeAlias type="com.semi.travelpalette.community.domain.Reply" alias="Reply"/>
 		<typeAlias type="com.semi.travelpalette.common.domain.Like" alias="Like"/>
+		<typeAlias type="com.semi.travelpalette.inquiry.domain.Inquiry" alias="Inquiry"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/travel-mapper.xml"/>
@@ -25,5 +26,6 @@
 		<mapper resource="mappers/review-mapper.xml"/>
 		<mapper resource="mappers/reply-mapper.xml"/>
 		<mapper resource="mappers/like-mapper.xml"/>
+		<mapper resource="mappers/inquiry-mapper.xml"/>		
 	</mappers>
 </configuration>

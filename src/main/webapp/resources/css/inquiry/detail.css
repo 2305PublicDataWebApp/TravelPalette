@@ -1,0 +1,75 @@
+@charset "UTF-8";
+#inquiries {
+    width: 80%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+}
+#fileBox {
+    display: flex;
+    align-items: center;
+}
+.fileBox .upload-name {
+    /* display: inline-block; */
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 78%;
+    color: #999999;
+    border-radius: 5px;
+}         
+.fileBox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}        
+.respones {
+    background-color: #f4f4f2;
+    padding: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+#btnBox{
+    display: flex;
+    justify-content: flex-end;
+}
+#btnBox > button {
+    margin-left: 20px;
+}
+#question {
+    /* border: 1px solid #ccc; */
+    padding: 20px;
+    border-radius: 10px;
+}
+#downBtn {
+    width: 40px;
+    height: 20px;
+    font-size: 20%;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(135, 180, 224);
+    margin-left: 10px;
+}
+thead {
+    border-top: thin solid black;
+}
+#qContnet {
+    border-top: thin solid #ccc;
+    border-bottom: thin solid #ccc;
+}
+
+textarea {
+    width: 100%;
+    border: none;
+    resize: none;
+}
+textarea:focus {
+	outline: none;
+}
+button {
+    margin-left: 20px;
+}

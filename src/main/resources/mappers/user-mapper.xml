@@ -43,15 +43,18 @@
  	<insert id="insertUserInfo">
  		INSERT INTO USER_INFO_TBL VALUES(SEQ_USER_INFO_NO.NEXTVAL, #{userName }, #{userNickname }, #{userGender }, #{userEmail }, #{userTel }, #{userEmailStatus }, #{userSmsStatus })
  	</insert>
- 	<insert id="insertAuth">
- 		INSERT INTO EMAIL_AUTH_TBL VALUES(SEQ_USER_AUTH_NO.NEXTVAL, #{authEmail }, #{authNo }, '회원가입', DEFAULT)
- 	</insert>
  	<update id="updateUserNormal">
  		UPDATE USER_TBL SET USER_PW=#{userPw } WHERE USER_NO=#{userNo }
  	</update>
  	<update id="updateUserInfoNormal">
- 		UPDATE USER_INFO_TBL SET USER_NICKNAME=#{userNickname }, USER_EMAIL=#{userEmail }, USER_TEL=#{userTel }, USER_EMAIL_STATUS=#{userEmailStatus }, USER_SMS_STATUS=#{userSmsStatus } USER WHERE USER_NO=#{userNo }
+ 		UPDATE USER_INFO_TBL SET USER_NICKNAME=#{userNickname }, USER_EMAIL=#{userEmail }, USER_TEL=#{userTel }, USER_EMAIL_STATUS=#{userEmailStatus }, USER_SMS_STATUS=#{userSmsStatus } WHERE USER_NO=#{userNo }
  	</update>
+ 	<update id="deleteUser">
+ 		UPDATE USER_TBL SET USER_DELETE_DATE=DEFAULT, USER_STATUS='N' WHERE USER_NO=#{userNo }
+ 	</update>
+ 	<delete id="deleteUserInfo">
+ 		DELETE USER_INFO_TBL WHERE USER_NO=#{userNo }
+ 	</delete>
 
  	<select id="selectUserOneNickname" resultMap="userInfoResultMap">
  		SELECT * FROM USER_INFO_TBL WHERE USER_NICKNAME=#{userNickname }
@@ -64,6 +67,9 @@
  	</select>
 	<select id="selectKakaoUser" resultMap="userResultMap">
 		SELECT * FROM USER_TBL WHERE USER_ID=#{userId }
+	</select>
+	<select id="selectUser" resultMap="userResultMap">
+		SELECT * FROM USER_TBL WHERE USER_NO=#{userNo }
 	</select>
 	<select id="selectUserInfo" resultMap="userInfoResultMap">
 		SELECT * FROM USER_INFO_TBL WHERE USER_NO=#{userNo }
