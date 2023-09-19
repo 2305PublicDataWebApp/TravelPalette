@@ -1,6 +1,7 @@
 package com.semi.travelpalette.community.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +93,18 @@ public class CommunityServiceImpl implements CommunityService{
 	public int deleteLike(Like like) {
 		int result = cStore.deleteLike(session, like);
         return result;
+	}
+
+	@Override
+	public int getSearchListCount(Map<String, String> paraMap) {
+		int result = cStore.getSearchListCount(session, paraMap);
+        return result;
+	}
+
+	@Override
+	public List<Community> searchNoticesByKeyword(Map<String, String> paraMap, PageInfo pInfo) {
+		List<Community> cList = cStore.searchNoticesByKeyword(session, paraMap, pInfo);
+		return cList;
 	}
 
 }

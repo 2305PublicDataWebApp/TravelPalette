@@ -20,6 +20,31 @@
         <result property="boardFileLength" column="BOARD_FILE_LENGTH" />
         <result property="likeNo" column="LIKE_NO" />
     </resultMap>
+    <select id="searchNoticesByKeyword" resultMap="CommunityResultMap">
+  		SELECT * FROM COMMUNITY_TBL 
+  		<if test="searchCondition == 'all'">
+	  		WHERE BOARD_TITLE LIKE '%'||#{searchKeyword}||'%' OR USER_ID LIKE '%'||#{searchKeyword}||'%'
+  		</if>
+  		<if test="searchCondition == 'title'">
+  			WHERE BOARD_TITLE LIKE '%'||#{searchKeyword}||'%'
+  		</if>
+  		<if test="searchCondition == 'nickName'">
+  			WHERE USER_NICKNAME LIKE '%'||#{searchKeyword}||'%'
+  		</if>
+  	</select>
+  	<select id="getListCount" resultType="_int">
+  		SELECT COUNT(*) FROM COMMUNITY_TBL
+  		<if test="searchCondition == 'all'">
+	  		WHERE BOARD_TITLE LIKE '%'||#{searchKeyword}||'%' OR USER_NICKNAME LIKE '%'||#{searchKeyword}||'%'
+  		</if>
+  		<if test="searchCondition == 'title'">
+  			WHERE BOARD_TITLE LIKE '%'||#{searchKeyword}||'%'
+  		</if>
+  		<if test="searchCondition == 'nickName'">
+  			WHERE USER_NICKNAME LIKE '%'||#{searchKeyword}||'%'
+  		</if>
+  	</select>
+    
     <select id="selectListByBoardType" resultMap="CommunityResultMap">
         SELECT * FROM COMMUNITY_TBL WHERE BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y' ORDER BY BOARD_CREATE_DATE DESC
     </select>

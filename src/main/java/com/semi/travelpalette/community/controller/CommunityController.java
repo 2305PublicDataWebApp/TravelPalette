@@ -335,6 +335,40 @@ public class CommunityController {
     	return response;
     }
     
+    @GetMapping("/notice/search.kh")
+	public ModelAndView searchList(
+			@RequestParam(value="searchCondition") String searchCondition
+			, @RequestParam(value="searchKeyword") String searchKeyword
+			, @RequestParam(value="boardType") String boardType
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
+			, HttpSession session
+			, ModelAndView mv) {
+    	
+		session.setAttribute("searchCondition", searchCondition);
+		Map<String, String> paraMap= new HashMap<String, String>();
+		paraMap.put("searchCondition", searchCondition);
+		paraMap.put("searchKeyword", searchKeyword);
+		paraMap.put("boardType", boardType);
+		int totalCount = cService.getSearchListCount(paraMap);
+		PageInfo pInfo = this.getPageInfo(currentPage, totalCount ,boardType);
+		// put() 메소드를 사용해서 key-value 설정을 하는데
+		// key 값(파란색)이 mapper.xml에서 사용됌
+		List<Community> cList = cService.searchNoticesByKeyword(paraMap, pInfo);
+		
+		if(!cList.isEmpty()) {
+			mv.addObject("pInfo", pInfo);
+			mv.addObject("cList", cList);
+			mv.addObject("paraMap", paraMap);
+			mv.setViewName("community/searchList");
+			return mv;
+		}else {
+			mv.addObject("msg", "게시물 검색에 실패하였습니다.");
+            mv.addObject("url", "/");
+            mv.setViewName("community/errorPage");
+            return mv;
+		}
+	}
+    
     
     public PageInfo getPageInfo(int curruntPage, int totalCount, String boardType) {
 

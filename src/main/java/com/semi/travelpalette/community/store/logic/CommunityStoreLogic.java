@@ -1,6 +1,7 @@
 package com.semi.travelpalette.community.store.logic;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -89,6 +90,21 @@ public class CommunityStoreLogic implements CommunityStore{
 	public int deleteLike(SqlSession session, Like like) {
 		int result = session.delete("LikeMapper.deleteLike", like);
         return result;
+	}
+
+	@Override
+	public int getSearchListCount(SqlSession session, Map<String, String> paraMap) {
+		int result = session.selectOne("CommunityMapper.getSearchListCount");
+		return result;
+	}
+
+	@Override
+	public List<Community> searchNoticesByKeyword(SqlSession session, Map<String, String> paraMap, PageInfo pInfo) {
+		int limit = pInfo.getRecordCountPerPage(); // 가져오는 행의 갯수
+		int offset = (pInfo.getCurrentPage()-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Community> cList = session.selectList("CommunityMapper.searchNoticesByKeyword", paraMap, rowBounds);
+		return cList;
 	}
 
 }

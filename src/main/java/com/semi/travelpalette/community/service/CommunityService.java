@@ -1,6 +1,7 @@
 package com.semi.travelpalette.community.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.semi.travelpalette.common.domain.Like;
 import com.semi.travelpalette.common.domain.PageInfo;
@@ -90,5 +91,20 @@ public interface CommunityService {
 	 * @return
 	 */
 	int deleteLike(Like like);
+
+	/**
+	 * 검색 게시물 총 갯수 Service
+	 * @param paraMap
+	 * @return
+	 */
+	int getSearchListCount(Map<String, String> paraMap);
+
+	/**
+	 * 검색한 게시물 리스트 불러오기 Service
+	 * @param paraMap
+	 * @param pInfo
+	 * @return
+	 */
+	List<Community> searchNoticesByKeyword(Map<String, String> paraMap, PageInfo pInfo);
 
 }
