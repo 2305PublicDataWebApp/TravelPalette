@@ -30,4 +30,10 @@ public class ReplyStoreLogic implements ReplyStore{
 		return result;
 	}
 
+	@Override
+	public int modifyReply(SqlSession session, Reply reply) {
+		int result = session.update("ReplyMapper.modifyReply", reply);
+		return result;
+	}
+
 }

@@ -39,4 +39,10 @@ public class ReplyServiceImpl implements ReplyService{
 		return result;
 	}
 
+	@Override
+	public int modifyReply(Reply reply) {
+		int result = rStore.modifyReply(session, reply);
+		return result;
+	}
+
 }

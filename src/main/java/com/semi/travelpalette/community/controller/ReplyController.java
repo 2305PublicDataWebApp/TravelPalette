@@ -33,10 +33,6 @@ public class ReplyController {
     		, HttpServletResponse responce) {
 		
     	Map<String, Object> response = new HashMap<>();
-//        if (reply.getReplySecretType() != 'Y') {
-//            reply.setReplySecretType('N');
-//        }
-//        String replyWriter = (String) session.getAttribute("userNickname");
         reply.setUserId((String) session.getAttribute("userId"));
         reply.setUserNickname((String) session.getAttribute("userNickname"));
         int result = rService.insertReply(reply);
@@ -45,6 +41,23 @@ public class ReplyController {
         } else {
         	response.put("success", false);
             response.put("message", "댓글 작성 함수를 가져올 수 없습니다.");
+        }
+        return response;
+    }
+	
+	@PostMapping("/modify.tp")
+    @ResponseBody
+    public Map<String, Object> modifyReply(@ModelAttribute Reply reply
+    		, HttpSession session
+    		, HttpServletResponse responce) {
+		
+    	Map<String, Object> response = new HashMap<>();
+        int result = rService.modifyReply(reply);
+        if (result > 0) {
+        	response.put("success", true);
+        } else {
+        	response.put("success", false);
+            response.put("message", "댓글 수정 함수를 가져올 수 없습니다.");
         }
         return response;
     }

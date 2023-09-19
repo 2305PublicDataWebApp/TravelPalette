@@ -21,8 +21,15 @@ public interface ReplyService {
 	 */
 	List<Reply> selectReplyList(Community cOne);
 
+	/**
+	 * 댓글 수정하기
+	 * @param reply
+	 * @return
+	 */
+	int modifyReply(Reply reply);
+	
 	/** 
-	 * 게시물 삭제하기 Service
+	 * 댓글 삭제하기 Service
 	 * @param reply
 	 * @return
 	 */

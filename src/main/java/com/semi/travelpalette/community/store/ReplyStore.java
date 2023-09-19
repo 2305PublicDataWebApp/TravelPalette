@@ -26,11 +26,19 @@ public interface ReplyStore {
 	List<Reply> selectReplyList(SqlSession session, Community cOne);
 
 	/**
-	 * 게시물 삭제하기 Store
+	 * 댓글 삭제하기 Store
 	 * @param session
 	 * @param reply
 	 * @return
 	 */
 	int deleteReply(SqlSession session, Reply reply);
+
+	/**
+	 * 댓글 수정하기 Store
+	 * @param session
+	 * @param reply
+	 * @return
+	 */
+	int modifyReply(SqlSession session, Reply reply);
 
 }

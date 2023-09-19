@@ -87,25 +87,21 @@
                 <div style="width: 100%;height: 110px;margin-top: 80px;">
                     <h4 style="font-family: 'TmoneyRoundWindExtraBold';font-size: 28px;padding: 20px;margin-top: 30px;">댓글 남기기</h4>
                 </div>
-                <form action="/reply/add.tp" method="post">
-					<input type="hidden" name="boardNo" value="${community.boardNo}">
-					<input type="hidden" name="boardType" value="${community.boardType}">
-	                <div style="width: 100%;margin: 0 auto;height: 245px;border-radius: 10px;background-color: rgb(239, 239, 239);font-family: 'SUITE-Regular';">
-	                    <div class="form-floating" style="width: 90%;margin: 0 auto;padding-top: 1px;">
-	                        <textarea name="replyContent" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;border: 1px solid #ccc;margin-top: 25px;resize: none;height: 150px;"></textarea>                        
-	                        <label for="floatingTextarea2" style="margin-top: 18px;">댓글을 입력해주세요~</label>
-	                    </div>
-	                    <button onclick="insertReplyBtn()" type="button" class="btn btn-secondary" style="float: right;margin-right: 50px;margin-top: 15px;">
-	                        글 등록
-	                    </button>
-	                    <div class="form-check" style="float: right;margin-right: 15px;margin-top: 21px;">
-	                        <input id="secretCheck" name="replySecretType" class="form-check-input" type="checkbox" value="Y" id="flexCheckDefault">
-	                        <label class="form-check-label" for="secretCheck">
-	                          비밀 댓글
-	                        </label>
-	                      </div>
-	                </div>
-				</form>
+                <div style="width: 100%;margin: 0 auto;height: 245px;border-radius: 10px;background-color: rgb(239, 239, 239);font-family: 'SUITE-Regular';">
+                    <div class="form-floating" style="width: 90%;margin: 0 auto;padding-top: 1px;">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;border: 1px solid #ccc;margin-top: 25px;resize: none;height: 150px;"></textarea>                        
+                        <label for="floatingTextarea2" style="margin-top: 20px;">댓글을 입력해주세요~</label>
+                    </div>
+                    <button onclick="insertReplyBtn()" type="button" class="btn btn-secondary" style="float: right;margin-right: 50px;margin-top: 15px;">
+                        글 등록
+                    </button>
+                    <div class="form-check" style="float: right;margin-right: 15px;margin-top: 21px;">
+                        <input id="secretCheck" class="form-check-input" type="checkbox" value="Y" id="flexCheckDefault">
+                        <label class="form-check-label" for="secretCheck">
+                          비밀 댓글
+                        </label>
+                      </div>
+                </div>
                 <div style="width: 100%;height: 110px;margin-top: 80px;">
                     <h4 style="font-family: 'TmoneyRoundWindExtraBold';font-size: 28px;padding: 20px;margin-top: 30px;">댓글 목록</h4>
                 </div>
@@ -120,14 +116,35 @@
 	                            <div style="width: 800px;height: 100px;background-color: #FCECDD;float: left;padding: 10px;border-radius: 10px;">
 	                                <p>${reply.replyContent }.</p>
 	                            </div>
-								<a href="javascript:void(0);" onclick="showModifyForm(this);">수정하기</a>
-								<a href="javascript:void(0);" onclick="deleteReply(event);" data-reply-no="${reply.replyNo}">삭제하기</a>
+								<a href="javascript:void(0);" onclick="showModifyForm(this);"
+								style="position: absolute;top: 24px;left:195px;">수정하기</a>
+								<a href="javascript:void(0);" onclick="deleteReply(event);" data-reply-no="${reply.replyNo}"
+								style="position: absolute;top: 24px;left: 255px;">삭제하기</a>
 	                        </div>
 	                        <div style="padding: 10px;margin-top: 27px;position: absolute;right: 50px;top: 36px;">
 	                            <span style="float: right;font-size: 23px;font-weight: 600;margin-top: 12px;margin-left: 5px;">1</span>
 	                            <img style="width: 40px;float: right;" src="../resources/images/community/likeoff.png" alt="">
 	                        </div>
 	                    </div>
+	                </div>
+	                <div style="display:none;width: 100%;margin: 0 auto;height: 200px;background-color: rgb(239, 239, 239);font-family: 'SUITE-Regular';border-bottom: 2px solid #d8dee3;">
+	                    <div class="form-floating" style="width: 90%;margin: 0 auto;padding-top: 1px;">
+	                        <textarea name="replyContent" class="form-control" placeholder="Leave a comment here" style="height: 115px;border: 1px solid #ccc;margin-top: 25px;resize: none;">${reply.replyContent}</textarea>                        
+	                        <label for="floatingTextarea2" style="margin-top: 22px;">댓글을 입력해주세요~</label>
+	                    </div>
+	                    <button onclick="modifyBack(this);" type="button" class="btn btn-secondary" style="float: right;margin-right: 50px;margin-top: 10px;">
+	                        취소
+	                    </button>
+	                    <button type="button" onclick="modifyReply(this);" class="btn btn-secondary" style="float: right;margin-right: 10px;margin-top: 10px;">
+	                        수정 완료
+	                    </button>
+	                    <input type="hidden" value="${reply.replyNo }">
+	                    <div class="form-check" style="float: right;margin-right: 15px;margin-top: 16px;">
+	                        <input name="replySecretType" class="form-check-input" type="checkbox" value="Y" ${reply.replySecretType.toString() eq 'Y' ? 'checked' : ''}>
+	                        <label class="form-check-label">
+	                          비밀 댓글
+	                        </label>
+	                     </div>
 	                </div>
 				</c:forEach>
             </div>
@@ -142,9 +159,6 @@
 	        document.getElementById("goBackButton").addEventListener("click", function() {
 	            location.href = "/community/certify.tp"
 	        });
-//             document.getElementById("goModifyButton").addEventListener("click", function() {
-//                 location.href= "/community/modify.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
-//             });
             document.getElementById("deleteButton").addEventListener("click", function() {
             	if(confirm("게시물을 삭제하시겠습니까?")){            		
                 	location.href= "/community/delete.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
@@ -177,13 +191,13 @@
 				});
             }
             //댓글 등록 ajax
+           	var boardNo = "${community.boardNo}";
+           	var boardType = "${community.boardType}";
             function insertReplyBtn() {
-            	var boardNo = "${community.boardNo}";
-            	var boardType = "${community.boardType}";
-                let replyContent = document.getElementById('floatingTextarea2').value;
+                var replyContent = document.getElementById('floatingTextarea2').value;
                 // 값의 길이를 확인하고 5보다 작으면 경고창을 띄웁니다.
                 if (replyContent.length < 5) {
-                  alert('댓글 내용은 5자 이상이어야 합니다');
+                  alert('댓글 내용은 5자 이상 작성하셔야 합니다.');
                 }
                 // 체크되었는지 여부를 확인합니다.
                 var replySecretType = document.getElementById('secretCheck').checked ? 'Y' : 'N';
@@ -192,8 +206,6 @@
                     type: "POST", // 또는 "GET"에 맞게 변경
                     url: "/reply/add.tp", // 로그인 처리를 하는 URL로 변경
                     data: {
-                    	boardNo: boardNo,
-                    	boardType: boardType,
                     	replyContent: replyContent,
                     	replySecretType: replySecretType
                     },
@@ -213,10 +225,52 @@
                 
             }
             
+            function showModifyForm(obj){
+				obj.parentElement.parentElement.parentElement.nextElementSibling.style.display="";
+			}
+            function modifyBack(obj){
+            	obj.parentElement.style.display="none";
+            }
+            
+            function modifyReply(obj){
+            	if(confirm("댓글을 수정하시겠습니까?")){
+            		
+            	}else{
+            		return;
+            	}
+            	var replyNo = obj.nextElementSibling.value;
+            	var replyContent = obj.previousElementSibling.previousElementSibling.children[0].value;
+                // 값의 길이를 확인하고 5보다 작으면 경고창을 띄웁니다.
+                if (replyContent.length < 5) {
+                  alert('댓글 내용은 5자 이상 작성하셔야 합니다.');
+                }
+                // 체크되었는지 여부를 확인합니다.
+                var replySecretType = obj.nextElementSibling.nextElementSibling.children[0].checked ? 'Y' : 'N';
+            	$.ajax({
+                    type: "POST", // 또는 "GET"에 맞게 변경
+                    url: "/reply/modify.tp", // 로그인 처리를 하는 URL로 변경
+                    data: {
+                    	replyNo: replyNo,
+                    	replyContent: replyContent,
+                    	replySecretType: replySecretType
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            alert("댓글 수정을 완료하였습니다.");
+                            location.reload();
+                        } else {
+                        	alert("댓글 수정을 실패하였습니다.");
+                        }
+                    },
+                    error: function () {
+                    	console.error("서버 요청에 실패했습니다. 상태 코드: " + status);
+                        console.error("에러 내용: " + error);
+                    }
+                });  
+            }
+            
             function deleteReply(event) {
 			    var button = event.target; // 클릭된 버튼 요소
-			    var boardNo = "${community.boardNo}";
-			    var boardType = "${community.boardType}";
 			    var replyNo = button.getAttribute("data-reply-no");
 
 			    if (confirm("리뷰를 삭제하시겠습니까?")) {

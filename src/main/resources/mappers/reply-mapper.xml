@@ -23,6 +23,9 @@
 		 #{replyContent}, DEFAULT, DEFAULT, #{userId}, #{userNickname}, DEFAULT)
 	</insert>
 	<update id="deleteReply">
-		UPDATE REPLY_TBL SET REPLY_STATUS = 'N' WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType} AND REPLY_NO = #{replyNo}
+		UPDATE REPLY_TBL SET REPLY_STATUS = 'N' WHERE REPLY_NO = #{replyNo}
+	</update>
+	<update id="modifyReply">
+		UPDATE REPLY_TBL SET REPLY_CONTENT = #{replyContent} WHERE REPLY_NO = #{replyNo}
 	</update>
 </mapper>
