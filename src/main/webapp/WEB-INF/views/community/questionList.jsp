@@ -73,7 +73,7 @@
                             <td class="tr">
                                 <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${community.boardCreateDate }" />
                             </td>
-                            <td>1</td>
+                            <td>${community.likeNo}</td>
                             <td class="tr"> 
                                 <fmt:formatNumber pattern="##,###,###" value="${community.viewCount}"></fmt:formatNumber>
                             </td>

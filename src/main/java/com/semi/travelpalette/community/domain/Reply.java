@@ -13,6 +13,7 @@ public class Reply {
 	private String userId;
 	private String userNickname;
 	private char replyStatus;
+	private int likeNo;
 	public int getReplyNo() {
 		return replyNo;
 	}
@@ -73,13 +74,19 @@ public class Reply {
 	public void setReplyStatus(char replyStatus) {
 		this.replyStatus = replyStatus;
 	}
+	public int getLikeNo() {
+		return likeNo;
+	}
+	public void setLikeNo(int likeNo) {
+		this.likeNo = likeNo;
+	}
 	
 	@Override
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", boardNo=" + boardNo + ", boardType=" + boardType + ", replySecretType="
 				+ replySecretType + ", replyContent=" + replyContent + ", replyCreateDate=" + replyCreateDate
 				+ ", replyUpdateDate=" + replyUpdateDate + ", userId=" + userId + ", userNickname=" + userNickname
-				+ ", replyStatus=" + replyStatus + "]";
+				+ ", replyStatus=" + replyStatus + ", 좋아요 갯수" + likeNo + "]";
 	}
 	
 }

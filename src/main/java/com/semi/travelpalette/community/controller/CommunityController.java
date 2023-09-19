@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.semi.travelpalette.common.domain.Like;
 import com.semi.travelpalette.common.domain.PageInfo;
 import com.semi.travelpalette.community.domain.Community;
 import com.semi.travelpalette.community.domain.Reply;
@@ -97,12 +98,23 @@ public class CommunityController {
     @RequestMapping(value="/detail.tp", method=RequestMethod.GET)
     public ModelAndView goBoardDatailPage(ModelAndView mv
             , @RequestParam("boardType") String boardType
-            , @RequestParam("boardNo") int boardNo) {
+            , @RequestParam("boardNo") int boardNo
+            , HttpSession session) {
         
         try {
             Community cOne = new Community(boardNo, boardType);
             Community community = cService.selectOneByClass(cOne);
+            community.setViewCount(community.getViewCount()+1);
+            cService.updateViewCount(community);
             List<Reply> rList = rService.selectReplyList(cOne);
+            String userId = (String)session.getAttribute("userId");
+            if(userId != null) {            	
+            	Like like = new Like(boardNo, boardType, userId);
+            	Like cLike = cService.selectLikeByClass(like);
+            	if(cLike != null) {
+            		mv.addObject("likeId", userId);
+            	}
+            }
 
             if (!community.getBoardTitle().equals("")) {
                 mv.addObject("community", community).addObject("rList", rList);

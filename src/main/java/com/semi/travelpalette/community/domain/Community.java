@@ -18,6 +18,7 @@ public class Community {
 	private String boardFileRename;
 	private String boardFilePath;
 	private long boardFileLength;
+	private int likeNo;
 	
 	public Community() {}
 	public Community(int boardNo, String boardType) {
@@ -111,13 +112,20 @@ public class Community {
 	public void setBoardFileLength(long boardFileLength) {
 		this.boardFileLength = boardFileLength;
 	}
+	public int getLikeNo() {
+		return likeNo;
+	}
+	public void setLikeNo(int likeNo) {
+		this.likeNo = likeNo;
+	}
+	
 	@Override
 	public String toString() {
 		return "커뮤니티 [게시판 번호=" + boardNo + ", 게시물 제목=" + boardTitle + ", 게시판 타입=" + boardType
 				+ ", 게시물 내용=" + boardContent + ", 아이디=" + userId + ", 닉네임=" + userNickname 
 				+ ", 작성날짜=" + boardCreateDate + ", 수정날짜=" + boardUpdateDate + ", 조회수=" + viewCount 
 				+ ", 상태=" + boardStatus + ", 파일이름=" + boardFileName + ", 파일리네임="+ boardFileRename 
-				+ ", 파일 경로=" + boardFilePath + ", 파일 길이=" + boardFileLength + "]";
+				+ ", 파일 경로=" + boardFilePath + ", 파일 길이=" + boardFileLength + ", 좋아요 개수 "+ likeNo + "]";
 	}
 	
 	

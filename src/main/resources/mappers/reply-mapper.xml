@@ -14,13 +14,14 @@
 		<result property="userId" column="USER_ID"/>
 		<result property="userNickname" column="USER_NICKNAME"/>
 		<result property="replyStatus" column="REPLY_STATUS"/>
+		<result property="likeNo" column="LIKE_NO"/>
 	</resultMap>
 	<select id="selectReplyList" resultMap="ReplyResultMap">
 		SELECT * FROM REPLY_TBL WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType} AND REPLY_STATUS = 'Y'
 	</select>
 	<insert id="insertReply">
 		INSERT INTO REPLY_TBL VALUES(SEQ_REPLY_NO.NEXTVAL, #{boardNo}, #{boardType}, #{replySecretType},
-		 #{replyContent}, DEFAULT, DEFAULT, #{userId}, #{userNickname}, DEFAULT)
+		 #{replyContent}, DEFAULT, DEFAULT, #{userId}, #{userNickname}, DEFAULT, DEFAULT)
 	</insert>
 	<update id="deleteReply">
 		UPDATE REPLY_TBL SET REPLY_STATUS = 'N' WHERE REPLY_NO = #{replyNo}

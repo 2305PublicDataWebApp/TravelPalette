@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -17,6 +18,7 @@
         <result property="boardFileRename" column="BOARD_FILE_RENAME" />
         <result property="boardFilePath" column="BOARD_FILE_PATH" />
         <result property="boardFileLength" column="BOARD_FILE_LENGTH" />
+        <result property="likeNo" column="LIKE_NO" />
     </resultMap>
     <select id="selectListByBoardType" resultMap="CommunityResultMap">
         SELECT * FROM COMMUNITY_TBL WHERE BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y' ORDER BY BOARD_CREATE_DATE DESC
@@ -31,12 +33,15 @@
     	SELECT MAX(BOARD_NO) FROM COMMUNITY_TBL
     </select>
     <insert id="insertBoard">
-        INSERT INTO COMMUNITY_TBL VALUES(SEQ_BOARD_NO.NEXTVAL, #{boardTitle}, #{boardType}, #{boardContent}, #{userId}, #{userNickname}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, #{boardFileName}, #{boardFileRename}, #{boardFilePath}, #{boardFileLength})
+        INSERT INTO COMMUNITY_TBL VALUES(SEQ_BOARD_NO.NEXTVAL, #{boardTitle}, #{boardType}, #{boardContent}, #{userId}, #{userNickname}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, #{boardFileName}, #{boardFileRename}, #{boardFilePath}, #{boardFileLength}, DEFAULT)
     </insert>
     <update id="updateBoard">
         UPDATE COMMUNITY_TBL SET BOARD_TITLE = #{boardTitle}, BOARD_CONTENT = #{boardContent}, BOARD_FILE_NAME = #{boardFileName}, BOARD_FILE_RENAME = #{boardFileRename}, BOARD_FILE_PATH = #{boardFilePath}, BOARD_FILE_LENGTH = #{boardFileLength}, BOARD_UPDATE_DATE = DEFAULT WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType}
     </update>
     <update id="deleteBoard">
         UPDATE COMMUNITY_TBL SET BOARD_STATUS = 'N' WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y'
+    </update>
+    <update id="updateViewCount">
+    	UPDATE COMMUNITY_TBL SET VIEW_COUNT = #{viewCount} WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y'
     </update>
 </mapper>

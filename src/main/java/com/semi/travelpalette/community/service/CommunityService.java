@@ -2,6 +2,7 @@ package com.semi.travelpalette.community.service;
 
 import java.util.List;
 
+import com.semi.travelpalette.common.domain.Like;
 import com.semi.travelpalette.common.domain.PageInfo;
 import com.semi.travelpalette.community.domain.Community;
 
@@ -54,5 +55,19 @@ public interface CommunityService {
      * @return
      */
 	int selectMaxNo();
+
+	/**
+	 * 게시물 조회수 증가 Service
+	 * @param community
+	 * @return
+	 */
+	int updateViewCount(Community community);
+
+	/**
+	 * 게시물 좋아요 여부 확인
+	 * @param like
+	 * @return
+	 */
+	Like selectLikeByClass(Like like);
 
 }

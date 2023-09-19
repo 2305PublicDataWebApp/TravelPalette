@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.semi.travelpalette.common.domain.Like;
 import com.semi.travelpalette.common.domain.PageInfo;
 import com.semi.travelpalette.community.domain.Community;
 import com.semi.travelpalette.community.store.CommunityStore;
@@ -58,6 +59,18 @@ public class CommunityStoreLogic implements CommunityStore{
 	public int selectMaxNo(SqlSession session) {
 		int maxNo = session.selectOne("CommunityMapper.selectMaxNo");
         return maxNo;
+	}
+
+	@Override
+	public int updateViewCount(SqlSession session, Community community) {
+		int result = session.delete("CommunityMapper.updateViewCount", community);
+        return result;
+	}
+
+	@Override
+	public Like selectLikeByClass(SqlSession session, Like like) {
+		Like cLike = session.selectOne("LikeMapper.selectLikeByClass", like);
+		return cLike;
 	}
 
 }
