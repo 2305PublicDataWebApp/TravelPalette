@@ -53,10 +53,10 @@ public interface TravelStore {
 	/**
 	 * 첨부파일 삭제 Store
 	 * @param session
-	 * @param travelFileNo
+	 * @param travelFile
 	 * @return
 	 */
-	int deleteFileByNo(SqlSession session, int travelFileNo);
+	int deleteFileByNo(SqlSession session, TravelFile travelFile);
 
 	/**
 	 * 여행정보 상세조회 Store

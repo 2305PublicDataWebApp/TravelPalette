@@ -46,10 +46,10 @@ public interface TravelService {
 
 	/**
 	 * 첨부파일 삭제 Service
-	 * @param travelFileNo
+	 * @param travelFile
 	 * @return
 	 */
-	int deleteFileByNo(int travelFileNo);
+	int deleteFileByNo(TravelFile travelFile);
 
 	/**
 	 * 여행정보 상세조회 Service
@@ -77,6 +77,7 @@ public interface TravelService {
 	 * @return
 	 */
 	int getTotalCount();
+
 
 	
 

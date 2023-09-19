@@ -43,6 +43,12 @@ public class ReviewServiceImpl implements ReviewService{
 		return myReview;
 	}
 
+	@Override
+	public int deleteReview(Review review) {
+		int result = rStore.deleteReview(session, review);
+		return result;
+	}
+
 
 
 

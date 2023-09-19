@@ -41,5 +41,13 @@ public interface ReviewStore {
 	 */
 	Review selectMyReview(SqlSession session, Review review);
 
+	/**
+	 * 리뷰삭제 Store
+	 * @param session
+	 * @param review
+	 * @return
+	 */
+	int deleteReview(SqlSession session, Review review);
+
 
 }

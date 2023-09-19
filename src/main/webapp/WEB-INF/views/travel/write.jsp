@@ -7,9 +7,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>여행 정보 게시판 작성</title>
         <link rel="stylesheet" href="../resources/css/travel/write.css">
-        <link rel="stylesheet" href="../resources/css/travel/header.css" />
-        <link rel="stylesheet" href="../resources/css/travel/nav.css" />
-        <link rel="stylesheet" href="../resources/css/travel/footer.css" />
     </head>
     <body>
     	<!-- 헤더 -->

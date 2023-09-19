@@ -34,5 +34,12 @@ public interface ReviewService {
 	 * @return
 	 */
 	Review selectMyReview(Review review);
+
+	/**
+	 * 리뷰삭제 Service
+	 * @param review
+	 * @return
+	 */
+	int deleteReview(Review review);
 	
 }

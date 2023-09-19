@@ -19,10 +19,16 @@
 		VALUES (SEQ_REVIEW_NO.NEXTVAL, #{reviewContent}, DEFAULT, #{reviewRating}, DEFAULT, #{userNickname}, #{travelNo}, DEFAULT)
 	</insert>
 	
+	<update id="deleteReview">
+		UPDATE REVIEW_TBL
+		SET REVIEW_STATUS = 'N'
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
+	
 	<select id="getReviewTotalCount" resultType="int">
 		SELECT COUNT (*) 
 		FROM REVIEW_TBL
-		WHERE TRAVEL_NO = #{travelNo}
+		WHERE TRAVEL_NO = #{travelNo} AND REVIEW_STATUS = 'Y'
 	</select>
 	
 	<select id="selectReviewByTNo" resultMap="ReviewResultMap">
@@ -33,7 +39,7 @@
 	</select>
 	
 	<select id="selectMyReview" resultMap="ReviewResultMap">
-		SELECT * 
+		SELECT REVIEW_NO, REVIEW_CONTENT, REVIEW_CREATE_DATE, REVIEW_RATING, USER_NICKNAME, TRAVEL_NO   
 		FROM REVIEW_TBL
 		WHERE TRAVEL_NO = #{travelNo} AND USER_NICKNAME = #{userNickname} AND REVIEW_STATUS = 'Y'
 	</select>
