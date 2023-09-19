@@ -10,6 +10,10 @@
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	</head>
     <body>
+    	<!-- 헤더 -->
+        <jsp:include page="/include/header.jsp"></jsp:include>
+        <!-- 네비 -->
+        <jsp:include page="/include/nav.jsp"></jsp:include>          
         <div class="flex">
             <p>${titleMsg }</p>
             <div class="loginBox">
@@ -24,8 +28,11 @@
                     <button type="button" class="btn btn-info loginBtn" onclick="formBtn()">${btnMsg }</button>
                 </div>
             </div>
+        <!-- 푸터 -->
+        <jsp:include page="/include/footer.jsp"></jsp:include>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
-        <script type="text/javascript">
+    	<script type="text/javascript">
+    	<jsp:include page="/include/navjs.jsp"></jsp:include>
             function formBtn() {
                 let userPw = document.querySelector("#userPw").value;
                 if(userPw == ''){

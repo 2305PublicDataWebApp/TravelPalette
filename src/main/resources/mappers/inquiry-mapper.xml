@@ -9,6 +9,7 @@
  		<result property="inquiryContent" 		column="INQUIRY_CONTENT"/>
  		<result property="userId" 				column="USER_ID"/>
  		<result property="inquiryCreateDate" 	column="INQUIRY_CREATE_DATE"/>
+ 		<result property="inquiryUpdateDate" 	column="INQUIRY_UPDATE_DATE"/>
  		<result property="inquiryDeleteDate" 	column="INQUIRY_DELETE_DATE"/>
  		<result property="inquiryFileName" 		column="INQUIRY_FILE_NAME"/>
  		<result property="inquiryFileRename" 	column="INQUIRY_FILERENAME"/>
@@ -17,18 +18,26 @@
  		<result property="inquiryResponse" 		column="INQUIRY_RESPONSE"/>
  		<result property="inquiryStatus" 		column="INQUIRY_STATUS"/>
  	</resultMap>
+ 	<insert id="insertInquiry">
+ 		INSERT INTO INQUIRY_TBL VALUES(SEQ_INQUIRY_NO.NEXTVAL, #{inquiryTitle }, #{inquiryContent }, #{userId }, DEFAULT, null, null, #{inquiryFileName }
+ 		, #{inquiryFileRename }, #{inquiryFilePath }, #{inquiryFileLength }, 'N', 'Y')
+ 	</insert>
+ 	<update id="updateInquiry">
+ 		UPDATE INQUIRY_TBL SET INQUIRY_TITLE=#{inquiryTitle }, INQUIRY_CONTENT=#{inquiryContent }, INQUIRY_UPDATE_DATE=DEFAULT, INQUIRY_FILE_NAME=#{inquiryFileName }, INQUIRY_FILERENAME=#{inquiryFileRename }
+ 		, INQUIRY_FILE_PATH=#{inquiryFilePath }, INQUIRY_FILE_LENGTH=#{inquiryFileLength } WHERE INQUIRY_NO=#{inquiryNo }
+ 	</update>
  	<delete id="deleteInquiry">
- 		DELETE FROM INQUIRY_TBL WHERE USER_ID=#{userId } AND INQUIRY_NO=#{inquiryNo }
+ 		UPDATE FROM INQUIRY_TBL WHERE USER_ID=#{userId } AND INQUIRY_NO=#{inquiryNo }
  	</delete>
  	
  	<select id="selectInquiryListCount" resultType="_int">
  		SELECT COUNT(*) FROM INQUIRY_TBL WHERE USER_ID=#{userId }
  	</select>
  	<select id="selectInquiryList" resultMap="inquiryResultMap">
- 		SELECT * FROM INQUIRY_TBL WHERE USER_ID=#{userId } ORDER BY INQUIRY_CREATE_DATE DESC
+ 		SELECT * FROM INQUIRY_TBL WHERE USER_ID=#{userId } AND INQUIRY_STATUS='Y'ORDER BY INQUIRY_CREATE_DATE DESC
  	</select>
  	<select id="selectOneInquiryPost" resultMap="inquiryResultMap">
- 		SELECT * FROM INQUIRY_TBL WHERE USER_ID=#{userId } AND INQUIRY_NO=#{inquiryNo }
+ 		SELECT * FROM INQUIRY_TBL WHERE USER_ID=#{userId } AND INQUIRY_NO=#{inquiryNo } AND INQUIRY_STATUS='Y'
  	</select>
 	
 </mapper>

@@ -11,6 +11,10 @@
     	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
+    	<!-- 헤더 -->
+        <jsp:include page="/include/header.jsp"></jsp:include>
+        <!-- 네비 -->
+        <jsp:include page="/include/nav.jsp"></jsp:include>          
     <jsp:include page="/include/header.jsp"></jsp:include>
         <div class="registerContainer">
             <p>회원가입</p>
@@ -93,8 +97,11 @@
                 </div>
             </div>
         </div>
+        <!-- 푸터 -->
+        <jsp:include page="/include/footer.jsp"></jsp:include>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
-        <script>
+    	<script type="text/javascript">
+    	<jsp:include page="/include/navjs.jsp"></jsp:include>
 
 	     // 아이디 중복 검사
 	        function idCheck() {
