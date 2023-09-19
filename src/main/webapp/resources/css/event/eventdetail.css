@@ -5,11 +5,6 @@
     max-width: 1000px; /* Set the img width to 100% */
 }
 
-.eventContent img {
-    max-width: 100%; /* Set the img width to 100% */
-    height: auto;
-}
-
 .eventAdd table {
     min-height: 100px; /* 최소 높이 설정 */
     height: auto; /* 높이를 자동으로 조절하도록 설정 */

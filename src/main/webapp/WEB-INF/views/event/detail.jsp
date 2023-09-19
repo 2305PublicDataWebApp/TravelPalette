@@ -27,7 +27,7 @@
 				<button id="deleteButton" type="button">삭제하기</button>
 				<h1>${event.eventTitle }</h1><br>
 				<c:if test="${!empty event.eventFileName }">
-					<img alt="첨부파일" src="../resources/euploadFiles/${event.eventFileRename }"  style="max-width: 100%; height: auto;">
+					<img alt="첨부파일" src="../resources/euploadFiles/${event.eventFileRename }"  style="width: 1000px; height: auto;">
 				</c:if>
 				<c:if test="${empty event.eventFileName }">더미 데이터라 사진이 없습니당!!</c:if>
 				<c:if test="${!empty event.eventPrecautions }">
