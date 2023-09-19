@@ -44,4 +44,7 @@
     <update id="updateViewCount">
     	UPDATE COMMUNITY_TBL SET VIEW_COUNT = #{viewCount} WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y'
     </update>
+    <update id="updateLikeNo">
+    	UPDATE COMMUNITY_TBL SET LIKE_NO = #{likeNo} WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType}
+    </update>
 </mapper>

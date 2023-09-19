@@ -59,7 +59,7 @@
                             <a href="/user/mypage.tp">
                                 마이페이지<br>
                             </a>
-                            <a href="#">
+                            <a href="/inquiry/list.tp">
                                 1 : 1 문의사항
                             </a>
                         </li>

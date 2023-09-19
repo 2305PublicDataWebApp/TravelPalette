@@ -64,10 +64,24 @@ public interface CommunityService {
 	int updateViewCount(Community community);
 
 	/**
-	 * 게시물 좋아요 여부 확인
+	 * 게시물 좋아요 여부 확인 Service
 	 * @param like
 	 * @return
 	 */
 	Like selectLikeByClass(Like like);
+
+	/**
+	 * 게시물 좋아요 누르기 Service
+	 * @param like
+	 * @return
+	 */
+	int insertLike(Like like);
+
+	/**
+	 * 게시물 좋아요 개수 수정하기 Service
+	 * @param cOne
+	 * @return
+	 */
+	int updateLikeNo(Community cOne);
 
 }

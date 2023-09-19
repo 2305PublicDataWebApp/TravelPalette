@@ -73,4 +73,16 @@ public class CommunityStoreLogic implements CommunityStore{
 		return cLike;
 	}
 
+	@Override
+	public int insertLike(SqlSession session, Like like) {
+		int result = session.delete("LikeMapper.insertLike", like);
+        return result;
+	}
+
+	@Override
+	public int updateLikeNo(SqlSession session, Community cOne) {
+		int result = session.delete("CommunityMapper.updateLikeNo", cOne);
+        return result;
+	}
+
 }

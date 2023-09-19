@@ -76,4 +76,16 @@ public class CommunityServiceImpl implements CommunityService{
 		return clike;
 	}
 
+	@Override
+	public int insertLike(Like like) {
+		int result = cStore.insertLike(session, like);
+        return result;
+	}
+
+	@Override
+	public int updateLikeNo(Community cOne) {
+		int result = cStore.updateLikeNo(session, cOne);
+        return result;
+	}
+
 }

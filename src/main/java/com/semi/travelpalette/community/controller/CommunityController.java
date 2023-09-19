@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -108,15 +110,15 @@ public class CommunityController {
             cService.updateViewCount(community);
             List<Reply> rList = rService.selectReplyList(cOne);
             String userId = (String)session.getAttribute("userId");
-            if(userId != null) {            	
-            	Like like = new Like(boardNo, boardType, userId);
-            	Like cLike = cService.selectLikeByClass(like);
-            	if(cLike != null) {
-            		mv.addObject("likeId", userId);
-            	}
-            }
-
             if (!community.getBoardTitle().equals("")) {
+	            if(userId != null) {            	
+	            	Like like = new Like(boardNo, boardType, userId);
+	            	Like cLike = cService.selectLikeByClass(like);
+	            	if(cLike != null) {
+	            		mv.addObject("likeId", userId);
+	            	}
+	            }
+
                 mv.addObject("community", community).addObject("rList", rList);
                 mv.setViewName("community/detail");
                 return mv;
@@ -245,7 +247,7 @@ public class CommunityController {
         }
     }
     
-    @RequestMapping(value="/delete.tp", method=RequestMethod.GET)
+    @GetMapping("/delete.tp")
     public ModelAndView deleteBoard(ModelAndView mv
             ,@ModelAttribute Community community) {
         
@@ -266,6 +268,32 @@ public class CommunityController {
             mv.setViewName("/");
             return mv;
         }
+    }
+    
+    @PostMapping("/like.tp")
+    @ResponseBody
+    public Map<String, Object> insertLike(@ModelAttribute Like like
+    		, HttpSession session
+    		, HttpServletResponse responce) {
+		
+    	Map<String, Object> response = new HashMap<>();
+    	try {
+    		
+//    		int result = cService.insertLike(like);
+    		Community community = new Community(like.getBoardNo(), like.getBoardType(), like.getUserId());
+    		Community cOne = cService.selectOneByClass(community);
+    		cOne.setViewCount(cOne.getViewCount()+1);
+    		int update = cService.updateLikeNo(cOne);
+    		if (update > 0) {
+    			response.put("success", true);
+    		} else {
+    			response.put("success", false);
+    			response.put("message", "게시물 좋아요 함수를 가져올 수 없습니다.");
+    		}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+    	return response;
     }
     
     public PageInfo getPageInfo(int curruntPage, int totalCount, String boardType) {
@@ -329,4 +357,6 @@ public class CommunityController {
 			file.delete();
 		}
 	}
+    
+    
 }

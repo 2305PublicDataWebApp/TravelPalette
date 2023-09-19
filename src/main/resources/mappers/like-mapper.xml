@@ -13,6 +13,9 @@
         <result property="userId" column="USER_ID" />
     </resultMap>
     <select id="selectLikeByClass" resultMap="LikeResultMap">
-        SELECT * FROM LIKE_TBL WHERE BOARD_TYPE = #{boardType} AND BOARD_NO = #{boardNo} AND USER_ID = #{userId}
+        SELECT * FROM LIKE_TBL WHERE BOARD_TYPE = #{boardType} AND BOARD_NO = #{boardNo} AND USER_ID = #{userId} AND REPLY_NO IS NULL
     </select>
+    <insert id="insertLike">
+    	INSERT INTO LIKE_TBL VALUES(SEQ_LIKE_NO.NEXTVAL, #{boardNo}, #{boardType}, NULL, 'thumbs up', DEFAULT, #{userId})
+    </insert>
 </mapper>

@@ -72,11 +72,27 @@ public interface CommunityStore {
 	int updateViewCount(SqlSession session, Community community);
 
 	/**
-	 * 좋아요 여부 확인 Store
+	 * 게시물 좋아요 여부 확인 Store
 	 * @param session
 	 * @param like
 	 * @return
 	 */
 	Like selectLikeByClass(SqlSession session, Like like);
+
+	/** 
+	 * 게시물 좋아요 누르기 Store
+	 * @param session
+	 * @param like
+	 * @return
+	 */
+	int insertLike(SqlSession session, Like like);
+
+	/**
+	 * 게시물 좋아요 개수 수정하기 Store
+	 * @param session
+	 * @param cOne
+	 * @return
+	 */
+	int updateLikeNo(SqlSession session, Community cOne);
 
 }

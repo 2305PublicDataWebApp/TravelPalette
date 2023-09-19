@@ -81,7 +81,21 @@
                 <h4 style="float: left;;font-family: 'SUITE-Regular';font-size: 25px;padding: 20px;margin-top: 30px;">추천 버튼으로 마음을 표현해보세요 ^O^!</h4>
                 <div style="float: right;padding: 10px;margin-top: 27px;">
                     <span style="float: right;font-size: 23px;font-weight: 600;margin-top: 12px;margin-left: 5px;">${community.likeNo}</span>
-                    <img style="width: 40px;float: right;" src="../resources/images/community/likeoff.png" alt="">
+                    <c:if test="${userId eq null}">
+                   		<a href="javascript:void(0);" onclick="loginCheck();">
+           					<img style="width: 40px;float: right;" src="../resources/images/community/likeoff.png" alt="">
+                   		</a>
+	               	</c:if>
+	               	<c:if test="${userId ne null && likeId ne userId}">
+	               		<a href="javascript:void(0);" onclick="insertLike();">
+	                     	<img style="width: 40px;float: right;" src="../resources/images/community/likeoff.png" alt="">
+	               		</a>
+	               	</c:if>
+                    <c:if test="${likeId eq userId && userId ne null}">
+                       	<a href="javascript:void(0);" onclick="deleteLike();">
+	                    	<img style="width: 40px;float: right;" src="../resources/images/community/likeon.png" alt="">
+                       	</a>
+	               	</c:if>
                 </div>
                 </div>
                 <div style="width: 100%;height: 110px;margin-top: 80px;">
@@ -114,7 +128,6 @@
 									<fmt:formatDate pattern="yyyy-MM-dd" value="${reply.replyCreateDate }"/>
 								</p>
 		                        <div style="width: 150px;height: 30px;float: left;margin-left: 10px;">
-		                        	<c:if test=""></c:if>
 		                            <img style="width: 26px;height: 25px;float: left;" src="../resources/images/community/likeoff.png" alt="">
 		                            <span style="float: left;font-size: 17px;font-weight: 600;margin-top: 4px;margin-left: 4px;">${reply.likeNo }</span>
 		                        </div>
@@ -142,9 +155,7 @@
 	                    <input type="hidden" value="${reply.replyNo }">
 	                    <div class="form-check" style="float: right;margin-right: 15px;margin-top: 16px;">
 	                        <input name="replySecretType" class="form-check-input" type="checkbox" value="Y" ${reply.replySecretType.toString() eq 'Y' ? 'checked' : ''}>
-	                        <label class="form-check-label">
-	                          비밀 댓글
-	                        </label>
+	                        <p>비밀 댓글</p>
 	                     </div>
 	                </div>
 				</c:forEach>
@@ -194,6 +205,7 @@
             //댓글 등록 ajax
            	var boardNo = "${community.boardNo}";
            	var boardType = "${community.boardType}";
+           	var userId = "${userId}";
             function insertReplyBtn() {
                 var replyContent = document.getElementById('floatingTextarea2').value;
                 // 값의 길이를 확인하고 5보다 작으면 경고창을 띄웁니다.
@@ -281,6 +293,31 @@
 			    if (confirm("리뷰를 삭제하시겠습니까?")) {
 			        location.href = "/reply/delete.tp?replyNo=" + replyNo + "&boardNo=" + boardNo+ "&boardType=" + boardType;
 			    }
+            }
+            //좋아요 기능 insert
+            function insertLike(){
+                var likeNo = ${community.likeNo}+1;
+            	$.ajax({
+                    type: "POST", // 또는 "GET"에 맞게 변경
+                    url: "/community/like.tp", 
+                    data: {
+                    	boardNo: boardNo,
+                    	boardType: boardType,
+                    	userId: userId,
+                    	likeNo: likeNo
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                        	alert("좋아요 누르기을 실패하였습니다.");
+                        }
+                    },
+                    error: function () {
+                    	console.error("서버 요청에 실패했습니다. 상태 코드: " + status);
+                        console.error("에러 내용: " + error);
+                    }
+                });  
             }
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
