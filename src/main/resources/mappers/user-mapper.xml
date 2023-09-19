@@ -11,7 +11,7 @@
 		<result property="userCreateDate" 	column="USER_CREATE_DATE"/>
 		<result property="userDeleteDate" 	column="USER_DELETE_DATE"/>
 		<result property="userStatus" 		column="USER_STATUS"/>
-		<result property="adminCheck" 		column="ADMIN_CHECK"/>		
+		<result property="adminCheck" 		column="ADMIN_CHECK"/>
 	</resultMap>
 	<resultMap type="User" id="userInfoResultMap">
 		<id 	property="userNo" 			column="USER_NO"/>
@@ -20,16 +20,17 @@
 		<result property="userGender" 		column="USER_GENDER"/>
 		<result property="userEmail" 		column="USER_EMAIL"/>
 		<result property="userTel" 			column="USER_TEL"/>
-		<result property="userEmailStatus" 	column="USER_EMAIL_STATUS"/>	
-		<result property="userSmsStatus" 	column="USER_SMS_STATUS"/>	
+		<result property="userEmailStatus" 	column="USER_EMAIL_STATUS"/>
+		<result property="userSmsStatus" 	column="USER_SMS_STATUS"/>
 	</resultMap>
-	
- 	<select id="selectUSerOneId" resultMap="userResultMap, userInfoResultMap">
+
+
+	<select id="selectUSerOneId" resultMap="userResultMap, userInfoResultMap">
  		SELECT *
 		FROM USER_TBL
 		JOIN USER_INFO_TBL ON USER_TBL.USER_NO = USER_INFO_TBL.USER_NO
 		WHERE USER_TBL.USER_ID = #{userId }
- 	</select>	
+ 	</select>
 
  	<insert id="kakaoUserInsert">
  		INSERT INTO USER_TBL VALUES(SEQ_USER_NO.NEXTVAL, #{userEmail }, null, 'kakao', DEFAULT, null, DEFAULT, DEFAULT)
@@ -74,4 +75,28 @@
 	<select id="selectUserInfo" resultMap="userInfoResultMap">
 		SELECT * FROM USER_INFO_TBL WHERE USER_NO=#{userNo }
 	</select>
+
+	<select id="selectUserActivity" resultType="userMypageDto">
+        select user_id userid,
+               content,
+               create_date createdate,
+               type
+        from (select *
+              from (select user_id, REPLY_CONTENT content, REPLY_CREATE_DATE create_date, '댓글' type
+                    from REPLY_TBL
+                    union
+                    --커뮤니티
+                    select user_id, board_title content, BOARD_CREATE_DATE create_date, '커뮤니티' type
+                    from COMMUNITY_TBL
+                    union
+                    select USER_TBL.user_id, REVIEW_CONTENT, REVIEW_CREATE_DATE, '리뷰' type
+                    from REVIEW_TBL
+                             join USER_INFO_TBL
+                                  on (review_tbl.USER_NICKNAME = USER_INFO_TBL.USER_NICKNAME)
+                             join USER_TBL
+                                  on (user_tbl.USER_NO = USER_INFO_TBL.user_no))
+              where USER_ID = #{userId}
+              order by create_date desc)
+        where rownum &lt;= 10
+    </select>
 </mapper>
