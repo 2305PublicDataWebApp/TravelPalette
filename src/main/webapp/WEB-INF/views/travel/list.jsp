@@ -38,8 +38,7 @@
                     <ul>
                     <c:forEach items="${tList}" var="travel" >
                         <li>
-                            <div class="photo">
-                            	<img src="../resources/tUploadFiles/${travel.travelFileRename}" style="width: 130px; height: 90px;">
+                            <div class="photo" style="background-image: url('../resources/tUploadFiles/${travel.travelFileRename}'); background-size: cover;">
                                 <a href="/travel/detail.tp?travelNo=${travel.travelNo }"></a>
                             </div>
                             <div class="area">
@@ -49,7 +48,7 @@
                                 	<c:set var="tagsString" value="${travel.travelTags}" />
     								<c:set var="tagsArray" value="${fn:split(tagsString, ',')}" />
 								    <c:forEach var="tag" items="${tagsArray}">
-	                                    <span>${tag}</span>
+	                                    <span>#${tag}</span>
 								    </c:forEach>
                                 </div>
                             </div>
@@ -112,18 +111,6 @@
                     <button style="float: right">새고</button>
                     <ul>
                         <li><a href="#">#전체</a></li>
-                        <li><a href="#">#스포츠</a></li>
-                        <li><a href="#">#동물</a></li>
-                        <li><a href="#">#캠핑</a></li>
-                        <li><a href="#">#한옥체험</a></li>
-                        <li><a href="#">#문화시설</a></li>
-                        <li><a href="#">#럭셔리</a></li>
-                        <li><a href="#">#테마파크</a></li>
-                        <li><a href="#">#실내여행지</a></li>
-                        <li><a href="#">#유적지</a></li>
-                        <li><a href="#">#쇼핑</a></li>
-                        <li><a href="#">#자연여행</a></li>
-                        <li><a href="#">#관광지</a></li>
                     </ul>
                 </div>
             </div>
@@ -134,10 +121,32 @@
 			function travelRegGo() {
 				location.href = "/travel/insert.tp";
             }
-			
 
-			
-	      
+		    // 지역 목록 생성
+		    const regions = ["서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기", "강원", "충북", "충남", "경북", "경남", "전북", "전남", "제주"];
+		    const regionList = document.getElementById("regionList");
+		
+		    regions.forEach(region => {
+		        const listItem = document.createElement("li");
+		        const link = document.createElement("a");
+		        link.href = "/travel/list.tp?region=" + encodeURIComponent("#" + region);
+		        link.textContent = "#" + region;
+		        listItem.appendChild(link);
+		        regionList.appendChild(listItem);
+		    });
+		    
+		    const keywords = ["스포츠", "동물", "캠핑", "문화시설", "럭셔리", "테마파크", "실내여행지", "유적지", "쇼핑", "자연여행", "관광지"];
+		    const keywordList = document.getElementById("keywordList");
+		
+		    keywords.forEach(keyword => {
+		        const listItem = document.createElement("li");
+		        const link = document.createElement("a");
+		        link.href = "/travel/list.tp?keyword=" + encodeURIComponent("#" + keyword);
+		        link.textContent = "#" + keyword;
+		        listItem.appendChild(link);
+		        keywordList.appendChild(listItem);
+		    });
+
 		</script>
     </body>
 </html>

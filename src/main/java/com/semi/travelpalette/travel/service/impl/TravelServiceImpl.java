@@ -2,6 +2,7 @@ package com.semi.travelpalette.travel.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -132,8 +133,31 @@ public class TravelServiceImpl implements TravelService{
 
 	@Override
 	public List<Travel> travelSortList(Map<String, Object> sortMap) {
-		List<Travel> tList = tStore.travelSortList(session, sortMap);
-		return tList;
+
+		try {
+			String selectedLocation = (String)sortMap.get("selectedLocation");
+			String selectedKeyword = (String)sortMap.get("selectedKeyword");
+			List<Travel> AllTravelList = tStore.travelSortList(session, sortMap);
+			if(selectedLocation == null && selectedKeyword == null) {
+				 // selectedLocation과 selectedKeyword 모두 없는 경우 모든 리스트 반환
+				return AllTravelList;
+			} else {
+				List<Travel> filteredList = new ArrayList<Travel>();
+				for(Travel travel : AllTravelList) {
+					String travelLocation = travel.getTravelLocation();
+					String travelTags = travel.getTravelTags();
+					// 선택한 필터가 존재하지 않거나 선택한 필터와 일치하는 경우에만 필터링
+	                if ((selectedLocation == null || travelLocation.equals(selectedLocation))
+	                        && (selectedKeyword == null || travelTags.equals(selectedKeyword))) {
+	                    filteredList.add(travel);
+	                }
+				}			
+				return filteredList;
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ArrayList<Travel>();
+		}
 	}
 
 	@Override
