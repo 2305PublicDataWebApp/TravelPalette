@@ -45,11 +45,14 @@
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
+                        <c:forEach items="${userMypageActivity}" var="mypageActivity" varStatus="i" >
                             <tr>
-                                <td>2023-08-07</td>
-                                <td>좋아용</td>
-                                <td>굿</td>
+                                <td>${mypageActivity.createdate}</td>
+                                <td>${mypageActivity.type}</td>
+                                <td>${mypageActivity.content}</td>
                             </tr>
+
+                        </c:forEach>
                         </tbody>
                     </table>
                     <p class="fs-6">최근 활동 내역은 최신순으로 10개까지만 표시됩니다</p>
