@@ -430,6 +430,7 @@
 		 	    		    if(authCode != null) {
 		 	    		    	alert('인증번호가 전송되었습니다.');
 		 		    			// 버튼 누르면 인증번호 입력 div flex로
+		 		    			document.getElementById('mailClickBtn').disabled = true;    
 		 						 emailCodeDiv.style.opacity = '1';
 		 						 emailCodeDiv.style.display = 'flex';
 		                }else {
@@ -492,27 +493,31 @@
 		    xhr.send();
 		}    	
     	
-    	
-			document.addEventListener("DOMContentLoaded", function() {
-			  const mailCheckbox = document.getElementById("mail");
-			  const smsCheckbox = document.getElementById("SMS");
-
-			  mailCheckbox.addEventListener("change", function() {
-			    if (mailCheckbox.checked) {
-			      mailCheckbox.value = "Y";
-			    } else {
-			      mailCheckbox.value = "N";
-			    }
-			  });
-
-			  smsCheckbox.addEventListener("change", function() {
-			    if (smsCheckbox.checked) {
-			      smsCheckbox.value = "Y";
-			    } else {
-			      smsCheckbox.value = "N";
-			    }
-			  });
-			});    	
+        document.getElementById('SMS').addEventListener("click" , (e)=> {
+            
+        	const checked = e.target.checked;
+        	if(checked) {
+        		e.target.value ="Y"
+        	}else {
+        		e.target.value = "N"
+        	}
+        	
+        	console.log(e.target.value);
+        	
+        });
+        
+        document.getElementById('mail').addEventListener("click" , (e)=> {
+        
+        	const checked = e.target.checked;
+        	if(checked) {
+        		e.target.value ="Y"
+        	}else {
+        		e.target.value = "N"
+        	}
+        	
+        	console.log(e.target.value);
+        	
+        });
 
          function registerCheck() {
              let userId = document.querySelector("#userId").value;
@@ -524,6 +529,8 @@
              let emailCodeCheckMsg = document.querySelector("#emailCodeCheckMsg");
              let idCheckMsg = document.querySelector("#idCheckMsg");
              let nickcnameCheckMsg = document.querySelector("#nicknameCheckMsg");
+             
+             
              
              if(userId == '' || userPw == '' || userPwCheck == '' || userName == '' || userNickname =='' || userEmail =='' ){
                 alert("필수 정보는 모두 입력해야 합니다.");

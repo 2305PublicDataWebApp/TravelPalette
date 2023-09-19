@@ -20,6 +20,7 @@
             <div id="container">
                 <div class="flex">
                 	<form name="userModifyForm" action="/user/modifyNormal.tp" method="post">
+                		<input type="hidden" name="userNo" value="${userInfo.userNo }">
 	                    <div>
 	                        <label for="userPw">비밀번호<span class="redSpan">*</span></label>
 	                        <input type="password" name="userPw" id="userPw" class="input" placeholder="영어, 숫자, 특수문자를 반드시 포함해 8~20글자">
@@ -61,18 +62,15 @@
 	                    <div style="display: flex; align-items: center;">
 	                        <label for="">SMS/메일<br>수신 여부</label>
 	                        <div id="checkDiv">
-	                        	<c:if test="${userInfo.userEmailStatus.toString() == 'Y' }">
-		                            <input type="checkbox" name="userEmailStatus" class="form-check-input" id="SMS" checked="checked"><label class="form-check-label" for="SMS">SMS</label>
-	                        	</c:if>
-	                        	<c:if test="${userInfo.userEmailStatus.toString() == 'N' }">
-		                            <input type="checkbox" name="userEmailStatus" class="form-check-input" id="SMS"><label class="form-check-label" for="SMS">SMS</label>
-	                        	</c:if>
-	                        	<c:if test="${userInfo.userSmsStatus.toString() == 'Y' }">
-		                            <input type="checkbox" name="userSmsStatus" class="form-check-input" id="mail" checked="checked"><label class="form-check-label" for="mail">메일</label>
-	                        	</c:if>
-	                        	<c:if test="${userInfo.userSmsStatus.toString() == 'N' }">
-	                        		<input type="checkbox" name="userSmsStatus" class="form-check-input" id="mail"><label class="form-check-label" for="mail">메일</label>
-	                        	</c:if>
+
+		                                <input type="checkbox" name="userEmailStatus" class="form-check-input" id="SMS" <c:if test="${userInfo.userEmailStatus.toString() eq 'Y'}" >checked</c:if>><label class="form-check-label" for="SMS">SMS</label>
+	                 
+
+		                            <input type="checkbox" name="userSmsStatus" class="form-check-input" id="mail" value="Y" 
+		                            <c:if test="${userInfo.userSmsStatus.toString() eq 'Y'}" >checked</c:if>
+		                   
+		                            ><label class="form-check-label" for="mail">메일</label>
+
 	                        </div>
 	                    </div>
 	                    <div class="registerBox">
@@ -83,7 +81,27 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    	
+    	
     	<script type="text/javascript">
+    	
+    	$(function() {
+//     		  var c1 = $("input[name='userEmailStatus']").is(":checked") ? "Y" : "N";
+//     		  var c2 = $("input[name='userSmsStatus']").is(":checked") ? "Y" : "N";
+    		  
+//     		  $("#mail").val(c1);
+//     		  $("#SMS").val(c2);
+    		  
+//     		  console.log(c1);
+//     		  const mail = document.querySelector("input[name='userEmailStatus']");
+//     		  const sms = document.querySelector("input[name='userSmsStatus']");
+    		  
+//     		  console.log(mail)
+//     		  console.log(sms)
+    		  
+    		}); 
+    	
+    	
 	     // 닉네임 중복 검사
 	    const userNicknameInput = document.getElementById('userNickname');
 		const nicknameBtn = document.getElementById('nicknameBtn');
@@ -156,6 +174,35 @@
             	}
             	
         }
+        
+        
+        document.getElementById('SMS').addEventListener("click" , (e)=> {
+        
+        	const checked = e.target.checked;
+        	if(checked) {
+        		e.target.value ="Y"
+        	}else {
+        		e.target.value = "N"
+        	}
+        	
+        	console.log(e.target.value);
+        	
+        });
+        
+        document.getElementById('mail').addEventListener("click" , (e)=> {
+        
+        	const checked = e.target.checked;
+        	if(checked) {
+        		e.target.value ="Y"
+        	}else {
+        		e.target.value = "N"
+        	}
+        	
+        	console.log(e.target.value);
+        	
+        });
+        
+        
         
 		function emailCheck() {
 		    const email = document.getElementById('userEmail').value;
@@ -236,27 +283,7 @@
 		    // Send the request
 		    xhr.send();
 		}    	     
-    	
-		document.addEventListener("DOMContentLoaded", function() {
-			  const mailCheckbox = document.getElementById("mail");
-			  const smsCheckbox = document.getElementById("SMS");
-
-			  mailCheckbox.addEventListener("change", function() {
-			    if (mailCheckbox.checked) {
-			      mailCheckbox.value = "Y";
-			    } else {
-			      mailCheckbox.value = "N";
-			    }
-			  });
-
-			  smsCheckbox.addEventListener("change", function() {
-			    if (smsCheckbox.checked) {
-			      smsCheckbox.value = "Y";
-			    } else {
-			      smsCheckbox.value = "N";
-			    }
-			  });
-			});      	
+ 
     	
     	
 		function modifyCheck() {
@@ -272,18 +299,45 @@
 		    let prevUserNickname = "${userInfo.userNickname}";
 		    let prevUserEmail = "${userInfo.userEmail}";
 
-		    if (userPw == '' || userPwCheck == '' || userNickname== '' || userEmail == '') 
-		    {   alert("필수 정보는 모두 입력해야 합니다.");
+		    if (userPw == '' || userPwCheck == '' || userNickname == '' || userEmail == '') {
+		        alert("필수 정보는 모두 입력해야 합니다.");
 		        return false;
-		    } else if (nickcnameCheckMsg.style.color !== "blue") {
-		        alert("닉네임 중복 검사를 완료해야 합니다.");
-		    } else if (emailCodeCheckMsg.style.color !== "blue") {
-		        alert("이메일 인증을 완료해야 합니다.");
-		        return false;
-		    } else if (userNickname !== prevUserNickname || userEmail !== prevUserEmail) {
-		        document.userModifyForm.submit();
+		    }
+
+		    if (userNickname !== prevUserNickname) {
+		        if (nickcnameCheckMsg.style.color === 'blue') { // 등호 두 개(===)를 사용하여 값 비교
+		            isNicknameChecked = true;
+		        } else {
+		            alert("닉네임 중복 검사를 완료해야 합니다.");
+		            return false;
+		        }
 		    } else {
-		        alert("변경사항이 없습니다.");
+		        // 닉네임 중복 검사가 완료되었음을 표시
+		        isNicknameChecked = true;
+		        nicknameCheckMsg.style.color = 'blue'; // 닉네임 중복 검사 완료 메시지 스타일 변경
+		    }
+
+		    if (userEmail !== prevUserEmail) {
+		    	if(emailCodeCheckMsg.style.color === 'blue'){
+		    		isEmailChecked = true; // 이메일 인증이 완료되었음을 표시
+		    	} else {
+			        alert("이메일 인증을 완료해야 합니다.");
+			        return false; // 이메일 인증이 완료되지 않았으므로 폼 전송 중지
+		    	}
+		    } else {
+		        isEmailChecked = true; // 이메일 인증이 완료되었음을 표시
+		        emailCodeCheckMsg.style.color = 'blue'; // 닉네임 중복 검사 완료 메시지 스타일 변경
+		    };
+
+		    if (userPw !== userPwCheck) {
+		        alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+		        return false;
+		    }
+		    
+		
+
+		    if (isNicknameChecked && isEmailChecked) {
+		        document.userModifyForm.submit();
 		    }
 		}   
         

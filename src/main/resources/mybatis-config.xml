@@ -9,9 +9,13 @@
 	<typeAliases>
 		<typeAlias type="com.semi.travelpalette.travel.domain.Travel" alias="Travel"/>
 		<typeAlias type="com.semi.travelpalette.community.domain.Community" alias="Community"/>
+		<typeAlias type="com.semi.travelpalette.user.domain.User" alias="User"/>
+		<typeAlias type="com.semi.travelpalette.inquiry.domain.Inquiry" alias="Inquiry"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/travel-mapper.xml"/>
 		<mapper resource="mappers/community-mapper.xml"/>
+		<mapper resource="mappers/user-mapper.xml"/>
+		<mapper resource="mappers/inquiry-mapper.xml"/>		
 	</mappers>
 </configuration>

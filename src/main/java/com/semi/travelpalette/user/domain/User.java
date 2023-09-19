@@ -1,12 +1,14 @@
 package com.semi.travelpalette.user.domain;
 
+import java.util.Date;
+
 public class User {
 	private int userNo;
 	private String userId;
 	private String userPw;
 	private String platformType;
-	private String userCreateDate;
-	private String userDeleteDate;
+	private Date userCreateDate;
+	private Date userDeleteDate;
 	private char userStatus;
 	private char adminCheck;
 	private String userName;
@@ -36,6 +38,28 @@ public class User {
 		this.userId = userId;
 		this.userPw = userPw;
 	}
+	
+
+	public User(int userNo, String userId, String userPw, String platformType, Date userCreateDate,
+			Date userDeleteDate, char userStatus, char adminCheck, String userName, String userNickname,
+			String userGender, String userEmail, String userTel, char userEmailStatus, char userSmsStatus) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userPw = userPw;
+		this.platformType = platformType;
+		this.userCreateDate = userCreateDate;
+		this.userDeleteDate = userDeleteDate;
+		this.userStatus = userStatus;
+		this.adminCheck = adminCheck;
+		this.userName = userName;
+		this.userNickname = userNickname;
+		this.userGender = userGender;
+		this.userEmail = userEmail;
+		this.userTel = userTel;
+		this.userEmailStatus = userEmailStatus;
+		this.userSmsStatus = userSmsStatus;
+	}
 
 	public int getUserNo() {
 		return userNo;
@@ -61,16 +85,16 @@ public class User {
 	public void setPlatformType(String platformType) {
 		this.platformType = platformType;
 	}
-	public String getUserCreateDate() {
+	public Date getUserCreateDate() {
 		return userCreateDate;
 	}
-	public void setUserCreateDate(String userCreateDate) {
+	public void setUserCreateDate(Date userCreateDate) {
 		this.userCreateDate = userCreateDate;
 	}
-	public String getUserDeleteDate() {
+	public Date getUserDeleteDate() {
 		return userDeleteDate;
 	}
-	public void setUserDeleteDate(String userDeleteDate) {
+	public void setUserDeleteDate(Date userDeleteDate) {
 		this.userDeleteDate = userDeleteDate;
 	}
 	public char getUserStatus() {

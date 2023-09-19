@@ -18,7 +18,7 @@ public class UserStoreLogic implements UserStore{
 	@Override
 	public int kakaoUserInfoInsert(SqlSession session, User kakaoUser) {
 		int user = session.insert("UserMapper.kakaoUserInfoInsert", kakaoUser);
-		return 0;
+		return user;
 	}	
 
 	@Override
@@ -71,13 +71,31 @@ public class UserStoreLogic implements UserStore{
 
 	@Override
 	public int updateUserNormal(SqlSession session, User userInfo) {
-		int result = session.update("UserMapper.updateUserNormal", "userInfo");
+		int result = session.update("UserMapper.updateUserNormal", userInfo);
 		return result;
 	}
 
 	@Override
 	public int updateUserInfoNormal(SqlSession session, User userInfo) {
 		int result = session.update("UserMapper.updateUserInfoNormal", userInfo);
+		return result;
+	}
+
+	@Override
+	public User selectUser(SqlSession session, int userNo) {
+		User user = session.selectOne("UserMapper.selectUser", userNo);
+		return user;
+	}
+
+	@Override
+	public int deleteUser(SqlSession session, int userNo) {
+		int result = session.update("UserMapper.deleteUser", userNo);
+		return result;
+	}
+
+	@Override
+	public int deleteUserInfo(SqlSession session, int userNo) {
+		int result = session.delete("UserMapper.deleteUserInfo", userNo);
 		return result;
 	}
 
