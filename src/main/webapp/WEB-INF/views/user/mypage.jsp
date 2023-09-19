@@ -10,6 +10,10 @@
 		<link rel="stylesheet" href="../resources/css/user/mypage.css">
     </head>
     <body>
+    	<!-- 헤더 -->
+        <jsp:include page="/include/header.jsp"></jsp:include>
+        <!-- 네비 -->
+        <jsp:include page="/include/nav.jsp"></jsp:include>          
         <div class="container">
             <p>My Page</p>
             <div class="w-line"></div>
@@ -52,8 +56,11 @@
                 </div>
             </div>
         </div>
+        <!-- 푸터 -->
+        <jsp:include page="/include/footer.jsp"></jsp:include>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
-        <script type="text/javascript">
+    	<script type="text/javascript">
+    	<jsp:include page="/include/navjs.jsp"></jsp:include>
         
         </script>
     </body>

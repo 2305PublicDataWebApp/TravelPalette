@@ -42,4 +42,20 @@ public interface InquiryStore {
 	 */
 	int deleteInquiry(SqlSession session, Inquiry inquiryInfo);
 
+	/**
+	 * 문의사항 등록
+	 * @param session
+	 * @param inquiry
+	 * @return
+	 */
+	int insertInquiry(SqlSession session, Inquiry inquiry);
+
+	/**
+	 * 문의사항 수정
+	 * @param session
+	 * @param inquiry
+	 * @return
+	 */
+	int updateInquiry(SqlSession session, Inquiry inquiry);
+
 }

@@ -1,6 +1,12 @@
 package com.semi.travelpalette.inquiry.service;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.travelpalette.inquiry.domain.Inquiry;
 import com.semi.travelpalette.inquiry.domain.PageInfo;
@@ -43,5 +49,36 @@ public interface InquiryService {
 	 * @return
 	 */
 	int deleteInquiry(Inquiry inquiryInfo);
+
+	/**
+	 * 문의사항 작성
+	 * @param inquiry
+	 * @return
+	 */
+	int insertInquiry(Inquiry inquiry);
+
+	/**
+	 * 첨부 파일 저장 메소드
+	 * @param request
+	 * @param uploadFile
+	 * @return
+	 * @throws IOException 
+	 * @throws Exception 
+	 */
+	Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws Exception, IOException;
+
+	/**
+	 * 삭제 메소드
+	 * @param fileRename
+	 * @param request
+	 */
+	void deleteFile(String fileRename, HttpServletRequest request);
+
+	/**
+	 * 문의사항 수정
+	 * @param inquiry
+	 * @return
+	 */
+	int updateInquiry(Inquiry inquiry);
 
 }
