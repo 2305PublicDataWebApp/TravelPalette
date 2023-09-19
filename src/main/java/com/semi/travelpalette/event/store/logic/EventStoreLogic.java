@@ -18,8 +18,8 @@ public class EventStoreLogic implements EventStore {
 		int limit = pageInfo.getRecordCountPerPage();
 		int offset = (pageInfo.getCurrentPage() - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<Event> tList = sqlSession.selectList("EventMapper.eventAllListByNew", null, rowBounds);
-		return tList;
+		List<Event> eList = sqlSession.selectList("EventMapper.eventAllListByNew", null, rowBounds);
+		return eList;
 	}
 
 	@Override

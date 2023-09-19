@@ -22,8 +22,8 @@ public class EventServiceImpl implements EventService{
 	
 	@Override
 	public List<Event> eventAllListByNew(EventPageInfo pageInfo) {
-		List<Event> tList = eStore.eventAllListByNew(sqlSession, pageInfo);
-		return tList;
+		List<Event> eList = eStore.eventAllListByNew(sqlSession, pageInfo);
+		return eList;
 	}
 
 	@Override

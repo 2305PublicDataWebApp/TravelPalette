@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,7 +20,7 @@
         
         <!-- 메인 -->
         <main>
-		<div id="map" style="width: 100%; height: 97vh;"></div>
+		<div id="map" style="width: 100%; height: 97vh; margin: 0 auto;"></div>
 		
 		<!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
@@ -32,12 +33,18 @@
 		window.addEventListener('load', function () {
 		    var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
 		    var mapOption = {
-		        center: new kakao.maps.LatLng(37.566826, 126.978656), // 지도의 초기 중심 좌표 (서울)
-		        level: 10 // 지도의 확대 레벨
+	    		center: new kakao.maps.LatLng(37.55909, 126.97717), // 지도의 중심좌표
+		        level: 8, // 지도의 확대 레벨
 		    };  
 		
 		    // 지도를 생성합니다    
-		    var map = new kakao.maps.Map(mapContainer, mapOption); 
+		    var map = new kakao.maps.Map(mapContainer, mapOption);
+		    
+		 	// 지도에 확대 축소 컨트롤을 생성한다
+			var zoomControl = new kakao.maps.ZoomControl();
+
+			// 지도의 우측에 확대 축소 컨트롤을 추가한다
+			map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 		
 		    // 마커 이미지의 주소
 		    var markerImageUrl = '../resources/images/map/marker.png';
@@ -53,14 +60,16 @@
 		    var geocoder = new kakao.maps.services.Geocoder();
 		
 		    // 주소와 장소 이름을 포함한 배열
-		    var locations = [
-		        { address: '서울특별시 중구 장충단로13길 34', name: '동화상가' },
-		        { address: '서울특별시 강남구 선릉로100길 1', name: '서울 선릉(성종과 정현왕후)과 정릉(중종)' },
-		        { address: '서울특별시 동대문구 회기로 57', name: '홍릉수목원' },
-		        { address: '서울특별시 동작구 현충로 210', name: '국립서울현충원' },
-		        { address: '서울특별시 성동구 뚝섬로 273', name: '서울숲' }
-		    ];
-		
+		    var locations = [];
+		    
+		    // tList 배열에 저장된 travelAddr 및 travelName 추가
+		    <c:forEach items="${tList}" var="travel">
+		        locations.push({
+		            address: '<c:out value="${travel.travelAddr}" />',
+		            name: '<c:out value="${travel.travelName}" />'
+		        });
+		    </c:forEach>
+		    
 		    // 각 주소에 대한 좌표를 검색하고 마커를 표시합니다.
 		    locations.forEach(function (location) {
 		        geocoder.addressSearch(location.address, function (result, status) {
@@ -72,17 +81,51 @@
 		                    position: coords
 		                });
 		
-		                // 각 마커에 인포윈도우로 장소 이름을 표시합니다.
-		                var infowindow = new kakao.maps.InfoWindow({
-		                    content: '<div style="width:150px;text-align:center;padding:6px 0;">' + location.name + '</div>'
-		                });
-		                infowindow.open(map, marker);
+// 		                // 각 마커에 인포윈도우로 장소 이름을 표시합니다.
+// 		                var infowindow = new kakao.maps.InfoWindow({
+// 		                    content: '<div style="width:150px;text-align:center;padding:6px 0;">' + location.name + '</div>'
+// 		                });
+// 		                infowindow.open(map, marker);
 		
 		                // 지도의 중심을 마지막 주소의 좌표로 이동시킵니다.
-		                map.setCenter(coords);
+// 		                map.setCenter(coords);
+		                
+		                // 커스텀 오버레이에 표시할 컨텐츠 입니다
+						// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+						// 별도의 이벤트 메소드를 제공하지 않습니다 
+						var content = '<div class="wrap">' + 
+						            '    <div class="info">' + 
+						            '        <div class="title">' + 
+						                        location.name + 
+						            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+						            '        </div>' + 
+						            '        <div class="body">' + 
+						            '            <div class="desc">' + 
+						            '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' + 
+						            '            </div>' + 
+						            '        </div>' + 
+						            '    </div>' +    
+						            '</div>';
+						// 마커 위에 커스텀오버레이를 표시합니다
+						// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+						var overlay = new kakao.maps.CustomOverlay({
+						    content: content,
+						    map: map,
+						    position: marker.getPosition()       
+						});
 		            } else {
 		                console.log('주소 검색 실패: ' + status);
 		            }
+		            
+					// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+					kakao.maps.event.addListener(marker, 'click', function() {
+					    overlay.setMap(map);
+					});
+					
+					// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+					function closeOverlay() {
+					    overlay.setMap(null);     
+					}
 		        });
 		    });
 		});

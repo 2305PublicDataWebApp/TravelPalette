@@ -1,17 +1,13 @@
 @charset "UTF-8";
-/* 스타일을 적용할 맵 컨테이너 내의 텍스트 요소 선택자 */
-#map div {
-    font-family: 'Your Font Name', sans-serif; /* 원하는 폰트로 변경 */
-    font-size: 16px; /* 원하는 폰트 크기로 변경 */
-    font-weight: bold; /* 원하는 폰트 두께로 변경 */
-    color: #6a14cc; /* 원하는 텍스트 색상으로 변경 */
-}
-
-/* 맵 제목을 감싸는 div 요소에 스타일 적용 */
-#map-title {
-    background-color: #000; /* 배경색 설정 */
-    color: #fff; /* 텍스트 색상 설정 */
-    padding: 10px; /* 여백 설정 */
-    font-size: 24px; /* 폰트 크기 설정 */
-    text-align: center; /* 가운데 정렬 설정 */
-}
+.wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+.wrap * {padding: 0;margin: 0;}
+.wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+.wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+.info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+.info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+.info .close:hover {cursor: pointer;}
+.info .body {position: relative;overflow: hidden;}
+.info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+.info .link {color: #5085BB;}
