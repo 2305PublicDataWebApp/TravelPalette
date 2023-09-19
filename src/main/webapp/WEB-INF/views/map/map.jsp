@@ -7,13 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>주소로 장소 표시하기</title>
     <link rel="stylesheet" href="/resources/css/map/map.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 </head>
 	<body>
+	 <!-- 헤더 -->
+        <jsp:include page="/include/header.jsp"></jsp:include>
+        
+        <!-- 네비 -->
+        <jsp:include page="/include/nav.jsp"></jsp:include>
+        
+        <!-- 메인 -->
+        <main>
 		<div id="map" style="width: 100%; height: 97vh;"></div>
 		
+		<!-- 푸터 -->
+        <jsp:include page="/include/footer.jsp"></jsp:include>
+        
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d52709ffacc68e58aa4c5df1743f8ea&libraries=services" ></script>
 		<script>
+       	<jsp:include page="/include/navjs.jsp"></jsp:include>
+    	
 		// Kakao Maps SDK가 로드된 후에 실행되도록 이벤트 리스너를 추가합니다.
 		window.addEventListener('load', function () {
 		    var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
@@ -26,7 +40,7 @@
 		    var map = new kakao.maps.Map(mapContainer, mapOption); 
 		
 		    // 마커 이미지의 주소
-		    var markerImageUrl = '../resources/images/marker.png';
+		    var markerImageUrl = '../resources/images/map/marker.png';
 		    var markerImageSize = new kakao.maps.Size(40, 42); // 마커 이미지의 크기
 		    var markerImageOptions = {
 		        offset: new kakao.maps.Point(19, 43) // 마커 좌표에 일치시킬 이미지 안의 좌표

@@ -19,14 +19,26 @@
 	    <result property="eventUpdateDate" 	column="EVENT_UPDATE_DATE" />
 	    <result property="eventStatus" 		column="EVENT_STATUS" />
 	</resultMap>
-		<select id="eventAllListByNew" resultMap="EventResultMap">
+	<select id="eventAllListByNew" resultMap="EventResultMap">
 		SELECT	 * 
-		FROM 	 EVENT_TBL 
-		ORDER BY EVENT_CREATE_DATE DESC
+		FROM 	 EVENT_TBL
+		<if test="eventCondition =='IngEvent'">
+			WHERE EVENT_START_DATE &lt;= SYSDATE AND EVENT_END_DATE &gt;= SYSDATE
+		</if>
+		<if test="eventCondition =='EndEvent'">
+			WHERE EVENT_END_DATE &lt; SYSDATE
+		</if>
+		ORDER BY EVENT_NO DESC
 	</select>
 	
 	<select id="getTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM EVENT_TBL
+		<if test="eventCondition =='IngEvent'">
+			WHERE EVENT_START_DATE &lt;= SYSDATE AND EVENT_END_DATE &gt;= SYSDATE
+		</if>
+		<if test="eventCondition =='EndEvent'">
+			WHERE EVENT_END_DATE &lt; SYSDATE
+		</if>
 	</select>
 	
 	<select id="selectEventByNo" resultMap="EventResultMap">
@@ -40,4 +52,17 @@
 		VALUES (SEQ_EVENT_NO.NEXTVAL, DEFAULT, #{eventTitle}, #{eventFileName}, #{eventFileRename}, #{eventFilePath}, #{eventFileLength}
 				,#{eventStartDate}, #{eventEndDate}, #{eventPrecautions}, #{eventInquiries}, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
+	
+	<update id="updateEvent">
+		UPDATE EVENT_TBL SET EVENT_TITLE = #{eventTitle }, EVENT_FILE_NAME = #{eventFileName }, EVENT_FILE_RENAME = #{eventFileRename }, EVENT_FILE_PATH = #{eventFilePath }
+			, EVENT_FILE_LENGTH = #{eventFileLength }, EVENT_START_DATE = #{eventStartDate }, EVENT_END_DATE = #{eventEndDate }, EVENT_PRECAUTIONS = #{eventPrecautions}
+			, EVENT_INQUIRIES = #{eventInquiries }, EVENT_UPDATE_DATE = DEFAULT WHERE EVENT_NO = #{eventNo }
+	</update>
+	
+	<update id="deleteByNo">
+		UPDATE TRAVEL_TBL
+		SET EVENT_STATUS = 'N'
+		WHERE EVENT_NO = #{eventNo}
+	</update>
+	
   </mapper>

@@ -39,4 +39,16 @@ public class EventStoreLogic implements EventStore {
 		int result = sqlSession.insert("EventMapper.insertEvent", event);
 		return result;
 	}
+
+	@Override
+	public int updateEvent(SqlSession sqlSession, Event event) {
+		int result = sqlSession.update("EventMapper.updateEvent", event);
+		return result;
+	}
+
+	@Override
+	public int deleteEvent(SqlSession sqlSession, int eventNo) {
+		int result = sqlSession.update("EventMapper.deleteByNo", eventNo);
+		return result;
+	}
 }

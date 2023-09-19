@@ -15,4 +15,8 @@ public interface EventService {
 
 	Event selectEventByNo(int eventNo);
 
+	int updateEvent(Event event);
+
+	int deleteByNo(int eventNo);
+
 }

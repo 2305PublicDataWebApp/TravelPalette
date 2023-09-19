@@ -17,4 +17,8 @@ public interface EventStore {
 
 	int insertEvent(SqlSession sqlSession, Event event);
 
+	int updateEvent(SqlSession sqlSession, Event event);
+
+	int deleteEvent(SqlSession sqlSession, int eventNo);
+
 }

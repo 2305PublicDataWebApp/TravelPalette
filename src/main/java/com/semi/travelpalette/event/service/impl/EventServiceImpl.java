@@ -44,4 +44,16 @@ public class EventServiceImpl implements EventService{
 		return result;
 	}
 
+	@Override
+	public int updateEvent(Event event) {
+		int result = eStore.updateEvent(sqlSession, event);
+		return result;
+	}
+
+	@Override
+	public int deleteByNo(int eventNo) {
+		int result = eStore.deleteEvent(sqlSession, eventNo);
+		return result;
+	}
+
 }

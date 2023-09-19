@@ -31,117 +31,200 @@ public class EventController {
 	private EventService eService;
 	
 	@RequestMapping(value="/insert.tp", method=RequestMethod.GET)
-	public ModelAndView showWriteForm(ModelAndView mv) {
+	public ModelAndView showInsertForm(ModelAndView mv) {
 		mv.setViewName("event/write");
 		return mv;
 	}
-	
-    @RequestMapping(value = "/insert.tp", method = RequestMethod.POST)
-    public ModelAndView insertEvent(
-            ModelAndView mv,
-            @ModelAttribute Event event,
-            @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile,
-            @RequestParam("eventStartDate") @DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date eventStartDate,
-            @RequestParam("eventEndDate") @DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date eventEndDate,
-            HttpServletRequest request) {
 
-        try {
-            event.setEventStartDate(new java.sql.Date(eventStartDate.getTime()));
-            event.setEventEndDate(new java.sql.Date(eventEndDate.getTime()));
-
-            if (uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
-                // ÆÄÀÏ Á¤º¸(ÀÌ¸§, ¸®³×ÀÓ, °æ·Î, Å©±â) ¹× ÆÄÀÏ ÀúÀå
-                Map<String, Object> eMap = this.saveFile(request, uploadFile);
-                event.setEventFileName((String) eMap.get("fileName"));
-                event.setEventFileRename((String) eMap.get("fileRename"));
-                event.setEventFilePath((String) eMap.get("filePath"));
-                event.setEventFileLength((long) eMap.get("fileLength"));
-            }
-            int result = eService.insertEvent(event);
-            if (result > 0) {
-                mv.addObject("msg", "ÀÌº¥Æ®°¡ µî·ÏµÇ¾ú½À´Ï´Ù.");
-                mv.addObject("url", "/event/list.tp");
-                mv.setViewName("common/successPage");
-            } else {
-                mv.addObject("msg", "[¼­ºñ½º½ÇÆĞ] ÀÌº¥Æ®°¡ µî·ÏµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
-                mv.addObject("url", "/event/insert.tp");
-                mv.setViewName("common/errorPage");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            mv.addObject("error", e.getMessage());
-            mv.addObject("msg", "[¼­ºñ½º½ÇÆĞ] °ü¸®ÀÚ¿¡ ¹®ÀÇ¹Ù¶ø´Ï´Ù.");
-            mv.setViewName("common/errorPage");
-        }
-        return mv;
-    }
+	@RequestMapping(value = "/insert.tp", method = RequestMethod.POST)
+	public ModelAndView insertEvent(
+	        ModelAndView mv,
+	        @ModelAttribute Event event,
+	        @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile,
+	        @RequestParam("eventStartDate") @DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date eventStartDate,
+	        @RequestParam("eventEndDate") @DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date eventEndDate,
+	        HttpServletRequest request) {
 	
-	private Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws Exception {
-		HashMap<String, Object> fileMap = new HashMap<String, Object>();
-		// resources °æ·Î ±¸ÇÏ±â
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		// ÆÄÀÏ ÀúÀå °æ·Î
-		String savePath = root + "\\buploadFiles";
-		// ÆÄÀÏ ÀÌ¸§ ±¸ÇÏ±â
-		String fileName = uploadFile.getOriginalFilename();
-		// ÆÄÀÏ È®ÀåÀÚ ±¸ÇÏ±â
-		String extension = fileName.substring(fileName.lastIndexOf(".")+1);
-		// ½Ã°£À¸·Î ÆÄÀÏ ¸®³×ÀÓÇÏ±â
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMDDHHmmss");
-		String fileRename = sdf.format(new Date(System.currentTimeMillis())) + "." + extension;
-		// ÆÄÀÏ ÀúÀå Àü Æú´õ ¸¸µé±â
-		File saveFolder = new File(savePath);
-		if(!saveFolder.exists()) {
-			saveFolder.mkdir();
-		}
-		// ********************** ÆÄÀÏ ÀúÀå **********************
-		File saveFile = new File(savePath + "\\" + fileRename);
-		uploadFile.transferTo(saveFile);
-		// ====================== ÆÄÀÏ Å©±â ======================
-		long fileLength = uploadFile.getSize();
-		// ÆÄÀÏ ÀÌ¸§, °æ·Î, Å©±â¸¦ ³Ñ°ÜÁÖ±âÀ§ÇØ Map¿¡ Á¤º¸¸¦ ÀúÀåÇÑ ÈÄ return ÇÔ
-		// ¿Ö return ÇÏ´Â °¡? DB¿¡ ÀúÀåÇÏ±â À§ÇØ¼­ ÇÊ¿äÇÑ Á¤º¸´Ï±î
-		fileMap.put("fileName", fileName);
-		fileMap.put("fileRename", fileRename);
-		fileMap.put("filePath", "../resources/buploadFiles/" + fileRename);
-		fileMap.put("fileLength", fileLength);
-		
-		return fileMap;
+	    try {
+	        event.setEventStartDate(new java.sql.Date(eventStartDate.getTime()));
+	        event.setEventEndDate(new java.sql.Date(eventEndDate.getTime()));
+	
+	        if (uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
+	        	// íŒŒì¼ ì •ë³´(ì´ë¦„, ë¦¬ë„¤ì„, ê²½ë¡œ, í¬ê¸°) ë° íŒŒì¼ ì €ì¥
+	            Map<String, Object> eMap = this.saveFile(request, uploadFile);
+	            event.setEventFileName((String) eMap.get("fileName"));
+	            event.setEventFileRename((String) eMap.get("fileRename"));
+	            event.setEventFilePath((String) eMap.get("filePath"));
+	            event.setEventFileLength((long) eMap.get("fileLength"));
+	        }
+	        int result = eService.insertEvent(event);
+	        if (result > 0) {
+	            mv.addObject("msg", "ì´ë²¤íŠ¸ê°€ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤.");
+	            mv.addObject("url", "/event/list.tp");
+	            mv.setViewName("common/successPage");
+	        } else {
+	            mv.addObject("msg", "[ì„œë¹„ìŠ¤ì‹¤íŒ¨] ì´ë²¤íŠ¸ê°€ ë“±ë¡ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+	            mv.addObject("url", "/event/insert.tp");
+	            mv.setViewName("common/errorPage");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        mv.addObject("error", e.getMessage());
+	        mv.addObject("msg", "[ì„œë¹„ìŠ¤ì‹¤íŒ¨] ê´€ë¦¬ìì— ë¬¸ì˜ë°”ëë‹ˆë‹¤.");
+	        mv.setViewName("common/errorPage");
+	    }
+	    return mv;
 	}
 	
-	private void deleteFile(HttpServletRequest request, String fileName) {
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		String delfilepath = root + "\\nuploadFiles\\" + fileName;
-		File file = new File(delfilepath);
-		if(file.exists()) {
-			file.delete();
+	@RequestMapping(value="/modify.tp", method=RequestMethod.GET)
+	public ModelAndView showModifyForm(ModelAndView mv
+			, @RequestParam("eventNo") int eventNo) {
+		try {
+			Event event = eService.selectEventByNo(eventNo);
+			if(event != null) {
+				mv.addObject("event", event);
+				mv.setViewName("event/modify");
+			} else {
+				mv.addObject("msg", "[ì„œë¹„ìŠ¤ì‹¤íŒ¨] ì´ë²¤íŠ¸ ìˆ˜ì •í˜ì´ì§€ ì´ë™ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+	        e.printStackTrace();
+	        mv.addObject("error", e.getMessage());
+	        mv.addObject("msg", "[ì„œë¹„ìŠ¤ì‹¤íŒ¨] ê´€ë¦¬ìì— ë¬¸ì˜ë°”ëë‹ˆë‹¤.");
+	        mv.setViewName("common/errorPage");
 		}
+		return mv;
 	}
+
+	@RequestMapping(value="/modify.tp", method=RequestMethod.POST)
+	public ModelAndView updateEvent(
+	        ModelAndView mv,
+	        @ModelAttribute Event event,
+	        @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile,
+	        @RequestParam("eventStartDate") @DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date eventStartDate,
+	        @RequestParam("eventEndDate") @DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date eventEndDate,
+	        HttpServletRequest request) {
+		try {
+	        event.setEventStartDate(new java.sql.Date(eventStartDate.getTime()));
+	        event.setEventEndDate(new java.sql.Date(eventEndDate.getTime()));
+			
+			if(uploadFile != null && !uploadFile.isEmpty()) {
+				// ìˆ˜ì •
+				// 1. ëŒ€ì²´, ì‚­ì œ í›„ ë“±ë¡
+				// ê¸°ì¡´ ì—…ë¡œë“œ ëœ íŒŒì¼ ì¡´ì¬ ì—¬ë¶€ ì²´í¬ í›„ ìˆìœ¼ë©´ ê¸°ì¡´ íŒŒì¼ ì‚­ì œ
+				String fileName = event.getEventFileRename();
+				if(event.getEventFileName() != null) {
+					// ìˆìœ¼ë©´ ê¸°ì¡´ íŒŒì¼ ì‚­ì œ
+					this.deleteFile(request, fileName);
+				}
+				// ì—†ìœ¼ë©´ ìƒˆë¡œ ì—…ë¡œë“œ í•˜ë ¤ëŠ” íŒŒì¼ ì €ì¥
+				Map<String, Object> infoMap = this.saveFile(request, uploadFile);
+				
+				// DBì— ì €ì¥í•˜ê¸° ìœ„í•´ eventì— ë°ì´í„°ë¥¼ Setí•˜ëŠ” ë¶€ë¶„ì„.
+				String eventfileName = (String)infoMap.get("fileName");
+				event.setEventFileName(eventfileName);
+				String eventfileRename = (String)infoMap.get("fileRename");
+				event.setEventFileRename(eventfileRename);
+				event.setEventFilePath((String)infoMap.get("filePath"));
+				event.setEventFileLength((long)infoMap.get("fileLength"));
+			}
+			int result = eService.updateEvent(event);
+			if(result > 0) {
+				mv.addObject("msg", "ì´ë²¤íŠ¸ê°€ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.");
+	            mv.addObject("url", "/event/detail.tp?eventNo=" + event.getEventNo());
+	            mv.setViewName("common/successPage");
+			}else {
+	            mv.addObject("msg", "[ì„œë¹„ìŠ¤ì‹¤íŒ¨] ì´ë²¤íŠ¸ê°€ ìˆ˜ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+	            mv.addObject("url", "/event/insert.tp");
+	            mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+	        e.printStackTrace();
+	        mv.addObject("error", e.getMessage());
+	        mv.addObject("msg", "[ì„œë¹„ìŠ¤ì‹¤íŒ¨] ê´€ë¦¬ìì— ë¬¸ì˜ë°”ëë‹ˆë‹¤.");
+	        mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+
+	@RequestMapping(value="/delete.tp", method=RequestMethod.GET)
+	public ModelAndView deleteEvent(ModelAndView mv
+			, @RequestParam(value="eventNo") int eventNo) {
+		try {
+			int result = eService.deleteByNo(eventNo);
+			if(result > 0) {
+				mv.addObject("msg", "ì—¬í–‰ì •ë³´ê°€ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤");
+				mv.addObject("url", "/event/list.tp");
+				mv.setViewName("common/successPage");
+			} else {
+				mv.addObject("msg", "[ì„œë¹„ìŠ¤ì‹¤íŒ¨] ì‚­ì œê°€ ì™„ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+				mv.addObject("url", "/event/detail.tp?eventNo="+eventNo);
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("error", e.getMessage());
+			mv.addObject("msg", "[ì„œë¹„ìŠ¤ì‹¤íŒ¨] ê´€ë¦¬ìì— ë¬¸ì˜ë°”ëë‹ˆë‹¤.");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
 	@RequestMapping(value="/list.tp", method=RequestMethod.GET)
 	public ModelAndView showAllList(
 			ModelAndView mv
+			, @RequestParam(value = "eventCondition", required=false) String eventCondition
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
 		try {
 			int totalCount = eService.getTotalCount();
 			EventPageInfo pageInfo = getPageInfo(currentPage, totalCount);
 			List<Event> eList = eService.eventAllListByNew(pageInfo);
 			if(eList.size() > 0) {
+				mv.addObject("eventCondition", eventCondition);
 				mv.addObject("pageInfo", pageInfo);
 				mv.addObject("totalCount", totalCount);
 				mv.addObject("eList", eList);
 				mv.setViewName("event/list");
 			} else {
-				mv.addObject("msg", "[¼­ºñ½º½ÇÆĞ] ¸ñ·ÏÀ» Á¶È¸ÇÒ ¼ö ¾ø½À´Ï´Ù.");
+				mv.addObject("msg", "[ì„œë¹„ìŠ¤ì‹¤íŒ¨] ëª©ë¡ì„ ì¡°íšŒí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 				mv.setViewName("common/errorPage");
 			}	
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("error", e.getMessage());
-			mv.addObject("msg", "[¼­ºñ½º½ÇÆĞ] °ü¸®ÀÚ¿¡ ¹®ÀÇ¹Ù¶ø´Ï´Ù.");
+			mv.addObject("msg", "[ì„œë¹„ìŠ¤ì‹¤íŒ¨] ê´€ë¦¬ìì— ë¬¸ì˜ë°”ëë‹ˆë‹¤.");
 			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}
+	
+//	@RequestMapping(value="/list.tp", method=RequestMethod.GET)
+//	public ModelAndView showIngEventList(
+//			ModelAndView mv
+//			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
+//		try {
+//			int totalCount = eService.getTotalCount();
+//			EventPageInfo pageInfo = getPageInfo(currentPage, totalCount);
+//			List<Event> eList = eService.eventAllListByNew(pageInfo);
+//			if(eList.size() > 0) {
+//				mv.addObject("pageInfo", pageInfo);
+//				mv.addObject("totalCount", totalCount);
+//				mv.addObject("eList", eList);
+//				mv.setViewName("event/list");
+//			} else {
+//				mv.addObject("msg", "[ì„œë¹„ìŠ¤ì‹¤íŒ¨] ëª©ë¡ì„ ì¡°íšŒí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+//				mv.setViewName("common/errorPage");
+//			}	
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			mv.addObject("error", e.getMessage());
+//			mv.addObject("msg", "[ì„œë¹„ìŠ¤ì‹¤íŒ¨] ê´€ë¦¬ìì— ë¬¸ì˜ë°”ëë‹ˆë‹¤.");
+//			mv.setViewName("common/errorPage");
+//		}
+//		return mv;
+//	}
+	
 
 	@RequestMapping(value="detail.tp", method=RequestMethod.GET)
 	public ModelAndView eventDetail (
@@ -153,25 +236,64 @@ public class EventController {
 				mv.addObject("event", event);
 				mv.setViewName("event/detail");
 			} else {
-				mv.addObject("msg", "[¼­ºñ½º½ÇÆĞ] ¸ñ·ÏÀ» Á¶È¸ÇÒ ¼ö ¾ø½À´Ï´Ù.");
+				mv.addObject("msg", "[ì„œë¹„ìŠ¤ì‹¤íŒ¨] ì´ë²¤íŠ¸ë¥¼ ì¡°íšŒí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤..");
 				mv.setViewName("common/errorPage");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("error", e.getMessage());
-			mv.addObject("msg", "[¼­ºñ½º½ÇÆĞ] °ü¸®ÀÚ¿¡ ¹®ÀÇ¹Ù¶ø´Ï´Ù.");
+			mv.addObject("msg", "[ì„œë¹„ìŠ¤ì‹¤íŒ¨] ê´€ë¦¬ìì— ë¬¸ì˜ë°”ëë‹ˆë‹¤.");
 			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}
 
 
+	private Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws Exception {
+		HashMap<String, Object> fileMap = new HashMap<String, Object>();
+		// resources ê²½ë¡œ êµ¬í•˜ê¸°
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		// íŒŒì¼ ì €ì¥ ê²½ë¡œ
+		String savePath = root + "\\euploadFiles";
+		// íŒŒì¼ ì´ë¦„ êµ¬í•˜ê¸°
+		String fileName = uploadFile.getOriginalFilename();
+		// íŒŒì¼ í™•ì¥ì êµ¬í•˜ê¸°
+		String extension = fileName.substring(fileName.lastIndexOf(".")+1);
+		// ì‹œê°„ìœ¼ë¡œ íŒŒì¼ ë¦¬ë„¤ì„í•˜ê¸°
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMDDHHmmss");
+		String fileRename = sdf.format(new Date(System.currentTimeMillis())) + "." + extension;
+		// íŒŒì¼ ì €ì¥ ì „ í´ë” ë§Œë“¤ê¸°
+		File saveFolder = new File(savePath);
+		if(!saveFolder.exists()) {
+			saveFolder.mkdir();
+		}
+		// ********************** íŒŒì¼ ì €ì¥ **********************
+		File saveFile = new File(savePath + "\\" + fileRename);
+		uploadFile.transferTo(saveFile);
+		// ====================== íŒŒì¼ í¬ê¸° ======================
+		long fileLength = uploadFile.getSize();
+		// íŒŒì¼ ì´ë¦„, ê²½ë¡œ, í¬ê¸°ë¥¼ ë„˜ê²¨ì£¼ê¸°ìœ„í•´ Mapì— ì •ë³´ë¥¼ ì €ì¥í•œ í›„ return í•¨
+				// ì™œ return í•˜ëŠ” ê°€? DBì— ì €ì¥í•˜ê¸° ìœ„í•´ì„œ í•„ìš”í•œ ì •ë³´ë‹ˆê¹Œ
+		fileMap.put("fileName", fileName);
+		fileMap.put("fileRename", fileRename);
+		fileMap.put("filePath", "../resources/euploadFiles/" + fileRename);
+		fileMap.put("fileLength", fileLength);
+		
+		return fileMap;
+	}
+
+	private void deleteFile(HttpServletRequest request, String fileName) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String delfilepath = root + "\\euploadFiles\\" + fileName;
+		File file = new File(delfilepath);
+		if(file.exists()) {
+			file.delete();
+		}
+	}
+
 	private EventPageInfo getPageInfo(Integer currentPage, int totalCount) {
-		//³×ºñ°ÔÀÌÅÍ ÇÊ¿äº¯¼ö : recordCountPerPage, naviCountPerPage, naviTotalCount, startNavi, endNavi
-		//°íÁ¤º¯¼ö
 		int recordCountPerPage = 10;
 		int naviCountPerPage = 5;
-		//°è»êº¯¼ö
 		int naviTotalCount = (int)Math.ceil((double)totalCount/recordCountPerPage);
 		int startNavi = ((int)((double)currentPage/naviCountPerPage+0.9)-1)*naviCountPerPage+1;
 		int endNavi = startNavi + naviCountPerPage - 1;

@@ -4,12 +4,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>이벤트 리스트</title>
-<link rel="stylesheet" href="../resources/css/travel/list.css" />
-</head>
+	<head>
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">	
+		<title>이벤트 리스트</title>
+		<link rel="stylesheet" href="../resources/css/event/eventlist.css" />
+		<link rel="stylesheet" href="../resources/css/event/eventfont.css">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	</head>
     <body>
+        <!-- 헤더 -->
+        <jsp:include page="/include/header.jsp" />
+        
+        <!-- 네비 -->
+        <jsp:include page="/include/nav.jsp" />
+        
+        <!-- 메인 -->
         <main>
             <div class="leftBox">
                 <div class="ListTitle">
@@ -31,7 +41,11 @@
                     <c:forEach items="${eList}" var="event" >
                         <li>
                             <div class="photo">
-                                <a href="/event/detail.tp?eventNo=${event.eventNo }"></a>
+                                <a href="/event/detail.tp?eventNo=${event.eventNo }">
+                           			<c:if test="${!empty event.eventFileName }">
+										<img alt="첨부파일" src="../resources/euploadFiles/${event.eventFileRename }"  style="max-width: 100%; height: auto;">
+									</c:if>
+                                </a>
                             </div>
                             <div class="area">
                                 <div class="areaTitle"><a href="/event/detail.tp?eventNo=${event.eventNo }">${event.eventTitle }</a></div>
@@ -68,19 +82,29 @@
             </div>
             <div class="rightBox">
                 <div class="selectTag">
-                    <span style="font-size: 24px; font-weight: bold">지역</span>
                     <button style="float: right">새고</button>
                     <ul>
-                    	<li><a href="#">#진행 예정 이벤트</a></li>
-                        <li><a href="#">#진행중인 이벤트</a></li>
-                        <li><a href="#">#종료된 이벤트</a></li>
-
+                        <li>
+                 			<c:url var="eventUrl" value="/event/list.tp">
+                   				<c:param name="eventCondition" value="IngEvent"></c:param>
+                   			</c:url>
+                   			<a href="${eventUrl }">#진행중인 이벤트</a>
+                       	</li><br>
+                        <li>
+							<c:url var="eventUrl" value="/event/list.tp">
+								<c:param name="eventCondition" value="EndEvent"></c:param>
+							</c:url>
+	              			<a href="${eventUrl }">#종료된 이벤트</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </main>
         
+		<!-- 푸터 -->
+        <jsp:include page="/include/footer.jsp" />
 		<script>
+			<jsp:include page="/include/navjs.jsp"></jsp:include>
 			function eventRegGo() {
 				location.href = "/event/insert.tp";
             }

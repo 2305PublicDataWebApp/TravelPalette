@@ -22,7 +22,7 @@ public class Event {
 	public Event() {
 		super();
 	}
-
+	
 	public Event(int eventNo, String boardType, String eventTitle, String eventFileName, String eventFileRename,
 			String eventFilePath, long eventFileLength, Date eventStartDate, Date eventEndDate, String eventPrecautions,
 			String eventInquiries, Timestamp eventCreateDate, Timestamp eventUpdateDate, char eventStatus) {
@@ -157,12 +157,12 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "ÀÌº¥Æ® [°Ô½Ã±Û¹øÈ£=" + eventNo + ", °Ô½ÃÆÇ Á¾·ù=" + boardType + ", Á¦¸ñ=" + eventTitle
-				+ ", ÀÌº¥Æ® Ã·ºÎ ÆÄÀÏ ÀÌ¸§=" + eventFileName + ", ÀÌº¥Æ® Ã·ºÎ ÆÄÀÏ ¸®³×ÀÓ=" + eventFileRename + ", ÀÌº¥Æ® Ã·ºÎ ÆÄÀÏ °æ·Î="
-				+ eventFilePath + ", ÀÌº¥Æ® Ã·ºÎ ÆÄÀÏ Å©±â=" + eventFileLength + ", ÀÌº¥Æ®½ÃÀÛÀÏ=" + eventStartDate
-				+ ", ÀÌº¥Æ®Á¾·áÀÏ=" + eventEndDate + ", ÀÌº¥Æ® À¯ÀÇ»çÇ×=" + eventPrecautions + ", ÀÌº¥Æ® ¹®ÀÇ»çÇ×="
-				+ eventInquiries + ", °Ô½Ã±Ûµî·ÏÀÏ=" + eventCreateDate + ", °Ô½Ã±Û¼öÁ¤ÀÏ=" + eventUpdateDate
-				+ ", °Ô½Ã±Û»óÅÂ=" + eventStatus + "]";
+		return "ï¿½Ìºï¿½Æ® [ï¿½Ô½Ã±Û¹ï¿½È£=" + eventNo + ", ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½=" + boardType + ", ï¿½ï¿½ï¿½ï¿½=" + eventTitle
+				+ ", ï¿½Ìºï¿½Æ® Ã·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½=" + eventFileName + ", ï¿½Ìºï¿½Æ® Ã·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½=" + eventFileRename + ", ï¿½Ìºï¿½Æ® Ã·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½="
+				+ eventFilePath + ", ï¿½Ìºï¿½Æ® Ã·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½=" + eventFileLength + ", ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½=" + eventStartDate
+				+ ", ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½=" + eventEndDate + ", ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½=" + eventPrecautions + ", ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½="
+				+ eventInquiries + ", ï¿½Ô½Ã±Ûµï¿½ï¿½ï¿½ï¿½=" + eventCreateDate + ", ï¿½Ô½Ã±Û¼ï¿½ï¿½ï¿½ï¿½ï¿½=" + eventUpdateDate
+				+ ", ï¿½Ô½Ã±Û»ï¿½ï¿½ï¿½=" + eventStatus + "]";
 	}
 
 }
