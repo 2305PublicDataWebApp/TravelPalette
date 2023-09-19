@@ -119,14 +119,14 @@ public class KakaoServiceImpl implements KakaoService{
         userInfo.put("userGender", userGender);
         
         
-        User user = uStore.selectKakaoUser(session, userEmail);
+        User user = uStore.selectKakaoUser( userEmail);
         if(user == null) {
 //        //DB 저장
         	User kakaoUser = new User(userEmail, userNickname, userNickname, userGender, userEmail);
 //        	User2 kakaouser = new User2(userEmail);
 //        	UserInfo kakaoUserInfo = new UserInfo(userNickname, userNickname, userGender, userEmail);
-        	uStore.kakaoUserInsert(session, kakaoUser);
-        	uStore.kakaoUserInfoInsert(session, kakaoUser);
+        	uStore.kakaoUserInsert( kakaoUser);
+        	uStore.kakaoUserInfoInsert( kakaoUser);
         }
         
         
