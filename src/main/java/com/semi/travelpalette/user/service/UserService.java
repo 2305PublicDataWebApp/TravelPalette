@@ -1,9 +1,6 @@
 package com.semi.travelpalette.user.service;
 
 import com.semi.travelpalette.user.domain.User;
-import com.semi.travelpalette.user.domain.UserMypageDto;
-
-import java.util.List;
 
 public interface UserService {
 
@@ -70,8 +67,6 @@ public interface UserService {
 	 * @return
 	 */
 	int deleteUser(int userNo);
-
-	List<UserMypageDto> selectUserActivity(String userId);
 
 
 //	int kakaoUserInsert(User kakaouser);

@@ -2,9 +2,7 @@ package com.semi.travelpalette.inquiry.controller;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.semi.travelpalette.inquiry.domain.Inquiry;
@@ -104,124 +101,12 @@ public class InquiryController {
 		String userId = (String) session.getAttribute("userId");
 		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
 		if(uOne != null) {
-			mv.setViewName("/inquiry/insert");
+			mv.setViewName("/inquiry/insert.tp");
 		}else {
 			mv.setViewName("/temp");
 		}	
 		return mv;
 	}
-	
-	@PostMapping("/insert.tp")
-	public ModelAndView insertInquiry (
-			ModelAndView mv
-			, Inquiry inquiry
-			, @RequestParam(value="uploadFile", required = false) MultipartFile uploadFile
-			, HttpSession session
-			, HttpServletRequest request) {
-		String userId = (String) session.getAttribute("userId");
-		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
-		int inquiryNo = inquiry.getInquiryNo();
-		
-		try {
-			if(userId != null && !userId.equals("")) {
-				inquiry.setUserId(userId);
-				if(uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
-					// 파일 정보(이름, 리네임, 경로, 크기) 및 파일 저장
-					Map<String, Object> bMap = inquiryService.saveFile(request, uploadFile);
-					inquiry.setInquiryFileName((String)bMap.get("fileName"));
-					inquiry.setInquiryFileRename((String)bMap.get("fileRename"));
-					inquiry.setInquiryFilePath((String)bMap.get("filePath"));
-					inquiry.setInquiryFileLength((long)bMap.get("fileLength"));
-				}
-				// 완료했으면 비즈니스 로직 태우기
-				System.out.println(inquiry.toString());
-				int result = inquiryService.insertInquiry(inquiry);
-				if(result > 0) {
-			        mv.setViewName("/inquiry/list.tp");
-				}
-			} else {
-				mv.addObject("msg", "로그인 정보가 존재하지 않습니다.");
-				mv.addObject("error", "로그인이 필요합니다.");
-				mv.addObject("url", "/index.jsp");
-				mv.setViewName("/common/errorPage");
-			}
-		} catch (Exception e) {
-			mv.addObject("msg", "게시글 등록이 완료되지 않았습니다.");
-			mv.addObject("error", e.getMessage());
-			mv.addObject("url", "/inquiry/insert.tp");
-			mv.setViewName("common/errorPage");
-		}
-		return mv;
-	}
-	
-	@GetMapping("/modify.tp")
-	public ModelAndView showInquiryModify(
-			ModelAndView mv
-			, Inquiry inquiry
-			, HttpSession session) {
-		String userId = (String) session.getAttribute("userId");
-		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
-		int inquiryNo = inquiry.getInquiryNo();
-		Inquiry inquiryInfo = new Inquiry(inquiryNo, userId);
-		Inquiry iPost = inquiryService.selectOneInquiryPost(inquiryInfo);
-		if(uOne != null) {
-			mv.addObject("iPost", iPost);
-//			mv.setViewName("inquiry/modify.tp?inquiryNo="+inquiryNo);
-		}else {
-			mv.setViewName("/temp"); 
-		}	
-		return mv;
-	}
-	
-	@PostMapping("/modify.tp")
-	public ModelAndView modifyInquiry (
-			ModelAndView mv
-			, Inquiry inquiry
-			, @RequestParam(value="uploadFile", required = false) MultipartFile uploadFile
-			, HttpSession session
-			, HttpServletRequest request) {
-		String userId = (String) session.getAttribute("userId");
-		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
-		int inquiryNo = inquiry.getInquiryNo();
-		
-		try {
-			if(userId != null && !userId.equals("")) {
-				if(uploadFile != null && uploadFile.getOriginalFilename().equals("")) {
-					String fileRename = inquiry.getInquiryFileRename();
-					if(fileRename != null) {
-						inquiryService.deleteFile(fileRename, request);
-					}
-				if(uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
-					// 파일 정보(이름, 리네임, 경로, 크기) 및 파일 저장
-					Map<String, Object> bMap = inquiryService.saveFile(request, uploadFile);
-					inquiry.setInquiryFileName((String)bMap.get("fileName"));
-					inquiry.setInquiryFileRename((String)bMap.get("fileRename"));
-					inquiry.setInquiryFilePath((String)bMap.get("filePath"));
-					inquiry.setInquiryFileLength((long)bMap.get("fileLength"));
-				}
-				// 완료했으면 비즈니스 로직 태우기
-				System.out.println(inquiry.toString());
-				int result = inquiryService.updateInquiry(inquiry);
-				if(result > 0) {
-			        mv.setViewName("/inquiry/list");
-				}
-			} else {
-				mv.addObject("msg", "로그인 정보가 존재하지 않습니다.");
-				mv.addObject("error", "로그인이 필요합니다.");
-				mv.addObject("url", "/index.jsp");
-				mv.setViewName("/common/errorPage");
-			}
-			}
-		 
-		}catch (Exception e) {
-			mv.addObject("msg", "게시글 등록이 완료되지 않았습니다.");
-			mv.addObject("error", e.getMessage());
-			mv.addObject("url", "/inquiry/insert.tp");
-			mv.setViewName("common/errorPage");
-		}
-		return mv;
-	}
-	
 	
 	
 }
