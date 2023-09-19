@@ -5,12 +5,14 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.semi.travelpalette.common.domain.PageInfo;
 import com.semi.travelpalette.community.domain.Community;
 import com.semi.travelpalette.community.service.CommunityService;
 import com.semi.travelpalette.community.store.CommunityStore;
 
+@Transactional
 @Service
 public class CommunityServiceImpl implements CommunityService{
 

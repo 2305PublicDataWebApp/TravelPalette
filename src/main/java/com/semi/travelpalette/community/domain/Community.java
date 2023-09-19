@@ -9,15 +9,15 @@ public class Community {
 	private String boardType;
 	private String boardContent;
 	private String userId;
+	private String userNickname;
 	private Timestamp boardCreateDate;
 	private Timestamp boardUpdateDate;
 	private int viewCount;
 	private char boardStatus;
-	private String userNickName;
 	private String boardFileName;
 	private String boardFileRename;
 	private String boardFilePath;
-	private long BoardFileLength;
+	private long boardFileLength;
 	
 	public Community() {}
 	public Community(int boardNo, String boardType) {
@@ -57,6 +57,12 @@ public class Community {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	public String getUserNickname() {
+		return userNickname;
+	}
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
+	}
 	public Timestamp getBoardCreateDate() {
 		return boardCreateDate;
 	}
@@ -81,12 +87,6 @@ public class Community {
 	public void setBoardStatus(char boardStatus) {
 		this.boardStatus = boardStatus;
 	}
-	public String getUserNickName() {
-		return userNickName;
-	}
-	public void setUserNickName(String userNickName) {
-		this.userNickName = userNickName;
-	}
 	public String getBoardFileName() {
 		return boardFileName;
 	}
@@ -106,18 +106,18 @@ public class Community {
 		this.boardFilePath = boardFilePath;
 	}
 	public long getBoardFileLength() {
-		return BoardFileLength;
+		return boardFileLength;
 	}
 	public void setBoardFileLength(long boardFileLength) {
-		BoardFileLength = boardFileLength;
+		this.boardFileLength = boardFileLength;
 	}
 	@Override
 	public String toString() {
-		return "Ŀ�´�Ƽ [�Խñ� ��ȣ=" + boardNo + ", �Խñ� ����=" + boardTitle + ", �Խ��� ����=" + boardType
-				+ ", �Խ��� ����=" + boardContent + ", �ۼ��� ���̵�=" + userId + ", �ۼ� ��¥=" + boardCreateDate
-				+ ", ���� ��¥=" + boardUpdateDate + ", ��ȸ��=" + viewCount + ", ����=" + boardStatus
-				+ ", �г���=" + userNickName + ", ÷�����ϸ�=" + boardFileName + ", ÷�θ�����="
-				+ boardFileRename + ", ÷�ΰ��=" + boardFilePath + ", ÷��ũ��=" + BoardFileLength + "]";
+		return "커뮤니티 [게시판 번호=" + boardNo + ", 게시물 제목=" + boardTitle + ", 게시판 타입=" + boardType
+				+ ", 게시물 내용=" + boardContent + ", 아이디=" + userId + ", 닉네임=" + userNickname 
+				+ ", 작성날짜=" + boardCreateDate + ", 수정날짜=" + boardUpdateDate + ", 조회수=" + viewCount 
+				+ ", 상태=" + boardStatus + ", 파일이름=" + boardFileName + ", 파일리네임="+ boardFileRename 
+				+ ", 파일 경로=" + boardFilePath + ", 파일 길이=" + boardFileLength + "]";
 	}
 	
 	

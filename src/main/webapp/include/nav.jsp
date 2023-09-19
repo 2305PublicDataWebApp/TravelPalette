@@ -42,10 +42,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/community/qList.tp?boardType=travelVerification">
+                            <a href="/community/certify.tp">
                                 커뮤니티 홈<br>
                             </a>
-                            <a href="/community/qList.tp?boardType=travelVerification">
+                            <a href="/community/certify.tp">
                                 여행 인증 게시판<br>
                             </a>
                             <a href="/community/qList.tp">

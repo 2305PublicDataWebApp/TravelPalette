@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -32,7 +34,7 @@
                 </div>
                 <div style="width: 100%;float: left;border-top: 1px solid #ccc;margin-top: 15px;padding: 10px 0px">
                     <p style="float:left;font-size: 18px;margin: 0;padding: 5px;font-weight: 600;font-family: 'SUITE-Regular';letter-spacing: 2px;padding-left: 15px;">#12건</p>
-                    <button type="button" style="float: right;" class="btn btn-primary">글 등록</button>
+                    <button id="goInsertBoardPage" type="button" style="float: right;" class="btn btn-primary">글 등록</button>
                     <p style="margin: 0;padding: 7px 13px 0px 8px;margin-left: 3px;float: right;">
                         <a href="#">최신순 </a>|
                         <a href="#">추천순</a> 
@@ -45,198 +47,72 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td style="width: 220px;padding-top: 10px;padding-bottom: 10px;">
-                        <div class="card" style="width: 200px;height: 120px;">
-                            <img src="..." class="card-img-top" alt="...">
-                        </div>
-                    </td >
-                    <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
-                        닉네임 : <br>
-                        작성날짜 :
-                    </td>
-                    <td style="width: 100px;">
-                        <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
-                        <div>
-                            <span style="font-size: 20px;font-weight: 600;">1</span>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="width: 220px;padding-top: 10px;padding-bottom: 10px;">
-                        <div class="card" style="width: 200px;height: 120px;">
-                            <img src="..." class="card-img-top" alt="...">
-                        </div>
-                    </td >
-                    <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
-                        닉네임 : <br>
-                        작성날짜 :
-                    </td>
-                    <td style="width: 100px;">
-                        <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
-                        <div>
-                            <span style="font-size: 20px;font-weight: 600;">1</span>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="width: 220px;padding-top: 10px;padding-bottom: 10px;">
-                        <div class="card" style="width: 200px;height: 120px;">
-                            <img src="..." class="card-img-top" alt="...">
-                        </div>
-                    </td >
-                    <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
-                        닉네임 : <br>
-                        작성날짜 :
-                    </td>
-                    <td style="width: 100px;">
-                        <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
-                        <div>
-                            <span style="font-size: 20px;font-weight: 600;">1</span>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="width: 220px;padding-top: 10px;padding-bottom: 10px;">
-                        <div class="card" style="width: 200px;height: 120px;">
-                            <img src="..." class="card-img-top" alt="...">
-                        </div>
-                    </td >
-                    <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
-                        닉네임 : <br>
-                        작성날짜 :
-                    </td>
-                    <td style="width: 100px;">
-                        <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
-                        <div>
-                            <span style="font-size: 20px;font-weight: 600;">1</span>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="width: 220px;padding-top: 10px;padding-bottom: 10px;">
-                        <div class="card" style="width: 200px;height: 120px;">
-                            <img src="..." class="card-img-top" alt="...">
-                        </div>
-                    </td >
-                    <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
-                        닉네임 : <br>
-                        작성날짜 :
-                    </td>
-                    <td style="width: 100px;">
-                        <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
-                        <div>
-                            <span style="font-size: 20px;font-weight: 600;">1</span>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="width: 220px;padding-top: 10px;padding-bottom: 10px;">
-                        <div class="card" style="width: 200px;height: 120px;">
-                            <img src="..." class="card-img-top" alt="...">
-                        </div>
-                    </td >
-                    <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
-                        닉네임 : <br>
-                        작성날짜 :
-                    </td>
-                    <td style="width: 100px;">
-                        <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
-                        <div>
-                            <span style="font-size: 20px;font-weight: 600;">1</span>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="width: 220px;padding-top: 10px;padding-bottom: 10px;">
-                        <div class="card" style="width: 200px;height: 120px;">
-                            <img src="..." class="card-img-top" alt="...">
-                        </div>
-                    </td >
-                    <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
-                        닉네임 : <br>
-                        작성날짜 :
-                    </td>
-                    <td style="width: 100px;">
-                        <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
-                        <div>
-                            <span style="font-size: 20px;font-weight: 600;">1</span>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="width: 220px;padding-top: 10px;padding-bottom: 10px;">
-                        <div class="card" style="width: 200px;height: 120px;">
-                            <img src="..." class="card-img-top" alt="...">
-                        </div>
-                    </td >
-                    <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
-                        닉네임 : <br>
-                        작성날짜 :
-                    </td>
-                    <td style="width: 100px;">
-                        <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
-                        <div>
-                            <span style="font-size: 20px;font-weight: 600;">1</span>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="width: 220px;padding-top: 10px;padding-bottom: 10px;">
-                        <div class="card" style="width: 200px;height: 120px;">
-                            <img src="..." class="card-img-top" alt="...">
-                        </div>
-                    </td >
-                    <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
-                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">제목이 들어갈 자리입니다</h4> <br>
-                        닉네임 : <br>
-                        작성날짜 :
-                    </td>
-                    <td style="width: 100px;">
-                        <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
-                        <div>
-                            <span style="font-size: 20px;font-weight: 600;">1</span>
-                        </div>
-                    </td>
-                  </tr>
+                	<c:forEach var="community" items="${cList}" varStatus="i">
+                        <tr>
+		                    <td style="width: 220px;padding-top: 10px;padding-bottom: 10px;">
+		                        <div class="card" style="width: 200px;height: 120px;overflow: hidden">
+		                    		<div class="card-img-top" style="width: 100%; height: 100%; background-image: url(${community.boardFilePath}); background-position: center center;"></div>
+		                        </div>
+		                    </td >
+		                    <td style="text-align: left;font-size: 17px;font-family: 'SUITE-Regular';">
+	                            <c:url var="detailUrl" value="/community/detail.tp">
+	                                <c:param name="boardNo" value="${community.boardNo }"></c:param>
+	                                <c:param name="boardType" value="${community.boardType }"></c:param>
+	                            </c:url>
+		                        <h4 style="font-family: 'HakgyoansimWoojuR';padding-top: 10px;font-weight: 600;margin: 0;font-size: 22px;">
+		                            <a href="${detailUrl}">${community.boardTitle}</a>
+		                        </h4> 
+		                        <br>
+		                        닉네임 : ${community.userNickname }<br>
+		                        작성날짜 : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${community.boardCreateDate }" />
+		                    </td>
+		                    <td style="width: 100px;">
+		                        <img style="width: 40px;padding-top: 25px;" src="../resources/images/community/likeoff.png" alt="">
+		                        <div>
+		                            <span style="font-size: 20px;font-weight: 600;">1</span>
+		                        </div>
+		                    </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
-              </table>
-        </div>
-        <div aria-label="Page navigation example">
-            <ul class="pagination justify-content-center" style="width: 100%;height: 100px;padding-top: 30px;">
-              <li class="page-item"><a style="color: black;" class="page-link" href="#">Previous</a></li>
-              <li class="page-item"><a style="color: black;" class="page-link" href="#">1</a></li>
-              <li class="page-item"><a style="color: black;" class="page-link" href="#">2</a></li>
-              <li class="page-item"><a style="color: black;" class="page-link" href="#">3</a></li>
-              <li class="page-item"><a style="color: black;" class="page-link" href="#">4</a></li>
-              <li class="page-item"><a style="color: black;" class="page-link" href="#">5</a></li>
-              <li class="page-item"><a style="color: black;" class="page-link" href="#">Next</a></li>
-            </ul>
-        </div>
+            </table>
+        	<div aria-label="Page navigation example">
+                <ul class="pagination justify-content-center" style="width: 100%;height: 100px;padding-top: 30px;">
+                    <c:if test="${pInfo.startNavi ne 1}">
+                        <c:url var="bPageUrl" value="/community/qList.tp">
+                            <c:param name="page" value="${pInfo.startNavi-1}"></c:param>
+                        </c:url>
+                        <li class="page-item">
+                            <a style="color: black;" class="page-link" href="${bPageUrl}">Previous</a>
+                        </li>
+                    </c:if>
+                    <c:forEach begin="${pInfo.startNavi}" end="${pInfo.endNavi}" var="p">
+                        <c:url var="pageUrl" value="/community/qList.tp">
+                            <c:param name="page" value="${p}"></c:param>
+                        </c:url>
+                        <li class="page-item">
+                            <a style="color: black;" class="page-link" href="${pageUrl}">${p}</a>
+                        </li>
+                    </c:forEach>
+                    <c:if test="${pInfo.endNavi ne pInfo.naviTotalCount}">
+                        <c:url var="nPageUrl" value="/community/qList.tp">
+                            <c:param name="page" value="${pInfo.endNavi+1}"></c:param>
+                        </c:url>
+                        <li class="page-item">
+                            <a style="color: black;" class="page-link" href="${nPageUrl}">Next</a>
+                        </li>
+                    </c:if>
+                </ul>
+            </div>
         </main>
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script>
-        <jsp:include page="/include/navjs.jsp"></jsp:include>
+        	<jsp:include page="/include/navjs.jsp"></jsp:include>
 			
-			    navArea.addEventListener('mouseleave', () => {
-			        hoverIntent = false;
-			        setTimeout(() => {
-			            if (!hoverIntent) {
-			                navArea.classList.remove('show');
-			            }
-                        // navArea.style.zIndex = -1;
-			        }, ); // Add a delay before hiding to allow time for moving to menu_text
-			    });
-			});
+        	document.getElementById("goInsertBoardPage").addEventListener("click", function() {
+                location.href= "/community/insert.tp";
+            });
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     </body>

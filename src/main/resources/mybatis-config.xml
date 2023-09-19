@@ -13,6 +13,7 @@
 		<typeAlias type="com.semi.travelpalette.user.domain.User" alias="User"/>
 		<typeAlias type="com.semi.travelpalette.travel.domain.TravelFile" alias="TravelFile"/>
 		<typeAlias type="com.semi.travelpalette.travel.domain.Review" alias="Review"/>
+		<typeAlias type="com.semi.travelpalette.community.domain.Reply" alias="Reply"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/travel-mapper.xml"/>
@@ -21,5 +22,6 @@
 		<mapper resource="mappers/user-mapper.xml"/>
 		<mapper resource="mappers/travelFile-mapper.xml"/>
 		<mapper resource="mappers/review-mapper.xml"/>
+		<mapper resource="mappers/reply-mapper.xml"/>
 	</mappers>
 </configuration>

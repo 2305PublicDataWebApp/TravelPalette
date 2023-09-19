@@ -24,11 +24,11 @@
                 <button id="goBackButton" style="float: right;margin: 49px 10px 0px 0px;" type="button" class="btn btn-primary">목록으로</button>
                 <!-- <button style="float: right;margin: 47px 10px 0px 0px;" type="button" class="btn btn-info">수정하기</button> -->
             </div>
-            <form name="insertForm" action="/community/insert.tp" method="post">
+            <form name="insertForm" action="/community/insert.tp" method="post" enctype="multipart/form-data">
                 <div style="width: 100%;margin: 0 auto;">
                     <div class="form-floating mb-3">
 	                    <input name="boardTitle" type="text" style="border: 1px solid #ccc;" class="form-control" id="floatingInput" placeholder="제목을 입력해주세요">
-	                    <label for="floatingInput" id="boardTitleLable">제목</label>
+	                    <label for="floatingInput" id="boardTitleLable" style="z-index: 1;">제목</label>
                       </div>
                 </div>
                    <div class="form-floating" style="margin-top: 25px;">
@@ -36,13 +36,13 @@
                       <option selected>게시판을 선택해주세요!</option>
                       <option value="QnABoard">질의문답 게시판</option>
                       <option value="travelCompanion">동행 구인 게시판</option>
-                      <option value="travelVerification">여행 인증 게시판</option>
+                      <option value="travelcertify">여행 인증 게시판</option>
                     </select>
                     <label>게시판 종류</label>
                  </div>
                  <div id="imageFile" class="input-group mb-3" style="margin-top: 25px;display:none;">
                     <img src="../resources/images/community/fileadd.png" style="width: 25px;height: 25px;margin-top: 6px;margin-right: 10px;float:left" alt="">
-                    <input type="file" class="form-control" id="inputGroupFile02" style="border: 1px solid #ccc;width: 925px;">
+                    <input type="file"  name="uploadFile" class="form-control" id="inputGroupFile02" style="border: 1px solid #ccc;width: 925px;">
                     <!-- <label class="input-group-text" for="inputGroupFile02">Upload</label> -->
                  </div>
                  <div class="form-floating">
@@ -59,11 +59,11 @@
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script>
-        <jsp:include page="/include/navjs.jsp"></jsp:include>
+        	<jsp:include page="/include/navjs.jsp"></jsp:include>
             
-            document.getElementById("goBackButton").addEventListener("click", function() {
-                history.go(-1); // 뒤로가기
-            });
+	        document.getElementById("goBackButton").addEventListener("click", function() {
+	            location.href = "/community/certify.tp"
+	        });
             
             //select에 따른 자바스크립트
             var selectBoard = document.getElementById("boardSelect");
@@ -86,7 +86,7 @@
                     boardTitleInput.textContent = "동행 구인 글 제목을 입력해주세요";
                     boardContentTextarea.value = "예상 동행 인원 :\n\n주로 활동하는 날 :\n\n모임의 특징 :\n\n예상 회비 :\n\n전화번호 :";
                     document.getElementById("imageFile").style.display = "none";
-                } else if (selectedOption === "travelVerification") {
+                } else if (selectedOption === "travelcertify") {
                     boardTitleInput.textContent = "여행 인증 글 제목을 입력해주세요";
                     boardContentLable.textContent = "신나는 여행 일기를 적어보세요";
                     document.getElementById("imageFile").style.display = "block";
