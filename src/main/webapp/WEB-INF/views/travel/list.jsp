@@ -10,6 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>여행리스트</title>
         <link rel="stylesheet" href="../resources/css/travel/list.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     </head>
     <body>
     	<!-- 헤더 -->
@@ -24,11 +25,11 @@
                 	<c:if test="${userId eq 'admin' }">
 	    				<button style="float: right" onClick="travelRegGo();">관리자글등록</button><br>
                 	</c:if>
-                    <p style="font-size: 24px; font-weight: bold">#전체</p>
+                    <p style="font-size: 30px; font-weight: bold; padding-bottom: 5px; ">#전체</p>
                 </div>
-                <div class="totalCheck">
+                <div class="totalCheck" style="font-size: 20px;">
                     <b>총<span id="totalCount">${totalCount }</span>건</b>
-                    <ul style="float: right">
+                    <ul style="float: right;">
                         <li><a href="/travel/list.tp?order=latest">최신순</a></li>
         				<li><a href="/travel/list.tp?order=views">조회순</a></li>
         				<li><a href="/travel/list.tp?order=popular">인기순</a></li>
@@ -42,7 +43,7 @@
                             <div class="photo" style="background-image: url('../resources/tUploadFiles/${travel.travelFileRename}'); background-size: cover;">
                                 <a href="/travel/detail.tp?travelNo=${travel.travelNo }"></a>
                             </div>
-                            <div class="area">
+                            <div class="area" style="font-family: 'SUITE-Regular';">
                                 <div class="areaTitle"><a href="/travel/detail.tp?travelNo=${travel.travelNo }">${travel.travelName }</a></div>
                                 <p>${travel.travelAddr }</p>
                                 <div class="areaTag">
@@ -104,6 +105,8 @@
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
 		<script>
+			<jsp:include page="/include/navjs.jsp"></jsp:include>
+			
 			function travelRegGo() {
 				location.href = "/travel/insert.tp";
             }

@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>상세페이지</title>
         <link rel="stylesheet" href="../resources/css/travel/detail.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     </head>
     <body>
     	<!-- 헤더 -->
@@ -233,7 +233,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d52709ffacc68e58aa4c5df1743f8ea"></script>
     <script>
-        
+    	<jsp:include page="/include/navjs.jsp"></jsp:include>
+    	
         //지도 api
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
