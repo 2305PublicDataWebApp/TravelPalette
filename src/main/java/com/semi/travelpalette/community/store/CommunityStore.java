@@ -95,4 +95,12 @@ public interface CommunityStore {
 	 */
 	int updateLikeNo(SqlSession session, Community cOne);
 
+	/**
+	 * 게시물 좋아요 취소하기 Store
+	 * @param session
+	 * @param like
+	 * @return
+	 */
+	int deleteLike(SqlSession session, Like like);
+
 }

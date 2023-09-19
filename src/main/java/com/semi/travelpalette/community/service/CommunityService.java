@@ -84,4 +84,11 @@ public interface CommunityService {
 	 */
 	int updateLikeNo(Community cOne);
 
+	/**
+	 * 게시물 좋아요 취소하기 Service
+	 * @param like
+	 * @return
+	 */
+	int deleteLike(Like like);
+
 }

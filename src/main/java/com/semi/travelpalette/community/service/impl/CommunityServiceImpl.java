@@ -88,4 +88,10 @@ public class CommunityServiceImpl implements CommunityService{
         return result;
 	}
 
+	@Override
+	public int deleteLike(Like like) {
+		int result = cStore.deleteLike(session, like);
+        return result;
+	}
+
 }

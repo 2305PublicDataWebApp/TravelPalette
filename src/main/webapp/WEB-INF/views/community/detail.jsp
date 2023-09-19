@@ -127,8 +127,23 @@
 	                            <p style="float: left;padding: 5px;padding-left: 8px;">
 									<fmt:formatDate pattern="yyyy-MM-dd" value="${reply.replyCreateDate }"/>
 								</p>
+								<input type="hidden" value="${reply.replyNo}"> 
 		                        <div style="width: 150px;height: 30px;float: left;margin-left: 10px;">
-		                            <img style="width: 26px;height: 25px;float: left;" src="../resources/images/community/likeoff.png" alt="">
+		                        	<c:if test="${userId eq null}">
+				                   		<a href="javascript:void(0);" onclick="loginCheck();">
+				           					<img style="width: 25px;height: 25px;float: left;" src="../resources/images/community/likeoff.png" alt="">
+				                   		</a>
+					               	</c:if>
+					               	<c:if test="${reply.likeYn.toString() eq 'N' }">
+					               		<a href="javascript:void(0);" onclick="insertReplyLike(this);">
+					                     	<img style="width: 25px;height: 25px;float: left;" src="../resources/images/community/likeoff.png" alt="">
+					               		</a>
+					               	</c:if>
+				                    <c:if test="${reply.likeYn.toString() eq 'Y' }">
+				                       	<a href="javascript:void(0);" onclick="deleteReplyLike(this);">
+					                    	<img style="width: 25px;height: 25px;float: left;" src="../resources/images/community/likeon.png" alt="">
+				                       	</a>
+					               	</c:if>	
 		                            <span style="float: left;font-size: 17px;font-weight: 600;margin-top: 4px;margin-left: 4px;">${reply.likeNo }</span>
 		                        </div>
 	                            <div style="width: 900px;height: 100px;background-color: #FCECDD;float: left;padding: 10px;border-radius: 10px;">
@@ -296,7 +311,6 @@
             }
             //좋아요 기능 insert
             function insertLike(){
-                var likeNo = ${community.likeNo}+1;
             	$.ajax({
                     type: "POST", // 또는 "GET"에 맞게 변경
                     url: "/community/like.tp", 
@@ -304,13 +318,86 @@
                     	boardNo: boardNo,
                     	boardType: boardType,
                     	userId: userId,
-                    	likeNo: likeNo
                     },
                     success: function (data) {
                         if (data.success) {
                             location.reload();
                         } else {
                         	alert("좋아요 누르기을 실패하였습니다.");
+                        }
+                    },
+                    error: function () {
+                    	console.error("서버 요청에 실패했습니다. 상태 코드: " + status);
+                        console.error("에러 내용: " + error);
+                    }
+                });  
+            }
+            
+            function insertReplyLike(obj){
+            	var replyNo = obj.parentElement.previousElementSibling.value;
+            	console.log(replyNo);
+            	$.ajax({
+                    type: "POST", // 또는 "GET"에 맞게 변경
+                    url: "/reply/like.tp", 
+                    data: {
+                    	boardNo: boardNo,
+                    	boardType: boardType,
+                    	userId: userId,
+                    	replyNo: replyNo
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                        	alert("댓글 좋아요 누르기을 실패하였습니다.");
+                        }
+                    },
+                    error: function () {
+                    	console.error("서버 요청에 실패했습니다. 상태 코드: " + status);
+                        console.error("에러 내용: " + error);
+                    }
+                });  
+            }
+            
+            function deleteLike(){
+            	$.ajax({
+                    type: "POST", // 또는 "GET"에 맞게 변경
+                    url: "/community/dislike.tp", 
+                    data: {
+                    	boardNo: boardNo,
+                    	boardType: boardType,
+                    	userId: userId,
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                        	alert("좋아요 취소를 실패하였습니다.");
+                        }
+                    },
+                    error: function () {
+                    	console.error("서버 요청에 실패했습니다. 상태 코드: " + status);
+                        console.error("에러 내용: " + error);
+                    }
+                });  
+            }
+            
+            function deleteReplyLike(obj){
+            	var replyNo = obj.parentElement.previousElementSibling.value;
+            	$.ajax({
+                    type: "POST", // 또는 "GET"에 맞게 변경
+                    url: "/reply/dislike.tp", 
+                    data: {
+                    	boardNo: boardNo,
+                    	boardType: boardType,
+                    	userId: userId,
+                    	replyNo: replyNo
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                        	alert("댓글 좋아요 누르기을 실패하였습니다.");
                         }
                     },
                     error: function () {

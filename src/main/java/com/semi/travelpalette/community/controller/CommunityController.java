@@ -104,6 +104,7 @@ public class CommunityController {
             , HttpSession session) {
         
         try {
+        	int replyLikeCount = 0;
             Community cOne = new Community(boardNo, boardType);
             Community community = cService.selectOneByClass(cOne);
             community.setViewCount(community.getViewCount()+1);
@@ -117,8 +118,22 @@ public class CommunityController {
 	            	if(cLike != null) {
 	            		mv.addObject("likeId", userId);
 	            	}
+	            	
+	            	Map<String, Object> paramMap = new HashMap<String, Object>(); 
+	    			paramMap.put("boardNo", boardNo);
+	    			paramMap.put("boardType", boardType);
+	            	for(int i = 0; i < rList.size(); i++) {
+	            		Reply reply = rList.get(i);
+	    				if(userId.equals(reply.getUserId())) {
+	    					reply.setLikeYn('Y');
+	    				}else if(!userId.equals(reply.getUserId())){
+	    					reply.setLikeYn('N');
+	    				}
+	    				paramMap.put("replyNo", reply.getReplyNo());
+	    				replyLikeCount = rService.countLikeByMap(paramMap);
+	    				reply.setLikeNo(replyLikeCount);
+	    			}
 	            }
-
                 mv.addObject("community", community).addObject("rList", rList);
                 mv.setViewName("community/detail");
                 return mv;
@@ -273,18 +288,17 @@ public class CommunityController {
     @PostMapping("/like.tp")
     @ResponseBody
     public Map<String, Object> insertLike(@ModelAttribute Like like
-    		, HttpSession session
+    		, @ModelAttribute Community community
     		, HttpServletResponse responce) {
 		
     	Map<String, Object> response = new HashMap<>();
     	try {
     		
-//    		int result = cService.insertLike(like);
-    		Community community = new Community(like.getBoardNo(), like.getBoardType(), like.getUserId());
+    		int result = cService.insertLike(like);
     		Community cOne = cService.selectOneByClass(community);
-    		cOne.setViewCount(cOne.getViewCount()+1);
+    		cOne.setLikeNo(cOne.getLikeNo()+1);
     		int update = cService.updateLikeNo(cOne);
-    		if (update > 0) {
+    		if (update > 0 && result > 0) {
     			response.put("success", true);
     		} else {
     			response.put("success", false);
@@ -295,6 +309,32 @@ public class CommunityController {
 		}
     	return response;
     }
+    
+    @PostMapping("/dislike.tp")
+    @ResponseBody
+    public Map<String, Object> deleteLike(@ModelAttribute Like like
+    		, @ModelAttribute Community community
+    		, HttpServletResponse responce) {
+		
+    	Map<String, Object> response = new HashMap<>();
+    	try {
+    		
+    		int result = cService.deleteLike(like);
+    		Community cOne = cService.selectOneByClass(community);
+    		cOne.setLikeNo(cOne.getLikeNo()-1);
+    		int update = cService.updateLikeNo(cOne);
+    		if (update > 0 && result > 0) {
+    			response.put("success", true);
+    		} else {
+    			response.put("success", false);
+    			response.put("message", "게시물 좋아요 함수를 가져올 수 없습니다.");
+    		}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+    	return response;
+    }
+    
     
     public PageInfo getPageInfo(int curruntPage, int totalCount, String boardType) {
 

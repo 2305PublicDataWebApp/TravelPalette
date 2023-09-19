@@ -10,10 +10,13 @@ public class Reply {
 	private String replyContent;
 	private Timestamp replyCreateDate;
 	private Timestamp replyUpdateDate;
+	private String replyWriter;
 	private String userId;
 	private String userNickname;
 	private char replyStatus;
 	private int likeNo;
+	private char likeYn;
+	
 	public int getReplyNo() {
 		return replyNo;
 	}
@@ -56,6 +59,12 @@ public class Reply {
 	public void setReplyUpdateDate(Timestamp replyUpdateDate) {
 		this.replyUpdateDate = replyUpdateDate;
 	}
+	public String getReplyWriter() {
+		return replyWriter;
+	}
+	public void setReplyWriter(String replyWriter) {
+		this.replyWriter = replyWriter;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -80,12 +89,18 @@ public class Reply {
 	public void setLikeNo(int likeNo) {
 		this.likeNo = likeNo;
 	}
+	public char getLikeYn() {
+		return likeYn;
+	}
+	public void setLikeYn(char c) {
+		this.likeYn = c;
+	}
 	
 	@Override
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", boardNo=" + boardNo + ", boardType=" + boardType + ", replySecretType="
 				+ replySecretType + ", replyContent=" + replyContent + ", replyCreateDate=" + replyCreateDate
-				+ ", replyUpdateDate=" + replyUpdateDate + ", userId=" + userId + ", userNickname=" + userNickname
+				+ ", replyUpdateDate=" + replyUpdateDate + ", replyWriter=" + replyWriter + ", userNickname=" + userNickname
 				+ ", replyStatus=" + replyStatus + ", 좋아요 갯수" + likeNo + "]";
 	}
 	

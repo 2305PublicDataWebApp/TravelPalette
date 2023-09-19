@@ -1,7 +1,9 @@
 package com.semi.travelpalette.community.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.semi.travelpalette.common.domain.Like;
 import com.semi.travelpalette.community.domain.Community;
 import com.semi.travelpalette.community.domain.Reply;
 
@@ -22,7 +24,7 @@ public interface ReplyService {
 	List<Reply> selectReplyList(Community cOne);
 
 	/**
-	 * 댓글 수정하기
+	 * 댓글 수정하기 Service
 	 * @param reply
 	 * @return
 	 */
@@ -34,5 +36,26 @@ public interface ReplyService {
 	 * @return
 	 */
 	int deleteReply(Reply reply);
+
+	/**
+	 * 댓글 당 좋아요 개수 불러오기 Service
+	 * @param paramMap
+	 * @return
+	 */
+	int countLikeByMap(Map<String, Object> paramMap);
+
+	/**
+	 * 댓글 좋아요 누르기 Service
+	 * @param like
+	 * @return
+	 */
+	int insertReplyLike(Like like);
+	
+	/**
+	 * 댓글 좋아요 취소 Service
+	 * @param like
+	 * @return
+	 */
+	int deleteReplyLike(Like like);
 
 }

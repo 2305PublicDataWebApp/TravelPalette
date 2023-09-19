@@ -11,13 +11,21 @@
 		<result property="replyContent" column="REPLY_CONTENT"/>
 		<result property="replyCreateDate" column="REPLY_CREATE_DATE"/>
 		<result property="replyUpdateDate" column="REPLY_UPDATE_DATE"/>
-		<result property="userId" column="USER_ID"/>
+		<result property="replyWriter" column="REPLY_WRITER"/>
 		<result property="userNickname" column="USER_NICKNAME"/>
 		<result property="replyStatus" column="REPLY_STATUS"/>
 		<result property="likeNo" column="LIKE_NO"/>
+		<result property="userId" column="USER_ID"/>
 	</resultMap>
 	<select id="selectReplyList" resultMap="ReplyResultMap">
-		SELECT * FROM REPLY_TBL WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType} AND REPLY_STATUS = 'Y'
+		SELECT
+		R.REPLY_NO, R.BOARD_NO, R.BOARD_TYPE, R.REPLY_SECRET_TYPE, R.REPLY_CONTENT, R.REPLY_CREATE_DATE, 
+    	R.REPLY_UPDATE_DATE, R.REPLY_WRITER, R.USER_NICKNAME AS REPLY_USER_NICKNAME,
+    	R.REPLY_STATUS, L.LIKE_NO, L.USER_ID AS
+		FROM REPLY_TBL R LEFT JOIN LIKE_TBL L 
+		ON R.REPLY_NO = L.REPLY_NO AND R.BOARD_TYPE = L.BOARD_TYPE AND R.BOARD_NO = L.BOARD_NO
+		WHERE R.BOARD_NO = #{boardNo} AND R.BOARD_TYPE = #{boardType} AND R.REPLY_STATUS = 'Y'
+		ORDER BY R.REPLY_NO
 	</select>
 	<insert id="insertReply">
 		INSERT INTO REPLY_TBL VALUES(SEQ_REPLY_NO.NEXTVAL, #{boardNo}, #{boardType}, #{replySecretType},
