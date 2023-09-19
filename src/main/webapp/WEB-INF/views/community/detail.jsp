@@ -80,7 +80,7 @@
                 <div style="width: 100%;height: 130px;border-bottom: 1px solid #ccc;">
                 <h4 style="float: left;;font-family: 'SUITE-Regular';font-size: 25px;padding: 20px;margin-top: 30px;">추천 버튼으로 마음을 표현해보세요 ^O^!</h4>
                 <div style="float: right;padding: 10px;margin-top: 27px;">
-                    <span style="float: right;font-size: 23px;font-weight: 600;margin-top: 12px;margin-left: 5px;">1</span>
+                    <span style="float: right;font-size: 23px;font-weight: 600;margin-top: 12px;margin-left: 5px;">${community.likeNo}</span>
                     <img style="width: 40px;float: right;" src="../resources/images/community/likeoff.png" alt="">
                 </div>
                 </div>
@@ -108,22 +108,23 @@
                 <c:forEach var="reply" items="${rList }" >				
 	                <div style="width: 1000px;margin: 0 auto;font-family: 'SUITE-Regular';position: relative;">
 	                    <div style="width: 100%;height: 200px;background-color: #FDF6F0;border-bottom: 2px solid #eedecf;">
-	                        <div style="float: left;padding: 20px;">
+	                        <div style="float: left;padding: 20px;padding-left:50px;">
 	                            <h4 style="float: left;font-weight: 600;">${reply.userNickname }</h4>
 	                            <p style="float: left;padding: 5px;padding-left: 8px;">
 									<fmt:formatDate pattern="yyyy-MM-dd" value="${reply.replyCreateDate }"/>
 								</p>
-	                            <div style="width: 800px;height: 100px;background-color: #FCECDD;float: left;padding: 10px;border-radius: 10px;">
+		                        <div style="width: 150px;height: 30px;float: left;margin-left: 10px;">
+		                        	<c:if test=""></c:if>
+		                            <img style="width: 26px;height: 25px;float: left;" src="../resources/images/community/likeoff.png" alt="">
+		                            <span style="float: left;font-size: 17px;font-weight: 600;margin-top: 4px;margin-left: 4px;">${reply.likeNo }</span>
+		                        </div>
+	                            <div style="width: 900px;height: 100px;background-color: #FCECDD;float: left;padding: 10px;border-radius: 10px;">
 	                                <p>${reply.replyContent }.</p>
 	                            </div>
 								<a href="javascript:void(0);" onclick="showModifyForm(this);"
-								style="position: absolute;top: 24px;left:195px;">수정하기</a>
+								style="position: absolute;top: 24px;right:135px;">수정하기</a>
 								<a href="javascript:void(0);" onclick="deleteReply(event);" data-reply-no="${reply.replyNo}"
-								style="position: absolute;top: 24px;left: 255px;">삭제하기</a>
-	                        </div>
-	                        <div style="padding: 10px;margin-top: 27px;position: absolute;right: 50px;top: 36px;">
-	                            <span style="float: right;font-size: 23px;font-weight: 600;margin-top: 12px;margin-left: 5px;">1</span>
-	                            <img style="width: 40px;float: right;" src="../resources/images/community/likeoff.png" alt="">
+								style="position: absolute;top: 24px;right: 65px;">삭제하기</a>
 	                        </div>
 	                    </div>
 	                </div>
@@ -206,6 +207,8 @@
                     type: "POST", // 또는 "GET"에 맞게 변경
                     url: "/reply/add.tp", // 로그인 처리를 하는 URL로 변경
                     data: {
+                    	boardNo: boardNo,
+                    	boardType: boardType,
                     	replyContent: replyContent,
                     	replySecretType: replySecretType
                     },
@@ -251,6 +254,8 @@
                     url: "/reply/modify.tp", // 로그인 처리를 하는 URL로 변경
                     data: {
                     	replyNo: replyNo,
+                    	boardNo: boardNo,
+                    	boardType: boardType,
                     	replyContent: replyContent,
                     	replySecretType: replySecretType
                     },

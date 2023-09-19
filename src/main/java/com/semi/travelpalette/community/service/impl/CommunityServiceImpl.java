@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.semi.travelpalette.common.domain.Like;
 import com.semi.travelpalette.common.domain.PageInfo;
 import com.semi.travelpalette.community.domain.Community;
 import com.semi.travelpalette.community.service.CommunityService;
@@ -61,6 +62,18 @@ public class CommunityServiceImpl implements CommunityService{
 	public int selectMaxNo() {
 		int max = cStore.selectMaxNo(session);
 		return max;
+	}
+
+	@Override
+	public int updateViewCount(Community community) {
+		int result = cStore.updateViewCount(session, community);
+        return result;
+	}
+
+	@Override
+	public Like selectLikeByClass(Like like) {
+		Like clike = cStore.selectLikeByClass(session, like);
+		return clike;
 	}
 
 }

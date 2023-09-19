@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.semi.travelpalette.common.domain.Like;
 import com.semi.travelpalette.common.domain.PageInfo;
 import com.semi.travelpalette.community.domain.Community;
 
@@ -61,5 +62,21 @@ public interface CommunityStore {
      * @return
      */
 	int selectMaxNo(SqlSession session);
+
+	/**
+	 * 게시물 조회수 증가 Store
+	 * @param session
+	 * @param community
+	 * @return
+	 */
+	int updateViewCount(SqlSession session, Community community);
+
+	/**
+	 * 좋아요 여부 확인 Store
+	 * @param session
+	 * @param like
+	 * @return
+	 */
+	Like selectLikeByClass(SqlSession session, Like like);
 
 }
