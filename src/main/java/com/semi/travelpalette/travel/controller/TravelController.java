@@ -226,7 +226,8 @@ public class TravelController {
 			ModelAndView mv
 			, @RequestParam(value = "order", required=false) String order
 			, @RequestParam(value = "page", required=false, defaultValue="1") Integer currentPage
-			, @RequestParam(value = "region", required = false) String selectedLocation) {
+			, @RequestParam(value = "region", required = false) String selectedLocation
+			, @RequestParam(value = "keyword", required = false) String selectedKeyword) {
 		try {
 			int totalCount = tService.getTotalCount();
 			int recordCountPerPage = 10;
@@ -237,9 +238,34 @@ public class TravelController {
 			Map<String, Object> sortMap = new HashMap<String, Object>();
 			sortMap.put("pageInfo", pageInfo);
 			sortMap.put("order", order);
-			sortMap.put("selectedLocation", selectedLocation);
+			
+			// 검색 필터 적용 여부를 확인
+	        boolean applyFilter = false;
+	        
+	        if (selectedLocation != null && !selectedLocation.isEmpty()) {
+	            sortMap.put("selectedLocation", selectedLocation);
+	            applyFilter = true;
+	        }
+	        
+	        if (selectedKeyword != null && !selectedKeyword.isEmpty()) {
+	            sortMap.put("selectedKeyword", selectedKeyword);
+	            applyFilter = true;
+	        }
+	        
+	        List<Travel> tList;
+	        
+	        if (applyFilter) {
+	            // 검색 필터가 적용되면 해당 필터로 목록을 가져옴
+	            tList = tService.travelSortList(sortMap);
+	        } else {
+	            // 검색 필터가 적용되지 않으면 모든 목록을 가져옴
+	            tList = tService.travelSortList(sortMap);
+	        }
+	        
 			System.out.println("******************selectedLocation :" + selectedLocation);
-			List<Travel> tList = tService.travelSortList(sortMap);				
+			System.out.println("******************selectedKeyword :" + selectedKeyword);
+			//List<Travel> tList = tService.travelSortList(sortMap);				
+
 
 			if(tList.size() > 0) {
 				mv.addObject("pageInfo", pageInfo);

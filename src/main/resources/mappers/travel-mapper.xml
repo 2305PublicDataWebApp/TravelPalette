@@ -84,4 +84,10 @@
 	        ORDER BY likes DESC
 	    </if> -->
 	</select>
+	
+	<select id="showTravelMap" resultMap="TravelResultMap">
+		SELECT	* 
+		FROM 	TRAVEL_TBL 
+		WHERE	TRAVEL_STATUS = 'Y'
+	</select>
 </mapper>

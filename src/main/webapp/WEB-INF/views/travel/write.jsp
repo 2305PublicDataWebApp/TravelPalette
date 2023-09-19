@@ -52,39 +52,39 @@
 	                </li>
 	                <li>
 	                    <label for="tLocation"><b>지역키워드</b></label><br>
-	                    <span class="tagsCheck">#서울 <input type="radio" name="travelLocation" value="#서울" id="tLocation"></span>
-	                    <span class="tagsCheck">#부산 <input type="radio" name="travelLocation" value="#부산" id="tLocation"></span>
-	                    <span class="tagsCheck">#대구 <input type="radio" name="travelLocation" value="#대구" id="tLocation"></span>
-	                    <span class="tagsCheck">#인천 <input type="radio" name="travelLocation" value="#인천" id="tLocation"></span>
-	                    <span class="tagsCheck">#광주 <input type="radio" name="travelLocation" value="#광주" id="tLocation"></span>
-	                    <span class="tagsCheck">#대전 <input type="radio" name="travelLocation" value="#대전" id="tLocation"></span>
-	                    <span class="tagsCheck">#울산 <input type="radio" name="travelLocation" value="#울산" id="tLocation"></span>
-	                    <span class="tagsCheck">#세종 <input type="radio" name="travelLocation" value="#세종" id="tLocation"></span>
-	                    <span class="tagsCheck">#경기 <input type="radio" name="travelLocation" value="#경기" id="tLocation"></span>
-	                    <span class="tagsCheck">#강원 <input type="radio" name="travelLocation" value="#강원" id="tLocation"></span>
-	                    <span class="tagsCheck">#충북 <input type="radio" name="travelLocation" value="#충북" id="tLocation"></span>
-	                    <span class="tagsCheck">#충남 <input type="radio" name="travelLocation" value="#충남" id="tLocation"></span>
-	                    <span class="tagsCheck">#경북 <input type="radio" name="travelLocation" value="#경북" id="tLocation"></span>
-	                    <span class="tagsCheck">#경남 <input type="radio" name="travelLocation" value="#경남" id="tLocation"></span>
-	                    <span class="tagsCheck">#전북 <input type="radio" name="travelLocation" value="#전북" id="tLocation"></span>
-	                    <span class="tagsCheck">#전남 <input type="radio" name="travelLocation" value="#전남" id="tLocation"></span>
-	                    <span class="tagsCheck">#제주 <input type="radio" name="travelLocation" value="#제주" id="tLocation"></span>
+	                    <span class="tagsCheck">서울 <input type="radio" name="travelLocation" value="서울" id="tLocation"></span>
+	                    <span class="tagsCheck">부산 <input type="radio" name="travelLocation" value="부산" id="tLocation"></span>
+	                    <span class="tagsCheck">대구 <input type="radio" name="travelLocation" value="대구" id="tLocation"></span>
+	                    <span class="tagsCheck">인천 <input type="radio" name="travelLocation" value="인천" id="tLocation"></span>
+	                    <span class="tagsCheck">광주 <input type="radio" name="travelLocation" value="광주" id="tLocation"></span>
+	                    <span class="tagsCheck">대전 <input type="radio" name="travelLocation" value="대전" id="tLocation"></span>
+	                    <span class="tagsCheck">울산 <input type="radio" name="travelLocation" value="울산" id="tLocation"></span>
+	                    <span class="tagsCheck">세종 <input type="radio" name="travelLocation" value="세종" id="tLocation"></span>
+	                    <span class="tagsCheck">경기 <input type="radio" name="travelLocation" value="경기" id="tLocation"></span>
+	                    <span class="tagsCheck">강원 <input type="radio" name="travelLocation" value="강원" id="tLocation"></span>
+	                    <span class="tagsCheck">충북 <input type="radio" name="travelLocation" value="충북" id="tLocation"></span>
+	                    <span class="tagsCheck">충남 <input type="radio" name="travelLocation" value="충남" id="tLocation"></span>
+	                    <span class="tagsCheck">경북 <input type="radio" name="travelLocation" value="경북" id="tLocation"></span>
+	                    <span class="tagsCheck">경남 <input type="radio" name="travelLocation" value="경남" id="tLocation"></span>
+	                    <span class="tagsCheck">전북 <input type="radio" name="travelLocation" value="전북" id="tLocation"></span>
+	                    <span class="tagsCheck">전남 <input type="radio" name="travelLocation" value="전남" id="tLocation"></span>
+	                    <span class="tagsCheck">제주 <input type="radio" name="travelLocation" value="제주" id="tLocation"></span>
 	                </li>
 	                <li>
 	                    <label for="tTags"><b>테마키워드</b></label>
 	                    <span style="margin-left: 10px; color: red; font-weight: bold;">중복 선택 가능</span><br>
-	                    <span class="tagsCheck">#동물       <input type="checkbox" name="travelTags" value="#동물" 		 id="tTags"></span>
-	                    <span class="tagsCheck">#레포츠     <input type="checkbox" name="travelTags" value="#레포츠"  	 id="tTags"></span>
-	                    <span class="tagsCheck">#캠핑       <input type="checkbox" name="travelTags" value="#캠핑"    	 id="tTags"></span>
-	                    <span class="tagsCheck">#한옥체험   <input type="checkbox" name="travelTags" value="#한옥체험" 	 id="tTags"></span>
-	                    <span class="tagsCheck">#문화시설   <input type="checkbox" name="travelTags" value="#문화시설"   id="tTags"></span>
-	                    <span class="tagsCheck">#럭셔리     <input type="checkbox" name="travelTags" value="#럭셔리"     id="tTags"></span>
-	                    <span class="tagsCheck">#테마파크   <input type="checkbox" name="travelTags" value="#테마파크" 	 id="tTags"></span>
-	                    <span class="tagsCheck">#실내여행지 <input type="checkbox" name="travelTags" value="#실내여행지" id="tTags"></span>
-	                    <span class="tagsCheck">#유적지     <input type="checkbox" name="travelTags" value="#유적지" 	 id="tTags"></span>
-	                    <span class="tagsCheck">#쇼핑       <input type="checkbox" name="travelTags" value="#쇼핑" 		 id="tTags"></span>
-	                    <span class="tagsCheck">#자연여행   <input type="checkbox" name="travelTags" value="#자연여행" 	 id="tTags"></span>
-	                    <span class="tagsCheck">#관광지     <input type="checkbox" name="travelTags" value="#관광지" 	 id="tTags"></span>
+	                    <span class="tagsCheck">동물       <input type="checkbox" name="travelTags" value="동물" 	   id="tTags"></span>
+	                    <span class="tagsCheck">레포츠     <input type="checkbox" name="travelTags" value="레포츠"     id="tTags"></span>
+	                    <span class="tagsCheck">캠핑       <input type="checkbox" name="travelTags" value="캠핑"       id="tTags"></span>
+	                    <span class="tagsCheck">한옥체험   <input type="checkbox" name="travelTags" value="한옥체험"   id="tTags"></span>
+	                    <span class="tagsCheck">문화시설   <input type="checkbox" name="travelTags" value="문화시설"   id="tTags"></span>
+	                    <span class="tagsCheck">럭셔리     <input type="checkbox" name="travelTags" value="럭셔리"     id="tTags"></span>
+	                    <span class="tagsCheck">테마파크   <input type="checkbox" name="travelTags" value="테마파크"   id="tTags"></span>
+	                    <span class="tagsCheck">실내여행지 <input type="checkbox" name="travelTags" value="실내여행지" id="tTags"></span>
+	                    <span class="tagsCheck">유적지     <input type="checkbox" name="travelTags" value="유적지" 	   id="tTags"></span>
+	                    <span class="tagsCheck">쇼핑       <input type="checkbox" name="travelTags" value="쇼핑"	   id="tTags"></span>
+	                    <span class="tagsCheck">자연여행   <input type="checkbox" name="travelTags" value="자연여행"   id="tTags"></span>
+	                    <span class="tagsCheck">관광지     <input type="checkbox" name="travelTags" value="관광지" 	   id="tTags"></span>
 	                </li>
 	                <li>
 	                    <div id="addFile">

@@ -133,18 +133,24 @@ public class TravelServiceImpl implements TravelService{
 
 	@Override
 	public List<Travel> travelSortList(Map<String, Object> sortMap) {
+
 		try {
 			String selectedLocation = (String)sortMap.get("selectedLocation");
+			String selectedKeyword = (String)sortMap.get("selectedKeyword");
 			List<Travel> AllTravelList = tStore.travelSortList(session, sortMap);
-			if(selectedLocation == null) {
+			if(selectedLocation == null && selectedKeyword == null) {
+				 // selectedLocation과 selectedKeyword 모두 없는 경우 모든 리스트 반환
 				return AllTravelList;
 			} else {
 				List<Travel> filteredList = new ArrayList<Travel>();
 				for(Travel travel : AllTravelList) {
 					String travelLocation = travel.getTravelLocation();
-					if(travelLocation.equals(selectedLocation)) {
-						filteredList.add(travel);
-					}
+					String travelTags = travel.getTravelTags();
+					// 선택한 필터가 존재하지 않거나 선택한 필터와 일치하는 경우에만 필터링
+	                if ((selectedLocation == null || travelLocation.equals(selectedLocation))
+	                        && (selectedKeyword == null || travelTags.equals(selectedKeyword))) {
+	                    filteredList.add(travel);
+	                }
 				}			
 				return filteredList;
 			}	
