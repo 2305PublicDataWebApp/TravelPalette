@@ -1,20 +1,11 @@
 package com.semi.travelpalette.inquiry.service.impl;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.travelpalette.inquiry.domain.Inquiry;
 import com.semi.travelpalette.inquiry.domain.PageInfo;
@@ -56,18 +47,6 @@ public class InquiryServiceImpl implements InquiryService {
 		int result = inquiryStore.deleteInquiry(session, inquiryInfo);
 		return result;
 	}
-	
-	@Override
-	public int insertInquiry(Inquiry inquiry) {
-		int result = inquiryStore.insertInquiry(session, inquiry);
-		return result;
-	}
-
-	@Override
-	public int updateInquiry(Inquiry inquiry) {
-		int result = inquiryStore.updateInquiry(session, inquiry);
-		return result;
-	}
 
 	
 	
@@ -94,64 +73,6 @@ public class InquiryServiceImpl implements InquiryService {
 		pi = new PageInfo(currentPage, inquiryWriter, recordnaviCountPage, naviCountPerPage, startNavi, endNavi, totalCount, naviTotalCount);
 		return pi;
 	}
-
-	// **************************** 파일 관련 메소드 *********************************
-	
-	public void deleteFile(String fileRename, HttpServletRequest request) {
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		String delFilePath = root + "\\iuploadFiles\\" + fileRename;
-		File file = new File(delFilePath);
-		if(file.exists()) {
-			file.delete();
-		}
-	}
-
-
-	@Override
-	public Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws Exception, IOException {
-		// HashMap 사용해서 파일 저장하기
-		Map<String, Object> infoMap = new HashMap<String, Object>();
-		// ===================== 파일 이름 설정하기 ==========================
-		String fileName = uploadFile.getOriginalFilename();
-		
-		// ===================== 파일 경로 ==============================
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		/*
-		 * getServletContext() : 서블릿에 관련된 모든 정보를 가짐
-		 * getTealPath("resources") : resources에 대한 경로를 가지고 옴
-		 */
-		String saveFolder = root + "\\iuploadFiles";
-		// 파일 객체 만들기
-		File folder = new File(saveFolder);
-		if(!folder.exists()) {
-			folder.mkdir();
-		}
-		// ===================== 파일 리네임(시간으로) ========================
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyMMddHHmmss");
-		String strResult = sdf.format(new Date(System.currentTimeMillis()));
-		
-		// ===================== 확장자명 구하기 =====================
-		String ext = fileName.substring(fileName.lastIndexOf(".")+1);
-		// 설정한 파일리네임 = B(파일 구분용) + 시간으로 리네임한 이름 + . + 확장자명
-		String fileRename = "I" + strResult + "." + ext;
-		// 최종 저장 경로 = 저장할 폴더(resources + 저장하는 폴더 위치 + \\ + 설정한 파일리네임)
-		String savePath = saveFolder + "\\" + fileRename;
-		// 파일 크기 구하기
-		long fileLength = uploadFile.getSize();
-		// ==================== 진짜 파일 저장 =======================
-		File file = new File(savePath);
-		uploadFile.transferTo(file); // 예외처리 해주기
-		// HashMap에 데이터 put 하기
-		infoMap.put("fileName", fileName);
-		infoMap.put("fileRename", fileRename);
-		infoMap.put("filePath", savePath);
-		infoMap.put("fileLength", fileLength);
-
-		return infoMap;
-	}
-
-
-
 
 	
 

@@ -12,10 +12,6 @@
 			<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		</head>
     <body>
-    	<!-- 헤더 -->
-        <jsp:include page="/include/header.jsp"></jsp:include>
-        <!-- 네비 -->
-        <jsp:include page="/include/nav.jsp"></jsp:include>          
         <div class="d-flex justify-content-center">
 
             <div id="inquiries" >
@@ -95,13 +91,10 @@
                     <a href="/inquiry/list.tp?userId=${userId }"><button class="btn btn-success">목록</button></a>
                     <button onclick="deleteCheck('${iPost.inquiryNo}')"class="btn btn-success">삭제</button></a>
                 </div>
-	        </div>
-	    </div>
-        <!-- 푸터 -->
-        <jsp:include page="/include/footer.jsp"></jsp:include>
+        </div>
+    </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     	<script type="text/javascript">
-    	<jsp:include page="/include/navjs.jsp"></jsp:include>
 			const deleteCheck = (inquiryNo) => {
 				if(confirm("정말로 삭제하시겠습니까?")){
 					location.href = "/inquiry/delete.tp?inquiryNo="+inquiryNo;

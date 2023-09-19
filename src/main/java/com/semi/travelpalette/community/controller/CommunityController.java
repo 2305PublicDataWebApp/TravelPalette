@@ -43,6 +43,7 @@ public class CommunityController {
     public ModelAndView goBoardListPage(ModelAndView mv
             , @RequestParam(value= "page", required = false, defaultValue="1") Integer curruntPage
             , @RequestParam(value= "boardType", required = false, defaultValue="QnABoard") String boardType) {
+        
         try {
             int totalCount = cService.getListCountByBoardType(boardType);
             PageInfo pInfo = this.getPageInfo(curruntPage, totalCount, boardType);

@@ -8,7 +8,6 @@ public class Inquiry {
 	private String inquiryContent;
 	private String userId;
 	private Date inquiryCreateDate;
-	private Date inquiryUpdateDate;
 	private Date inquiryDeleteDate;
 	private String inquiryFileName;
 	private String inquiryFileRename;
@@ -57,15 +56,6 @@ public class Inquiry {
 	public void setInquiryCreateDate(Date inquiryCreateDate) {
 		this.inquiryCreateDate = inquiryCreateDate;
 	}
-	
-	public Date getInquiryUpdateDate() {
-		return inquiryUpdateDate;
-	}
-
-	public void setInquiryUpdateDate(Date inquiryUpdateDate) {
-		this.inquiryUpdateDate = inquiryUpdateDate;
-	}
-
 	public Date getInquiryDeleteDate() {
 		return inquiryDeleteDate;
 	}
@@ -112,7 +102,7 @@ public class Inquiry {
 	public String toString() {
 		return "문의사항 [문의글 번호=" + inquiryNo + ", 문의글 제목=" + inquiryTitle + ", 문의글 내용="
 				+ inquiryContent + ", 작성자 아이디=" + userId + ", 문의글 작성일=" + inquiryCreateDate
-				+ ", 문의글 수정일="+inquiryUpdateDate+", 문의글 삭제일=" + inquiryDeleteDate + ", 문의글 파일명=" + inquiryFileName
+				+ ", 문의글 삭제일=" + inquiryDeleteDate + ", 문의글 파일명=" + inquiryFileName
 				+ ", 문의글 파일 리네임명=" + inquiryFileRename + ", 문의글 파일 경로=" + inquiryFilePath
 				+ ", 문의글 파일 크기=" + inquiryFileLength + ", 문의글 답변 여부=" + inquiryResponse 
 				+ ", 문의글 상태=" + inquiryStatus + "]";
