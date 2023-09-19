@@ -125,6 +125,7 @@ public class UserController {
 		System.out.println("제발~~!!" + userId);
 		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
 		String userNickname = (String) session.getAttribute("userNickname");
+		
 		if(uOne != null) {
 			mv.addObject("userId", uOne.getUserId()).addObject("userNickname", uOne.getUserNickname());
 			mv.setViewName("/user/mypage");
