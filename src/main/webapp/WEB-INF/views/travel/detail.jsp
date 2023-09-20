@@ -231,19 +231,35 @@
     <!-- 푸터 -->
     <jsp:include page="/include/footer.jsp"></jsp:include>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d52709ffacc68e58aa4c5df1743f8ea"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d52709ffacc68e58aa4c5df1743f8ea&libraries=services" ></script>
     <script>
     	<jsp:include page="/include/navjs.jsp"></jsp:include>
     	
-        //지도 api
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		    mapOption = {
-		        center: new kakao.maps.LatLng(37.56723, 126.98358), // 지도의 중심좌표
-		        level: 3, // 지도의 확대 레벨
-		        mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
-		    }; 
-		// 지도를 생성한다 
-		var map = new kakao.maps.Map(mapContainer, mapOption);
+    	// ================ 지도시작 ================
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch('${travel.travelAddr}', function(result, status) {
+		    // 정상적으로 검색이 완료됐으면
+		    if (status === kakao.maps.services.Status.OK) {
+		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		     // 이미지 지도를 생성한다
+		        var staticMapContainer = document.getElementById('map'); // 이미지 지도를 표시할 div
+		        var staticMapOption = {
+		            marker: {
+		                text: '${travel.travelName}', // 마커와 함께 표시할 텍스트
+		                position: coords // 좌표를 직접 전달
+		            },
+		            center: coords, // 이미지 지도의 중심 좌표
+		            level: 4, // 이미지 지도의 확대 레벨
+		            mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
+		        };
+		        // 이미지 지도를 생성한다
+		        var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+		    }
+		});
+		
+		// ================ 지도 종료 ================
         
 		const travelNo = "${travel.travelNo}";
 		

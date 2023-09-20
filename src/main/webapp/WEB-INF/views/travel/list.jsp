@@ -45,7 +45,7 @@
                             </div>
                             <div class="area" style="font-family: 'SUITE-Regular';">
                                 <div class="areaTitle"><a href="/travel/detail.tp?travelNo=${travel.travelNo }">${travel.travelName }</a></div>
-                                <p>${travel.travelAddr }</p>
+                                <div class="areaAddr">${travel.travelAddr }</div>
                                 <div class="areaTag">
                                 	<c:set var="tagsString" value="${travel.travelTags}" />
     								<c:set var="tagsArray" value="${fn:split(tagsString, ',')}" />
