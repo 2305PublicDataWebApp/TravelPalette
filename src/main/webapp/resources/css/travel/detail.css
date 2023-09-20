@@ -7,10 +7,30 @@
 
 main {
     width: 1000px;
-    --border: 1px solid black;
     text-align: center;
+    font-family: 'SUITE-Regular';
+}
+ #detailTop.fixed {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 1000px;
+    transform: translateX(-50%);
+    background-color: #fff; /* 메뉴 배경색상 설정 */
+    z-index: 100; /* 다른 요소 위에 표시되도록 설정 */
+    justify-content: center;
 }
 
+
+#photo,
+#detailInfo,
+#infoMap,
+#review {
+    padding-top: 40px; /* 여백 추가 */
+}
+#detailTop.centered {
+    margin-top: 0; /* 스크롤 시 상단 여백 제거 */
+}
 .center {
     text-align: center;
 }
@@ -53,8 +73,12 @@ main {
 }
 #detailInfo p {
     text-align: left;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
-
+.selectdLike {
+	background-color: #ccc;
+}
 #infoList {
     width: 100%;
     float: left;
@@ -254,15 +278,19 @@ main {
 .infoLike label{
     font-size: 3em;
 }
-.likeDislike {
+.like, .Dislike {
     display: flex;
     justify-content: center;
 }
-.like {
+.like, .dislike {
     float: left;
     padding: 5px 15px 5px 15px;
 }
-.like span {
+.like, .dislike span {
     font-size: 30px;
     font-weight: bold;
 }
+.like, .dislike hover {
+    background-color: #ccc;
+}
+

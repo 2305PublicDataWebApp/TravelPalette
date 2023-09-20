@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.semi.travelpalette.common.domain.PageInfo;
 import com.semi.travelpalette.travel.domain.Travel;
 import com.semi.travelpalette.travel.domain.TravelFile;
 
@@ -96,5 +97,22 @@ public interface TravelStore {
 	 * @return
 	 */
 	int getTotalCount(SqlSession sqlSession);
+
+	/**
+	 * 검색 레코드 개수 Store
+	 * @param session
+	 * @param searchKeyword
+	 * @return
+	 */
+	int searchListCount(SqlSession session, String searchKeyword);
+
+	/**
+	 * 여행지역 키워드 검색 Store
+	 * @param session
+	 * @param searchPInfo 
+	 * @param searchKeyword
+	 * @return
+	 */
+	List<Travel> searchListByKeyword(SqlSession session, PageInfo searchPInfo, String searchKeyword);
 
 }

@@ -59,8 +59,25 @@ main {
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 5px;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
 }
-
+.areaTitle a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 50%;
+    background-color: #fccb83; /* 형광펜 색상을 원하는 색상으로 변경하세요 */
+    opacity: 0.3;
+    transition: width 0.5s ease; /* 투명도 변경 시 부드럽게 전환되도록 설정 */
+    pointer-events: none; /* ::before 요소를 마우스 이벤트에서 제외 */
+}
+.areaTitle a:hover::before {
+    width: 100%; 
+}
 .areaAddr {
 	margin-bottom: 5px;
 }

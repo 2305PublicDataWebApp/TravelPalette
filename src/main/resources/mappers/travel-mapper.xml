@@ -90,4 +90,16 @@
 		FROM 	TRAVEL_TBL 
 		WHERE	TRAVEL_STATUS = 'Y'
 	</select>
+	
+	<select id="searchListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM TRAVEL_TBL
+		WHERE TRAVEL_ADDR LIKE '%'||#{searchKeyword}||'%'
+	</select>
+	
+	<select id="searchListByKeyword" resultMap="TravelResultMap">
+		SELECT *
+		FROM TRAVEL_TBL
+		WHERE TRAVEL_ADDR LIKE '%'||#{searchKeyword}||'%'
+	</select>
 </mapper>

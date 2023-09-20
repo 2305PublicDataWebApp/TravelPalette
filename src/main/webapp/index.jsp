@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>       
 <!DOCTYPE html>
 <html lang="ko">
@@ -16,15 +16,15 @@
         </style>
     </head>
     <body>
-		<!-- Çì´õ -->
+		<!-- í—¤ë” -->
         <jsp:include page="/include/header_main.jsp"></jsp:include>
         
-        <!-- ³×ºñ -->
+        <!-- ë„¤ë¹„ -->
         <jsp:include page="/include/nav.jsp"></jsp:include>
   
-        <!-- ¸ÞÀÎ -->
+        <!-- ë©”ì¸ -->
         <main>
-            <!-- Ä³·¯¼¿ µÞ °ø°£ -->
+            <!-- ìºëŸ¬ì…€ ë’· ê³µê°„ -->
             <div id="mainBackground"></div>
             <div id="slider">
                 <button class="btn prev"><</button>
@@ -42,75 +42,75 @@
             </div>
             <div class="travelRecommendArea">
                 <div class="travelRecommendText">
-                    <h2>ÃßÃµ ¿©Çà ÄÚ½º</h2>
+                    <h2>ì¶”ì²œ ì—¬í–‰ ì½”ìŠ¤</h2>
                     <img style="width:32px;float: right;padding-top: 3px;margin-right: 14px;" src="../resources/images/main/plus.png" alt="">
                 </div>
                 <div class="travelRecommand">
                     <ul>
                         <li style="position: relative;">
                             <div class="animationTravelImg">
-                                <div class="travelImg" style="background-image: url(../resources/images/main/¿©ÇàÁö»çÁø1.jpg);"></div>
+                                <div class="travelImg" style="background-image: url(../resources/images/main/ì—¬í–‰ì§€ì‚¬ì§„1.jpg);"></div>
                             </div>
                             <img style="position:absolute;top:10px;right: 20px;" src="../resources/images/main/emptyheart.png" alt="">
-                            <div class="travelText">Àå¼Ò1</div>
+                            <div class="travelText">ìž¥ì†Œ1</div>
                         </li>
                         <li style="position: relative;">
                             <div class="animationTravelImg">
-                                <div class="travelImg" style="background-image: url(../resources/images/main/¿©ÇàÁö»çÁø2.jpg);"></div>
+                                <div class="travelImg" style="background-image: url(../resources/images/main/ì—¬í–‰ì§€ì‚¬ì§„2.jpg);"></div>
                             </div>
                             <img style="position:absolute;top:10px;right: 20px;" src="../resources/images/main/emptyheart.png" alt="">
-                            <div class="travelText">Àå¼Ò1</div>
+                            <div class="travelText">ìž¥ì†Œ1</div>
                         </li>
                         <li style="position: relative;">
                             <div class="animationTravelImg">
-                                <div class="travelImg" style="background-image: url(../resources/images/main/¿©ÇàÁö»çÁø3.jpg);"></div>
+                                <div class="travelImg" style="background-image: url(../resources/images/main/ì—¬í–‰ì§€ì‚¬ì§„3.jpg);"></div>
                             </div>
                             <img style="position:absolute;top:10px;right: 20px;" src="../resources/images/main/emptyheart.png" alt="">
-                            <div class="travelText">Àå¼Ò1</div>
+                            <div class="travelText">ìž¥ì†Œ1</div>
                         </li>
                         <li style="position: relative;">
                             <div class="animationTravelImg">
-                                <div class="travelImg" style="background-image: url(../resources/images/main/¿©ÇàÁö»çÁø4.jpg);"></div>
+                                <div class="travelImg" style="background-image: url(../resources/images/main/ì—¬í–‰ì§€ì‚¬ì§„4.jpg);"></div>
                             </div>
                             <img style="position:absolute;top:10px;right: 20px;" src="../resources/images/main/emptyheart.png" alt="">
-                            <div class="travelText">Àå¼Ò1</div>
+                            <div class="travelText">ìž¥ì†Œ1</div>
                         </li>
                     </ul>
                 </div>
             </div>
-            <!-- ÁÖ¿äÀÌº¥Æ® -->
+            <!-- ì£¼ìš”ì´ë²¤íŠ¸ -->
             <div class="eventImg">
                 <div style="width: 50%;height: 100%;float: left;">
                     <div style="width: 450px;height: 250px;margin-left: 25px;">
-                        <img style="height: 250px;width: 450px;border-radius: 10px;" src="../resources/images/main/ÀÌº¥Æ®1.png" alt="">
+                        <img style="height: 250px;width: 450px;border-radius: 10px;" src="../resources/images/main/ì´ë²¤íŠ¸1.png" alt="">
                     </div>
                 </div>
                 <div class="eventArea">
                     <div>
-                        <h4>ÁÖ¿ä ÀÌº¥Æ®</h4>
+                        <h4>ì£¼ìš” ì´ë²¤íŠ¸</h4>
                     </div>
                     <div style="width: 100%;height: 50px;background-color: rgba(224, 224, 224, 0.32);padding-top: 10px;padding-left: 15px;">
                         <p style="float: left;background-color: #222;color: white;border-radius: 5px;width: 182px;text-align: center;margin: 0;font-weight: 100;">
-                            À§ÄÉÀÌ¼Ç Å×¸¶°ü ¿ÀÇÂ
+                            ìœ„ì¼€ì´ì…˜ í…Œë§ˆê´€ ì˜¤í”ˆ
                         </p>
-                        &nbsp;&nbsp;&nbsp;¿©ÇàÀ» ¶°³ª¿ä
+                        &nbsp;&nbsp;&nbsp;ì—¬í–‰ì„ ë– ë‚˜ìš”
                     </div>
                     <div class="eventList table-info">
-                        <p class="eventHighlight">À§ÄÉÀÌ¼Ç Å×¸¶°ü ¿ÀÇÂ | </p>&nbsp;ÀÏ°ú ÈÞ°¡¸¦ µ¿½Ã¿¡, ¿öÄÉÀÌ¼Ç ¶°³ªÀÚ!
+                        <p class="eventHighlight">ìœ„ì¼€ì´ì…˜ í…Œë§ˆê´€ ì˜¤í”ˆ | </p>&nbsp;ì¼ê³¼ íœ´ê°€ë¥¼ ë™ì‹œì—, ì›Œì¼€ì´ì…˜ ë– ë‚˜ìž!
                     </div>
                     <div class="eventList">
-                        <p class="eventHighlight">Áý¿¡ °¥ ½Ã°£ | </p>&nbsp;Áö±Ý ¹Ù·Î ¶°³ªÀÚ!
+                        <p class="eventHighlight">ì§‘ì— ê°ˆ ì‹œê°„ | </p>&nbsp;ì§€ê¸ˆ ë°”ë¡œ ë– ë‚˜ìž!
                     </div>
                     <div class="eventList">
-                        <p class="eventHighlight">¾ðÁ¦Âë ¿Ï¼ºÇÒ±î..? | </p>&nbsp;ÀÏ´Ü Áý¿¡ °¡!
+                        <p class="eventHighlight">ì–¸ì œì¯¤ ì™„ì„±í• ê¹Œ..? | </p>&nbsp;ì¼ë‹¨ ì§‘ì— ê°€!
                     </div>
                 </div>
             </div>
-            <!-- °¡ÀÌµåºÏ °ø°£ -->
+            <!-- ê°€ì´ë“œë¶ ê³µê°„ -->
             <div style="width: 1000px;margin: 0 auto;height: 400px;">
                 <div style="height: 200px;">
                     <h2 style="font-family: 'TmoneyRoundWindExtraBold';font-size: 28px;padding-top: 130px;float:left;">
-                        ¿©Çà °¡ÀÌµåºÏ
+                        ì—¬í–‰ ê°€ì´ë“œë¶
                     </h2>
                     <img style="width:32px;float: right;padding-top: 131px;margin-right: 14px;" src="../resources/images/main/plus.png" alt="">
                 </div>
@@ -118,30 +118,30 @@
                     <div style="width: 100%;height: 50px;"></div>
                     <div style="display: flex;flex-direction: row;justify-content: space-evenly;">
                         <div class="card guideBookMsg" style="float: left;">
-                            <img src="../resources/images/main/°¡ÀÌµåºÏ1.png" class="card-img-top" alt="">
+                            <img src="../resources/images/main/ê°€ì´ë“œë¶1.png" class="card-img-top" alt="">
                             <div class="card-body">
-                                <p class="card-text">ÇÑ±¹ÀÇ ¼ûÀº °ñ¸ñ ¸ÀÁý</p>
+                                <p class="card-text">í•œêµ­ì˜ ìˆ¨ì€ ê³¨ëª© ë§›ì§‘</p>
                             </div>
                         </div>
                         <div class="card guideBookMsg" style="float:left;">
-                            <img style="border-radius:5px;" src="../resources/images/main/°¡ÀÌµåºÏ2.jpg" class="card-img-top" alt="">
+                            <img style="border-radius:5px;" src="../resources/images/main/ê°€ì´ë“œë¶2.jpg" class="card-img-top" alt="">
                             <div class="card-body">
-                                <p class="card-text">¾Æ¸§´Ù¿î ÇÑ±¹ÀÇ °ÇÃà¹° ¼ø·Ê</p>
+                                <p class="card-text">ì•„ë¦„ë‹¤ìš´ í•œêµ­ì˜ ê±´ì¶•ë¬¼ ìˆœë¡€</p>
                             </div>
                         </div>
                         <div class="card guideBookMsg">
-                            <img src="../resources/images/main/°¡ÀÌµåºÏ3.png" class="card-img-top" alt="">
+                            <img src="../resources/images/main/ê°€ì´ë“œë¶3.png" class="card-img-top" alt="">
                             <div class="card-body">
-                                <p class="card-text">µ¿Çà! µ¿³× ÇÑ¹ÙÄû(º½)</p>
+                                <p class="card-text">ë™í–‰! ë™ë„¤ í•œë°”í€´(ë´„)</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- ºó °ø°£ -->
+            <!-- ë¹ˆ ê³µê°„ -->
             <div style="width: 100%;height: 500px;"></div>
         </main>
-        <!-- ÇªÅÍ -->
+        <!-- í‘¸í„° -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
@@ -182,7 +182,7 @@
 			        }, ); // Add a delay before hiding to allow time for moving to menu_text
 			    });
 			});
-            // Ä³·¯¼¿
+            // ìºëŸ¬ì…€
             const silder = document.querySelector('#slider');
             const wrapper = document.querySelector('.wrapper');
             const items = document.querySelector('.items');
@@ -193,9 +193,9 @@
             const mainBackground = document.querySelector("#mainBackground");
             const nav = document.querySelector(".navContainer");
             const colors = ['#FBFFDC', '#FFE3E1', '#FFD1D1', '#FFB9B9', 'orange'];
-            let startX = 0;         //mousedown½Ã À§Ä¡
-            let moveX = 0;         //¿òÁ÷ÀÎ Á¤µµ
-            let currentIdx = 0;    //ÇöÀç À§Ä¡(index)
+            let startX = 0;         //mousedownì‹œ ìœ„ì¹˜
+            let moveX = 0;         //ì›€ì§ì¸ ì •ë„
+            let currentIdx = 0;    //í˜„ìž¬ ìœ„ì¹˜(index)
             let positions = [];
 
             function initializeData() {
@@ -231,7 +231,7 @@
             // console.log(currentIdx);
 
             mainBackground.style.background = "linear-gradient(to bottom, " + colors[currentIdx] + ", white)";
-            nav.style.backgroundColor = colors[currentIdx]; // ¹è°æ»ö º¯°æ
+            nav.style.backgroundColor = colors[currentIdx]; // ë°°ê²½ìƒ‰ ë³€ê²½
             });
             prev.addEventListener('click', (e) => {
             if (currentIdx === 0) {
@@ -243,7 +243,7 @@
             currentIdx = currentIdx - 1;
             items.style.left = positions[currentIdx] + 'px';
             mainBackground.style.background = "linear-gradient(to bottom, " + colors[currentIdx] + ", white)";
-            nav.style.backgroundColor = colors[currentIdx]; // ¹è°æ»ö º¯°æ
+            nav.style.backgroundColor = colors[currentIdx]; // ë°°ê²½ìƒ‰ ë³€ê²½
             });
 
 
@@ -258,7 +258,7 @@
                 items.removeEventListener('mousemove', onMouseMove);
                 document.onmouseup = null;
                 if (moveX > -70 && moveX <= 70) {
-                //   ¸¸¾à -70~70ÀÌ¸é ÃÊ±âÀ§Ä¡·Î ÀÌµ¿
+                //   ë§Œì•½ -70~70ì´ë©´ ì´ˆê¸°ìœ„ì¹˜ë¡œ ì´ë™
                 return items.style.left = positions[currentIdx] + 'px';
                 }
                 if (moveX > 0 && currentIdx > 0) {

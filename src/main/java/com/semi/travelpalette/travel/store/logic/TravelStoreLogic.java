@@ -94,6 +94,23 @@ public class TravelStoreLogic implements TravelStore{
 	}
 
 
+	@Override
+	public int searchListCount(SqlSession session, String searchKeyword) {
+		int searchListCount = session.selectOne("TravelMapper.searchListCount", searchKeyword);
+		return searchListCount;
+	}
+
+
+	@Override
+	public List<Travel> searchListByKeyword(SqlSession session, PageInfo searchPInfo, String searchKeyword) {
+		int limit = searchPInfo.getRecordCountPerPage();
+		int offset = (searchPInfo.getCurrentPage() - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Travel> searchList = session.selectList("TravelMapper.searchListByKeyword", searchKeyword, rowBounds);
+		return searchList;
+	}
+
+
 
 
 
