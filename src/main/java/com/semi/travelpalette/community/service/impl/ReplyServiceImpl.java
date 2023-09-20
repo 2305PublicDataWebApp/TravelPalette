@@ -48,8 +48,8 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 
 	@Override
-	public int countLikeByMap(Map<String, Object> paramMap) {
-		int result = rStore.countLikeByMap(session, paramMap);
+	public int countLikeByMap(Reply setReply) {
+		int result = rStore.countLikeByMap(session, setReply);
 		return result;
 	}
 
@@ -63,6 +63,18 @@ public class ReplyServiceImpl implements ReplyService{
 	public int deleteReplyLike(Like like) {
 		int result = rStore.deleteReplyLike(session, like);
 		return result;
+	}
+
+	@Override
+	public List<Reply> selectReplyLikeList(Community cOne) {
+		List<Reply> rList = rStore.selectReplyLikeList(session, cOne);
+		return rList;
+	}
+
+	@Override
+	public Like selectLikeByReply(Reply setReply) {
+		Like like = rStore.selectLikeByReply(session, setReply);
+		return like;
 	}
 
 }

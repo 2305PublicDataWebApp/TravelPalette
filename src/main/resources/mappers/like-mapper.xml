@@ -18,6 +18,9 @@
     <select id="countLikeByMap" resultType="_int">
 		SELECT COUNT(*) FROM LIKE_TBL WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType} AND REPLY_NO = #{replyNo}
 	</select>
+	<select id="selectLikeByReply" resultMap="LikeResultMap">
+		SELECT * FROM LIKE_TBL WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType} AND REPLY_NO = #{replyNo} AND USER_ID = #{userId}
+	</select>
     <insert id="insertLike">
     	INSERT INTO LIKE_TBL VALUES(SEQ_LIKE_NO.NEXTVAL, #{boardNo}, #{boardType}, NULL, 'thumbs up', DEFAULT, #{userId})
     </insert>

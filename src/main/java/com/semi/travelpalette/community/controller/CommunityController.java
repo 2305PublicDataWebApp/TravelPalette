@@ -44,15 +44,24 @@ public class CommunityController {
     @RequestMapping(value="/qList.tp", method=RequestMethod.GET)
     public ModelAndView goBoardListPage(ModelAndView mv
             , @RequestParam(value= "page", required = false, defaultValue="1") Integer curruntPage
+            , @RequestParam(value= "sortType", required = false, defaultValue="no") String sortType
             , @RequestParam(value= "boardType", required = false, defaultValue="QnABoard") String boardType) {
         
         try {
             int totalCount = cService.getListCountByBoardType(boardType);
             PageInfo pInfo = this.getPageInfo(curruntPage, totalCount, boardType);
+            if(!sortType.equals("no")) {
+            	List<Community> sList = cService.selectSortList(pInfo);
+            	if(sList.size() > 0) {
+            		mv.addObject("cList", sList).addObject("pInfo", pInfo).addObject("sortType", sortType);
+            		mv.setViewName("community/questionList");
+                    return mv;
+            	}
+            }
             List<Community> cList = cService.selectCommunityList(pInfo);
 
             if (cList.size() > 0) {
-                mv.addObject("cList", cList).addObject("pInfo", pInfo);
+                mv.addObject("cList", cList).addObject("pInfo", pInfo).addObject("sortType", sortType);
                 mv.setViewName("community/questionList");
                 return mv;
             } else {
@@ -72,27 +81,29 @@ public class CommunityController {
     @RequestMapping(value="/certify.tp", method=RequestMethod.GET)
     public ModelAndView goCertifyListPage(ModelAndView mv
             , @RequestParam(value= "page", required = false, defaultValue="1") Integer curruntPage
+            , @RequestParam(value= "sortType", required = false, defaultValue="no") String sortType
             , @RequestParam(value= "boardType", required = false, defaultValue="travelcertify") String boardType) {
         
-        try {
-            int totalCount = cService.getListCountByBoardType(boardType);
-            PageInfo pInfo = this.getPageInfo(curruntPage, totalCount, boardType);
-            List<Community> cList = cService.selectCommunityList(pInfo);
-
-            if (cList.size() > 0) {
-                mv.addObject("cList", cList).addObject("pInfo", pInfo);
+        int totalCount = cService.getListCountByBoardType(boardType);
+        PageInfo pInfo = this.getPageInfo(curruntPage, totalCount, boardType);
+        if(!sortType.equals("no")) {
+        	List<Community> sList = cService.selectSortList(pInfo);
+        	if(sList.size() > 0) {
+        		mv.addObject("cList", sList).addObject("pInfo", pInfo).addObject("sortType", sortType);
                 mv.setViewName("community/travelcertifyList");
                 return mv;
-            } else {
-                mv.addObject("msg", "리스트 불러오기에 실패하였습니다.");
-                mv.addObject("url", "/");
-                mv.setViewName("common/errorPage");
-                return mv;
-            }
+        	}
+        }
+        List<Community> cList = cService.selectCommunityList(pInfo);
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            mv.setViewName("/");
+        if (cList.size() > 0) {
+            mv.addObject("cList", cList).addObject("pInfo", pInfo).addObject("sortType", sortType);
+            mv.setViewName("community/travelcertifyList");
+            return mv;
+        }else {
+            mv.addObject("msg", "리스트 불러오기에 실패하였습니다.");
+            mv.addObject("url", "/");
+            mv.setViewName("common/errorPage");
             return mv;
         }
     }
@@ -109,32 +120,40 @@ public class CommunityController {
             Community community = cService.selectOneByClass(cOne);
             community.setViewCount(community.getViewCount()+1);
             cService.updateViewCount(community);
-            List<Reply> rList = rService.selectReplyList(cOne);
+            List<Reply> rList = rService.selectReplyList(community);
+            
+//            List<Reply> LikeList = rService.selectReplyLikeList(community);
             String userId = (String)session.getAttribute("userId");
             if (!community.getBoardTitle().equals("")) {
-	            if(userId != null) {            	
+            	if(userId != null && !userId.equals("")) {            	
 	            	Like like = new Like(boardNo, boardType, userId);
 	            	Like cLike = cService.selectLikeByClass(like);
 	            	if(cLike != null) {
 	            		mv.addObject("likeId", userId);
 	            	}
-	            	
-	            	Map<String, Object> paramMap = new HashMap<String, Object>(); 
-	    			paramMap.put("boardNo", boardNo);
-	    			paramMap.put("boardType", boardType);
+	            	System.out.println("여기서 문제1");
+	    			Reply setReply = new Reply(boardNo, boardType, userId);
 	            	for(int i = 0; i < rList.size(); i++) {
 	            		Reply reply = rList.get(i);
-	    				if(userId.equals(reply.getUserId())) {
-	    					reply.setLikeYn('Y');
-	    				}else if(!userId.equals(reply.getUserId())){
-	    					reply.setLikeYn('N');
-	    				}
-	    				paramMap.put("replyNo", reply.getReplyNo());
-	    				replyLikeCount = rService.countLikeByMap(paramMap);
+	            		setReply.setReplyNo(i+1);
+	            		Like checkLike = rService.selectLikeByReply(setReply);
+	            		if(checkLike != null) {	            			
+	            			if(userId.equals(checkLike.getUserId())){
+	            				reply.setLikeYn('Y');
+	            			}
+	            		}else {	            			
+	            			reply.setLikeYn('N');
+	            		}
+	    				replyLikeCount = rService.countLikeByMap(setReply);
 	    				reply.setLikeNo(replyLikeCount);
 	    			}
+	            	System.out.println("여기서 문제2");
 	            }
-                mv.addObject("community", community).addObject("rList", rList);
+	            if(rList.size() > 0) {
+	            	mv.addObject("rList", rList);
+	            }
+	            System.out.println("여기서 문제3");
+                mv.addObject("community", community);
                 mv.setViewName("community/detail");
                 return mv;
             } else {
@@ -335,7 +354,7 @@ public class CommunityController {
     	return response;
     }
     
-    @GetMapping("/notice/search.kh")
+    @GetMapping("/search.tp")
 	public ModelAndView searchList(
 			@RequestParam(value="searchCondition") String searchCondition
 			, @RequestParam(value="searchKeyword") String searchKeyword
@@ -350,16 +369,48 @@ public class CommunityController {
 		paraMap.put("searchKeyword", searchKeyword);
 		paraMap.put("boardType", boardType);
 		int totalCount = cService.getSearchListCount(paraMap);
-		PageInfo pInfo = this.getPageInfo(currentPage, totalCount ,boardType);
+		PageInfo pInfo = this.getPageInfo(currentPage, totalCount,boardType);
 		// put() 메소드를 사용해서 key-value 설정을 하는데
 		// key 값(파란색)이 mapper.xml에서 사용됌
-		List<Community> cList = cService.searchNoticesByKeyword(paraMap, pInfo);
+		List<Community> cList = cService.searchListByKeyword(paraMap, pInfo);
 		
 		if(!cList.isEmpty()) {
 			mv.addObject("pInfo", pInfo);
 			mv.addObject("cList", cList);
 			mv.addObject("paraMap", paraMap);
-			mv.setViewName("community/searchList");
+			mv.setViewName("community/searchboard");
+			return mv;
+		}else {
+			mv.addObject("msg", "게시물 검색에 실패하였습니다.");
+            mv.addObject("url", "/");
+            mv.setViewName("community/errorPage");
+            return mv;
+		}
+	}
+    
+    @GetMapping("/searchcertify.tp")
+	public ModelAndView searchcertifyList(
+			@RequestParam(value="searchCondition") String searchCondition
+			, @RequestParam(value="searchKeyword") String searchKeyword
+			, @RequestParam(value= "boardType", required = false, defaultValue="travelcertify") String boardType
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
+			, HttpSession session
+			, ModelAndView mv) {
+    	
+		session.setAttribute("searchCondition", searchCondition);
+		Map<String, String> paraMap= new HashMap<String, String>();
+		paraMap.put("searchCondition", searchCondition);
+		paraMap.put("searchKeyword", searchKeyword);
+		paraMap.put("boardType", boardType);
+		int totalCount = cService.getSearchListCount(paraMap);
+		PageInfo pInfo = this.getPageInfo(currentPage, totalCount,boardType);
+		List<Community> cList = cService.searchListByKeyword(paraMap, pInfo);
+		
+		if(!cList.isEmpty()) {
+			mv.addObject("pInfo", pInfo);
+			mv.addObject("cList", cList);
+			mv.addObject("paraMap", paraMap);
+			mv.setViewName("community/searchcertify");
 			return mv;
 		}else {
 			mv.addObject("msg", "게시물 검색에 실패하였습니다.");

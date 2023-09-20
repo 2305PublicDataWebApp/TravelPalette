@@ -31,7 +31,7 @@
                 </h2>
                	<form action="/community/search.tp" method="get">
                 	<div class="input-group" style="width: 600px;float: right;margin-top: 90px;">
-                		<input type="hidden" name="boardType" value="${community.boardType }">
+                		<input type="hidden" name="boardType" value="${pInfo.boardType }">
 	                    <select name="searchCondition" class="form-select" aria-label="Default select example" style="margin-right: 8px;border: 1px solid #adb5bd;">
 	                        <option value="all">전체</option>
 	                        <option value="title">제목</option>
@@ -45,8 +45,14 @@
                     <p style="float:left;font-size: 18px;margin: 0;padding: 5px;font-weight: 600;font-family: 'SUITE-Regular';letter-spacing: 2px;padding-left: 15px;">#${pInfo.totalCount }건</p>
                     <button id="goInsertBoardPage" type="button" style="float: right;width: 80px;" class="btn btn-primary">글 등록</button>
                     <p style="margin: 0;padding: 7px 13px 0px 8px;margin-left: 3px;float: right;">
-                        <a href="#">최신순 </a>|
-                        <a href="#">추천순</a> 
+                    	<c:if test="${sortType eq 'no' }">
+                    		<a href="/community/qList.tp" style="text-decoration:underline;">최신순 </a>|
+               	        	<a href="/community/qList.tp?sortType=likeDESC">추천순</a>
+                    	</c:if>
+               	        <c:if test="${sortType ne 'no' }">
+               	        	<a href="/community/qList.tp">최신순 </a>|
+	                        <a href="/community/qList.tp?sortType=likeDESC" style="text-decoration:underline;">추천순</a> 
+                    	</c:if>
                     </p>
                 </div>
             </div>
@@ -86,30 +92,58 @@
             </table>
             <div aria-label="Page navigation example">
                 <ul class="pagination justify-content-center" style="width: 100%;height: 100px;padding-top: 30px;">
-                    <c:if test="${pInfo.startNavi ne 1}">
-                        <c:url var="bPageUrl" value="/community/qList.tp">
-                            <c:param name="page" value="${pInfo.startNavi-1}"></c:param>
-                        </c:url>
-                        <li class="page-item">
-                            <a style="color: black;" class="page-link" href="${bPageUrl}">Previous</a>
-                        </li>
-                    </c:if>
-                    <c:forEach begin="${pInfo.startNavi}" end="${pInfo.endNavi}" var="p">
-                        <c:url var="pageUrl" value="/community/qList.tp">
-                            <c:param name="page" value="${p}"></c:param>
-                        </c:url>
-                        <li class="page-item">
-                            <a style="color: black;" class="page-link" href="${pageUrl}">${p}</a>
-                        </li>
-                    </c:forEach>
-                    <c:if test="${pInfo.endNavi ne pInfo.naviTotalCount}">
-                        <c:url var="nPageUrl" value="/community/qList.tp">
-                            <c:param name="page" value="${pInfo.endNavi+1}"></c:param>
-                        </c:url>
-                        <li class="page-item">
-                            <a style="color: black;" class="page-link" href="${nPageUrl}">Next</a>
-                        </li>
-                    </c:if>
+                	<c:if test="${sortType eq 'no' }">                   		
+	                    <c:if test="${pInfo.startNavi ne 1}">
+	                        <c:url var="bPageUrl" value="/community/qList.tp">
+	                            <c:param name="page" value="${pInfo.startNavi-1}"></c:param>
+	                        </c:url>
+	                        <li class="page-item">
+	                            <a style="color: black;" class="page-link" href="${bPageUrl}">Previous</a>
+	                        </li>
+	                    </c:if>
+	                    <c:forEach begin="${pInfo.startNavi}" end="${pInfo.endNavi}" var="p">
+	                        <c:url var="pageUrl" value="/community/qList.tp">
+	                            <c:param name="page" value="${p}"></c:param>
+	                        </c:url>
+	                        <li class="page-item">
+	                            <a style="color: black;" class="page-link" href="${pageUrl}">${p}</a>
+	                        </li>
+	                    </c:forEach>
+	                    <c:if test="${pInfo.endNavi ne pInfo.naviTotalCount}">
+	                        <c:url var="nPageUrl" value="/community/qList.tp">
+	                            <c:param name="page" value="${pInfo.endNavi+1}"></c:param>
+	                        </c:url>
+	                        <li class="page-item">
+	                            <a style="color: black;" class="page-link" href="${nPageUrl}">Next</a>
+	                        </li>
+	                    </c:if>
+                   	</c:if>
+                   	<c:if test="${sortType ne 'no' }">                   		
+	                    <c:if test="${pInfo.startNavi ne 1}">
+	                        <c:url var="bPageUrl" value="/community/qList.tp?sortType=likeDESC">
+	                            <c:param name="page" value="${pInfo.startNavi-1}"></c:param>
+	                        </c:url>
+	                        <li class="page-item">
+	                            <a style="color: black;" class="page-link" href="${bPageUrl}">Previous</a>
+	                        </li>
+	                    </c:if>
+	                    <c:forEach begin="${pInfo.startNavi}" end="${pInfo.endNavi}" var="p">
+	                        <c:url var="pageUrl" value="/community/qList.tp?sortType=likeDESC">
+	                            <c:param name="page" value="${p}"></c:param>
+	                        </c:url>
+	                        <li class="page-item">
+	                            <a style="color: black;" class="page-link" href="${pageUrl}">${p}</a>
+	                        </li>
+	                    </c:forEach>
+	                    <c:if test="${pInfo.endNavi ne pInfo.naviTotalCount}">
+	                        <c:url var="nPageUrl" value="/community/qList.tp?sortType=likeDESC">
+	                            <c:param name="page" value="${pInfo.endNavi+1}"></c:param>
+	                        </c:url>
+	                        <li class="page-item">
+	                            <a style="color: black;" class="page-link" href="${nPageUrl}">Next</a>
+	                        </li>
+	                    </c:if>
+	                </c:if>
                 </ul>
             </div>
         </main>

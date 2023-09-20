@@ -39,21 +39,33 @@ public class ReplyStoreLogic implements ReplyStore{
 	}
 
 	@Override
-	public int countLikeByMap(SqlSession session, Map<String, Object> paramMap) {
-		int result = session.selectOne("LikeMapper.countLikeByMap", paramMap);
+	public int countLikeByMap(SqlSession session, Reply setReply) {
+		int result = session.selectOne("LikeMapper.countLikeByMap", setReply);
 		return result;
 	}
 
 	@Override
 	public int insertReplyLike(SqlSession session, Like like) {
-		int result = session.selectOne("LikeMapper.insertReplyLike", like);
+		int result = session.insert("LikeMapper.insertReplyLike", like);
 		return result;
 	}
 
 	@Override
 	public int deleteReplyLike(SqlSession session, Like like) {
-		int result = session.selectOne("LikeMapper.deleteReplyLike", like);
+		int result = session.delete("LikeMapper.deleteReplyLike", like);
 		return result;
+	}
+
+	@Override
+	public List<Reply> selectReplyLikeList(SqlSession session, Community cOne) {
+		List<Reply> rList = session.selectList("ReplyMapper.selectReplyLikeList", cOne);
+		return rList;
+	}
+
+	@Override
+	public Like selectLikeByReply(SqlSession session, Reply setReply) {
+		Like like = session.selectOne("LikeMapper.selectLikeByReply", setReply);
+		return like;
 	}
 
 }

@@ -28,6 +28,13 @@ public interface ReplyStore {
 	List<Reply> selectReplyList(SqlSession session, Community cOne);
 
 	/**
+	 * 게시판 게시물 별 댓글 좋아요 리스트 불러오기 Store
+	 * @param session
+	 * @param cOne
+	 * @return
+	 */
+	List<Reply> selectReplyLikeList(SqlSession session, Community cOne);
+	/**
 	 * 댓글 삭제하기 Store
 	 * @param session
 	 * @param reply
@@ -46,10 +53,10 @@ public interface ReplyStore {
 	/**
 	 * 댓글 당 좋아요 개수 불러오기 Store
 	 * @param session
-	 * @param paramMap
+	 * @param setReply
 	 * @return
 	 */
-	int countLikeByMap(SqlSession session, Map<String, Object> paramMap);
+	int countLikeByMap(SqlSession session, Reply setReply);
 
 	/**
 	 * 댓글 좋아요 누르기 Store
@@ -66,5 +73,15 @@ public interface ReplyStore {
 	 * @return
 	 */
 	int deleteReplyLike(SqlSession session, Like like);
+
+	/**
+	 * 로그인 한 아이디가 댓글에 좋아요를 눌렀는지 여부 불러오기 Store
+	 * @param session
+	 * @param setReply
+	 * @return
+	 */
+	Like selectLikeByReply(SqlSession session, Reply setReply);
+
+	
 
 }

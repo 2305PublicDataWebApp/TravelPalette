@@ -119,6 +119,14 @@ public interface CommunityStore {
 	 * @param pInfo
 	 * @return
 	 */
-	List<Community> searchNoticesByKeyword(SqlSession session, Map<String, String> paraMap, PageInfo pInfo);
+	List<Community> searchListByKeyword(SqlSession session, Map<String, String> paraMap, PageInfo pInfo);
+
+	/**
+	 * 여행인증 게시판 정렬 Store
+	 * @param session
+	 * @param pInfo
+	 * @return
+	 */
+	List<Community> selectSortList(SqlSession session, PageInfo pInfo);
 
 }

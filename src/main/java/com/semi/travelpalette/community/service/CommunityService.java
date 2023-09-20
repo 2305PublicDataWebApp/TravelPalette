@@ -105,6 +105,13 @@ public interface CommunityService {
 	 * @param pInfo
 	 * @return
 	 */
-	List<Community> searchNoticesByKeyword(Map<String, String> paraMap, PageInfo pInfo);
+	List<Community> searchListByKeyword(Map<String, String> paraMap, PageInfo pInfo);
+
+	/** 
+	 * 여행인증 게시판 정렬
+	 * @param pInfo
+	 * @return
+	 */
+	List<Community> selectSortList(PageInfo pInfo);
 
 }

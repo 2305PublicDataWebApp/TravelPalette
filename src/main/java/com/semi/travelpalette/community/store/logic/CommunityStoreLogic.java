@@ -94,17 +94,27 @@ public class CommunityStoreLogic implements CommunityStore{
 
 	@Override
 	public int getSearchListCount(SqlSession session, Map<String, String> paraMap) {
-		int result = session.selectOne("CommunityMapper.getSearchListCount");
+		int result = session.selectOne("CommunityMapper.getSearchListCount", paraMap);
 		return result;
 	}
 
 	@Override
-	public List<Community> searchNoticesByKeyword(SqlSession session, Map<String, String> paraMap, PageInfo pInfo) {
+	public List<Community> searchListByKeyword(SqlSession session, Map<String, String> paraMap, PageInfo pInfo) {
 		int limit = pInfo.getRecordCountPerPage(); // 가져오는 행의 갯수
 		int offset = (pInfo.getCurrentPage()-1)*limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<Community> cList = session.selectList("CommunityMapper.searchNoticesByKeyword", paraMap, rowBounds);
+		List<Community> cList = session.selectList("CommunityMapper.searchListByKeyword", paraMap, rowBounds);
 		return cList;
+	}
+
+	@Override
+	public List<Community> selectSortList(SqlSession session, PageInfo pInfo) {
+		int limit = pInfo.getRecordCountPerPage();
+        int offset = (pInfo.getCurrentPage() - 1) * limit;
+        RowBounds rowBounds = new RowBounds(offset, limit);
+        
+        List<Community> cList = session.selectList("CommunityMapper.selectSortList", pInfo ,rowBounds);
+        return cList;
 	}
 
 }

@@ -35,8 +35,10 @@
 	                        </c:if>
 	                    </h4>
 	                    <button id="goBackButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-primary">목록으로</button>
-	                    <button id="goModifyButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-secondary">수정하기</button>
-	                    <button id="deleteButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-dark">삭제하기</button>
+	                    <c:if test="${userId eq community.userId}">
+		                    <button id="goModifyButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-secondary">수정하기</button>
+		                    <button id="deleteButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-dark">삭제하기</button>
+	                    </c:if>
 	                </div>
 	                <table class="table caption-top" style="padding: 0px 20px; font-family: 'SUITE-Regular'; font-size: 18px; width: 100%;">
 					    <thead style="--bs-table-bg: rgba(224, 224, 224, 0.32); border: 1px solid #eee; border-bottom: 2px solid #ccc;">
@@ -106,9 +108,16 @@
                         <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;border: 1px solid #ccc;margin-top: 25px;resize: none;height: 150px;"></textarea>                        
                         <label for="floatingTextarea2" style="margin-top: 20px;">댓글을 입력해주세요~</label>
                     </div>
-                    <button onclick="insertReplyBtn()" type="button" class="btn btn-secondary" style="float: right;margin-right: 50px;margin-top: 15px;">
-                        글 등록
-                    </button>
+                    <c:if test="${userId eq null }">
+	                    <button onclick="loginCheck()" type="button" class="btn btn-secondary" style="float: right;margin-right: 50px;margin-top: 15px;">
+	                        글 등록
+	                    </button>
+                    </c:if>
+                    <c:if test="${userId ne null }">
+	                    <button onclick="insertReplyBtn()" type="button" class="btn btn-secondary" style="float: right;margin-right: 50px;margin-top: 15px;">
+	                        글 등록
+	                    </button>
+                    </c:if>
                     <div class="form-check" style="float: right;margin-right: 15px;margin-top: 21px;">
                         <input id="secretCheck" class="form-check-input" type="checkbox" value="Y" id="flexCheckDefault">
                         <label class="form-check-label" for="secretCheck">
@@ -123,10 +132,12 @@
 	                <div style="width: 1000px;margin: 0 auto;font-family: 'SUITE-Regular';position: relative;">
 	                    <div style="width: 100%;height: 200px;background-color: #FDF6F0;border-bottom: 2px solid #eedecf;">
 	                        <div style="float: left;padding: 20px;padding-left:50px;">
-	                            <h4 style="float: left;font-weight: 600;">${reply.userNickname }</h4>
+	                            <h4 style="float: left;font-weight: 600;padding-left: 15px;">${reply.userNickname }</h4>
+<%-- 	                            ${reply } --%>
 	                            <p style="float: left;padding: 5px;padding-left: 8px;">
 									<fmt:formatDate pattern="yyyy-MM-dd" value="${reply.replyCreateDate }"/>
 								</p>
+								<input type="hidden" value="${reply.replyWriter}">
 								<input type="hidden" value="${reply.replyNo}"> 
 		                        <div style="width: 150px;height: 30px;float: left;margin-left: 10px;">
 		                        	<c:if test="${userId eq null}">
@@ -147,12 +158,24 @@
 		                            <span style="float: left;font-size: 17px;font-weight: 600;margin-top: 4px;margin-left: 4px;">${reply.likeNo }</span>
 		                        </div>
 	                            <div style="width: 900px;height: 100px;background-color: #FCECDD;float: left;padding: 10px;border-radius: 10px;">
-	                                <p>${reply.replyContent }.</p>
+	                            	<c:if test="${reply.replySecretType.toString() eq 'N'}">
+		                                <p>${reply.replyContent }</p>
+	                            	</c:if>
+	                            	<c:if test="${reply.replySecretType.toString() eq 'Y'}">
+	                            		<c:if test="${userId eq reply.replyWriter || userId eq community.userId}">
+	                            			<p>${reply.replyContent }</p>
+	                            		</c:if>
+	                            		<c:if test="${userId ne reply.replyWriter && userId ne community.userId}">
+			                                <p style="color: #9ca3ab;">비밀 댓글 입니다.</p>
+	                            		</c:if>
+	                            	</c:if>
 	                            </div>
-								<a href="javascript:void(0);" onclick="showModifyForm(this);"
-								style="position: absolute;top: 24px;right:135px;">수정하기</a>
-								<a href="javascript:void(0);" onclick="deleteReply(event);" data-reply-no="${reply.replyNo}"
-								style="position: absolute;top: 24px;right: 65px;">삭제하기</a>
+	                            <c:if test="${userId eq reply.replyWriter }">
+									<a href="javascript:void(0);" onclick="showModifyForm(this);"
+									style="position: absolute;top: 24px;right:135px;">수정하기</a>
+									<a href="javascript:void(0);" onclick="deleteReply(event);" data-reply-no="${reply.replyNo}"
+									style="position: absolute;top: 24px;right: 65px;">삭제하기</a>
+	                            </c:if>
 	                        </div>
 	                    </div>
 	                </div>
@@ -167,7 +190,7 @@
 	                    <button type="button" onclick="modifyReply(this);" class="btn btn-secondary" style="float: right;margin-right: 10px;margin-top: 10px;">
 	                        수정 완료
 	                    </button>
-	                    <input type="hidden" value="${reply.replyNo }">
+	                    <input name="replyNo" type="hidden" value="${reply.replyNo }">
 	                    <div class="form-check" style="float: right;margin-right: 15px;margin-top: 16px;">
 	                        <input name="replySecretType" class="form-check-input" type="checkbox" value="Y" ${reply.replySecretType.toString() eq 'Y' ? 'checked' : ''}>
 	                        <p>비밀 댓글</p>
@@ -334,29 +357,39 @@
             }
             
             function insertReplyLike(obj){
-            	var replyNo = obj.parentElement.previousElementSibling.value;
-            	console.log(replyNo);
-            	$.ajax({
-                    type: "POST", // 또는 "GET"에 맞게 변경
-                    url: "/reply/like.tp", 
-                    data: {
-                    	boardNo: boardNo,
-                    	boardType: boardType,
-                    	userId: userId,
-                    	replyNo: replyNo
-                    },
-                    success: function (data) {
-                        if (data.success) {
-                            location.reload();
-                        } else {
-                        	alert("댓글 좋아요 누르기을 실패하였습니다.");
+            	var replyNoElement = obj.parentElement.previousElementSibling;
+                var replyWriterElement = obj.parentElement.previousElementSibling.previousElementSibling;
+
+                if (replyNoElement && replyWriterElement) {
+                    var replyNo = replyNoElement.value;
+                    var replyWriter = replyWriterElement.value;
+                    console.log(replyNo);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/reply/like.tp",
+                        data: {
+                            boardNo: boardNo,
+                            boardType: boardType,
+                            replyWriter: replyWriter,
+                            userId: userId,
+                            replyNo: replyNo
+                        },
+                        success: function (data) {
+                            if (data.success) {
+                                location.reload();
+                            } else {
+                                alert("댓글 좋아요 누르기을 실패하였습니다.");
+                            }
+                        },
+                        error: function () {
+                            console.error("서버 요청에 실패했습니다. 상태 코드: " + status);
+                            console.error("에러 내용: " + error);
                         }
-                    },
-                    error: function () {
-                    	console.error("서버 요청에 실패했습니다. 상태 코드: " + status);
-                        console.error("에러 내용: " + error);
-                    }
-                });  
+                    });
+                } else {
+                    console.log("replyNo 또는 replyWriter가 존재하지 않습니다.");
+                }
             }
             
             function deleteLike(){
@@ -382,29 +415,35 @@
                 });  
             }
             
-            function deleteReplyLike(obj){
-            	var replyNo = obj.parentElement.previousElementSibling.value;
-            	$.ajax({
-                    type: "POST", // 또는 "GET"에 맞게 변경
-                    url: "/reply/dislike.tp", 
-                    data: {
-                    	boardNo: boardNo,
-                    	boardType: boardType,
-                    	userId: userId,
-                    	replyNo: replyNo
-                    },
-                    success: function (data) {
-                        if (data.success) {
-                            location.reload();
-                        } else {
-                        	alert("댓글 좋아요 누르기을 실패하였습니다.");
+            function deleteReplyLike(obj) {
+                var replyNoElement = obj.parentElement.previousElementSibling;
+
+                if (replyNoElement) {
+                    var replyNo = replyNoElement.value;
+                    $.ajax({
+                        type: "POST",
+                        url: "/reply/dislike.tp",
+                        data: {
+                            boardNo: boardNo,
+                            boardType: boardType,
+                            userId: userId,
+                            replyNo: replyNo
+                        },
+                        success: function (data) {
+                            if (data.success) {
+                                location.reload();
+                            } else {
+                                alert("댓글 좋아요 취소를 실패하였습니다.");
+                            }
+                        },
+                        error: function () {
+                            console.error("서버 요청에 실패했습니다. 상태 코드: " + status);
+                            console.error("에러 내용: " + error);
                         }
-                    },
-                    error: function () {
-                    	console.error("서버 요청에 실패했습니다. 상태 코드: " + status);
-                        console.error("에러 내용: " + error);
-                    }
-                });  
+                    });
+                } else {
+                    console.log("replyNo가 존재하지 않습니다.");
+                }
             }
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

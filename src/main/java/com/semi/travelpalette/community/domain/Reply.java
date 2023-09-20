@@ -17,6 +17,15 @@ public class Reply {
 	private int likeNo;
 	private char likeYn;
 	
+	public Reply() {}
+	
+	public Reply(int boardNo, String boardType, String userId) {
+		super();
+		this.boardNo = boardNo;
+		this.boardType = boardType;
+		this.userId = userId;
+	}
+
 	public int getReplyNo() {
 		return replyNo;
 	}

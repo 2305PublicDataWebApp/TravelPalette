@@ -95,8 +95,9 @@ public class ReplyController {
     			response.put("message", "게시물 좋아요 함수를 가져올 수 없습니다.");
     		}
 		} catch (Exception e) {
-			// try catch문에서 exception이 발동했지만 ajax는 정상작동..?
-			response.put("success", true);
+//			response.put("success", true);
+			System.out.println(e.getMessage());
+			response.put("success", false);
 		}
     	return response;
     }
@@ -116,8 +117,9 @@ public class ReplyController {
     			response.put("message", "게시물 좋아요 함수를 가져올 수 없습니다.");
     		}
 		} catch (Exception e) {
-			// try catch문에서 exception이 발동했지만 ajax는 정상작동..?
-			response.put("success", true);
+//			response.put("success", true);
+			System.out.println(e.getMessage());
+			response.put("success", false);
 		}
     	return response;
     }

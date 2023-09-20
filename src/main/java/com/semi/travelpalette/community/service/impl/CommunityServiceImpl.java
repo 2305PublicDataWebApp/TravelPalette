@@ -102,8 +102,14 @@ public class CommunityServiceImpl implements CommunityService{
 	}
 
 	@Override
-	public List<Community> searchNoticesByKeyword(Map<String, String> paraMap, PageInfo pInfo) {
-		List<Community> cList = cStore.searchNoticesByKeyword(session, paraMap, pInfo);
+	public List<Community> searchListByKeyword(Map<String, String> paraMap, PageInfo pInfo) {
+		List<Community> cList = cStore.searchListByKeyword(session, paraMap, pInfo);
+		return cList;
+	}
+
+	@Override
+	public List<Community> selectSortList(PageInfo pInfo) {
+		List<Community> cList = cStore.selectSortList(session, pInfo);
 		return cList;
 	}
 

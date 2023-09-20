@@ -22,6 +22,13 @@ public interface ReplyService {
 	 * @return
 	 */
 	List<Reply> selectReplyList(Community cOne);
+	
+	/**
+	 * 게시판 게시물 별 좋아요 한 사람들 리스트 불러오기 Service
+	 * @param cOne
+	 * @return
+	 */
+	List<Reply> selectReplyLikeList(Community cOne);
 
 	/**
 	 * 댓글 수정하기 Service
@@ -39,10 +46,10 @@ public interface ReplyService {
 
 	/**
 	 * 댓글 당 좋아요 개수 불러오기 Service
-	 * @param paramMap
+	 * @param setReply
 	 * @return
 	 */
-	int countLikeByMap(Map<String, Object> paramMap);
+	int countLikeByMap(Reply setReply);
 
 	/**
 	 * 댓글 좋아요 누르기 Service
@@ -57,5 +64,14 @@ public interface ReplyService {
 	 * @return
 	 */
 	int deleteReplyLike(Like like);
+
+	/**
+	 * 로그인 한 아이디가 해당 댓글에 좋아요를 눌렀는 지 체크 Service
+	 * @param setReply
+	 * @return
+	 */
+	Like selectLikeByReply(Reply setReply);
+
+	
 
 }
