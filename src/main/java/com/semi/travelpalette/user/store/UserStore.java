@@ -3,6 +3,8 @@ package com.semi.travelpalette.user.store;
 import com.semi.travelpalette.user.domain.UserMypageDto;
 import org.apache.ibatis.session.SqlSession;
 
+import com.semi.travelpalette.common.domain.Like;
+import com.semi.travelpalette.inquiry.domain.PageInfo;
 import com.semi.travelpalette.user.domain.User;
 
 import java.util.List;
@@ -148,6 +150,51 @@ public interface UserStore {
     int deleteUserInfo(int userNo);
 
     List<UserMypageDto> selectUserActivity(String userId);
+
+
+	/**
+	 * 좋아요 갯수
+	 * @param userId
+	 * @return
+	 */
+	public int selectLikeCount(String userId);
+
+	public List<Like> selectLikes(PageInfo pInfo);
+
+	/**
+	 * 아이디 찾기
+	 * @param findId
+	 * @return
+	 */
+	public User selectFindId(User findId);
+
+	/**
+	 * 비밀번호 찾기
+	 * @param findPW
+	 * @return
+	 */
+	public User selectFindPW(User findPw);
+
+	/**
+	 * 임시 비번으로 새로 설정
+	 * @param newPw
+	 * @return
+	 */
+	public int updateNewPw(String newPw);
+
+	/**
+	 * 이메일로 번호 검색
+	 * @param userEmail
+	 * @return
+	 */
+	public User selectUserNo(String userEmail);
+
+	/**
+	 * 임시 비번으로 update
+	 * @param updateInfo
+	 * @return
+	 */
+	public int updateNewPw(User updateInfo);
 
 
 //	public int kakaoUserInsert(  User kakaouser);
