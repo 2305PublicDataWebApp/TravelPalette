@@ -27,9 +27,9 @@
 	                    <input type="password" class="input" name="userPw" id="userPw" placeholder="비밀번호를 입력해주세요">
 	                </div>
 	                <div class="link">
-	                    <a href="#">가입하기</a>
-	                    <a href="#">아이디 찾기</a>
-	                    <a href="#">비밀번호 찾기</a>
+	                    <a href="/user/register.tp">가입하기</a>
+	                    <a href="/user/findId.tp">아이디 찾기</a>
+	                    <a href="/user/findPw.tp">비밀번호 찾기</a>
 	                </div>
 	                <span id="failMsg" style="display: none; text-align: center;">
 	    				로그인에 실패했습니다. 올바른 아이디와 비밀번호를 입력해주세요.

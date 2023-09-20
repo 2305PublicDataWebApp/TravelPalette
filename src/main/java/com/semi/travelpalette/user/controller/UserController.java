@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.semi.travelpalette.common.domain.Like;
+import com.semi.travelpalette.inquiry.domain.PageInfo;
+import com.semi.travelpalette.inquiry.service.InquiryService;
 import com.semi.travelpalette.user.domain.User;
 import com.semi.travelpalette.user.service.KakaoService;
 import com.semi.travelpalette.user.service.UserService;
@@ -31,14 +34,14 @@ import com.semi.travelpalette.user.service.UserService;
 public class UserController {
 
 	//권장
-//	private final UserService uService;
+//	private final UserService userService;
 //
 //	private final KakaoService kService;
 //
 //	private final JavaMailSenderImpl mailSender;
 
 	@Autowired
-	private UserService uService;
+	private UserService userService;
 	@Autowired
 	private KakaoService kService;
 
@@ -66,10 +69,10 @@ public class UserController {
 			) {
 		Map<String, Object> response = new HashMap<>();
 		// 입력받은 로그인 정보(아이디, pw)로 로그인 정보 객체에 저장
-		User login = uService.loginUser(user);
+		User login = userService.loginUser(user);
 		if(login != null) {
 			// 유저 상세 정보 번호로 조회
-			User userInfo = uService.selectUserAllInfo((int) login.getUserNo());
+			User userInfo = userService.selectUserAllInfo((int) login.getUserNo());
 	        if (userInfo != null) {
 	        	int userNo = login.getUserNo();
 	            String userId = login.getUserId();
@@ -78,6 +81,7 @@ public class UserController {
 	            String platformType = login.getPlatformType();
 	            System.out.println("로그인 닉네임 정보 : " + userNickname);
 	            System.out.println("로그인 플랫폼 정보 : " + platformType);
+	            System.out.println("로그인 아이디 정보 : " + userId);
 
 	            session.setAttribute("userNo", userNo);
 	            session.setAttribute("userId", userId);
@@ -120,10 +124,10 @@ public class UserController {
 			) {
 
 		String userId = (String) session.getAttribute("userId");
-		User uOne = uService.checkUserId(userId);
+		User uOne = userService.checkUserId(userId);
 
 		if(uOne != null) {
-            List<UserMypageDto> userMypageDtoList = uService.selectUserActivity(userId);
+            List<UserMypageDto> userMypageDtoList = userService.selectUserActivity(userId);
 
 			mv.addObject("userId", uOne.getUserId())
 					.addObject("userNickname", uOne.getUserNickname())
@@ -151,7 +155,7 @@ public class UserController {
     		) {
 		String userId = (String) session.getAttribute("userId");
 		System.out.println("제발~~!!" + userId);
-		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
+		User uOne = userService.checkUserId((String)session.getAttribute("userId"));
 		System.out.println();
 		if(uOne != null) {
 			mv.addObject("title", "비밀번호 확인").addObject("titleMsg", "비밀번호 확인")
@@ -174,7 +178,7 @@ public class UserController {
         // 요청 처리 로직
         String userId = (String)session.getAttribute("userId");
         User user =new User(userId, userPw);
-        User pwCheck = uService.loginUser(user);
+        User pwCheck = userService.loginUser(user);
         // 응답 데이터 생성
         Map<String, Object> response = new HashMap<>();
         if(pwCheck != null) {
@@ -199,14 +203,11 @@ public class UserController {
     		, @ModelAttribute User user
     		) {
 		String userId = (String) session.getAttribute("userId");
-		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
+		User uOne = userService.checkUserId((String)session.getAttribute("userId"));
 		// 유저 정보 검색 후 수정 페이지에 출력
-		System.out.println("제발" + uOne.toString());
-		System.out.println("되나? : " + uOne.getUserNo());
 		int userNo = uOne.getUserNo();
 		// 검색해온 유저 번호로 유저에 대한 모든 정보 select
-		User userInfo = uService.selectUserAllInfo(userNo);
-		System.out.println("되나??? : " + userInfo.toString());
+		User userInfo = userService.selectUserAllInfo(userNo);
 		if(uOne != null) {
 			mv.addObject("userInfo", userInfo);
 			mv.setViewName("/user/modifyNormal");
@@ -223,12 +224,10 @@ public class UserController {
 			ModelAndView mv
 			, HttpSession session
 			, User user) {
-		System.out.println("아!!!!!!!!!!!!!!!");
-		System.out.println(user.toString());
 		String userId = (String) session.getAttribute("userId");
-		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
-		User userInfo = uService.selectUserAllInfo(uOne.getUserNo());
-		uService.updateUserNormal(user);
+		User uOne = userService.checkUserId((String)session.getAttribute("userId"));
+		User userInfo = userService.selectUserAllInfo(uOne.getUserNo());
+		userService.updateUserNormal(user);
 		mv.setViewName("/user/mypage");
 		return mv;
 	}
@@ -243,11 +242,11 @@ public class UserController {
     		, @ModelAttribute User user
     		) {
 		String userId = (String) session.getAttribute("userId");
-		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
+		User uOne = userService.checkUserId((String)session.getAttribute("userId"));
 		// 유저 정보 검색 후 수정 페이지에 출력
 		int userNo = uOne.getUserNo();
 		// 검색해온 유저 번호로 유저에 대한 모든 정보 select
-		User userInfo = uService.selectUserAllInfo(userNo);
+		User userInfo = userService.selectUserAllInfo(userNo);
 		if(uOne != null) {
 			mv.addObject("userInfo", userInfo);
 			mv.setViewName("/user/delete");
@@ -268,7 +267,7 @@ public class UserController {
         // 요청 처리 로직
         String userId = (String)session.getAttribute("userId");
         User oneUser =new User(userId, user.getUserPw());
-        User pwCheck = uService.loginUser(oneUser);
+        User pwCheck = userService.loginUser(oneUser);
         // 응답 데이터 생성
         Map<String, Object> response = new HashMap<>();
         if(pwCheck != null) {
@@ -289,7 +288,7 @@ public class UserController {
     		, HttpSession session) {
     	// 요청 처리 로직
     	int userNo = (int)session.getAttribute("userNo");
-    	int result = uService.deleteUser(userNo);
+    	int result = userService.deleteUser(userNo);
     	// 응답 데이터 생성
     	Map<String, Object> response = new HashMap<>();
     	if(result > 0) {
@@ -304,9 +303,80 @@ public class UserController {
     }
 
 
-
-
-
+    // 아이디 찾기
+    @GetMapping("/findId.tp")
+    public ModelAndView findId(
+    		ModelAndView mv
+    		, User user
+    		) {
+    	mv.setViewName("/user/findId");
+    	return mv;
+    }
+    
+    @PostMapping("/findId.tp")
+    @ResponseBody
+    public Map<String, Object> UserSearchFindId(
+    		User user
+    		) {
+    	User findId = new User();
+    	findId.setUserEmail(user.getUserEmail());
+    	findId.setUserName(user.getUserName());
+    	User result = userService.selectFindId(findId);
+    	String userId = userService.displayId(result.getUserId());
+    	Map<String, Object> response = new HashMap<>();
+    	if(result != null) {
+    		response.put("success", true);
+    		response.put("userId", userId);
+    		response.put("url", "/user/infoResult.tp");
+    	} else {
+        	response.put("success", false);
+            response.put("message", "아이디와 비밀번호를 확인해주세요."); // 실패 메시지 설정
+    	}
+    	return response;
+    }
+    
+    @GetMapping("/infoResult.tp")
+    public ModelAndView showInfoResult(
+    		ModelAndView mv
+    		, @RequestParam("userId") String userId
+    		) {
+    	mv.addObject("userId", userId);
+    	mv.setViewName("/user/userInfoResult");
+    	return mv;
+    }
+    
+    // 비밀번호 찾기
+    @GetMapping("/findPw.tp")
+    public ModelAndView findPw(
+    		ModelAndView mv
+    		, User user
+    		) {
+    	mv.setViewName("/user/findPw");
+    	return mv;
+    }
+    
+    @PostMapping("/findPw.tp")
+    @ResponseBody
+    public Map<String, Object> UserSearchFindPw(
+    		User user
+    		, HttpSession session
+    		) {
+    	User findPw = new User();
+    	findPw.setUserId(user.getUserId());
+    	findPw.setUserEmail(user.getUserEmail());
+    	User result = userService.selectFindPw(findPw);
+    	Map<String, Object> response = new HashMap<>();
+    	if(result != null) {
+    		this.findPwEmail(findPw.getUserEmail(), session);
+    		response.put("success", true);
+    		response.put("msg", "임시 비밀번호가 발급되었습니다.\n임시 비밀번호로 로그인 후 비밀번호를 변경해주세요.");
+    		response.put("url", "/user/login.tp");
+    	} else {
+        	response.put("success", false);
+            response.put("message", "아이디와 비밀번호를 확인해주세요."); // 실패 메시지 설정
+    	}
+    	return response;
+    }
 
 
 	// ************************ 회원가입 관련 ***************************
@@ -326,7 +396,14 @@ public class UserController {
 			ModelAndView mv
 			, @ModelAttribute User user
 			) {
-		uService.insertUser(user);
+		int result = userService.insertUser(user);
+		if(result > 0) {
+			mv.addObject("msg", "회원가입이 성공적으로 완료되었습니다.").addObject("url", "redirect:/index.jsp");
+			mv.setViewName("/common/seccessPage");
+		}else {
+			mv.addObject("msg", "회원가입이 완료되지 않았습니다.").addObject("url", "redirect:/index.jsp");
+			mv.setViewName("/common/errorPage");
+		}
 		return mv;
 	}
 
@@ -335,7 +412,7 @@ public class UserController {
     @ResponseBody
     public Map<String, Object> checkId(@RequestParam String userId) {
         Map<String, Object> response = new HashMap<>();
-        User userData = uService.checkUserId(userId);
+        User userData = userService.checkUserId(userId);
         if (userData != null) {
             boolean isDuplicate = true; // 중복됨
             response.put("isDuplicate", isDuplicate);
@@ -352,7 +429,7 @@ public class UserController {
 	@ResponseBody
 	public Map<String, Object> checkNickname(@RequestParam String userNickname) {
 		Map<String, Object> response = new HashMap<>();
-		User userData = uService.checkUserNickname(userNickname);
+		User userData = userService.checkUserNickname(userNickname);
 		if (userData != null) {
 			boolean isDuplicate = true; // 중복됨
 			response.put("isDuplicate", isDuplicate);
@@ -363,6 +440,37 @@ public class UserController {
 
 		return response;
 	}
+	
+	
+	
+	// ******************* 유저 활동 내역 관리 ***********************
+	// 시간 상의 문제로 설계가 어려움
+	// DB 설계상 USER가 모든 활동 내역을 한 번에 관리하기 어려운 구조로 되어있음
+	// 추후 DB를 통째로 수정하거나 시간을 많이 투자하면 가능할 것으로 보임
+	
+//	@GetMapping("/activityLike.tp")
+//	@ResponseBody
+//	public ModelAndView likeDelete (
+//			ModelAndView mv
+//			, @RequestParam(value="page", required = false, defaultValue = "1") Integer currentPage
+//			, Like like
+//			, HttpSession session){
+//		String userId = (String) session.getAttribute("userId");
+//		if(userId != null) {
+//			
+//			int totalCount = userService.selectLikeCount(userId);
+//			PageInfo pInfo = userService.getPageInfo(currentPage, userId, totalCount);
+//			List<Like> likes = userService.selectLikes(pInfo);
+//			System.out.println(like.getLikeNo());
+//			mv.addObject("like", likes);
+//			mv.setViewName("/user/activityLike");
+//		} else {
+//			mv.addObject("error", "로그인 후 이용 가능합니다.").addObject("msg", "로그인 후 이용 가능합니다.").addObject("url", "/user/login.tp").addObject("back",false);
+//			mv.setViewName("/common/errorPage");
+//		}
+//		return mv;
+//	}
+	
 
 
 
@@ -380,7 +488,7 @@ public class UserController {
 		System.out.println("이메일 인증 이메일 : " + userEmail);
 
 		// 이메일 중복 검사
-		User mailCheck = uService.checkUserEmail(userEmail);
+		User mailCheck = userService.checkUserEmail(userEmail);
 	    if (mailCheck != null) {
 	        // 이메일이 이미 등록되어 있는 경우 (중복)
 	        response.put("isDuplicate", true);
@@ -416,13 +524,39 @@ public class UserController {
 		this.mailSend(setFrom, toMail, title, content);
 		int code = authNumber; // 인증번호를 code 변수에 저장
 
-	    if (session.getAttribute("code") != null) {
 	        session.removeAttribute("code");
-	    }
-	    session.setAttribute("code", code);
-//		int code = (int) session.getAttribute("code");
+	        session.setAttribute("code", code);
+
+		System.out.println("세션에 저장된 번호 : " + session.getAttribute("code"));
 		System.out.println("인증번호!!!!!!!!!!!! : " + code);
 		return Integer.toString(authNumber);
+	}
+	
+	public boolean findPwEmail(String userEmail
+			, HttpSession session) {
+		makeRandomNumber();
+		String setFrom = "travelpalette0901@gmail.com"; // email-config에 설정한 자신의 이메일 주소를 입력
+		String toMail = userEmail;
+		String title = "여행 팔레트 임시 비밀번호 이메일 입니다."; // 이메일 제목
+		int code = authNumber; // 인증번호를 code 변수에 저장
+		String newPw = "n" + code + "~!@";
+		String content =
+				"임시 비밀번호는 " + newPw + "입니다." +
+						"<br>" +
+						"임시 비밀번호로 로그인 후 비밀번호를 변경해주세요."; //이메일 내용 삽입
+		this.mailSend(setFrom, toMail, title, content);
+		// 이메일로 번호 출력 후 UPDATE 하기
+		User selectInfo = userService.selectUserNo(userEmail);
+		// 비번 + 번호로 update
+		User updateInfo = new User();
+		updateInfo.setUserNo(selectInfo.getUserNo());
+		updateInfo.setUserPw(newPw);
+		int pwUpdate = userService.updateNewPw(updateInfo);
+		if(pwUpdate > 0 ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	//이메일 전송 메소드
