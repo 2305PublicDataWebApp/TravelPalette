@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 	<html>
 	<head>
-		<meta charset="EUC-KR">
+		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<link rel="stylesheet" href="/resources/css/include/nav.css">
 	</head>
@@ -59,7 +59,7 @@
                             <a href="/user/mypage.tp">
                                 마이페이지<br>
                             </a>
-                            <a href="#">
+                            <a href="/inquiry/list.tp">
                                 1 : 1 문의사항
                             </a>
                         </li>

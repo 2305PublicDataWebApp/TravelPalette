@@ -1,6 +1,5 @@
 package com.semi.travelpalette.community.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.semi.travelpalette.common.domain.Like;
+import com.semi.travelpalette.community.domain.Community;
 import com.semi.travelpalette.community.domain.Reply;
 import com.semi.travelpalette.community.service.ReplyService;
 
@@ -77,6 +78,50 @@ public class ReplyController {
             mv.setViewName("common/errorPage");
             return mv;
         }
+    }
+	
+	@PostMapping("/like.tp")
+    @ResponseBody
+    public Map<String, Object> insertReplyLike(@ModelAttribute Like like
+    		, HttpServletResponse responce) {
+		
+    	Map<String, Object> response = new HashMap<>();
+    	try {
+    		int result = rService.insertReplyLike(like);
+    		if ( result > 0) {
+    			response.put("success", true);
+    		} else {
+    			response.put("success", false);
+    			response.put("message", "게시물 좋아요 함수를 가져올 수 없습니다.");
+    		}
+		} catch (Exception e) {
+//			response.put("success", true);
+			System.out.println(e.getMessage());
+			response.put("success", false);
+		}
+    	return response;
+    }
+    
+    @PostMapping("/dislike.tp")
+    @ResponseBody
+    public Map<String, Object> deleteReplyLike(@ModelAttribute Like like
+    		, HttpServletResponse responce) {
+		
+    	Map<String, Object> response = new HashMap<>();
+    	try {
+    		int result = rService.deleteReplyLike(like);
+    		if ( result > 0) {
+    			response.put("success", true);
+    		} else {
+    			response.put("success", false);
+    			response.put("message", "게시물 좋아요 함수를 가져올 수 없습니다.");
+    		}
+		} catch (Exception e) {
+//			response.put("success", true);
+			System.out.println(e.getMessage());
+			response.put("success", false);
+		}
+    	return response;
     }
 }
 

@@ -1,6 +1,7 @@
 package com.semi.travelpalette.community.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,42 @@ public class CommunityServiceImpl implements CommunityService{
 	public Like selectLikeByClass(Like like) {
 		Like clike = cStore.selectLikeByClass(session, like);
 		return clike;
+	}
+
+	@Override
+	public int insertLike(Like like) {
+		int result = cStore.insertLike(session, like);
+        return result;
+	}
+
+	@Override
+	public int updateLikeNo(Community cOne) {
+		int result = cStore.updateLikeNo(session, cOne);
+        return result;
+	}
+
+	@Override
+	public int deleteLike(Like like) {
+		int result = cStore.deleteLike(session, like);
+        return result;
+	}
+
+	@Override
+	public int getSearchListCount(Map<String, String> paraMap) {
+		int result = cStore.getSearchListCount(session, paraMap);
+        return result;
+	}
+
+	@Override
+	public List<Community> searchListByKeyword(Map<String, String> paraMap, PageInfo pInfo) {
+		List<Community> cList = cStore.searchListByKeyword(session, paraMap, pInfo);
+		return cList;
+	}
+
+	@Override
+	public List<Community> selectSortList(PageInfo pInfo) {
+		List<Community> cList = cStore.selectSortList(session, pInfo);
+		return cList;
 	}
 
 }

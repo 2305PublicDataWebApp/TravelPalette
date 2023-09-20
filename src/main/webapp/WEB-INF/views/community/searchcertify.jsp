@@ -24,28 +24,30 @@
                 <h2 style="font-family: 'TmoneyRoundWindExtraBold'; font-size: 28px; padding: 20px; margin-top: 30px; float: left;">여행 인증 게시판</h2>
                 <form action="/community/searchcertify.tp" method="get">
                 	<div class="input-group" style="width: 600px;float: right;margin-top: 90px;">
+                		<input type="hidden" name="boardType" value="${pInfo.boardType }">
 	                    <select name="searchCondition" class="form-select" aria-label="Default select example" style="margin-right: 8px;border: 1px solid #adb5bd;">
-	                        <option value="all">전체</option>
-	                        <option value="title">제목</option>
-	                        <option value="nickName">닉네임</option>
+	                        <option value="all" <c:if test="${paraMap.searchCondition eq 'all'}">selected</c:if>>전체</option>
+	                        <option value="title" <c:if test="${paraMap.searchCondition eq 'title'}">selected</c:if>>제목</option>
+	                        <option value="nickName" <c:if test="${paraMap.searchCondition eq 'nickName'}">selected</c:if>>닉네임</option>
 	                      </select>
-	                    <input name="searchKeyword" style="width: 200px;border: 1px solid #adb5bd;" class="form-control me-2" type="search" placeholder="검색어를 입력해주세요." aria-label="Search">
+	                    <input name="searchKeyword" style="width: 200px;border: 1px solid #adb5bd;" class="form-control me-2" type="search" 
+	                    placeholder="검색어를 입력해주세요." aria-label="Search" value="${paraMap.searchKeyword}">
 	                    <button class="btn btn-outline-success" style="border-bottom-right-radius: 5px;border-top-right-radius: 5px;z-index: 1;width: 80px;" type="submit" >Search</button>
                 	</div>
                	</form>
                 <div style="width: 100%;float: left;border-top: 1px solid #ccc;margin-top: 15px;padding: 10px 0px">
                     <p style="float:left;font-size: 18px;margin: 0;padding: 5px;font-weight: 600;font-family: 'SUITE-Regular';letter-spacing: 2px;padding-left: 15px;"># ${pInfo.totalCount }건</p>
                     <button id="goInsertBoardPage" type="button" style="float: right;" class="btn btn-primary">글 등록</button>
-                    <p style="margin: 0;padding: 7px 13px 0px 8px;margin-left: 3px;float: right;">
-                        <c:if test="${sortType eq 'no' }">
-                    		<a href="/community/certify.tp" style="text-decoration:underline;">최신순 </a>|
-               	        	<a href="/community/certify.tp?sortType=likeDESC">추천순</a>
-                    	</c:if>
-               	        <c:if test="${sortType ne 'no' }">
-               	        	<a href="/community/certify.tp">최신순 </a>|
-	                        <a href="/community/certify.tp?sortType=likeDESC" style="text-decoration:underline;">추천순</a> 
-                    	</c:if>
-                    </p>
+<!--                     <p style="margin: 0;padding: 7px 13px 0px 8px;margin-left: 3px;float: right;"> -->
+<%--                         <c:if test="${sortType eq 'no' }"> --%>
+<!--                     		<a href="/community/certify.tp" style="text-decoration:underline;">최신순 </a>| -->
+<!--                	        	<a href="/community/certify.tp?sortType=likeDESC">추천순</a> -->
+<%--                     	</c:if> --%>
+<%--                	        <c:if test="${sortType ne 'no' }"> --%>
+<!--                	        	<a href="/community/certify.tp">최신순 </a>| -->
+<!-- 	                        <a href="/community/certify.tp?sortType=likeDESC" style="text-decoration:underline;">추천순</a>  -->
+<%--                     	</c:if> --%>
+<!--                     </p> -->
                 </div>
             </div>
             <table class="table" style="text-align: center;margin:0;margin-top: 5px;">
@@ -85,58 +87,39 @@
             </table>
         	<div aria-label="Page navigation example">
                 <ul class="pagination justify-content-center" style="width: 100%;height: 100px;padding-top: 30px;">
-                    <c:if test="${sortType eq 'no' }">                   		
-	                    <c:if test="${pInfo.startNavi ne 1}">
-	                        <c:url var="bPageUrl" value="/community/certify.tp">
-	                            <c:param name="page" value="${pInfo.startNavi-1}"></c:param>
-	                        </c:url>
-	                        <li class="page-item">
-	                            <a style="color: black;" class="page-link" href="${bPageUrl}">Previous</a>
-	                        </li>
-	                    </c:if>
-	                    <c:forEach begin="${pInfo.startNavi}" end="${pInfo.endNavi}" var="p">
-	                        <c:url var="pageUrl" value="/community/certify.tp">
-	                            <c:param name="page" value="${p}"></c:param>
-	                        </c:url>
-	                        <li class="page-item">
-	                            <a style="color: black;" class="page-link" href="${pageUrl}">${p}</a>
-	                        </li>
-	                    </c:forEach>
-	                    <c:if test="${pInfo.endNavi ne pInfo.naviTotalCount}">
-	                        <c:url var="nPageUrl" value="/community/certify.tp">
-	                            <c:param name="page" value="${pInfo.endNavi+1}"></c:param>
-	                        </c:url>
-	                        <li class="page-item">
-	                            <a style="color: black;" class="page-link" href="${nPageUrl}">Next</a>
-	                        </li>
-	                    </c:if>
-                   	</c:if>
-                   	<c:if test="${sortType ne 'no' }">                   		
-	                    <c:if test="${pInfo.startNavi ne 1}">
-	                        <c:url var="bPageUrl" value="/community/certify.tp?sortType=likeDESC">
-	                            <c:param name="page" value="${pInfo.startNavi-1}"></c:param>
-	                        </c:url>
-	                        <li class="page-item">
-	                            <a style="color: black;" class="page-link" href="${bPageUrl}">Previous</a>
-	                        </li>
-	                    </c:if>
-	                    <c:forEach begin="${pInfo.startNavi}" end="${pInfo.endNavi}" var="p">
-	                        <c:url var="pageUrl" value="/community/certify.tp?sortType=likeDESC">
-	                            <c:param name="page" value="${p}"></c:param>
-	                        </c:url>
-	                        <li class="page-item">
-	                            <a style="color: black;" class="page-link" href="${pageUrl}">${p}</a>
-	                        </li>
-	                    </c:forEach>
-	                    <c:if test="${pInfo.endNavi ne pInfo.naviTotalCount}">
-	                        <c:url var="nPageUrl" value="/community/certify.tp?sortType=likeDESC">
-	                            <c:param name="page" value="${pInfo.endNavi+1}"></c:param>
-	                        </c:url>
-	                        <li class="page-item">
-	                            <a style="color: black;" class="page-link" href="${nPageUrl}">Next</a>
-	                        </li>
-	                    </c:if>
-	                </c:if>
+                    <c:if test="${pInfo.startNavi ne 1}">
+                        <c:url var="bPageUrl" value="/community/searchcertify.tp">
+                        	<c:param name="searchCondition" value="${paramap.searchCondition}"></c:param>
+                        	<c:param name="searchKeyword" value="${paramap.searchKeyword}"></c:param>
+                        	<c:param name="boardType" value="${pInfo.boardType}"></c:param>
+                            <c:param name="page" value="${pInfo.startNavi-1}"></c:param>
+                        </c:url>
+                        <li class="page-item">
+                            <a style="color: black;" class="page-link" href="${bPageUrl}">Previous</a>
+                        </li>
+                    </c:if>
+                    <c:forEach begin="${pInfo.startNavi}" end="${pInfo.endNavi}" var="p">
+                        <c:url var="pageUrl" value="/community/searchcertify.tp">
+                        	<c:param name="searchCondition" value="${paramap.searchCondition}"></c:param>
+                        	<c:param name="searchKeyword" value="${paramap.searchKeyword}"></c:param>
+                        	<c:param name="boardType" value="${pInfo.boardType}"></c:param>
+                            <c:param name="page" value="${p}"></c:param>
+                        </c:url>
+                        <li class="page-item">
+                            <a style="color: black;" class="page-link" href="${pageUrl}">${p}</a>
+                        </li>
+                    </c:forEach>
+                    <c:if test="${pInfo.endNavi ne pInfo.naviTotalCount}">
+                        <c:url var="nPageUrl" value="/community/searchcertify.tp">
+                        	<c:param name="searchCondition" value="${paramap.searchCondition}"></c:param>
+                        	<c:param name="searchKeyword" value="${paramap.searchKeyword}"></c:param>
+                        	<c:param name="boardType" value="${pInfo.boardType}"></c:param>
+                            <c:param name="page" value="${pInfo.endNavi+1}"></c:param>
+                        </c:url>
+                        <li class="page-item">
+                            <a style="color: black;" class="page-link" href="${nPageUrl}">Next</a>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
         </main>

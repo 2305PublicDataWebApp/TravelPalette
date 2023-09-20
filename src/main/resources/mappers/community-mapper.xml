@@ -20,6 +20,33 @@
         <result property="boardFileLength" column="BOARD_FILE_LENGTH" />
         <result property="likeNo" column="LIKE_NO" />
     </resultMap>
+    <select id="searchListByKeyword" resultMap="CommunityResultMap">
+  		SELECT * FROM COMMUNITY_TBL WHERE BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y'
+  		<if test="searchCondition == 'all'">
+	  		AND BOARD_TITLE LIKE '%'||#{searchKeyword}||'%' OR USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' 
+  		</if>
+  		<if test="searchCondition == 'title'">
+  			AND BOARD_TITLE LIKE '%'||#{searchKeyword}||'%'
+  		</if>
+  		<if test="searchCondition == 'nickName'">
+  			AND USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' 
+  		</if>
+  	</select>
+  	<select id="getSearchListCount" resultType="_int">
+  		SELECT COUNT(*) FROM COMMUNITY_TBL WHERE BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y'
+  		<if test="searchCondition == 'all'">
+	  		AND BOARD_TITLE LIKE '%'||#{searchKeyword}||'%' OR USER_NICKNAME LIKE '%'||#{searchKeyword}||'%'
+  		</if>
+  		<if test="searchCondition == 'title'">
+  			AND BOARD_TITLE LIKE '%'||#{searchKeyword}||'%' 
+  		</if>
+  		<if test="searchCondition == 'nickName'">
+  			AND USER_NICKNAME LIKE '%'||#{searchKeyword}||'%'
+  		</if>
+  	</select>
+    <select id="selectSortList" resultMap="CommunityResultMap">
+    	SELECT * FROM COMMUNITY_TBL WHERE BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y' ORDER BY LIKE_NO DESC
+    </select>
     <select id="selectListByBoardType" resultMap="CommunityResultMap">
         SELECT * FROM COMMUNITY_TBL WHERE BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y' ORDER BY BOARD_CREATE_DATE DESC
     </select>
@@ -43,5 +70,8 @@
     </update>
     <update id="updateViewCount">
     	UPDATE COMMUNITY_TBL SET VIEW_COUNT = #{viewCount} WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType} AND BOARD_STATUS = 'Y'
+    </update>
+    <update id="updateLikeNo">
+    	UPDATE COMMUNITY_TBL SET LIKE_NO = #{likeNo} WHERE BOARD_NO = #{boardNo} AND BOARD_TYPE = #{boardType}
     </update>
 </mapper>

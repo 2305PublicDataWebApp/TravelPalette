@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function loginCheck(){
       	var userId = "${userId}";
-	if(memberId === ""){
+	if(userId === ""){
 		alert("로그인 후 이용가능한 기능입니다.");
           	if(confirm("로그인 페이지로 이동하시겠습니까?")){
           		location.href="/user/login.tp";
