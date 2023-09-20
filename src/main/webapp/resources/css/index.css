@@ -34,7 +34,7 @@ header, nav, footer{
     /* 메인 */
     #mainBackground {
         width: 100%;
-        height: 700px;
+        height: 850px;
         position: absolute;
         top: 201px;
         z-index: -1;

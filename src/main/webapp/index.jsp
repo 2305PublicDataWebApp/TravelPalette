@@ -31,7 +31,14 @@
                 <div class="wrapper">
                   <div class="items">
                     <div class="item"></div>
-                    <div class="item"><div class="content pink">1</div></div>
+                    <div class="item">
+					    <div class="content pink" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent), url(../resources/tUploadFiles/부소담악\(추소정\)1.jpg); background-size: cover; background-repeat: no-repeat; background-position: center center; width: 1200px; height: 600px;postion:relative;">
+						    <div style="position:absolute;">
+						    	<h2 style="font-size: 42px;font-family: 'TmoneyRoundWindExtraBold';">호수 위에 떠 있는</h2>
+						    	<h4 style="font-family: 'KCC-Ganpan';font-size:35px;">부소담악</h4>
+						    </div>
+					    </div>
+					</div>
                     <div class="item"><div class="content yellow">2</div></div>
                     <div class="item"><div class="content skyblue">3</div></div>
                     <div class="item"><div class="content orange">4</div></div>
