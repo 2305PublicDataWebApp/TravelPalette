@@ -8,9 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>여행 정보 게시판 작성</title>
         <link rel="stylesheet" href="../resources/css/travel/write.css">
-        <link rel="stylesheet" href="../resources/css/travel/header.css" />
-        <link rel="stylesheet" href="../resources/css/travel/nav.css" />
-        <link rel="stylesheet" href="../resources/css/travel/footer.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     </head>
     <body>
     	<!-- 헤더 -->
@@ -121,6 +119,7 @@
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script>
+        	<jsp:include page="/include/navjs.jsp"></jsp:include>
         	// 라디오버튼 체크
         	document.addEventListener("DOMContentLoaded", function() {
         		const selectedLocation = "${travel.travelLocation}";
