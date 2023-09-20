@@ -32,16 +32,71 @@
                   <div class="items">
                     <div class="item"></div>
                     <div class="item">
-					    <div class="content pink" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent), url(../resources/tUploadFiles/부소담악\(추소정\)1.jpg); background-size: cover; background-repeat: no-repeat; background-position: center center; width: 1200px; height: 600px;postion:relative;">
-						    <div style="position:absolute;">
-						    	<h2 style="font-size: 42px;font-family: 'TmoneyRoundWindExtraBold';">호수 위에 떠 있는</h2>
-						    	<h4 style="font-family: 'KCC-Ganpan';font-size:35px;">부소담악</h4>
-						    </div>
+						<div class="content" style="width:23%;height:220px;float:left;background-color:#FFEFBC;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);text-align: center;">
+						    <div>
+							    <h2 style="font-size: 30px; font-family: 'TmoneyRoundWindExtraBold';color:#CC9B6D;">
+							    	*부소담악(추소정)
+							    </h2>
+							</div>						
+						</div>
+					    <div class="content pink" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent), url(../resources/images/main/부소담악.jpg); background-size: cover; 
+					    background-repeat: no-repeat;background-position: center center; width: 66%; height: 600px;float: right;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);">
 					    </div>
+						<div class="content" style="width:23%;float:left;height:330px;background-color:#F7D098;margin-top:50px;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);">
+							    <h4 style="font-family: 'SUITE-Regular'; font-size: 23px;font-weight:600;color: #fffdee;line-height: 33px;">호수 위에 떠 있는 병풍바위,<br><br>충북 옥천군 군북면<br> 부소무늬마을에 가면 <br>부소담악이라는 <br>절경을 만날 수 있다. </h4>
+						</div>
 					</div>
-                    <div class="item"><div class="content yellow">2</div></div>
-                    <div class="item"><div class="content skyblue">3</div></div>
-                    <div class="item"><div class="content orange">4</div></div>
+                    <div class="item">
+                    	<div class="content" style="width:23%;height:220px;float:left;background-color:#FFCCCC;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);text-align: center;">
+						    <div>
+							    <h2 style="font-size: 30px; font-family: 'TmoneyRoundWindExtraBold';color:#FF8989;">
+							    	*섬진강<br>기차마을
+							    </h2>
+							</div>						
+						</div>
+					    <div class="content pink" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1), transparent 70%), url(../resources/images/main/섬진강기차마을.jpg); background-size: cover; 
+					    background-repeat: no-repeat;background-position: center center; width: 66%; height: 600px;float: right;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);">
+					    </div>
+						<div class="content" style="width:23%;float:left;height:330px;background-color:#FFB9B9;margin-top:50px;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);">
+						    <h4 style="font-family: 'SUITE-Regular'; font-size: 23px;font-weight:600;color: white;line-height: 33px;">
+							국도17호선에서 빠져나오면<br>울창한 메타세쿼이아 <br>가로수가 펼쳐진다. <br><br>길 양편으로 기차처럼 <br>길쭉한 나무들이<br> 쭉쭉 뻗었다.
+							</h4>
+						</div>
+                    </div>
+                    <div class="item">
+                    	<div class="content" style="width:23%;height:220px;float:left;background-color:#FFB9B9;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);text-align: center;">
+						    <div>
+							    <h2 style="font-size: 30px; font-family: 'TmoneyRoundWindExtraBold';color:#FFEDED;">
+							    	*휴애리<br>자연생활<br> 공원
+							    </h2>
+							</div>						
+						</div>
+					    <div class="content pink" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent 70%), url(../resources/images/main/휴애리자연생활공원1.bmp); background-size: cover; 
+					    background-repeat: no-repeat;background-position: center center; width: 66%; height: 600px;float: right;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);">
+					    </div>
+						<div class="content" style="width:23%;float:left;height:330px;background-color:#FFACAC;margin-top:50px;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);">
+						    <h4 style="font-family: 'SUITE-Regular'; font-size: 23px;font-weight:600;color: #fbeeee;line-height: 33px;">
+								휴애리는 <br>수많은 꽃들과 <br>한라산 풍경이 더해져 <br>더욱 아름다움을 <br>자랑하는<br> 꽃 정원이다
+							</h4>
+						</div>
+                    </div>
+                    <div class="item">
+						<div class="content" style="width:23%;height:220px;float:left;background-color:#FC9D9D;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);text-align: center;">
+						    <div>
+							    <h2 style="font-size: 30px; font-family: 'TmoneyRoundWindExtraBold';color:#FFEDED;">
+							    	*아침 고요<br>수목원
+							    </h2>
+							</div>						
+						</div>
+					    <div class="content pink" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.3), transparent 70%), url(../resources/images/main/아침고요수목원1.jpg); background-size: cover; 
+					    background-repeat: no-repeat;background-position: center center; width: 66%; height: 600px;float: right;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);">
+					    </div>
+						<div class="content" style="width:23%;float:left;height:330px;background-color:#FF8585;margin-top:50px;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);">
+						    <h4 style="font-family: 'SUITE-Regular'; font-size: 23px;font-weight:600;color: #FFE1E1;line-height: 33px;">
+							여러 가지 <br>특색 있는 정원을<br> 갖추고 있고,<br><br> 울창한 잣나무 <br>숲 아래에서 <br>삼림욕을 즐길 수 있는<br> 도시민들의 쉼터
+							</h4>
+						</div>
+					</div>
                     <div class="item"></div>
                   </div> 
                 </div>  
@@ -50,7 +105,9 @@
             <div class="travelRecommendArea">
                 <div class="travelRecommendText">
                     <h2>추천 여행 코스</h2>
-                    <img style="width:32px;float: right;padding-top: 3px;margin-right: 14px;" src="../resources/images/main/plus.png" alt="">
+                    <a href="/travel/list.tp">
+	                    <img style="width:32px;float: right;padding-top: 5px;margin-right: 14px;" src="../resources/images/main/plus.png" alt="">
+                    </a>
                 </div>
                 <div class="travelRecommand">
                     <ul>
@@ -58,29 +115,29 @@
                             <div class="animationTravelImg">
                                 <div class="travelImg" style="background-image: url(../resources/images/main/여행지사진1.jpg);"></div>
                             </div>
-                            <img style="position:absolute;top:10px;right: 20px;" src="../resources/images/main/emptyheart.png" alt="">
-                            <div class="travelText">장소1</div>
+                            <img style="position:absolute;top:10px;right: 20px;" src="../resources/images/main/pinkheart.png" alt="">
+                            <div class="travelText">의미 있는 여행지</div>
                         </li>
                         <li style="position: relative;">
                             <div class="animationTravelImg">
                                 <div class="travelImg" style="background-image: url(../resources/images/main/여행지사진2.jpg);"></div>
                             </div>
-                            <img style="position:absolute;top:10px;right: 20px;" src="../resources/images/main/emptyheart.png" alt="">
-                            <div class="travelText">장소1</div>
+                            <img style="position:absolute;top:10px;right: 20px;" src="../resources/images/main/pinkheart.png" alt="">
+                            <div class="travelText">우리 동네 탐방기</div>
                         </li>
                         <li style="position: relative;">
                             <div class="animationTravelImg">
                                 <div class="travelImg" style="background-image: url(../resources/images/main/여행지사진3.jpg);"></div>
                             </div>
-                            <img style="position:absolute;top:10px;right: 20px;" src="../resources/images/main/emptyheart.png" alt="">
-                            <div class="travelText">장소1</div>
+                            <img style="position:absolute;top:10px;right: 20px;" src="../resources/images/main/pinkheart.png" alt="">
+                            <div class="travelText">신나게 놀자!</div>
                         </li>
                         <li style="position: relative;">
                             <div class="animationTravelImg">
                                 <div class="travelImg" style="background-image: url(../resources/images/main/여행지사진4.jpg);"></div>
                             </div>
-                            <img style="position:absolute;top:10px;right: 20px;" src="../resources/images/main/emptyheart.png" alt="">
-                            <div class="travelText">장소1</div>
+                            <img style="position:absolute;top:10px;right: 20px;" src="../resources/images/main/pinkheart.png" alt="">
+                            <div class="travelText">힐링 여행</div>
                         </li>
                     </ul>
                 </div>
@@ -94,9 +151,12 @@
                 </div>
                 <div class="eventArea">
                     <div>
-                        <h4>주요 이벤트</h4>
+                        <h4 style="width: 465px;float:left">주요 이벤트</h4>
+                        <a href="/event/list.tp">
+	                        <img style="width:28px;" src="../resources/images/main/plus.png" alt="">
+                        </a>
                     </div>
-                    <div style="width: 100%;height: 50px;background-color: rgba(224, 224, 224, 0.32);padding-top: 10px;padding-left: 15px;">
+                    <div style="width: 100%;height: 50px;background-color: rgba(224, 224, 224, 0.32);padding-top: 10px;padding-left: 15px;margin-top:6px;">
                         <p style="float: left;background-color: #222;color: white;border-radius: 5px;width: 182px;text-align: center;margin: 0;font-weight: 100;">
                             위케이션 테마관 오픈
                         </p>
@@ -106,10 +166,10 @@
                         <p class="eventHighlight">위케이션 테마관 오픈 | </p>&nbsp;일과 휴가를 동시에, 워케이션 떠나자!
                     </div>
                     <div class="eventList">
-                        <p class="eventHighlight">집에 갈 시간 | </p>&nbsp;지금 바로 떠나자!
+                        <p class="eventHighlight">나만 몰랐던 이벤트? | </p>&nbsp;지금 바로 확인해보자
                     </div>
                     <div class="eventList">
-                        <p class="eventHighlight">언제쯤 완성할까..? | </p>&nbsp;일단 집에 가!
+                        <p class="eventHighlight">나를 위한 여행 | </p>&nbsp;우리 집 근처가 인기 여행지?
                     </div>
                 </div>
             </div>
@@ -125,19 +185,26 @@
                     <div style="width: 100%;height: 50px;"></div>
                     <div style="display: flex;flex-direction: row;justify-content: space-evenly;">
                         <div class="card guideBookMsg" style="float: left;">
-                            <img src="../resources/images/main/가이드북1.png" class="card-img-top" alt="">
+<!--                         	<a href="../resources/pdf/guidebook.pdf" download>  -->
+	                            <img src="../resources/images/main/가이드북1.png" class="card-img-top" alt="">
+<!--                         	</a> -->
                             <div class="card-body">
                                 <p class="card-text">한국의 숨은 골목 맛집</p>
                             </div>
                         </div>
                         <div class="card guideBookMsg" style="float:left;">
-                            <img style="border-radius:5px;" src="../resources/images/main/가이드북2.jpg" class="card-img-top" alt="">
+<!--                         	<a href="../resources/pdf/guidebook.pdf" download> -->
+	                            <img style="border-radius:5px;" src="../resources/images/main/가이드북2.jpg" class="card-img-top" alt="">
+<!--                         	</a> -->
                             <div class="card-body">
                                 <p class="card-text">아름다운 한국의 건축물 순례</p>
                             </div>
                         </div>
                         <div class="card guideBookMsg">
-                            <img src="../resources/images/main/가이드북3.png" class="card-img-top" alt="">
+<!--                         pdf경로로 쓰기 -->
+<!--                         	<a href="../resources/pdf/guidebook.pdf" download> -->
+	                            <img src="../resources/images/main/가이드북3.png" class="card-img-top" alt="">
+<!--                         	</a> -->                        	
                             <div class="card-body">
                                 <p class="card-text">동행! 동네 한바퀴(봄)</p>
                             </div>
