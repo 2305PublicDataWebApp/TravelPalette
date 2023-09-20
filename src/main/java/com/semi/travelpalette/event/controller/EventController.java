@@ -177,9 +177,10 @@ public class EventController {
 			, @RequestParam(value = "eventCondition", required=false) String eventCondition
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
 		try {
-			int totalCount = eService.getTotalCount();
+			System.out.println(eventCondition);
+			int totalCount = eService.getTotalCount(eventCondition);
 			EventPageInfo pageInfo = getPageInfo(currentPage, totalCount);
-			List<Event> eList = eService.eventAllListByNew(pageInfo);
+			List<Event> eList = eService.eventAllListByNew(pageInfo, eventCondition);
 			if(eList.size() > 0) {
 				mv.addObject("eventCondition", eventCondition);
 				mv.addObject("pageInfo", pageInfo);

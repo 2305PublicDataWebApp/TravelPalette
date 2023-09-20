@@ -1,10 +1,15 @@
 @charset "UTF-8";
-.eventContent {
-    text-align: center; /* Center-align the content within the div */
-    margin: 0 auto; /* Center-align the content horizontally */
-    max-width: 1000px; /* Set the img width to 100% */
-}
 
+main {
+    max-width: 1000px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: auto; /* 왼쪽 마진을 자동으로 설정 (양옆으로 마진을 주지 않음) */
+    margin-right: auto; /* 오른쪽 마진을 자동으로 설정 (양옆으로 마진을 주지 않음) */
+}
+.eventContent h1 {
+    text-align: center;
+}
 .eventAdd table {
     min-height: 100px; /* 최소 높이 설정 */
     height: auto; /* 높이를 자동으로 조절하도록 설정 */

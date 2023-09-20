@@ -14,17 +14,17 @@ import com.semi.travelpalette.event.store.EventStore;
 public class EventStoreLogic implements EventStore {
 
 	@Override
-	public List<Event> eventAllListByNew(SqlSession sqlSession, EventPageInfo pageInfo) {
+	public List<Event> eventAllListByNew(SqlSession sqlSession, EventPageInfo pageInfo, String eventCondition) {
 		int limit = pageInfo.getRecordCountPerPage();
 		int offset = (pageInfo.getCurrentPage() - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<Event> eList = sqlSession.selectList("EventMapper.eventAllListByNew", null, rowBounds);
+		List<Event> eList = sqlSession.selectList("EventMapper.eventAllListByNew", eventCondition, rowBounds);
 		return eList;
 	}
 
 	@Override
-	public int getTotalCount(SqlSession sqlSession) {
-		int totalCount = sqlSession.selectOne("EventMapper.getTotalCount");
+	public int getTotalCount(SqlSession sqlSession, String eventCondition) {
+		int totalCount = sqlSession.selectOne("EventMapper.getTotalCount", eventCondition);
 		return totalCount;
 	}
 
