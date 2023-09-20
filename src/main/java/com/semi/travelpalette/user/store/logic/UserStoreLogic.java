@@ -1,10 +1,14 @@
 package com.semi.travelpalette.user.store.logic;
 
 import com.semi.travelpalette.user.domain.UserMypageDto;
+
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.semi.travelpalette.common.domain.Like;
+import com.semi.travelpalette.inquiry.domain.PageInfo;
 import com.semi.travelpalette.user.domain.User;
 import com.semi.travelpalette.user.store.UserStore;
 
@@ -108,6 +112,45 @@ public class UserStoreLogic implements UserStore {
 
     @Override
     public List<UserMypageDto> selectUserActivity(final String userId) {
-        return session.selectList( "UserMapper.selectUserActivity",userId);
+        return session.selectList( "UserMapper.selectUserActivity", userId);
     }
+
+	@Override
+	public int selectLikeCount(String userId) {
+		return session.selectOne("UserMapper.selectLikeCount", userId);
+	}
+
+	@Override
+	public List<Like> selectLikes(PageInfo pInfo) {
+		String userId = pInfo.getInquiryWriter();
+		int limit = pInfo.getrecordnaviCountPage();
+		int offset = (pInfo.getCurrentPage()-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return session.selectList("UserMapper.selectLikes", userId, rowBounds);
+	}
+
+	@Override
+	public User selectFindId(User findId) {
+		return session.selectOne("UserMapper.selectFindId", findId);
+	}
+
+	@Override
+	public User selectFindPW(User findPw) {
+		return session.selectOne("UserMapper.selectFindPw", findPw);
+	}
+
+	@Override
+	public int updateNewPw(String newPw) {
+		return session.update("UserMapper.updateNewPw", newPw);
+	}
+
+	@Override
+	public User selectUserNo(String userEmail) {
+		return session.selectOne("UserMapper.selectUserNo", userEmail);
+	}
+
+	@Override
+	public int updateNewPw(User updateInfo) {
+		return session.update("UserMapper.updateNewPw", updateInfo);
+	}
 }

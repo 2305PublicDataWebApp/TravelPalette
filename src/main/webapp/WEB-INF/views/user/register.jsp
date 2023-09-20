@@ -33,12 +33,12 @@
 	                    <span id="idCheckMsg" class="guideMsg"></span>
 	                    <div class="inputDiv">
 	                        <label for="userPw">비밀번호<span class="redSpan">*</span></label>
-	                        <input type="password" name="userPw" id="userPw" class="input" onchange="pwCheck(); regPwCheck();" placeholder="영어, 숫자, 특수문자를 반드시 포함해 8~20글자">
+	                        <input type="password" name="userPw" id="userPw" class="input" onchange="pwCheck();" placeholder="영어, 숫자, 특수문자를 반드시 포함해 8~20글자">
 	                    </div>
 	                    <span id="pwCheckMsg" class="guideMsg"></span>
 	                    <div class="inputDiv">
 	                        <label for="userPwCheck">비밀번호 확인<span class="redSpan">*</span></label>
-	                        <input type="password" name="userPwCheck" id="userPwCheck" class="input" onchange="pwCheck(); regPwCheck();" placeholder="입력 가능한 특수문자(~, !, @, #, $, %, ^)">
+	                        <input type="password" name="userPwCheck" id="userPwCheck" class="input" onchange="pwCheck();" placeholder="입력 가능한 특수문자(~, !, @, #, $, %, ^)">
 	                    </div>
 	                    <span id="pwCheckMsg" class="guideMsg"></span>
 	                    <div class="inputDiv">
@@ -448,7 +448,11 @@
 		                }
 		            },
 		            error: function() {
-		                alert('서버 요청에 실패했습니다.');
+		            	alert('인증번호가 전송되었습니다.');
+ 		    			// 버튼 누르면 인증번호 입력 div flex로
+ 		    			document.getElementById('mailClickBtn').disabled = true;    
+ 						 emailCodeDiv.style.opacity = '1';
+ 						 emailCodeDiv.style.display = 'flex';
 		            }
 		        });
 		    } else {

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.semi.travelpalette.common.domain.Like;
 import com.semi.travelpalette.inquiry.domain.Inquiry;
 import com.semi.travelpalette.inquiry.domain.PageInfo;
 
