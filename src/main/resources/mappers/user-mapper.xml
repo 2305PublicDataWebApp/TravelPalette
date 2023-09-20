@@ -32,7 +32,23 @@
         <result property="likeCreateDate" column="LIKE_CREATE_DATE" />
         <result property="userId" column="USER_ID" />
     </resultMap>
-
+    <resultMap type="Community" id="CommunityResultMap">
+        <id property="boardNo" column="BOARD_NO"/>
+        <result property="boardTitle" column="BOARD_TITLE" />    
+        <result property="boardType" column="BOARD_TYPE" />
+        <result property="boardContent" column="BOARD_CONTENT" />
+        <result property="userId" column="USER_ID" />
+        <result property="userNickname" column="USER_NICKNAME" />
+        <result property="boardCreateDate" column="BOARD_CREATE_DATE" />
+        <result property="boardUpdateDate" column="BOARD_UPDATE_DATE" />
+        <result property="viewCount" column="VIEW_COUNT" />
+        <result property="boardStatus" column="BOARD_STATUS" />
+        <result property="boardFileName" column="BOARD_FILE_NAME" />
+        <result property="boardFileRename" column="BOARD_FILE_RENAME" />
+        <result property="boardFilePath" column="BOARD_FILE_PATH" />
+        <result property="boardFileLength" column="BOARD_FILE_LENGTH" />
+        <result property="likeNo" column="LIKE_NO" />
+    </resultMap>
 	<select id="selectUSerOneId" resultMap="userResultMap, userInfoResultMap">
  		SELECT *
 		FROM USER_TBL
@@ -89,26 +105,26 @@
 	
 
 	<select id="selectUserActivity" resultType="userMypageDto">
-        select user_id userid,
-               content,
-               create_date createdate,
-               type
-        from (select *
-              from (select user_id, REPLY_CONTENT content, REPLY_CREATE_DATE create_date, '댓글' type
-                    from REPLY_TBL
-                    union
-                    --커뮤니티
-                    select user_id, board_title content, BOARD_CREATE_DATE create_date, '커뮤니티' type
-                    from COMMUNITY_TBL
-                    union
-                    select USER_TBL.user_id, REVIEW_CONTENT, REVIEW_CREATE_DATE, '리뷰' type
-                    from REVIEW_TBL
-                             join USER_INFO_TBL
-                                  on (review_tbl.USER_NICKNAME = USER_INFO_TBL.USER_NICKNAME)
-                             join USER_TBL
-                                  on (user_tbl.USER_NO = USER_INFO_TBL.user_no))
-              where USER_ID = #{userId}
-              order by create_date desc)
+		SELECT userid, content, createdate, type
+		FROM (
+		    SELECT userid, content, createdate, type
+		    FROM (
+		        SELECT USER_ID AS userid, BOARD_TYPE AS content, LIKE_CREATE_DATE AS createdate, '좋아요' AS type
+		        FROM LIKE_TBL
+		        UNION
+		        SELECT REPLY_WRITER AS userid, REPLY_CONTENT AS content, REPLY_CREATE_DATE AS createdate, '댓글' AS type
+		        FROM REPLY_TBL
+		        UNION
+		        SELECT USER_ID AS userid, board_title AS content, BOARD_CREATE_DATE AS createdate, '커뮤니티' AS type
+		        FROM COMMUNITY_TBL
+		        UNION
+		        SELECT USER_ID AS userid, REVIEW_CONTENT AS content, REVIEW_CREATE_DATE AS createdate, '리뷰' AS type
+		        FROM REVIEW_TBL
+		    )
+		    JOIN USER_TBL ON USER_TBL.USER_ID = userid
+		    WHERE USER_TBL.USER_ID = #{userId }
+		    ORDER BY createdate DESC
+		)
         where rownum &lt;= 10
     </select>
     
@@ -117,7 +133,9 @@
     </select> 
     
     <select id="selectLikes" resultMap="LikeResultMap">
-    	SELECT * FROM LIKE_TBL WHERE USER_ID=#{userId } ORDER BY LIKE_CREATE_DATE DESC
+    	SELECT * FROM LIKE_TBL 
+    	JOIN COMMUNITY_TBL USING(BOARD_NO) WHERE LIKE_TBL.USER_ID=#{userId } 
+    	ORDER BY LIKE_CREATE_DATE DESC
     </select>
     <select id="selectFindId" resultMap="userResultMap, userInfoResultMap">
     	SELECT * FROM USER_INFO_TBL 
@@ -129,6 +147,9 @@
     </select>
     <select id="selectUserNo" resultMap="userInfoResultMap">
     	SELECT * FROM USER_INFO_TBL WHERE USER_EMAIL=#{userEmail }
+    </select>
+    <select id="selectLike" resultMap="LikeResultMap">
+    	SELECT * FROM LIKE_TBL WHERE LIKE_NO=#{likeNo }
     </select>
     
    

@@ -120,6 +120,8 @@ public interface UserService {
 	 */
 	User selectUserNo(String userEmail);
 
+	Like selectLike(String likeNo);
+
 
 //	int kakaoUserInsert(User kakaouser);
 //

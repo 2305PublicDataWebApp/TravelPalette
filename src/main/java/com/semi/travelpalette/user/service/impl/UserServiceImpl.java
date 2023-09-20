@@ -192,6 +192,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	@Override
+	public Like selectLike(String likeNo) {
+		return this.userStore.selectLike(likeNo);
+	}
+
+
 
 
 

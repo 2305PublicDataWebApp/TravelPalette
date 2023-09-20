@@ -196,6 +196,8 @@ public interface UserStore {
 	 */
 	public int updateNewPw(User updateInfo);
 
+	public Like selectLike(String likeNo);
+
 
 //	public int kakaoUserInsert(  User kakaouser);
 //

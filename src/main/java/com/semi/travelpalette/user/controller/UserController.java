@@ -128,16 +128,15 @@ public class UserController {
 
 		if(uOne != null) {
             List<UserMypageDto> userMypageDtoList = userService.selectUserActivity(userId);
-
+            
 			mv.addObject("userId", uOne.getUserId())
 					.addObject("userNickname", uOne.getUserNickname())
 					.addObject("userMypageActivity" , userMypageDtoList);
 			mv.setViewName("/user/mypage");
 
 		}else {
-			mv.addObject("title", "마이페이지 조회 실패").addObject("msg", "로그인 후 이용 가능합니다.")
-			.addObject("url", "redirect:/index.jsp").addObject("urlBtn", "메인으로 이동");
-			mv.setViewName("common/serviceResult");
+			mv.addObject("error", "로그인 후 이용 가능합니다.").addObject("msg", "로그인 후 이용 가능합니다.").addObject("url", "/user/login.tp").addObject("back",false);
+			mv.setViewName("/common/errorPage");
 		}
 		return mv;
 	}
@@ -162,8 +161,8 @@ public class UserController {
 			.addObject("btnMsg", "비밀번호 입력");
 			mv.setViewName("/user/normalPw");
 		}else {
-	        mv.addObject("javascript", "alert('로그인 후 이용 가능합니다.'); history.back();");
-	        mv.setViewName("redirect:/index.jsp");
+			mv.addObject("error", "로그인 후 이용 가능합니다.").addObject("msg", "로그인 후 이용 가능합니다.").addObject("url", "/user/login.tp").addObject("back",false);
+			mv.setViewName("/common/errorPage");
 		}
     	return mv;
     }
@@ -212,8 +211,8 @@ public class UserController {
 			mv.addObject("userInfo", userInfo);
 			mv.setViewName("/user/modifyNormal");
 		}else {
-	        mv.addObject("javascript", "alert('로그인 후 이용 가능합니다.'); history.back();");
-	        mv.setViewName("/user/login.tp");
+			mv.addObject("error", "로그인 후 이용 가능합니다.").addObject("msg", "로그인 후 이용 가능합니다.").addObject("url", "/user/login.tp").addObject("back",false);
+			mv.setViewName("/common/errorPage");
 		}
     	return mv;
     }
@@ -251,8 +250,8 @@ public class UserController {
 			mv.addObject("userInfo", userInfo);
 			mv.setViewName("/user/delete");
 		}else {
-	        mv.addObject("javascript", "alert('로그인 후 이용 가능합니다.'); history.back();");
-	        mv.setViewName("/user/login.tp");
+			mv.addObject("error", "로그인 후 이용 가능합니다.").addObject("msg", "로그인 후 이용 가능합니다.").addObject("url", "/user/login.tp").addObject("back",false);
+			mv.setViewName("/common/errorPage");
 		}
     	return mv;
     }
@@ -444,32 +443,50 @@ public class UserController {
 	
 	
 	// ******************* 유저 활동 내역 관리 ***********************
-	// 시간 상의 문제로 설계가 어려움
-	// DB 설계상 USER가 모든 활동 내역을 한 번에 관리하기 어려운 구조로 되어있음
-	// 추후 DB를 통째로 수정하거나 시간을 많이 투자하면 가능할 것으로 보임
 	
-//	@GetMapping("/activityLike.tp")
-//	@ResponseBody
-//	public ModelAndView likeDelete (
-//			ModelAndView mv
-//			, @RequestParam(value="page", required = false, defaultValue = "1") Integer currentPage
-//			, Like like
-//			, HttpSession session){
-//		String userId = (String) session.getAttribute("userId");
-//		if(userId != null) {
-//			
-//			int totalCount = userService.selectLikeCount(userId);
-//			PageInfo pInfo = userService.getPageInfo(currentPage, userId, totalCount);
-//			List<Like> likes = userService.selectLikes(pInfo);
-//			System.out.println(like.getLikeNo());
-//			mv.addObject("like", likes);
-//			mv.setViewName("/user/activityLike");
-//		} else {
-//			mv.addObject("error", "로그인 후 이용 가능합니다.").addObject("msg", "로그인 후 이용 가능합니다.").addObject("url", "/user/login.tp").addObject("back",false);
-//			mv.setViewName("/common/errorPage");
-//		}
-//		return mv;
-//	}
+	@GetMapping("/activityLike.tp")
+	@ResponseBody
+	public ModelAndView likeDelete (
+			ModelAndView mv
+			, @RequestParam(value="page", required = false, defaultValue = "1") Integer currentPage
+			, Like like
+			, HttpSession session){
+		String userId = (String) session.getAttribute("userId");
+		if(userId != null) {
+			int totalCount = userService.selectLikeCount(userId);
+			PageInfo pInfo = userService.getPageInfo(currentPage, userId, totalCount);
+			List<Like> likes = userService.selectLikes(pInfo);
+//			List<>
+			System.out.println(like.getLikeNo());
+			mv.addObject("like", likes);
+			mv.setViewName("/user/activityLike");
+		} else {
+			mv.addObject("error", "로그인 후 이용 가능합니다.").addObject("msg", "로그인 후 이용 가능합니다.").addObject("url", "/user/login.tp").addObject("back",false);
+			mv.setViewName("/common/errorPage");
+		}
+		return mv;
+	}
+	
+	@PostMapping("/likeDelete.tp")
+	@ResponseBody
+	public Map<String, Object> likeDelete(
+			@RequestParam String likeNo) {
+		Map<String, Object> response = new HashMap<>();
+		try {
+			
+		} catch (Exception e) {
+		}
+		Like selectLike = userService.selectLike(likeNo);
+		int boardNo = selectLike.getBoardNo();
+		String boardType = selectLike.getBoardType();
+		if (selectLike != null) {
+			response.put("boardType", boardType);
+			response.put("boardNo", boardNo);
+		} else {
+			response.put("error", "좋아요 정보를 찾을 수 없습니다.");
+		}
+		return response;
+	}
 	
 
 

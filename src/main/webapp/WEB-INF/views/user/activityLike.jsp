@@ -37,37 +37,17 @@
                         
                         
                         <tbody class="table-group-divider">
-                            <tr>
-                                <td>남산타워 올라가기 힘드네요</td>
-                              ${like.likeNo}
-                                <td><a href="javascript:deleteCheck(${like.likeNo})">X</a></td>
-                            </tr>
+							<c:forEach items="${like}" var="item">
+	                        <tr id="sample">
+	<%-- 						    <c:out value="${item.inquiryCreateDate.toString()}" /> --%>
+	                            <td><a href="/community/detail.tp?boardType=${item.boardType }&iboardNo=${item.boardNo }">${item.boardTitle }</a></td>
+	                            <td>
+								    <a href="/dislike.tp?boardNo=${item.boardNo }&boardType=${item.boardType }&userId=${item.userId }"><p>X</p></a>
+	                            </td>
+	                            <td><a href="javascript:void(0)" onclick="deleteCheck(${item.likeNo} )">X</a></td>
+	                        </tr>
+							</c:forEach>                        
                         </tbody>
-                        
-                        
-                    <tbody class="table-group-divider">
-<%--                         <fmt:formatDate pattern="yyyy-MM-dd" value="${iList.inquiryCreateDate }"/> --%>
-						<c:forEach items="${likes}" var="item">
-                        <tr id="sample">
-<%-- 						    <c:out value="${item.inquiryCreateDate.toString()}" /> --%>
-							<td>
-							<fmt:formatDate pattern="yyyy-MM-dd" value="${item.inquiryCreateDate}" />
-							</td>
-                            <td><a href="/${item.boardType }/detail.tp?inquiryNo=${item.inquiryNo }">${item.inquiryTitle }</a></td>
-                            <td>
-							<c:if test='${item.inquiryResponse.toString() eq "N" }'>
-							    <p>X</p>
-							</c:if>
-							<c:if test='${item.inquiryResponse.toString() eq "Y" }'>
-							    <p>답변 완료</p>
-							</c:if>
-                            </td>
-                            <td><a href="javascript:void(0)" onclick="deleteCheck(${item.inquiryNo})">X</a></td>
-                        </tr>
-						</c:forEach>
-                            
-                    </tbody>                        
-                    </table>
 	                <nav aria-label="Page navigation example" class="d-flex justify-content-center">
 	                    <ul class="pagination">
 	                    <!-- 이전 -->
@@ -101,7 +81,7 @@
     	<script type="text/javascript">
     	<jsp:include page="/include/navjs.jsp"></jsp:include>
         
-            function deleteCheck(ilkeNo) {
+            function deleteCheck(likeNo) {
 
                 // AJAX 요청 보내기
                 $.ajax({
@@ -113,19 +93,28 @@
                     success: function (data) {
                         if (data.success) {
         					if (confirm("정말 삭제하시겠습니까?")) {
+        						const boardType = data.boardType;
+        		                const boardNo = data.boardNo;
 				                $.ajax({
 				                    method: "POST",
-				                    url: "/user/likeDeleteExecute.tp",
+				                    url: "/community/dislike.tp",
 				                    data: {
-				                    	likeNo: likeNo
+				                    	likeNo: likeNo,
+				                        boardType: boardType,
+				                        boardNo: boardNo
 				                    },
-				                    success: function (postData) {
-				                        alert("좋아요가 취소되었습니다.");
+				                    success: function (data) {
+				                        if (data.success) {
+				                            location.reload();
+				                        } else {
+				                        	alert("좋아요 취소를 실패하였습니다.");
+				                        }
 				                    },
 				                    error: function () {
-				                        console.error("서버 요청에 실패했습니다.");
+				                    	console.error("서버 요청에 실패했습니다. 상태 코드: " + status);
+				                        console.error("에러 내용: " + error);
 				                    }
-				                });
+				                });  
         					}
                         } 
                     },

@@ -153,4 +153,9 @@ public class UserStoreLogic implements UserStore {
 	public int updateNewPw(User updateInfo) {
 		return session.update("UserMapper.updateNewPw", updateInfo);
 	}
+
+	@Override
+	public Like selectLike(String likeNo) {
+		return session.selectOne("UserMapper.selectLike", likeNo);
+	}
 }

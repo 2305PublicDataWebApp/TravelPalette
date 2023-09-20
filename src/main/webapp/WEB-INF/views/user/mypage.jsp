@@ -20,7 +20,6 @@
             <div class="flex">
                 <div id="left">
                     <span class="fs-3">${sessionScope.userNickname }<br>환영합니다</span>
-                    <p>${sessionScope.userNickname }</p>
                     <br>
                     <br>
                     <c:if test="${sessionScope.platformType == 'normal'}">
@@ -29,7 +28,7 @@
                     <c:if test="${sessionScope.platformType == 'kakao'}">
 	                    <li><a href="#" onclick="userModify();">회원 정보 수정</a></li>
                     </c:if>
-                   	<li><a href="/user/activityDetails.tp"> 활동 내역 관리</a></li>
+<!--                    	<li><a href="/user/activityLike.tp"> 활동 내역 관리</a></li> -->
                     <li><a href="/inquiry/list.tp">1:1 문의</a></li>
                     <li><a href="#">회원 탈퇴</a></li>
                 </div>
