@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>여행 정보 게시판 작성</title>
         <link rel="stylesheet" href="../resources/css/travel/write.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     </head>
     <body>
     	<!-- 헤더 -->
@@ -98,6 +99,7 @@
 	        </form>
         </main>
         <script>
+        	<jsp:include page="/include/navjs.jsp"></jsp:include>
         	function addFileBtn() {
         		var fileInput = document.createElement("input");
         	    fileInput.type = "file";
