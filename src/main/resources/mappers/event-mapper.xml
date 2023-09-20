@@ -21,30 +21,30 @@
 	</resultMap>
 	<select id="eventAllListByNew" resultMap="EventResultMap">
 		SELECT	 * 
-		FROM 	 EVENT_TBL
+		FROM 	 EVENT_TBL WHERE EVENT_STATUS = 'Y'
 		<if test="eventCondition =='IngEvent'">
-			WHERE EVENT_START_DATE &lt;= SYSDATE AND EVENT_END_DATE &gt;= SYSDATE
+			AND EVENT_START_DATE &lt;= SYSDATE AND EVENT_END_DATE &gt;= SYSDATE
 		</if>
 		<if test="eventCondition =='EndEvent'">
-			WHERE EVENT_END_DATE &lt; SYSDATE
+			AND EVENT_END_DATE &lt; SYSDATE
 		</if>
 		ORDER BY EVENT_NO DESC
 	</select>
 	
 	<select id="getTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM EVENT_TBL
+		SELECT COUNT(*) FROM EVENT_TBL WHERE EVENT_STATUS = 'Y'
 		<if test="eventCondition =='IngEvent'">
-			WHERE EVENT_START_DATE &lt;= SYSDATE AND EVENT_END_DATE &gt;= SYSDATE
+			AND EVENT_START_DATE &lt;= SYSDATE AND EVENT_END_DATE &gt;= SYSDATE
 		</if>
 		<if test="eventCondition =='EndEvent'">
-			WHERE EVENT_END_DATE &lt; SYSDATE
+			AND EVENT_END_DATE &lt; SYSDATE
 		</if>
 	</select>
 	
 	<select id="selectEventByNo" resultMap="EventResultMap">
 		SELECT	* 
 		FROM 	EVENT_TBL 
-		WHERE	EVENT_NO = #{eventNo}
+		WHERE	EVENT_NO = #{eventNo} AND EVENT_STATUS = 'Y'
 	</select>
 	
 	<insert id="insertEvent">
@@ -60,7 +60,7 @@
 	</update>
 	
 	<update id="deleteByNo">
-		UPDATE TRAVEL_TBL
+		UPDATE EVENT_TBL
 		SET EVENT_STATUS = 'N'
 		WHERE EVENT_NO = #{eventNo}
 	</update>
