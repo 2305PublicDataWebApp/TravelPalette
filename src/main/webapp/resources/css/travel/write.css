@@ -4,16 +4,17 @@
     box-sizing: border-box;
     padding: 0;
     text-decoration: none;
+    font-family: 'SUITE-Regular';
 }
 
 body {
-    font-family: Arial, sans-serif;
     width: 100%;
     margin: 0 auto;
 }
 main {
 	width: 1000px;
     padding: 20px;
+    font-family: 'SUITE-Regular';
 	
 }
 h1 {

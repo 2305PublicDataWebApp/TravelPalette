@@ -36,8 +36,8 @@
 	                    </h4>
 	                    <button id="goBackButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-primary">목록으로</button>
 	                    <c:if test="${userId eq community.userId}">
-		                    <button id="goModifyButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-secondary">수정하기</button>
-		                    <button id="deleteButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-dark">삭제하기</button>
+		                    <button onclick="goModifyButton();" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-secondary">수정하기</button>
+		                    <button onclick="deleteButton();" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-dark">삭제하기</button>
 	                    </c:if>
 	                </div>
 	                <table class="table caption-top" style="padding: 0px 20px; font-family: 'SUITE-Regular'; font-size: 18px; width: 100%;">
@@ -132,10 +132,19 @@
 	                <div style="width: 1000px;margin: 0 auto;font-family: 'SUITE-Regular';position: relative;">
 	                    <div style="width: 100%;height: 200px;background-color: #FDF6F0;border-bottom: 2px solid #eedecf;">
 	                        <div style="float: left;padding: 20px;padding-left:50px;">
-	                            <h4 style="float: left;font-weight: 600;padding-left: 15px;">${reply.userNickname }</h4>
-<%-- 	                            ${reply } --%>
+	                            <h4 style="float: left;font-weight: 600;padding-left: 15px;">
+	                            	<c:if test="${reply.userNickname eq community.userNickname}">
+										글쓴이	                            	
+	                            	</c:if>
+	                            	<c:if test="${reply.userNickname ne community.userNickname}">
+		                            	${reply.userNickname }
+	                            	</c:if>
+	                            </h4>
 	                            <p style="float: left;padding: 5px;padding-left: 8px;">
 									<fmt:formatDate pattern="yyyy-MM-dd" value="${reply.replyCreateDate }"/>
+									<c:if test="${reply.replyCreateDate ne reply.replyUpdateDate }">
+										(수정됨)
+									</c:if>
 								</p>
 								<input type="hidden" value="${reply.replyWriter}">
 								<input type="hidden" value="${reply.replyNo}"> 
@@ -207,44 +216,59 @@
         	<jsp:include page="/include/navjs.jsp"></jsp:include>
             
 	        document.getElementById("goBackButton").addEventListener("click", function() {
-	            location.href = "/community/certify.tp"
+	        	if("${community.boardType}" === "travelCompanion"){
+	        		location.href = "/community/qList.tp?boardType=travelCompanion";
+	        	}else if("${community.boardType}" === "QnABoard"){
+	        		location.href = "/community/qList.tp?boardType=QnABoard";
+	        	}
+	        	else {	        		
+	            	location.href = "/community/certify.tp"
+	        	}
 	        });
-            document.getElementById("deleteButton").addEventListener("click", function() {
-            	if(confirm("게시물을 삭제하시겠습니까?")){            		
-                	location.href= "/community/delete.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
-            	}
-            });
+	        
+			function goModifyButton(){
+				if(confirm("게시물 수정 페이지로 이동하시겠습니까?")) {
+	              	location.href = "/community/modify.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
+	            }
+			}
+	        function deleteButton(){	        	
+	            if(confirm("게시물을 삭제하시겠습니까?")) {
+	              	location.href = "/community/delete.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
+	            }
+	        }
             
-            if("${community.boardType}" === "travelcertify"){            	
-	            // 이미지 모달 기능
-	            // 이미지를 클릭하면 모달 열기
-				const modalTrigger = document.querySelector('.modal-trigger');
-				const modal = document.getElementById('myModal');
-				const modalImage = document.getElementById('modalImage');
-				const closeModal = document.querySelector('.close');
-				
-				modalTrigger.addEventListener('click', () => {
-				    modal.style.display = 'block';
-				    modalImage.src = modalTrigger.style.backgroundImage.replace('url("', '').replace('")', '');
-				});
-				
-				// 모달 닫기
-				closeModal.addEventListener('click', () => {
-				    modal.style.display = 'none';
-				});
-				
-				// 모달 외부를 클릭하면 모달 닫기
-				window.addEventListener('click', (event) => {
-				    if (event.target == modal) {
-				        modal.style.display = 'none';
-				    }
-				});
-            }
+            document.addEventListener('DOMContentLoaded', () => {            	  
+	            if("${community.boardType}" === "travelcertify"){            	
+		            // 이미지 모달 기능
+		            // 이미지를 클릭하면 모달 열기
+					const modalTrigger = document.querySelector('.modal-trigger');
+					const modal = document.getElementById('myModal');
+					const modalImage = document.getElementById('modalImage');
+					const closeModal = document.querySelector('.close');
+					
+					modalTrigger.addEventListener('click', () => {
+					    modal.style.display = 'block';
+					    modalImage.src = modalTrigger.style.backgroundImage.replace('url("', '').replace('")', '');
+					});
+					
+					// 모달 닫기
+					closeModal.addEventListener('click', () => {
+					    modal.style.display = 'none';
+					});
+					
+					// 모달 외부를 클릭하면 모달 닫기
+					window.addEventListener('click', (event) => {
+					    if (event.target == modal) {
+					        modal.style.display = 'none';
+					    }
+					});
+	            }
+            });
             //댓글 등록 ajax
-           	var boardNo = "${community.boardNo}";
-           	var boardType = "${community.boardType}";
-           	var userId = "${userId}";
+           	
             function insertReplyBtn() {
+            	var boardNo = "${community.boardNo}";
+               	var boardType = "${community.boardType}";
                 var replyContent = document.getElementById('floatingTextarea2').value;
                 // 값의 길이를 확인하고 5보다 작으면 경고창을 띄웁니다.
                 if (replyContent.length < 5) {
@@ -286,6 +310,8 @@
             }
             
             function modifyReply(obj){
+            	var boardNo = "${community.boardNo}";
+               	var boardType = "${community.boardType}";
             	if(confirm("댓글을 수정하시겠습니까?")){
             		
             	}else{
@@ -325,6 +351,8 @@
             }
             
             function deleteReply(event) {
+            	var boardNo = "${community.boardNo}";
+               	var boardType = "${community.boardType}";
 			    var button = event.target; // 클릭된 버튼 요소
 			    var replyNo = button.getAttribute("data-reply-no");
 
@@ -334,6 +362,9 @@
             }
             //좋아요 기능 insert
             function insertLike(){
+            	var boardNo = "${community.boardNo}";
+               	var boardType = "${community.boardType}";
+               	var userId = "${userId}";
             	$.ajax({
                     type: "POST", // 또는 "GET"에 맞게 변경
                     url: "/community/like.tp", 
@@ -357,6 +388,9 @@
             }
             
             function insertReplyLike(obj){
+            	var boardNo = "${community.boardNo}";
+               	var boardType = "${community.boardType}";
+               	var userId = "${userId}";
             	var replyNoElement = obj.parentElement.previousElementSibling;
                 var replyWriterElement = obj.parentElement.previousElementSibling.previousElementSibling;
 
@@ -393,6 +427,9 @@
             }
             
             function deleteLike(){
+            	var boardNo = "${community.boardNo}";
+               	var boardType = "${community.boardType}";
+               	var userId = "${userId}";
             	$.ajax({
                     type: "POST", // 또는 "GET"에 맞게 변경
                     url: "/community/dislike.tp", 
@@ -416,6 +453,9 @@
             }
             
             function deleteReplyLike(obj) {
+            	var boardNo = "${community.boardNo}";
+               	var boardType = "${community.boardType}";
+               	var userId = "${userId}";
                 var replyNoElement = obj.parentElement.previousElementSibling;
 
                 if (replyNoElement) {

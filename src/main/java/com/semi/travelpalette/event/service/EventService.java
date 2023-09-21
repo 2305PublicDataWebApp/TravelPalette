@@ -9,9 +9,9 @@ public interface EventService {
 
 	int insertEvent(Event event);
 
-	int getTotalCount();
+	int getTotalCount(String eventCondition);
 
-	List<Event> eventAllListByNew(EventPageInfo pageInfo);
+	List<Event> eventAllListByNew(EventPageInfo pageInfo, String eventCondition);
 
 	Event selectEventByNo(int eventNo);
 
@@ -20,3 +20,4 @@ public interface EventService {
 	int deleteByNo(int eventNo);
 
 }
+ 

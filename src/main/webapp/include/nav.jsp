@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html>
 	<html>
 	<head>
@@ -16,20 +17,27 @@
                     <li><a href="/travel/list.tp">여행정보</a></li>
                     <li><a href="/map/view.tp">여행지도</a></li>
                     <li><a href="/community/certify.tp">커뮤니티</a></li>
-                    <li><a href="/user/mypage.tp">회원</a></li>
+                    <c:if test="${userId ne 'admin'}">
+	                    <li><a href="/user/mypage.tp">회원</a></li>
+                    </c:if>
+                    <c:if test="${userId eq 'admin'}">
+	                    <li><a href="/admin/inquirylist.tp">문의 목록</a></li>
+                    </c:if>
                 </ul>
             </div>
-            <div id="navArea" class="animatedNav" >
+            <div id="navArea" class="animatedNav" style="border-top:2px solid #BA704F;" >
                 <div class="menuContent">
                     <ul>
                         <li></li>
                         <li>
-                            <a href="/event/list.tp">
-                                진행중인 리스트<br>
-                            </a>
-                            <a href="/event/list.tp">
-                                종료된 이벤트<br>
-                            </a>
+                            <c:url var="eventUrl" value="/event/list.tp">
+               					<c:param name="eventCondition" value="IngEvent"></c:param>
+	               			</c:url>
+	               			<a style="float:left;" href="${eventUrl }">#진행중인 이벤트</a>
+							<c:url var="eventUrl2" value="/event/list.tp">
+								<c:param name="eventCondition" value="EndEvent"></c:param>
+							</c:url>
+		           			<a href="${eventUrl2 }">#종료된 이벤트</a>
                         </li>
                         <li>
                             <a href="/travel/list.tp">
@@ -56,12 +64,19 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/user/mypage.tp">
-                                마이페이지<br>
-                            </a>
-                            <a href="/inquiry/list.tp">
-                                1 : 1 문의사항
-                            </a>
+                        	<c:if test="${userId ne 'admin' }">
+	                            <a href="/user/mypage.tp">
+	                                마이페이지<br>
+	                            </a>
+	                            <a href="/inquiry/list.tp">
+	                                1 : 1 문의사항
+	                            </a>
+                        	</c:if>
+                        	<c:if test="${userId eq 'admin' }">
+	                            <a href="/admin/inquirylist.tp">
+	                                회원 문의사항
+	                            </a>
+                        	</c:if>
                         </li>
                     </ul>
                 </div>

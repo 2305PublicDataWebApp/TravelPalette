@@ -17,7 +17,9 @@
 		<typeAlias type="com.semi.travelpalette.common.domain.Like" alias="Like"/>
 		<typeAlias type="com.semi.travelpalette.inquiry.domain.Inquiry" alias="Inquiry"/>
 		<typeAlias type="com.semi.travelpalette.user.domain.UserMypageDto" alias="userMypageDto"/>
+		<typeAlias type="com.semi.travelpalette.admin.domain.Response" alias="Response"/>
 	</typeAliases>
+	
 	<mappers>
 		<mapper resource="mappers/travel-mapper.xml"/>
 		<mapper resource="mappers/community-mapper.xml"/>
@@ -28,5 +30,6 @@
 		<mapper resource="mappers/reply-mapper.xml"/>
 		<mapper resource="mappers/like-mapper.xml"/>
 		<mapper resource="mappers/inquiry-mapper.xml"/>		
+		<mapper resource="mappers/admin-mapper.xml"/>	
 	</mappers>
 </configuration>

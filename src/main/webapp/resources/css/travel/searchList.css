@@ -1,0 +1,111 @@
+
+* {
+    list-style-type: none;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 0;
+    
+}
+a:link, a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+
+main {
+	margin-top: 50px;
+    width: 1000px;
+    padding-bottom: 80px;
+    font-family: 'SUITE-Regular';
+}
+
+.searchTitle {
+	font-size: 30px; 
+	font-weight: bold; 
+	padding-bottom: 5px; 
+}
+.totalCheck ul li, .navi ul li {
+    display: inline-block;
+}
+.totalCheck ul li a:hover {
+    color: rgb(16, 133, 243);
+    font-weight: 600;
+}
+.leftBox, .rightBox {
+    float: left;
+    
+}
+.leftBox {
+    width: 680px;
+    margin-right: 20px;
+}
+.rightBox {
+    width: 300px;
+}
+
+.searchColor {
+    color: rgb(16, 133, 243);
+    padding: 10px;
+}
+.list ul li {
+    width: 680px;
+    height: 140px;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.photo {
+    width: 140px;
+    height: 94px;
+    float: left;
+}
+
+.area {
+    width: 100%;
+    height: 94px;
+    margin: 0;
+    padding-left: 160px;
+}
+.areaTitle {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+.areaTitle a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 50%;
+    background-color: rgb(87, 147, 247); /* 형광펜 색상을 원하는 색상으로 변경하세요 */
+    opacity: 0.3;
+    transition: width 0.5s ease; /* 투명도 변경 시 부드럽게 전환되도록 설정 */
+    pointer-events: none; /* ::before 요소를 마우스 이벤트에서 제외 */
+}
+
+.areaTitle a:hover::before {
+    width: 100%; 
+}
+
+.areaAddr {
+	margin-bottom: 5px;
+}
+.areaTag {
+    font-weight: bold;
+}
+
+.selectTag {
+    /* border: 1px solid black; */
+    margin-bottom: 20px;
+    float: left;
+    background-color: #ccc;
+}
+.selectTag ul li {
+    list-style-type: none;
+    float: left;
+    padding: 10px;
+}

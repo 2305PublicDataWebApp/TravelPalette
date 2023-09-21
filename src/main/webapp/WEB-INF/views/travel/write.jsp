@@ -90,7 +90,7 @@
 	                <li>
 	                    <div id="addFile">
 	                    </div>
-	                    <button type="button" onClick="addFileBtn();">사진추가</button>
+	                    <button class="btn btn-light" type="button" onClick="addFileBtn();">사진추가</button>
 	                </li>
 	            </ul>
 	            <div class="button-container">

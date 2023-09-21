@@ -177,9 +177,10 @@ public class EventController {
 			, @RequestParam(value = "eventCondition", required=false) String eventCondition
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
 		try {
-			int totalCount = eService.getTotalCount();
+			System.out.println(eventCondition);
+			int totalCount = eService.getTotalCount(eventCondition);
 			EventPageInfo pageInfo = getPageInfo(currentPage, totalCount);
-			List<Event> eList = eService.eventAllListByNew(pageInfo);
+			List<Event> eList = eService.eventAllListByNew(pageInfo, eventCondition);
 			if(eList.size() > 0) {
 				mv.addObject("eventCondition", eventCondition);
 				mv.addObject("pageInfo", pageInfo);
@@ -198,33 +199,6 @@ public class EventController {
 		}
 		return mv;
 	}
-	
-//	@RequestMapping(value="/list.tp", method=RequestMethod.GET)
-//	public ModelAndView showIngEventList(
-//			ModelAndView mv
-//			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
-//		try {
-//			int totalCount = eService.getTotalCount();
-//			EventPageInfo pageInfo = getPageInfo(currentPage, totalCount);
-//			List<Event> eList = eService.eventAllListByNew(pageInfo);
-//			if(eList.size() > 0) {
-//				mv.addObject("pageInfo", pageInfo);
-//				mv.addObject("totalCount", totalCount);
-//				mv.addObject("eList", eList);
-//				mv.setViewName("event/list");
-//			} else {
-//				mv.addObject("msg", "[서비스실패] 목록을 조회할 수 없습니다.");
-//				mv.setViewName("common/errorPage");
-//			}	
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			mv.addObject("error", e.getMessage());
-//			mv.addObject("msg", "[서비스실패] 관리자에 문의바랍니다.");
-//			mv.setViewName("common/errorPage");
-//		}
-//		return mv;
-//	}
-	
 
 	@RequestMapping(value="detail.tp", method=RequestMethod.GET)
 	public ModelAndView eventDetail (

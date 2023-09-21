@@ -8,7 +8,7 @@ public class Review {
 	private Timestamp reviewCreateDate;
 	private int reviewRating;
 	private char reviewStatus;
-	private String userNickname;
+	private String userId;
 	private int travelNo;
 	private String boardType;
 	
@@ -17,9 +17,9 @@ public class Review {
 		super();
 	}
 	
-	public Review(String userNickname, int travelNo) {
+	public Review(String userId, int travelNo) {
 		super();
-		this.userNickname = userNickname;
+		this.userId = userId;
 		this.travelNo = travelNo;
 	}
 
@@ -54,12 +54,15 @@ public class Review {
 	public void setReviewStatus(char reviewStatus) {
 		this.reviewStatus = reviewStatus;
 	}
-	public String getUserNickname() {
-		return userNickname;
+
+	public String getUserId() {
+		return userId;
 	}
-	public void setUserNickname(String userNickname) {
-		this.userNickname = userNickname;
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
+
 	public int getTravelNo() {
 		return travelNo;
 	}
@@ -77,7 +80,7 @@ public class Review {
 	public String toString() {
 		return "리뷰 [리뷰번호=" + reviewNo + ", 내용=" + reviewContent + ", 작성일="
 				+ reviewCreateDate + ", 별점=" + reviewRating + ", 리뷰상태=" + reviewStatus
-				+ ", 작성자닉네임=" + userNickname + ", 여행지번호=" + travelNo + ", 게시판종류=" + boardType + "]";
+				+ ", 작성자아이디=" + userId + ", 여행지번호=" + travelNo + ", 게시판종류=" + boardType + "]";
 	}
 	
 	

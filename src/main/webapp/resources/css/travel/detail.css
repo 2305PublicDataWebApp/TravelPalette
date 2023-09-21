@@ -7,10 +7,20 @@
 
 main {
     width: 1000px;
-    --border: 1px solid black;
     text-align: center;
+    font-family: 'SUITE-Regular';
 }
 
+
+#photo,
+#detailInfo,
+#infoMap,
+#review {
+    padding-top: 40px; /* 여백 추가 */
+}
+#detailTop.centered {
+    margin-top: 0; /* 스크롤 시 상단 여백 제거 */
+}
 .center {
     text-align: center;
 }
@@ -43,7 +53,7 @@ main {
 
 
 .carousel-inner .carousel-item img {
-    height: 500px; /* 원하는 높이로 설정 */
+    height: 600px; /* 원하는 높이로 설정 */
     width: auto; /* 가로 크기를 자동으로 조정하여 원래 비율을 유지 */
 }
 
@@ -53,8 +63,12 @@ main {
 }
 #detailInfo p {
     text-align: left;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
-
+.selectdLike {
+	background-color: #ccc;
+}
 #infoList {
     width: 100%;
     float: left;
@@ -246,23 +260,24 @@ main {
 }
 
 /* 정보글 평가 */
-.infoLike {
+ .infoLike {
     margin-top: 40px;
     width: 100%;
+    margin-bottom: 60px;
 }
 
-.infoLike label{
-    font-size: 3em;
+.likeDislike label {
+    font-size: 2.5em;
 }
-.likeDislike {
-    display: flex;
+.like, .dislike {
+	width: 320px;
+    display: inline-block;
     justify-content: center;
-}
-.like {
-    float: left;
     padding: 5px 15px 5px 15px;
 }
-.like span {
-    font-size: 30px;
-    font-weight: bold;
+
+.like:hover, .dislike:hover {
+    background: linear-gradient(to top, rgba(87, 147, 247, 0.3) 50%, transparent 50%);
+    display: inline;
+    font-weight:bold;
 }

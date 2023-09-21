@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="AdminMapper">
+ 
+	<resultMap type="User" id="userResultMap">
+		<id 	property="userNo" 			column="USER_NO"/>
+		<result property="userId" 			column="USER_ID"/>
+		<result property="userPw" 			column="USER_PW"/>
+		<result property="platformType" 	column="PLATFORM_TYPE"/>
+		<result property="userCreateDate" 	column="USER_CREATE_DATE"/>
+		<result property="userDeleteDate" 	column="USER_DELETE_DATE"/>
+		<result property="userStatus" 		column="USER_STATUS"/>
+		<result property="adminCheck" 		column="ADMIN_CHECK"/>
+	</resultMap>
+	
+<!-- 	<resultMap type="User" id="userInfoResultMap"> -->
+<!-- 		<id 	property="userNo" 			column="USER_NO"/> -->
+<!-- 		<result property="userName" 		column="USER_NAME"/> -->
+<!-- 		<result property="userNickname" 	column="USER_NICKNAME"/> -->
+<!-- 		<result property="userGender" 		column="USER_GENDER"/> -->
+<!-- 		<result property="userEmail" 		column="USER_EMAIL"/> -->
+<!-- 		<result property="userTel" 			column="USER_TEL"/> -->
+<!-- 		<result property="userEmailStatus" 	column="USER_EMAIL_STATUS"/> -->
+<!-- 		<result property="userSmsStatus" 	column="USER_SMS_STATUS"/> -->
+<!-- 	</resultMap> -->
+	
+ 	<resultMap type="Inquiry" id="inquiryResultMap">
+ 		<id 	property="inquiryNo" 			column="INQUIRY_NO"/>
+ 		<result property="inquiryTitle" 		column="INQUIRY_TITLE"/>
+ 		<result property="inquiryContent" 		column="INQUIRY_CONTENT"/>
+ 		<result property="userId" 				column="USER_ID"/>
+ 		<result property="inquiryCreateDate" 	column="INQUIRY_CREATE_DATE"/>
+ 		<result property="inquiryUpdateDate" 	column="INQUIRY_UPDATE_DATE"/>
+ 		<result property="inquiryDeleteDate" 	column="INQUIRY_DELETE_DATE"/>
+ 		<result property="inquiryFileName" 		column="INQUIRY_FILE_NAME"/>
+ 		<result property="inquiryFileRename" 	column="INQUIRY_FILERENAME"/>
+ 		<result property="inquiryFilePath" 		column="INQUIRY_FILE_PATH"/>
+ 		<result property="inquiryFileLength" 	column="INQUIRY_FILE_LENGTH"/>
+ 		<result property="inquiryResponse" 		column="INQUIRY_RESPONSE"/>
+ 		<result property="inquiryStatus" 		column="INQUIRY_STATUS"/>
+ 	</resultMap>
+ 	
+	<resultMap type="Response" id="responseResultMap" >
+	    <id 	property="responseNo" 			column="RESPONSE_NO" />
+	    <result property="inquiryNo" 			column="INQUIRY_NO" />
+	    <result property="responseContent" 		column="RESPONSE_CONTENT" />
+	    <result property="responseCreateDate" 	column="RESPONSE_CREATE_DATE" />
+	    <result property="responseUpdateDate" 	column="RESPONSE_UPDATE_DATE" />
+	</resultMap>
+ 	
+	
+	<select id="showUserList" resultMap="userResultMap, userInfoResultMap">
+ 		SELECT *
+		FROM USER_TBL
+		JOIN USER_INFO_TBL ON USER_TBL.USER_NO = USER_INFO_TBL.USER_NO
+ 	</select>
+ 	
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM USER_TBL
+		JOIN USER_INFO_TBL ON USER_TBL.USER_NO = USER_INFO_TBL.USER_NO
+	</select>
+	
+	<select id="showInquiryList" resultMap="inquiryResultMap"> 
+		SELECT * FROM INQUIRY_TBL WHERE INQUIRY_STATUS = 'Y' ORDER BY INQUIRY_NO DESC
+	</select>
+	
+	<select id="getInquiryCount" resultType="_int">
+		SELECT COUNT(*) FROM INQUIRY_TBL WHERE INQUIRY_STATUS = 'Y'
+	</select>
+	
+	<select id="showOneInquiry" resultMap="inquiryResultMap"> 
+		SELECT * FROM INQUIRY_TBL WHERE INQUIRY_NO = #{inquiryNo }
+	</select>
+	
+	<select id="selectOneResponse" resultMap="responseResultMap"> 
+		SELECT *
+		FROM RESPONSE_TBL
+		WHERE INQUIRY_NO = #{inquiryNo }
+	</select>
+	
+	<insert id="insertResponse">
+		INSERT INTO RESPONSE_TBL (RESPONSE_NO, INQUIRY_NO, RESPONSE_CONTENT, RESPONSE_CREATE_DATE, RESPONSE_UPDATE_DATE)
+		VALUES (#{inquiryNo }, SEQ_RESPONSE_NO.NEXTVAL, #{responseContent }, SYSTIMESTAMP, SYSTIMESTAMP)
+	</insert>
+	
+	<update id="changeInquiryStatus">
+		UPDATE INQUIRY_TBL
+		SET INQUIRY_RESPONSE = 'Y'
+		WHERE INQUIRY_NO = #{inquiryNo }
+	</update>
+	
+	<update id="modifyResponse">
+		UPDATE RESPONSE_TBL
+		SET RESPONSE_CONTENT = #{responseContent },
+		    RESPONSE_UPDATE_DATE = SYSTIMESTAMP
+		WHERE RESPONSE_NO = #{inquiryNo }
+	</update>
+	
+	
+ </mapper>

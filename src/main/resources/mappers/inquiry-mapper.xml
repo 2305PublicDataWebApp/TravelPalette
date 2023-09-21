@@ -33,9 +33,11 @@
  	<select id="selectInquiryListCount" resultType="_int">
  		SELECT COUNT(*) FROM INQUIRY_TBL WHERE USER_ID=#{userId }
  	</select>
+ 	
  	<select id="selectInquiryList" resultMap="inquiryResultMap">
  		SELECT * FROM INQUIRY_TBL WHERE USER_ID=#{userId } AND INQUIRY_STATUS='Y'ORDER BY INQUIRY_CREATE_DATE DESC
  	</select>
+ 	
  	<select id="selectOneInquiryPost" resultMap="inquiryResultMap">
  		SELECT * FROM INQUIRY_TBL WHERE USER_ID=#{userId } AND INQUIRY_NO=#{inquiryNo } AND INQUIRY_STATUS='Y'
  	</select>

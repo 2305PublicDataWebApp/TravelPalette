@@ -1,6 +1,5 @@
 package com.semi.travelpalette.travel.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +34,17 @@ public class TravelController {
 	private ReviewService rService;
 	
 	@RequestMapping(value="/insert.tp", method=RequestMethod.GET)
-	public ModelAndView showWriteForm(ModelAndView mv) {
-		mv.setViewName("travel/write");
+	public ModelAndView showWriteForm(
+			ModelAndView mv
+			,HttpSession session) {
+		String userId = (String)session.getAttribute("userId");
+		if(userId != null && userId.equals("admin")) {
+			mv.setViewName("travel/write");
+		} else {
+			mv.addObject("msg", "관리자만 접근할 수 있습니다.");
+			mv.addObject("url", "/index.jsp");
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
@@ -45,19 +53,27 @@ public class TravelController {
 			ModelAndView mv
 			, @ModelAttribute Travel travel
 			, @RequestParam (value="uploadFiles", required = false) MultipartFile[] uploadFiles
-			, HttpServletRequest request) {
+			, HttpServletRequest request
+			, HttpSession session) {
 		try {
-			int result = tService.insertTravel(travel, uploadFiles, request);
-			
-			if(result > 0) {
-				mv.addObject("msg", "여행정보가 등록되었습니다.");
-				mv.addObject("url", "/travel/list.tp");
-				mv.setViewName("common/successPage");
+			String userId = (String)session.getAttribute("userId");
+			if(userId != null && userId.equals("admin")) {
+				int result = tService.insertTravel(travel, uploadFiles, request);
+				
+				if(result > 0) {
+					mv.addObject("msg", "여행정보가 등록되었습니다.");
+					mv.addObject("url", "/travel/list.tp");
+					mv.setViewName("common/successPage");
+				} else {
+					mv.addObject("msg", "[서비스실패] 여행정보가 등록되지 않았습니다.");
+					mv.addObject("url", "/travel/insert.tp");
+					mv.setViewName("common/errorPage");
+				}			
 			} else {
-				mv.addObject("msg", "[서비스실패] 여행정보가 등록되지 않았습니다.");
-				mv.addObject("url", "/travel/insert.tp");
+				mv.addObject("msg", "관리자만 접근할 수 있습니다.");
+				mv.addObject("url", "/index.jsp");
 				mv.setViewName("common/errorPage");
-			}	
+			}
 		} 
 		catch (Exception e) {
 			mv.addObject("error", e.getMessage());
@@ -178,10 +194,10 @@ public class TravelController {
 				//조회수 증가
 				tService.updateViewCount(travelNo);
 				
-				 String userNickname = (String) session.getAttribute("userNickname");
-				 if(userNickname != null && userNickname != "") {
-					 //닉네임과 여행지번호로 리뷰조회
-					 Review review = new Review(userNickname, travelNo);
+				 String userId = (String) session.getAttribute("userId");
+				 if(userId != null && userId != "") {
+					 //userId, 여행지번호로 리뷰조회
+					 Review review = new Review(userId, travelNo);
 					 Review	myReview = rService.selectMyReview(review);
 					 if(myReview != null) {
 						 mv.addObject("myReview", myReview);
@@ -221,13 +237,41 @@ public class TravelController {
 		return mv;
 	}
 
+	@RequestMapping(value="/search.tp", method=RequestMethod.GET)
+	public ModelAndView searchTravel( 
+			ModelAndView mv
+			, @RequestParam(value = "order", required=false) String order
+			, @RequestParam(value="searchKeyword", required=false, defaultValue = "") String searchKeyword
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
+		int totalCount = tService.getSearchListCount(searchKeyword);
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		PageInfo searchPInfo = this.getPageInfo(currentPage, totalCount, recordCountPerPage, naviCountPerPage);
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("order", order);
+		searchMap.put("searchKeyword", searchKeyword);
+		
+		List<Travel> searchList = tService.searchListByKeyword(searchPInfo,searchMap);
+		if(!searchList.isEmpty()) {
+			mv.addObject("searchKeyword", searchKeyword);
+			mv.addObject("searchPInfo", searchPInfo);
+			mv.addObject("totalCount", totalCount);
+			mv.addObject("sList", searchList);
+			mv.setViewName("travel/searchList");
+		}  else {
+			mv.addObject("msg", "검색 정보를 불러올 수 없습니다.");
+			mv.addObject("url", "/index.jsp");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
 	@RequestMapping(value="/list.tp", method=RequestMethod.GET)
 	public ModelAndView sortList(
 			ModelAndView mv
 			, @RequestParam(value = "order", required=false) String order
-			, @RequestParam(value = "page", required=false, defaultValue="1") Integer currentPage
-			, @RequestParam(value = "region", required = false) String selectedLocation
-			, @RequestParam(value = "keyword", required = false) String selectedKeyword) {
+			, @RequestParam(value = "page", required=false, defaultValue="1") Integer currentPage) {
 		try {
 			int totalCount = tService.getTotalCount();
 			int recordCountPerPage = 10;
@@ -238,34 +282,8 @@ public class TravelController {
 			Map<String, Object> sortMap = new HashMap<String, Object>();
 			sortMap.put("pageInfo", pageInfo);
 			sortMap.put("order", order);
-			
-			// 검색 필터 적용 여부를 확인
-	        boolean applyFilter = false;
-	        
-	        if (selectedLocation != null && !selectedLocation.isEmpty()) {
-	            sortMap.put("selectedLocation", selectedLocation);
-	            applyFilter = true;
-	        }
-	        
-	        if (selectedKeyword != null && !selectedKeyword.isEmpty()) {
-	            sortMap.put("selectedKeyword", selectedKeyword);
-	            applyFilter = true;
-	        }
-	        
-	        List<Travel> tList;
-	        
-	        if (applyFilter) {
-	            // 검색 필터가 적용되면 해당 필터로 목록을 가져옴
-	            tList = tService.travelSortList(sortMap);
-	        } else {
-	            // 검색 필터가 적용되지 않으면 모든 목록을 가져옴
-	            tList = tService.travelSortList(sortMap);
-	        }
-	        
-			System.out.println("******************selectedLocation :" + selectedLocation);
-			System.out.println("******************selectedKeyword :" + selectedKeyword);
-			//List<Travel> tList = tService.travelSortList(sortMap);				
-
+	
+	        List<Travel> tList = tService.travelSortList(sortMap);
 
 			if(tList.size() > 0) {
 				mv.addObject("pageInfo", pageInfo);
@@ -286,6 +304,7 @@ public class TravelController {
 		}
 		return mv;
 	}
+	
 	
 	private PageInfo getPageInfo(Integer currentPage, int totalCount, int recordCountPerPage, int naviCountPerPage) {
 		//네비게이터 필요변수 : recordCountPerPage, naviCountPerPage, naviTotalCount, startNavi, endNavi
@@ -308,4 +327,3 @@ public class TravelController {
 		return pageInfo;
 	}
 }
-
