@@ -20,25 +20,25 @@
         <main>
         	<c:if test="${userId eq 'admin' }">
         		<div style="height: 30px; margin-top: 20px;">
-		        	<button style="float:right" onClick="travelDeleteGo(${travel.travelNo});">관리자글삭제</button>
-		        	<button style="float:right; margin-right: 10px;" onClick="travelModifyGo(${travel.travelNo});">관리자글수정</button>
+		        	<button class="btn btn-light" style="float:right" onClick="travelDeleteGo(${travel.travelNo});">관리자글삭제</button>
+		        	<button class="btn btn-light" style="float:right; margin-right: 10px;" onClick="travelModifyGo(${travel.travelNo});">관리자글수정</button>
         		</div>
 	        </c:if>
         	<div id="detailTop">
-	            <div>
+	          	<div>
 	                <h1 style="margin-top: 50px">${travel.travelName}</h1>
 	                <h4>${travel.travelAddr}</h4>
 	                <div class="center">
-	                    <div id="like"><span>💖</span><span style="padding-left:5px;]">12,345</span></div>
+	                    <!-- <div id="like"><span>💖</span><span style="padding-left:5px;]">12,345</span></div> -->
 	                    <div id="view"><span>👀</span><span style="padding-left:5px;]">${travel.travelViewCount}</span></div>
 	                </div>
 	            </div>
 	            <div class="menuTab fixed">
 	                <ul>
-	                    <li><a href="#photo">사진</a></li>
-	                    <li><a href="#detailInfo">상세정보</a></li>
-	                    <li><a href="#infoMap">지도</a></li>
-	                    <li><a href="#review">리뷰</a></li>
+	                    <li><a class ="btn btn-light" href="#photo">사진</a></li>
+	                    <li><a class ="btn btn-light" href="#detailInfo">상세정보</a></li>
+	                    <li><a class ="btn btn-light" href="#infoMap">지도</a></li>
+	                    <li><a class ="btn btn-light" href="#review">리뷰</a></li>
 	                </ul>
 	            </div>
             </div>
@@ -104,7 +104,7 @@
                 </div>
             </div>
             <div id="review">
-                <h3>리뷰 평점 <span>0</span></h3>
+                <h3>리뷰 평점<!--  <span>0</span> --></h3>
                 <hr />
                	<c:if test="${myReview eq null}">
 					<form action="/review/insert.tp" method="POST" onsubmit="return confirmSubmit();">
@@ -121,7 +121,7 @@
 	                        </div>
 	                        <div class="reviewContent">
 	                            <textarea name="reviewContent" placeholder="리뷰를 작성해주세요."></textarea>
-	                            <button type="submit">등록하기</button>
+	                            <button class="btn btn-secondary" type="submit">등록하기</button>
 	                        </div>
 	                    </div>
 					</form>	
@@ -218,7 +218,7 @@
 	                </c:if>
                 </ul>
             </div>
-            <form id="likeDislikeForm" action="/travel/like.tp" method="POST">
+<%--             <form id="likeDislikeForm" action="/travel/like.tp" method="POST">
 	            <div class="infoLike">
 	            <input type="hidden" name="userId" value="${sessionScope.userId}">
 	                <h3>여행정보가 마음에 드시나요?</h3>
@@ -235,7 +235,7 @@
 	                    </div>
 	                </div>
 	            </div>
-            </form>
+            </form> --%>
         </main>
     </body>
     <!-- 푸터 -->
@@ -323,56 +323,8 @@
 				alert("작성자만 삭제할 수 있습니다.");
 			}
 		}
-		// 스크롤 이벤트 리스너 추가
-		window.addEventListener("scroll", function () {
-		    const detailTop = document.getElementById("detailTop");
-		    const menuTab = detailTop.querySelector(".menuTab");
 
-		    // 현재 스크롤 위치
-		    const scrollY = window.scrollY;
-
-		    // detailTop의 top 위치
-		    const detailTopTop = detailTop.offsetTop;
-
-		    if (scrollY >= detailTopTop) {
-		        menuTab.classList.add("fixed");
-		    } else {
-		        menuTab.classList.remove("fixed");
-		    }
-		});
 		
-		// 페이지 로드 시 스크롤 이벤트 리스너를 등록하여 고정 메뉴 동작 추가
-        window.addEventListener("load", function () {
-            const detailTop = document.getElementById("detailTop");
-            const detailTopTop = detailTop.offsetTop;
-
-            function handleScroll() {
-                if (window.pageYOffset >= detailTopTop) {
-                    detailTop.classList.add("fixed");
-                } else {
-                    detailTop.classList.remove("fixed");
-                }
-            }
-
-            window.addEventListener("scroll", handleScroll);
-
-            // 클릭 이벤트 리스너를 등록하여 메뉴 항목 클릭 시 해당 섹션으로 스크롤 이동
-            const menuLinks = document.querySelectorAll(".menuTab ul li a");
-            menuLinks.forEach(function (link) {
-                link.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    const targetId = link.getAttribute("href").substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    window.scrollTo({
-                        top: targetElement.offsetTop,
-                        behavior: "smooth", // 부드러운 스크롤 효과 적용
-                    });
-
-                    // 스크롤 이동 후, detailTop 영역을 상단에 고정
-                    detailTop.classList.add("fixed");
-                });
-            });
-        });
 		
         document.addEventListener("DOMContentLoaded", function () {
             const likeDislikeForm = document.getElementById("likeDislikeForm");

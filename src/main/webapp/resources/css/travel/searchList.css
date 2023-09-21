@@ -27,7 +27,10 @@ main {
 .totalCheck ul li, .navi ul li {
     display: inline-block;
 }
-
+.totalCheck ul li a:hover {
+    color: rgb(16, 133, 243);
+    font-weight: 600;
+}
 .leftBox, .rightBox {
     float: left;
     
@@ -50,6 +53,7 @@ main {
     padding: 20px 0 20px 0;
     border-bottom: 1px solid #ccc;
 }
+
 .photo {
     width: 140px;
     height: 94px;
@@ -82,9 +86,11 @@ main {
     transition: width 0.5s ease; /* 투명도 변경 시 부드럽게 전환되도록 설정 */
     pointer-events: none; /* ::before 요소를 마우스 이벤트에서 제외 */
 }
+
 .areaTitle a:hover::before {
     width: 100%; 
 }
+
 .areaAddr {
 	margin-bottom: 5px;
 }

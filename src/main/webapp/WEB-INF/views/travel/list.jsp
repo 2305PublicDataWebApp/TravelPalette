@@ -23,7 +23,7 @@
             <div class="leftBox">
                 <div class="ListTitle">
                 	<c:if test="${userId eq 'admin' }">
-	    				<button style="float: right" onClick="travelRegGo();">관리자글등록</button><br>
+	    				<button class="btn btn-light" style="float: right" onClick="travelRegGo();">관리자글등록</button><br>
                 	</c:if>
                     <p class="searchTitle">#전체</p>
                 </div>
@@ -32,7 +32,6 @@
                     <ul style="float: right;">
                         <li><a href="/travel/list.tp?order=latest">최신순</a></li>
         				<li><a href="/travel/list.tp?order=views">조회순</a></li>
-        				<li><a href="/travel/list.tp?order=popular">인기순</a></li>
                     </ul>
                 </div>
                 <!-- 리스트출력 -->
@@ -40,7 +39,7 @@
                     <ul>
                     <c:forEach items="${tList}" var="travel" >
                         <li>
-                            <div class="photo" style="background-image: url('../resources/tUploadFiles/${travel.travelFileRename}'); background-size: cover;">
+                            <div class="photo" style="background-image: url('../resources/tUploadFiles/${travel.travelFileRename}');">
                                 <a href="/travel/detail.tp?travelNo=${travel.travelNo }"></a>
                             </div>
                             <div class="area" style="font-family: 'SUITE-Regular';">
@@ -62,16 +61,14 @@
             <div class="rightBox">
                 <div class="selectTag">
                     <span style="font-size: 24px; font-weight: bold">지역</span>
-                    <button style="float: right">새고</button>
                     <ul id="regionList">
-                        <li><a href="#">#전체</a></li>
+                        <li><a href="/travel/list.tp">#전체</a></li>
                     </ul>
                 </div>
                 <div class="selectTag">
                     <span style="font-size: 24px; font-weight: bold">테마</span>
-                    <button style="float: right">새고</button>
                     <ul id="keywordList">
-                        <li><a href="#">#전체</a></li>
+                        <li><a href="/travel/list.tp">#전체</a></li>
                     </ul>
                 </div>
             </div>
@@ -122,8 +119,8 @@
 		    regions.forEach(region => {
 		        const listItem = document.createElement("li");
 		        const link = document.createElement("a");
-		        link.href = "/travel/list.tp?region=" + encodeURIComponent("#" + region);
-		        link.textContent = "#" + region;
+		        link.href = "/travel/search.tp?searchKeyword=" + encodeURIComponent(region);
+		        link.textContent = "#"+region;
 		        listItem.appendChild(link);
 		        regionList.appendChild(listItem);
 		    });
@@ -134,8 +131,8 @@
 		    keywords.forEach(keyword => {
 		        const listItem = document.createElement("li");
 		        const link = document.createElement("a");
-		        link.href = "/travel/list.tp?keyword=" + encodeURIComponent("#" + keyword);
-		        link.textContent = "#" + keyword;
+		        link.href = "/travel/search.tp?searchKeyword=" + encodeURIComponent(keyword);
+		        link.textContent = "#"+keyword;
 		        listItem.appendChild(link);
 		        keywordList.appendChild(listItem);
 		    });

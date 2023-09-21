@@ -10,16 +10,6 @@ main {
     text-align: center;
     font-family: 'SUITE-Regular';
 }
- #detailTop.fixed {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    width: 1000px;
-    transform: translateX(-50%);
-    background-color: #fff; /* 메뉴 배경색상 설정 */
-    z-index: 100; /* 다른 요소 위에 표시되도록 설정 */
-    justify-content: center;
-}
 
 
 #photo,
@@ -63,7 +53,7 @@ main {
 
 
 .carousel-inner .carousel-item img {
-    height: 500px; /* 원하는 높이로 설정 */
+    height: 600px; /* 원하는 높이로 설정 */
     width: auto; /* 가로 크기를 자동으로 조정하여 원래 비율을 유지 */
 }
 
