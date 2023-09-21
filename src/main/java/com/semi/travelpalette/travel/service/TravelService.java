@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.semi.travelpalette.common.domain.PageInfo;
 import com.semi.travelpalette.travel.domain.Travel;
 import com.semi.travelpalette.travel.domain.TravelFile;
 
@@ -77,6 +78,21 @@ public interface TravelService {
 	 * @return
 	 */
 	int getTotalCount();
+
+	/**
+	 * 검색 레코드 개수 Service
+	 * @param searchKeyword
+	 * @return
+	 */
+	int getSearchListCount(String searchKeyword);
+
+	/**
+	 * 여행지역 키워드 검색 Service
+	 * @param searchPInfo 
+	 * @param searchMap
+	 * @return
+	 */
+	List<Travel> searchListByKeyword(PageInfo searchPInfo, Map<String, Object> searchMap);
 
 
 	

@@ -16,32 +16,21 @@ main {
 	margin-top: 50px;
     width: 1000px;
     padding-bottom: 80px;
-}
-.totalCheck ul li, .navi ul li {
-    display: inline-block;
-    padding-left: 10px;
-}
-.totalCheck ul li a:hover {
-    color: rgb(16, 133, 243);
-    font-weight: 600;
+    font-family: 'SUITE-Regular';
 }
 
-.searchColor {
-    color: rgb(16, 133, 243);
-    padding: 10px;
-}
-.searchTitle {
-    background: linear-gradient(to top, rgba(87, 147, 247, 0.3) 30%, transparent 50%);
-    display: inline; /* 인라인 요소로 설정하여 텍스트 내에서만 적용됩니다. */
-    line-height: 30%;
-}
 .searchTitle {
 	font-size: 30px; 
 	font-weight: bold; 
+	padding-bottom: 5px; 
 }
+.totalCheck ul li, .navi ul li {
+    display: inline-block;
+}
+
 .leftBox, .rightBox {
     float: left;
-    font-family: 'SUITE-Regular';
+    
 }
 .leftBox {
     width: 680px;
@@ -51,9 +40,9 @@ main {
     width: 300px;
 }
 
-#totalCount {
+.searchColor {
     color: rgb(16, 133, 243);
-    padding: 2px;
+    padding: 10px;
 }
 .list ul li {
     width: 680px;
@@ -113,8 +102,4 @@ main {
     list-style-type: none;
     float: left;
     padding: 10px;
-}
-
-.page-item{
-	margin:0;
 }

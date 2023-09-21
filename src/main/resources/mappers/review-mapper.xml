@@ -9,14 +9,14 @@
 		<result property="reviewCreateDate" column="REVIEW_CREATE_DATE" />
 		<result property="reviewRating" 	column="REVIEW_RATING" />
 		<result property="reviewStatus" 	column="REVIEW_STATUS" />
-		<result property="userNickname" 	column="USER_NICKNAME" />
+		<result property="userId" 			column="USER_ID" />
 		<result property="travelNo" 		column="TRAVEL_NO" />
 		<result property="boardType" 		column="BOARD_TYPE" />
 	</resultMap>
 	
 	<insert id="insertReview">
 		INSERT INTO REVIEW_TBL
-		VALUES (SEQ_REVIEW_NO.NEXTVAL, #{reviewContent}, DEFAULT, #{reviewRating}, DEFAULT, #{userNickname}, #{travelNo}, DEFAULT)
+		VALUES (SEQ_REVIEW_NO.NEXTVAL, #{reviewContent}, DEFAULT, #{reviewRating}, DEFAULT, #{userId}, #{travelNo}, DEFAULT)
 	</insert>
 	
 	<update id="deleteReview">
@@ -39,8 +39,8 @@
 	</select>
 	
 	<select id="selectMyReview" resultMap="ReviewResultMap">
-		SELECT REVIEW_NO, REVIEW_CONTENT, REVIEW_CREATE_DATE, REVIEW_RATING, USER_NICKNAME, TRAVEL_NO   
+		SELECT REVIEW_NO, REVIEW_CONTENT, REVIEW_CREATE_DATE, REVIEW_RATING, USER_ID, TRAVEL_NO   
 		FROM REVIEW_TBL
-		WHERE TRAVEL_NO = #{travelNo} AND USER_NICKNAME = #{userNickname} AND REVIEW_STATUS = 'Y'
+		WHERE TRAVEL_NO = #{travelNo} AND USER_ID = #{userId} AND REVIEW_STATUS = 'Y'
 	</select>
 </mapper>

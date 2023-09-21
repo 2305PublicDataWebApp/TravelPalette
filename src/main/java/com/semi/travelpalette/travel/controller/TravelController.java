@@ -1,6 +1,5 @@
 package com.semi.travelpalette.travel.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -178,10 +177,10 @@ public class TravelController {
 				//조회수 증가
 				tService.updateViewCount(travelNo);
 				
-				 String userNickname = (String) session.getAttribute("userNickname");
-				 if(userNickname != null && userNickname != "") {
-					 //닉네임과 여행지번호로 리뷰조회
-					 Review review = new Review(userNickname, travelNo);
+				 String userId = (String) session.getAttribute("userId");
+				 if(userId != null && userId != "") {
+					 //userId, 여행지번호로 리뷰조회
+					 Review review = new Review(userId, travelNo);
 					 Review	myReview = rService.selectMyReview(review);
 					 if(myReview != null) {
 						 mv.addObject("myReview", myReview);
@@ -221,6 +220,36 @@ public class TravelController {
 		return mv;
 	}
 
+	@RequestMapping(value="/search.tp", method=RequestMethod.GET)
+	public ModelAndView searchTravel( 
+			ModelAndView mv
+			, @RequestParam(value = "order", required=false) String order
+			, @RequestParam(value="searchKeyword", required=false, defaultValue = "") String searchKeyword
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
+		int totalCount = tService.getSearchListCount(searchKeyword);
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		PageInfo searchPInfo = this.getPageInfo(currentPage, totalCount, recordCountPerPage, naviCountPerPage);
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("order", order);
+		searchMap.put("searchKeyword", searchKeyword);
+		
+		List<Travel> searchList = tService.searchListByKeyword(searchPInfo,searchMap);
+		if(!searchList.isEmpty()) {
+			mv.addObject("searchKeyword", searchKeyword);
+			mv.addObject("searchPInfo", searchPInfo);
+			mv.addObject("totalCount", totalCount);
+			mv.addObject("sList", searchList);
+			mv.setViewName("travel/searchList");
+		}  else {
+			mv.addObject("msg", "검색 정보를 불러올 수 없습니다.");
+			mv.addObject("url", "/index.jsp");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
 	@RequestMapping(value="/list.tp", method=RequestMethod.GET)
 	public ModelAndView sortList(
 			ModelAndView mv
@@ -284,6 +313,12 @@ public class TravelController {
 			mv.addObject("msg", "[서비스실패] 관리자에 문의바랍니다.");
 			mv.setViewName("common/errorPage");
 		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/like.tp", method=RequestMethod.POST) 
+	public ModelAndView submitLike(ModelAndView mv) {
+		
 		return mv;
 	}
 	
