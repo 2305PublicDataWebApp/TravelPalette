@@ -122,6 +122,12 @@ public interface UserService {
 
 	Like selectLike(String likeNo);
 
+	User selectKakaoUserNo(String userNickname);
+
+	User selectKakaoUserInfo(int userNo);
+
+	User selectKakaoEmailCheck(String userId);
+
 
 //	int kakaoUserInsert(User kakaouser);
 //

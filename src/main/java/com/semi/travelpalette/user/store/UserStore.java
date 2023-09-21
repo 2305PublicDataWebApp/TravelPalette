@@ -198,6 +198,12 @@ public interface UserStore {
 
 	public Like selectLike(String likeNo);
 
+	public User selectKakaoUserNo(String userNickname);
+
+	public User selectKakaoUserInfo(int userNo);
+
+	public User selectKakaoEmailCheck(String userId);
+
 
 //	public int kakaoUserInsert(  User kakaouser);
 //

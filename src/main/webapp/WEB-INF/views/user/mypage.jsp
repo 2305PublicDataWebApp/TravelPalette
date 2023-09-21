@@ -19,14 +19,14 @@
             <div class="w-line"></div>
             <div class="flex">
                 <div id="left">
-                    <span class="fs-3">${sessionScope.userNickname }<br>환영합니다</span>
+                    <span class="fs-3">${sessionScope.userNickname }님<br>환영합니다</span>
                     <br>
                     <br>
                     <c:if test="${sessionScope.platformType == 'normal'}">
 	                    <li><a href="/user/userNormalPw.tp" onclick="userModify();">회원 정보 수정</a></li>
                     </c:if>
                     <c:if test="${sessionScope.platformType == 'kakao'}">
-	                    <li><a href="#" onclick="userModify();">회원 정보 수정</a></li>
+	                    <li><a href="/user/userKakaoEmail.tp" onclick="userModify();">회원 정보 수정</a></li>
                     </c:if>
 <!--                    	<li><a href="/user/activityLike.tp"> 활동 내역 관리</a></li> -->
                     <li><a href="/inquiry/list.tp">1:1 문의</a></li>

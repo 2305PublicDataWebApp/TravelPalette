@@ -158,4 +158,19 @@ public class UserStoreLogic implements UserStore {
 	public Like selectLike(String likeNo) {
 		return session.selectOne("UserMapper.selectLike", likeNo);
 	}
+
+	@Override
+	public User selectKakaoUserNo(String userNickname) {
+		return session.selectOne("UserMapper.selectKakaoUserNo", userNickname);
+	}
+
+	@Override
+	public User selectKakaoUserInfo(int userNo) {
+		return session.selectOne("UserMapper.selectKakaoUserInfo", userNo);
+	}
+
+	@Override
+	public User selectKakaoEmailCheck(String userId) {
+		return session.selectOne("UserMapper.selectKakaoEmailCheck", userId);
+	}
 }

@@ -16,8 +16,8 @@ public class User {
 	private String userGender;
 	private String userEmail;
 	private String userTel;
-	private char userEmailStatus;
-	private char userSmsStatus;
+	private String userEmailStatus;
+	private String userSmsStatus;
 	
 	public User() {
 		super();
@@ -39,10 +39,9 @@ public class User {
 		this.userPw = userPw;
 	}
 	
-
 	public User(int userNo, String userId, String userPw, String platformType, Date userCreateDate,
 			Date userDeleteDate, char userStatus, char adminCheck, String userName, String userNickname,
-			String userGender, String userEmail, String userTel, char userEmailStatus, char userSmsStatus) {
+			String userGender, String userEmail, String userTel, String userEmailStatus, String userSmsStatus) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -139,16 +138,16 @@ public class User {
 	public void setUserTel(String userTel) {
 		this.userTel = userTel;
 	}
-	public char getUserEmailStatus() {
+	public String getUserEmailStatus() {
 		return userEmailStatus;
 	}
-	public void setUserEmailStatus(char userEmailStatus) {
+	public void setUserEmailStatus(String userEmailStatus) {
 		this.userEmailStatus = userEmailStatus;
 	}
-	public char getUserSmsStatus() {
+	public String getUserSmsStatus() {
 		return userSmsStatus;
 	}
-	public void setUserSmsStatus(char userSmsStatus) {
+	public void setUserSmsStatus(String userSmsStatus) {
 		this.userSmsStatus = userSmsStatus;
 	}
 	@Override

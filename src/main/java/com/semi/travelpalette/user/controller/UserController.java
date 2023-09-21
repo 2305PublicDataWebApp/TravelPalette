@@ -1,5 +1,6 @@
 package com.semi.travelpalette.user.controller;
 
+import java.net.http.HttpHeaders;
 import java.util.*;
 
 import javax.mail.MessagingException;
@@ -113,6 +114,41 @@ public class UserController {
     }
 
 
+	//***************** 카카오 로그인 관련 메소드 *************************
+
+	// 카카오 로그인
+	@RequestMapping(value = "/kakao-login.tp")
+	public String kakaoLogin(
+			@RequestParam("code") String code,
+			Model model ,HttpSession session) throws Exception {
+
+		//code로 토큰 받음
+		String access_token = kService.getToken(code);
+
+		//토큰으로 사용자 정보 담은 list 가져오기
+		Map<String, Object> list = kService.getUserInfo(access_token);
+		
+		String email = (String)list.get("userEmail");
+		String userNickname = (String)list.get("userNickname");
+		
+		System.out.println(email);
+		System.out.println(userNickname);
+		
+		User kakaoUserNo = userService.selectKakaoUserNo(userNickname);
+		
+		User kakaoUserInfo = userService.selectKakaoUserInfo(kakaoUserNo.getUserNo());
+		
+		String platformType = kakaoUserInfo.getPlatformType();
+		
+	    // 세션에 로그인 정보 저장
+	    session.setAttribute("userId", email);
+	    session.setAttribute("userNickname", userNickname);
+	    session.setAttribute("platformType", platformType);
+
+		return "redirect:/index.jsp";
+	}
+
+
 
     // ************************ 회원 기능 관련 ***************************
 
@@ -153,7 +189,6 @@ public class UserController {
     		, @ModelAttribute User user
     		) {
 		String userId = (String) session.getAttribute("userId");
-		System.out.println("제발~~!!" + userId);
 		User uOne = userService.checkUserId((String)session.getAttribute("userId"));
 		System.out.println();
 		if(uOne != null) {
@@ -166,8 +201,6 @@ public class UserController {
 		}
     	return mv;
     }
-
-
 
 
     @PostMapping("/userNormalPw.tp")
@@ -226,14 +259,116 @@ public class UserController {
 		String userId = (String) session.getAttribute("userId");
 		User uOne = userService.checkUserId((String)session.getAttribute("userId"));
 		User userInfo = userService.selectUserAllInfo(uOne.getUserNo());
+		String userEmailStatus = user.getUserEmailStatus();
+		String userSmsStatus = user.getUserSmsStatus();
+		System.out.println(userEmailStatus);
+		if(userEmailStatus != "Y") {
+			user.setUserEmailStatus("N");
+		}
+		if(userSmsStatus != "Y") {
+			user.setUserSmsStatus("N");
+		}
 		userService.updateUserNormal(user);
 		mv.setViewName("/user/mypage");
 		return mv;
 	}
+	
+	
+
+	// ******************************* 카카오 *************************************
+	@GetMapping("/userKakaoEmail.tp")
+    public ModelAndView showUserKakaoEmail(
+    		ModelAndView mv
+    		, HttpSession session
+    		, @ModelAttribute User user
+    		) {
+		String userId = (String) session.getAttribute("userId");
+		User uOne = userService.checkUserId((String)session.getAttribute("userId"));
+		System.out.println();
+		if(uOne != null) {
+			mv.addObject("title", "이메일 확인").addObject("titleMsg", "이메일 확인")
+			.addObject("btnMsg", "카카오 계정 입력");
+			mv.setViewName("/user/normalPw");
+		}else {
+			mv.addObject("error", "로그인 후 이용 가능합니다.").addObject("msg", "로그인 후 이용 가능합니다.").addObject("url", "/user/login.tp").addObject("back",false);
+			mv.setViewName("/common/errorPage");
+		}
+    	return mv;
+    }
 
 
+    @PostMapping("/userKakaoEmail.tp")
+    @ResponseBody
+    public Map<String, Object> userKakaoEmail(@RequestParam("userId") String userId
+    		, HttpSession session) {
+        // 요청 처리 로직
+        String sessionUserId = (String)session.getAttribute("userId");
+        User kakaoEmailCheck = userService.selectKakaoEmailCheck(userId);
+        // 응답 데이터 생성
+        Map<String, Object> response = new HashMap<>();
+        
+        if(sessionUserId != null && sessionUserId.equals(userId)) {
+        	boolean isDuplicate = true;
+        	response.put("success", true);
+        	response.put("isDuplicate", isDuplicate);
+        	response.put("redirectUrl", "/user/modifyKakao.tp"); // 리디렉션할 URL 설정
+        } else {
+        	boolean isDuplicate = false;
+        	response.put("success", false);
+        	response.put("isDuplicate", isDuplicate);
+            response.put("message", "이메일을 확인해주세요."); // 실패 메시지 설정
+        }
+        return response;
+    }
 
     // 회원 정보 수정
+	@GetMapping("/modifyKakao.tp")
+    public ModelAndView showUserModifyKakao(
+    		ModelAndView mv
+    		, HttpSession session
+    		, @ModelAttribute User user
+    		) {
+		String userId = (String) session.getAttribute("userId");
+		User uOne = userService.checkUserId((String)session.getAttribute("userId"));
+		// 유저 정보 검색 후 수정 페이지에 출력
+		int userNo = uOne.getUserNo();
+		// 검색해온 유저 번호로 유저에 대한 모든 정보 select
+		User userInfo = userService.selectUserAllInfo(userNo);
+		if(uOne != null) {
+			mv.addObject("userInfo", userInfo);
+			mv.setViewName("/user/modifyKakao");
+		}else {
+			mv.addObject("error", "로그인 후 이용 가능합니다.").addObject("msg", "로그인 후 이용 가능합니다.").addObject("url", "/user/login.tp").addObject("back",false);
+			mv.setViewName("/common/errorPage");
+		}
+    	return mv;
+    }
+
+
+	@PostMapping("/modifyKakao.tp")
+	public ModelAndView UserModifyKaKao (
+			ModelAndView mv
+			, HttpSession session
+			, User user) {
+		String userId = (String) session.getAttribute("userId");
+		User uOne = userService.checkUserId((String)session.getAttribute("userId"));
+		User userInfo = userService.selectUserAllInfo(uOne.getUserNo());
+		String userEmailStatus = user.getUserEmailStatus();
+		String userSmsStatus = user.getUserSmsStatus();
+		System.out.println(userEmailStatus);
+		if(userEmailStatus != "Y") {
+			user.setUserEmailStatus("N");
+		}
+		if(userSmsStatus != "Y") {
+			user.setUserSmsStatus("N");
+		}
+		userService.updateUserNormal(user);
+		mv.setViewName("/user/mypage");
+		return mv;
+	}
+	
+
+
 	@GetMapping("/delete.tp")
     public ModelAndView showDeleteUser(
     		ModelAndView mv
@@ -395,6 +530,14 @@ public class UserController {
 			ModelAndView mv
 			, @ModelAttribute User user
 			) {
+		String userEmailStatus = user.getUserEmailStatus();
+		String userSmsStatus = user.getUserSmsStatus();
+		if(userEmailStatus != "Y") {
+			user.setUserEmailStatus("N");
+		}
+		if(userSmsStatus != "Y") {
+			user.setUserSmsStatus("N");
+		}
 		int result = userService.insertUser(user);
 		if(result > 0) {
 			mv.addObject("msg", "회원가입이 성공적으로 완료되었습니다.").addObject("url", "redirect:/index.jsp");
@@ -456,7 +599,7 @@ public class UserController {
 			int totalCount = userService.selectLikeCount(userId);
 			PageInfo pInfo = userService.getPageInfo(currentPage, userId, totalCount);
 			List<Like> likes = userService.selectLikes(pInfo);
-//			List<>
+//			List<Board>
 			System.out.println(like.getLikeNo());
 			mv.addObject("like", likes);
 			mv.setViewName("/user/activityLike");
@@ -593,31 +736,47 @@ public class UserController {
 		}
 	}
 
-
-
-	//***************** 카카오 로그인 관련 메소드 *************************
-
-	// 카카오 로그인
-	@RequestMapping(value = "/kakao-login.tp")
-	public String kakaoLogin(
-			@RequestParam("code") String code,
-			Model model ,HttpSession session) throws Exception {
-
-		//code로 토큰 받음
-		String access_token = kService.getToken(code);
-
-		//토큰으로 사용자 정보 담은 list 가져오기
-		Map<String, Object> list = kService.getUserInfo(access_token);
-
-		String userId = (String)list.get("userId");
-		String userNickName = (String)list.get("userNickname");
-
-	    // 세션에 로그인 정보 저장
-	    session.setAttribute("userId", userId);
-	    session.setAttribute("userNickName", userNickName);
-
-		return "redirect:/index.jsp";
-	}
+//    // 카카오 계정 탈퇴 메소드
+//    public static boolean deleteKakaoAccount(String kakaoAccessToken) {
+//        // 카카오 API 엔드포인트 URL
+//        String apiUrl = "https://kapi.kakao.com/v1/user/unlink";
+//
+//        // HTTP 요청 헤더 설정
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        headers.set("Authorization", "Bearer " + kakaoAccessToken);
+//
+//        // HTTP 요청 엔티티 설정
+//        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+//
+//        // RestTemplate을 사용하여 DELETE 요청 보내기
+//        RestTemplate restTemplate = new RestTemplate();
+//        ResponseEntity<String> responseEntity = restTemplate.exchange(
+//                apiUrl, HttpMethod.DELETE, requestEntity, String.class);
+//
+//        // 응답 처리
+//        if (responseEntity.getStatusCode() == HttpStatus.NO_CONTENT) {
+//            System.out.println("카카오 계정 탈퇴 성공");
+//            return true;
+//        } else {
+//            System.out.println("카카오 계정 탈퇴 실패");
+//            System.out.println("응답 코드: " + responseEntity.getStatusCodeValue());
+//            System.out.println("응답 본문: " + responseEntity.getBody());
+//            return false;
+//        }
+//    }
+//
+//    public static void main(String[] args) {
+//        String kakaoAccessToken = "YOUR_KAKAO_ACCESS_TOKEN";
+//        boolean result = deleteKakaoAccount(kakaoAccessToken);
+//
+//        // 탈퇴 결과에 따른 처리
+//        if (result) {
+//            // 성공적으로 탈퇴했을 때의 처리
+//        } else {
+//            // 탈퇴에 실패했을 때의 처리
+//        }
+//    }
 
 
 

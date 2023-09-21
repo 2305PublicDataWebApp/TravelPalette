@@ -198,6 +198,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	@Override
+	public User selectKakaoUserNo(String userNickname) {
+		return this.userStore.selectKakaoUserNo(userNickname);
+	}
+
+
+	@Override
+	public User selectKakaoUserInfo(int userNo) {
+		return this.userStore.selectKakaoUserInfo(userNo);
+	}
+
+
+	@Override
+	public User selectKakaoEmailCheck(String userId) {
+		return this.userStore.selectKakaoEmailCheck(userId);
+	}
+
+
 
 
 
