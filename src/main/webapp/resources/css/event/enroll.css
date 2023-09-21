@@ -1,30 +1,32 @@
 @charset "UTF-8";
-body {
+
+main {
     max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: auto; /* 왼쪽 마진을 자동으로 설정 (양옆으로 마진을 주지 않음) */
+    margin-right: auto; /* 오른쪽 마진을 자동으로 설정 (양옆으로 마진을 주지 않음) */
 }
-h1 {
+main h1 {
     text-align: center;
 }
-form {
+main form {
     margin-top: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     padding: 20px;
     background-color: #fff;
 }
-input[type="text"],
-textarea {
+main input[type="text"],
+main textarea {
     width: 95%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-
 }
-input[type="submit"],
-input[type="reset"]{
-    background-color: #000000b1;
+main input[type="submit"],
+main input[type="reset"] {
+    background-color: #000;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -32,23 +34,22 @@ input[type="reset"]{
     cursor: pointer;
     margin-right: 10px;
 }
-input[type="submit"]:hover
-input[type="submit"]:reset{
-    background-color: #000000;
+main input[type="submit"]:hover,
+main input[type="reset"]:hover {
+    background-color: #333;
 }
-.button-container {
-    text-align: center; /* 우측 정렬 */
+main .button-container {
+    text-align: center;
     margin-top: 20px;
-    padding-top: 10px; /* 위 여백 추가 */
+    padding-top: 10px;
 }
-ul {
+main ul {
     list-style: none;
     padding: 0;
 }
-li {
+main li {
     margin-bottom: 10px;
 }
-
-img {
-    width: 95%;	
+main img {
+    width: 95%;
 }
