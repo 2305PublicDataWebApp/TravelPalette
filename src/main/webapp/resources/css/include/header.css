@@ -69,8 +69,9 @@ ul{
             }
 
 /*검색버튼 css*/
-button .travelSearchButton {
-    display: none;
+.travelSearchButton {
+    border: 0px;
+    background-color: inherit;
 }
 
 

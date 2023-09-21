@@ -6,6 +6,11 @@
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<link rel="stylesheet" href="/resources/css/include/footer.css">
+		<style type="text/css">
+			footer a:link, footer a:visited{
+		        color: #E38B29;
+		    }
+		</style>
 	</head>
 	<body>
 		<footer>

@@ -191,7 +191,6 @@
                     <h2 style="font-family: 'TmoneyRoundWindExtraBold';font-size: 28px;padding-top: 130px;float:left;">
                         여행 가이드북
                     </h2>
-                    <img style="width:32px;float: right;padding-top: 131px;margin-right: 14px;" src="../resources/images/main/plus.png" alt="">
                 </div>
                 <div style="width:100%;height: 510px;background-color: rgba(224, 224, 224, 0.32);">
                     <div style="width: 100%;height: 50px;"></div>
@@ -336,6 +335,7 @@
             setInterval(() => {
                 next.click();
             }, 5000);
+            
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     </body>
