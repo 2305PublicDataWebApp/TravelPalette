@@ -43,7 +43,12 @@
                	</form>
                 <div style="width: 100%;float: left;border-top: 1px solid #ccc;margin-top: 15px;padding: 10px 0px">
                     <p style="float:left;font-size: 18px;margin: 0;padding: 5px;font-weight: 600;font-family: 'SUITE-Regular';letter-spacing: 2px;padding-left: 15px;">#${pInfo.totalCount }건</p>
-                    <button id="goInsertBoardPage" type="button" style="float: right;width: 80px;" class="btn btn-primary">글 등록</button>
+                    <c:if test="${userId eq null}">
+	                    <button onclick="loginCheck();" type="button" style="float: right;width: 80px;" class="btn btn-primary">글 등록</button>
+                    </c:if>
+                    <c:if test="${userId ne null && userId ne ''}">
+	                    <button id="goInsertBoardPage" type="button" style="float: right;width: 80px;" class="btn btn-primary">글 등록</button>
+                    </c:if>
                     <p style="margin: 0;padding: 7px 13px 0px 8px;margin-left: 3px;float: right;">
                     	<c:if test="${sortType eq 'no' }">
                     		<a href="/community/qList.tp" style="text-decoration:underline;">최신순 </a>|

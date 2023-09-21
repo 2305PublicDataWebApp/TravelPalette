@@ -22,16 +22,30 @@
         
         <!-- 메인 -->
         <main>
+        	<div style="width:100%;height:36px;"></div>
             <div class="leftBox">
                 <div class="ListTitle">
-                    <span style="font-size: 24px; font-weight: bold">#전체</span>
+                    <span style="font-size: 30px; font-weight: bold">#전체</span>
           			<c:if test="${userId eq 'admin' }">
 	                    <button style="float: right" onClick="eventRegGo();">관리자글등록</button>
 	                </c:if>
                 </div>
-                <div class="totalCheck">
-                    <b>총<span id="totalCount">${totalCount }</span>건</b>
+                <div class="totalCheck" style="padding-left: 10px;margin-top: 10px;width: 75%;float: left;">
+                    <b>총<span id="totalCount" style="margin-top: 10px;">${totalCount }</span>건</b>
                 </div>
+				<!-- 이벤트 옵션 선택 -->
+				<ul>
+                    <li>
+             			<c:url var="eventUrl" value="/event/list.tp">
+               				<c:param name="eventCondition" value="IngEvent"></c:param>
+               			</c:url>
+               			<a style="float:left;" href="${eventUrl }">#진행중인 이벤트</a>&nbsp;&nbsp;|&nbsp;
+						<c:url var="eventUrl2" value="/event/list.tp">
+							<c:param name="eventCondition" value="EndEvent"></c:param>
+						</c:url>
+	           			<a href="${eventUrl2 }">#종료된 이벤트</a>
+                   	</li>
+                </ul>
                 <!-- 리스트출력 -->
                 <div class="list">
                     <ul>
@@ -78,24 +92,6 @@
 	                    		<a style="color: black;" class="page-link"  href="${pageUrl }">다음</a>
 		                    </li>
                     	</c:if>
-                    </ul>
-                </div>
-            </div>
-            <div class="rightBox">
-                <div class="selectTag">
-                    <ul>
-                        <li>
-                 			<c:url var="eventUrl" value="/event/list.tp">
-                   				<c:param name="eventCondition" value="IngEvent"></c:param>
-                   			</c:url>
-                   			<a href="${eventUrl }">#진행중인 이벤트</a>
-                       	</li><br>
-                        <li>
-							<c:url var="eventUrl" value="/event/list.tp">
-								<c:param name="eventCondition" value="EndEvent"></c:param>
-							</c:url>
-	              			<a href="${eventUrl }">#종료된 이벤트</a>
-                        </li>
                     </ul>
                 </div>
             </div>

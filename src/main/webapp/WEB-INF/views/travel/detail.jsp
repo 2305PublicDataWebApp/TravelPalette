@@ -19,24 +19,26 @@
         <jsp:include page="/include/nav.jsp"></jsp:include>        
         <main>
         	<c:if test="${userId eq 'admin' }">
-	        	<button style="float:right" onClick="travelModifyGo(${travel.travelNo});">관리자글수정</button>
-	        	<button style="float:right" onClick="travelDeleteGo(${travel.travelNo});">관리자글삭제</button>
+        		<div style="height: 30px; margin-top: 20px;">
+		        	<button class="btn btn-light" style="float:right" onClick="travelDeleteGo(${travel.travelNo});">관리자글삭제</button>
+		        	<button class="btn btn-light" style="float:right; margin-right: 10px;" onClick="travelModifyGo(${travel.travelNo});">관리자글수정</button>
+        		</div>
 	        </c:if>
-        	<div>
-	            <div>
-	                <h1 style="padding: 20px">${travel.travelName}</h1>
+        	<div id="detailTop">
+	          	<div>
+	                <h1 style="margin-top: 50px">${travel.travelName}</h1>
 	                <h4>${travel.travelAddr}</h4>
 	                <div class="center">
-	                    <div id="like"><span>💖</span><span style="padding-left:5px;]">12,345</span></div>
+	                    <!-- <div id="like"><span>💖</span><span style="padding-left:5px;]">12,345</span></div> -->
 	                    <div id="view"><span>👀</span><span style="padding-left:5px;]">${travel.travelViewCount}</span></div>
 	                </div>
 	            </div>
 	            <div class="menuTab fixed">
 	                <ul>
-	                    <li><a href="#photo">사진</a></li>
-	                    <li><a href="#detailInfo">상세정보</a></li>
-	                    <li><a href="#infoMap">지도</a></li>
-	                    <li><a href="#review">리뷰</a></li>
+	                    <li><a class ="btn btn-light" href="#photo">사진</a></li>
+	                    <li><a class ="btn btn-light" href="#detailInfo">상세정보</a></li>
+	                    <li><a class ="btn btn-light" href="#infoMap">지도</a></li>
+	                    <li><a class ="btn btn-light" href="#review">리뷰</a></li>
 	                </ul>
 	            </div>
             </div>
@@ -73,7 +75,12 @@
                 </p>
                 <div id="infoList">
                     <ul>
-                        <li><label>홈페이지</label><span><a href="${travel.travelUrl}" target="_blank">${travel.travelUrl}</a></span></li>
+                        <li>
+	                        <label>홈페이지</label>
+	                        <c:if test="${travel.travelUrl ne null}">
+	                        	<span><a href="${travel.travelUrl}" target="_blank">${travel.travelUrl}</a></span></li>
+	                        </c:if>
+	                        <c:if test="${travel.travelUrl eq null}"><span>없음</span></c:if>
                         <li><label>주소</label><span>${travel.travelAddr}</span></li>
                         <li><label>연락처</label><span>${travel.travelTel}</span></li>
                         <li><label>이용시간</label><span>${travel.travelUsingTime}</span></li>
@@ -85,7 +92,7 @@
                 	<c:set var="tagsString" value="${travel.travelTags}" />
                 	<c:set var="tagArray" value="${fn:split(tagsString, ',')}" />
                 	<c:forEach items="${tagArray }" var="tags" >
-                		<span>${tags }</span>
+                		<span style="padding-right:15px;">#${tags }</span>
                 	</c:forEach>
                 </div>
             </div>
@@ -97,12 +104,12 @@
                 </div>
             </div>
             <div id="review">
-                <h3>리뷰 평점 <span>0</span></h3>
+                <h3>리뷰 평점<!--  <span>0</span> --></h3>
                 <hr />
                	<c:if test="${myReview eq null}">
 					<form action="/review/insert.tp" method="POST" onsubmit="return confirmSubmit();">
 					<input type="hidden" name="travelNo" value="${travel.travelNo}" >
-					<input type="hidden" name="userNickname" value="${userNickname }" >
+					<input type="hidden" name="userId" value="${sessionScope.userId }" >
 	                    <div class="reviewRegister">
 	                        <div class="starRating">
 	                            <input type="radio" name="reviewRating" value="5" id="rate1" onclick="selectedRating(5);"><label for="rate1">★</label>
@@ -114,7 +121,7 @@
 	                        </div>
 	                        <div class="reviewContent">
 	                            <textarea name="reviewContent" placeholder="리뷰를 작성해주세요."></textarea>
-	                            <button type="submit">등록하기</button>
+	                            <button class="btn btn-secondary" type="submit">등록하기</button>
 	                        </div>
 	                    </div>
 					</form>	
@@ -140,14 +147,14 @@
                            <textarea readonly>${myReview.reviewContent }</textarea>
                            <c:url var="delReviewUrl" value="/review/delete.tp">
 								<c:param name="reviewNo" value="${myReview.reviewNo }"></c:param>
-								<c:param name="userNickname" value="${myReview.userNickname }"></c:param>
+								<c:param name="userId" value="${myReview.userId }"></c:param>
 								<c:param name="travelNo" value="${myReview.travelNo }"></c:param>
 							</c:url>
                            <a href="javascript:void(0);" onclick="deleteReview('${delReviewUrl}');">삭제하기</a>
                        </div>
                        <div class="myReviewReg">
                            <span>${myReview.reviewCreateDate }</span>
-                           <span style="padding-left: 10px;">${myReview.userNickname }</span>
+                           <span style="padding-left: 10px;">${myReview.userId }</span>
                        </div>
                    </div>
 				</c:if>
@@ -177,7 +184,7 @@
 	                            </div>
 	                            <div class="reviewReg">
 	                                <span><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reviewCreateDate }"/></span>
-	                                <span>${review.userNickname }</span>
+	                                <span>${review.userId }</span>
 	                            </div>
 	                        </li>      
 	                    </c:forEach>	
@@ -211,21 +218,24 @@
 	                </c:if>
                 </ul>
             </div>
-            <div class="infoLike">
-                <h3>여행정보가 마음에 드시나요?</h3>
-                <p>더 좋은 여행정보를 위해 소중한 평가 부탁드립니다.</p>
-                <hr />
-                <div class="likeDislike">
-                    <div class="like">
-                        <label for="infoLikBtn">😊</label><span>도움이 됐어요</span>
-                        <input type="radio" id="infoLikBtn" name="like" value="infoLike"> 
-                    </div>
-                    <div class="like">
-                        <label for="infoDislikBtn">😒</label><span>별로예요</span>
-                        <input type="radio" id="infoDislikBtn" name="like" value="infoDislike"> 
-                    </div>
-                </div>
-            </div>
+<%--             <form id="likeDislikeForm" action="/travel/like.tp" method="POST">
+	            <div class="infoLike">
+	            <input type="hidden" name="userId" value="${sessionScope.userId}">
+	                <h3>여행정보가 마음에 드시나요?</h3>
+	                <p>더 좋은 여행정보를 위해 소중한 평가 부탁드립니다.</p>
+	                <hr />
+	                <div class="likeDislike">
+	                    <div class="like">
+	                        <label for="infoLikBtn">😊 도움이 됐어요</label>
+	                        <input type="radio" id="infoLikBtn" name="like" value="like"> 
+	                    </div>
+	                    <div class="dislike">
+	                        <label for="infoDislikBtn">😒 별로예요</label>
+	                        <input type="radio" id="infoDislikBtn" name="like" value="dislike"> 
+	                    </div>
+	                </div>
+	            </div>
+            </form> --%>
         </main>
     </body>
     <!-- 푸터 -->
@@ -274,9 +284,28 @@
 		}
 		
 		function confirmSubmit() {
-			const confirmed = confirm("리뷰를 등록하시겠습니까?");
-			return confirmed;
-		}
+	        const userId = "${sessionScope.userId}"; 
+	        const selectedRating = document.querySelector('input[name="reviewRating"]:checked');
+	        const reviewContent = document.querySelector('textarea[name="reviewContent"]').value.trim();
+	        // 별점이 선택되지 않은 경우
+	        if (!selectedRating) {
+	            alert("별점을 선택하세요.");
+	            return false;
+	        }
+	        // 리뷰 내용이 없는 경우
+	        if (reviewContent === "") {
+	            alert("리뷰 내용을 작성하세요.");
+	            return false;
+	        }
+	        // 로그인하지 않은 경우
+	        if (!userId) {
+	            alert("로그인 후 이용해 주세요.");
+	            window.location.href = "/user/login.tp"; 
+	            return false;
+	        }
+	        const confirmed = confirm("리뷰를 등록하시겠습니까?");
+	        return confirmed;
+	    }
 		
 		function selectedRating(rating) {
 			var selectedRating = rating;
@@ -284,10 +313,29 @@
 		}
 		
 		function deleteReview(url) {
-			if(confirm("리뷰를 삭제하시겠습니까? 삭제 후에는 복구가 불가합니다.")) {
-				location.href = url;				
+			const userId = "${sessionScope.userId}";
+			const reviewWriter = "${myReview.userId}";
+			if(userId == reviewWriter) {
+				if(confirm("리뷰를 삭제하시겠습니까? 삭제 후에는 복구가 불가합니다.")) {
+					location.href = url;				
+				}				
+			} else {
+				alert("작성자만 삭제할 수 있습니다.");
 			}
 		}
 
+		
+		
+        document.addEventListener("DOMContentLoaded", function () {
+            const likeDislikeForm = document.getElementById("likeDislikeForm");
+            
+            // 라디오버튼이 클릭되었을 때 자동으로 폼 제출
+            const radioButtons = document.querySelectorAll("input[type=radio]");
+            radioButtons.forEach(function (radioButton) {
+                radioButton.addEventListener("click", function () {
+                    likeDislikeForm.submit(); // 폼 제출
+                });
+            });
+        });
 	</script>
 </html>

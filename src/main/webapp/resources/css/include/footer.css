@@ -1,4 +1,4 @@
-@charset "EUC-KR";
+@charset "UTF-8";";
 	footer a:link, footer a:visited{
         color: #E38B29;
     }
@@ -53,7 +53,7 @@
                 float: left;
             }
 
-   		/* Âü°í»çÀÌÆ® */
+   		/* ì°¸ê³ ì‚¬ì´íŠ¸ */
         .footerWebContainer{
             width: 100%;
             height: 150px;

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.semi.travelpalette.common.domain.PageInfo;
 import com.semi.travelpalette.travel.domain.Travel;
 import com.semi.travelpalette.travel.domain.TravelFile;
 import com.semi.travelpalette.travel.service.TravelService;
@@ -204,6 +205,19 @@ public class TravelServiceImpl implements TravelService{
 		if(file.exists()) {
 			file.delete();
 		}
+	}
+
+	@Override
+	public int getSearchListCount(String searchKeyword) {
+		int searchListCount = tStore.searchListCount(session, searchKeyword);
+		return searchListCount;
+	}
+
+
+	@Override
+	public List<Travel> searchListByKeyword(PageInfo searchPInfo, Map<String, Object> searchMap) {
+		List<Travel> searchList = tStore.searchListByKeyword(session, searchPInfo, searchMap);
+		return searchList;
 	}
 
 

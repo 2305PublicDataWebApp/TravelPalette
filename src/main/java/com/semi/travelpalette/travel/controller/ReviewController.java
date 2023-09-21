@@ -24,17 +24,33 @@ public class ReviewController {
 	public ModelAndView insertReview(
 			ModelAndView mv
 			, @ModelAttribute Review review
-			, @RequestParam(value="travelNo") Integer travelNo) {
+			, @RequestParam(value="travelNo") Integer travelNo
+			, HttpSession session) {
 		try {
-			int result = rSerivce.insertReview(review);
+			String userId = (String)session.getAttribute("userId");
 			String url = "/travel/detail.tp?travelNo="+travelNo;
-			if(result > 0) {
-				mv.addObject("msg", "리뷰가 등록되었습니다.");
-				mv.addObject("url", url);
-				mv.setViewName("common/successPage");
+			if(userId != null && !userId.equals("")) {
+				if(review != null && !review.equals("")) {
+					review.setUserId(userId);
+					review.setTravelNo(travelNo);
+					int result = rSerivce.insertReview(review);
+					if(result > 0) {
+						mv.addObject("msg", "리뷰가 등록되었습니다.");
+						mv.addObject("url", url);
+						mv.setViewName("common/successPage");
+					} else {
+						mv.addObject("msg", "[서비스실패] 리뷰가 등록되지 않았습니다.");
+						mv.addObject("url", url);
+						mv.setViewName("common/errorPage");
+					}
+				} else {
+					mv.addObject("msg", "내용을 입력해 주세요.");
+					mv.addObject("url", url);
+					mv.setViewName("common/errorPage");
+				}
 			} else {
-				mv.addObject("msg", "[서비스실패] 리뷰가 등록되지 않았습니다.");
-				mv.addObject("url", url);
+				mv.addObject("msg", "로그인 후 이용해주세요.");
+				mv.addObject("url", "/user/login.tp");
 				mv.setViewName("common/errorPage");
 			}
 		} catch (Exception e) {
@@ -54,10 +70,10 @@ public class ReviewController {
 			, HttpSession session) {
 		String url = "";
 		try {
-			String loginNickname = (String)session.getAttribute("userNickname");
-			String writeNickname = review.getUserNickname();
+			String loginId = (String)session.getAttribute("userId");
+			String writeId = review.getUserId();
 			url = "/travel/detail.tp?travelNo="+review.getTravelNo();
-			if(loginNickname != null && loginNickname.equals(writeNickname)) {
+			if(loginId != null && loginId.equals(writeId)) {
 				int result = rSerivce.deleteReview(review);
 				if(result > 0) {
 					mv.addObject("msg", "리뷰가 삭제되었습니다.");

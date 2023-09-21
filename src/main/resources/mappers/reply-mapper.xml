@@ -39,6 +39,6 @@
 		UPDATE REPLY_TBL SET REPLY_STATUS = 'N' WHERE REPLY_NO = #{replyNo}
 	</update>
 	<update id="modifyReply">
-		UPDATE REPLY_TBL SET REPLY_CONTENT = #{replyContent} WHERE REPLY_NO = #{replyNo}
+		UPDATE REPLY_TBL SET REPLY_CONTENT = #{replyContent}, REPLY_UPDATE_DATE = DEFAULT  WHERE REPLY_NO = #{replyNo}
 	</update>
 </mapper>

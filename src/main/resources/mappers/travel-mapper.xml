@@ -79,10 +79,6 @@
 	    <if test="order == 'views'">
 	        ORDER BY TRAVEL_VIEW_COUNT DESC
 	    </if>
-    	<!-- 좋아요테이블 생성 후 수정 -->
-	    <!-- <if test="order == 'popular'">
-	        ORDER BY likes DESC
-	    </if> -->
 	</select>
 	
 	<select id="showTravelMap" resultMap="TravelResultMap">
@@ -90,4 +86,45 @@
 		FROM 	TRAVEL_TBL 
 		WHERE	TRAVEL_STATUS = 'Y'
 	</select>
+	
+	<select id="searchListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM TRAVEL_TBL
+		WHERE (TRAVEL_ADDR LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_TAGS LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_NAME LIKE '%'||#{searchKeyword}||'%')
+	</select>
+	
+	<select id="searchListByKeyword" resultMap="TravelResultMap">
+	    SELECT A.TRAVEL_NO, A.TRAVEL_NAME, A.TRAVEL_ADDR, A.TRAVEL_LOCATION, A.TRAVEL_TAGS, A.TRAVEL_VIEW_COUNT, B.TRAVEL_FILE_RENAME
+	    FROM TRAVEL_TBL A
+	    JOIN TRAVEL_FILE_TBL B ON A.TRAVEL_NO = B.TRAVEL_NO
+	    WHERE A.TRAVEL_STATUS = 'Y'
+	    AND B.TRAVEL_FILE_NO = (SELECT MAX(TRAVEL_FILE_NO) FROM TRAVEL_FILE_TBL WHERE TRAVEL_NO = A.TRAVEL_NO)
+	    
+	    <if test="searchKeyword != null and order == 'latest'">
+	        AND (TRAVEL_ADDR LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_TAGS LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_NAME LIKE '%'||#{searchKeyword}||'%')
+	        ORDER BY A.TRAVEL_CREATE_DATE DESC
+	    </if>
+	    
+	    <if test="searchKeyword != null and order == 'views'">
+	        AND(TRAVEL_ADDR LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_TAGS LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_NAME LIKE '%'||#{searchKeyword}||'%')
+	        ORDER BY A.TRAVEL_VIEW_COUNT DESC
+	    </if>
+	    
+	    <if test="searchKeyword != null and (order != 'latest' and order != 'views')">
+	        AND (TRAVEL_ADDR LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_TAGS LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_NAME LIKE '%'||#{searchKeyword}||'%')
+	    </if>
+	    
+	    <if test="searchKeyword == null and order == 'latest'">
+	        ORDER BY A.TRAVEL_CREATE_DATE DESC
+	    </if>
+	    
+	    <if test="searchKeyword == null and order == 'views'">
+	        ORDER BY A.TRAVEL_VIEW_COUNT DESC
+	    </if>
+	    
+	    <if test="searchKeyword == null and (order != 'latest' and order != 'views')">
+	        ORDER BY A.TRAVEL_CREATE_DATE DESC
+	    </if>
+	</select>
+
 </mapper>

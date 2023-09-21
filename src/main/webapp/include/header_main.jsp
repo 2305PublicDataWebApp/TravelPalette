@@ -16,11 +16,15 @@
                 	<a href="/">
 	                    <img class="logoImg" src="../resources/images/main/pallete.png" alt="">
 	                    <h1 style="width: 250px;">여행팔레트</h1>
-	                    <img style="position: absolute;z-index: -1;top: -52px;width: 300px;opacity: 0.8;" src="../resources/images/main/수채화1.png" alt="">
+	                    <img style="position: absolute;z-index: -1;top: -53px;width: 300px;opacity: 0.8;" src="../resources/images/main/수채화1.png" alt="">
                 	</a>
                 </div>
-                <div style="float:right;">
-                    <input type="text" class="searchInput" placeholder="가보고 싶은 여행지 있으신가요?">
+               <div style="float:right;display: flex;">
+                	<form action="/travel/search.tp" method="GET">
+					    <input type="text" name="searchKeyword" style="float:left;" class="searchInput" placeholder="가보고 싶은 여행지 있으신가요?">
+					    <button type="submit" class="travelSearchButton">
+						<img src="../resources/images/main/searchicon.png" alt="검색 아이콘" style="width:20px;float: left;padding: 14px 0px 0px 0px;"></button>
+					</form>
                     <div class="searchForm">
                     	<c:if test="${empty sessionScope.userId}">
 	                        <a href="/user/login.tp">
@@ -35,7 +39,6 @@
 		                    </a>
 						</c:if>
                     </div>
-                    <img src="../resources/images/main/searchicon.png" alt="검색 아이콘" style="width:20px;float: right;padding: 14px 0px 0px 0px;">
                 </div>
             </div>
         </header>

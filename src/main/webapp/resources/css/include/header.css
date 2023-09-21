@@ -68,8 +68,11 @@ ul{
                 background-color: inherit;
             }
 
-
-
+/*검색버튼 css*/
+.travelSearchButton {
+    border: 0px;
+    background-color: inherit;
+}
 
 
 
