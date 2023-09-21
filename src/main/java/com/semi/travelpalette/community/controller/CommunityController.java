@@ -130,7 +130,6 @@ public class CommunityController {
 	            	if(cLike != null) {
 	            		mv.addObject("likeId", userId);
 	            	}
-	            	System.out.println("여기서 문제1");
 	    			Reply setReply = new Reply(boardNo, boardType, userId);
 	            	for(int i = 0; i < rList.size(); i++) {
 	            		Reply reply = rList.get(i);
@@ -146,12 +145,10 @@ public class CommunityController {
 	    				replyLikeCount = rService.countLikeByMap(setReply);
 	    				reply.setLikeNo(replyLikeCount);
 	    			}
-	            	System.out.println("여기서 문제2");
 	            }
 	            if(rList.size() > 0) {
 	            	mv.addObject("rList", rList);
 	            }
-	            System.out.println("여기서 문제3");
                 mv.addObject("community", community);
                 mv.setViewName("community/detail");
                 return mv;
@@ -273,7 +270,6 @@ public class CommunityController {
                 return mv;
             } 
         } catch (Exception e) {
-        	mv.addObject("msg", "뭐가 문제일까용?");
             mv.addObject("url", "/");
             mv.setViewName("common/errorPage");
             return mv;
@@ -311,7 +307,6 @@ public class CommunityController {
 		
     	Map<String, Object> response = new HashMap<>();
     	try {
-    		
     		int result = cService.insertLike(like);
     		Community cOne = cService.selectOneByClass(community);
     		cOne.setLikeNo(cOne.getLikeNo()+1);

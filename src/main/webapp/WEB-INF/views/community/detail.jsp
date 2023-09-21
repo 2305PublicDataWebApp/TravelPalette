@@ -241,10 +241,10 @@
 				});
             }
             //댓글 등록 ajax
-           	var boardNo = "${community.boardNo}";
-           	var boardType = "${community.boardType}";
-           	var userId = "${userId}";
+           	
             function insertReplyBtn() {
+            	var boardNo = "${community.boardNo}";
+               	var boardType = "${community.boardType}";
                 var replyContent = document.getElementById('floatingTextarea2').value;
                 // 값의 길이를 확인하고 5보다 작으면 경고창을 띄웁니다.
                 if (replyContent.length < 5) {
@@ -286,6 +286,8 @@
             }
             
             function modifyReply(obj){
+            	var boardNo = "${community.boardNo}";
+               	var boardType = "${community.boardType}";
             	if(confirm("댓글을 수정하시겠습니까?")){
             		
             	}else{
@@ -325,6 +327,8 @@
             }
             
             function deleteReply(event) {
+            	var boardNo = "${community.boardNo}";
+               	var boardType = "${community.boardType}";
 			    var button = event.target; // 클릭된 버튼 요소
 			    var replyNo = button.getAttribute("data-reply-no");
 
@@ -334,6 +338,9 @@
             }
             //좋아요 기능 insert
             function insertLike(){
+            	var boardNo = "${community.boardNo}";
+               	var boardType = "${community.boardType}";
+               	var userId = "${userId}";
             	$.ajax({
                     type: "POST", // 또는 "GET"에 맞게 변경
                     url: "/community/like.tp", 
@@ -357,6 +364,9 @@
             }
             
             function insertReplyLike(obj){
+            	var boardNo = "${community.boardNo}";
+               	var boardType = "${community.boardType}";
+               	var userId = "${userId}";
             	var replyNoElement = obj.parentElement.previousElementSibling;
                 var replyWriterElement = obj.parentElement.previousElementSibling.previousElementSibling;
 
@@ -393,6 +403,9 @@
             }
             
             function deleteLike(){
+            	var boardNo = "${community.boardNo}";
+               	var boardType = "${community.boardType}";
+               	var userId = "${userId}";
             	$.ajax({
                     type: "POST", // 또는 "GET"에 맞게 변경
                     url: "/community/dislike.tp", 
@@ -416,6 +429,9 @@
             }
             
             function deleteReplyLike(obj) {
+            	var boardNo = "${community.boardNo}";
+               	var boardType = "${community.boardType}";
+               	var userId = "${userId}";
                 var replyNoElement = obj.parentElement.previousElementSibling;
 
                 if (replyNoElement) {
