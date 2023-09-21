@@ -20,3 +20,4 @@ public interface EventService {
 	int deleteByNo(int eventNo);
 
 }
+ 

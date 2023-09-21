@@ -31,7 +31,9 @@
 				</c:if>
 				<h1>${event.eventTitle }</h1><br>
 				<c:if test="${!empty event.eventFileName }">
+				<a href="${event.eventMoveUrl }">
 					<img alt="첨부파일" src="../resources/euploadFiles/${event.eventFileRename }"  style="width: 1000px; height: auto;">
+				</a>
 				</c:if>
 				<c:if test="${empty event.eventFileName }">더미 데이터라 사진이 없습니당!!</c:if>
 				<c:if test="${!empty event.eventInquiries }">
