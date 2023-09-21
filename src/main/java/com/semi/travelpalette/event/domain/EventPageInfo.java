@@ -68,10 +68,12 @@ public class EventPageInfo {
 	public void setEndNavi(int endNavi) {
 		this.endNavi = endNavi;
 	}
+
 	@Override
 	public String toString() {
-		return "이벤트페이지 [전체개수=" + totalCount + ", 현재페이지=" + currentPage + ", 페이지당게시물수="
-				+ recordCountPerPage + ", 페이지당네비수=" + naviCountPerPage + ", 네비전체개수=" + naviTotalCount
-				+ ", 시작네비=" + startNavi + ", 끝네비=" + endNavi + "]";
+		return "EventPageInfo [totalCount=" + totalCount + ", currentPage=" + currentPage + ", recordCountPerPage="
+				+ recordCountPerPage + ", naviCountPerPage=" + naviCountPerPage + ", naviTotalCount=" + naviTotalCount
+				+ ", startNavi=" + startNavi + ", endNavi=" + endNavi + "]";
 	}
+
 }
