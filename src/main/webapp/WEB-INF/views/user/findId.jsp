@@ -5,8 +5,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>비밀번호 찾기</title>
+        <title>아이디 찾기</title>
         <link rel="stylesheet" href="../resources/css/user/userInfo.css">
+        <link rel="stylesheet" href="../resources/css/user/common.css">        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
@@ -17,23 +18,27 @@
     	<!-- 헤더 -->
         <jsp:include page="/include/header.jsp"></jsp:include>
         <!-- 네비 -->
-        <jsp:include page="/include/nav.jsp"></jsp:include>          
-        <div class="container">
-            <div>
-                <p class="d-flex justify-content-center">아이디 찾기</p>
-                <div id="container">
-                    <div class="w-line"></div>
+        <jsp:include page="/include/nav.jsp"></jsp:include>   
+        <main>
+	        <div class="container">
+	                <p class="d-flex justify-content-center pageTitle">아이디 찾기</p>
+	            <div>
+	                <div id="container">
+	                    <div class="w-line"></div>
                         <div class="infoBox">
                             <label for="">이름</label>
-                            <input type="text" name="userName" id="userName" class="input" placeholder="아이디를 입력해주세요">
+                            <input type="text" name="userName" id="userName" class="input" placeholder="이름을 입력해주세요">
                         </div>
                         <div class="infoBox">
                             <label for="">이메일</label>
                             <input type="text" name="userEmail" id="userEmail" class="input" placeholder="이메일을 입력해주세요">
                         </div>
-                        <button onclick="findId()" class="btn btn-info">아이디 찾기</button>
+                        <span id="idCheckMsg" class="alertMsg" style="display: none;">입력하신 정보를 확인해주세요</span>
+                        <button id="infoBtn" onclick="findId()" class="btn btn-info">아이디 찾기</button>
                     </div>
-        </div>
+                </div>
+	        </div>
+        </main>       
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
@@ -43,6 +48,7 @@
     	function findId() {
             const userName = $('#userName').val();
             const userEmail = $('#userEmail').val();
+            const idCheckMsg = $('#idCheckMsg');
             
             if(userName != '' || userEmail != '') {
             	
@@ -59,7 +65,8 @@
 						location.href = url;
 	                },
 	                error: function () {
-	                    alert('입력하신 정보를 확인해주세요.');
+	                    const idCheckMsg = $('#idCheckMsg'); // HTML 요소를 선택합니다.
+	                    idCheckMsg.show();
 	                }
 	            });
             } else {

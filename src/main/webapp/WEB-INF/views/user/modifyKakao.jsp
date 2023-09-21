@@ -7,58 +7,61 @@
 		<meta charset="UTF-8">
         <title>회원 정보 수정</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    	<link rel="stylesheet" href="../resources/css/user/modify.css">
+    	<link rel="stylesheet" href="../resources/css/user/register.css">
+    	<link rel="stylesheet" href="../resources/css/user/common.css">
     	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
     	<!-- 헤더 -->
         <jsp:include page="/include/header.jsp"></jsp:include>
         <!-- 네비 -->
-        <jsp:include page="/include/nav.jsp"></jsp:include>          
-        <div class="container">
-            <p>회원 정보 수정</p>
-            <div class="pHead">
-                <span class="redSpan">*</span><span>은 필수 입력 정보입니다</span>
-            </div>
-            <div class="w-line"></div>
-            <div id="container">
-                <div class="flex">
-                	<form name="userModifyForm" action="/user/modifyKakao.tp" method="post">
-                		<input type="hidden" name="userNo" value="${userInfo.userNo }">
-	                    <div>
-	                        <label for="userNickname">닉네임<span class="redSpan">*</span></label>
-	                        <input type="text" name="userNickname" id="userNickname" class="input" placeholder="닉네임을 입력해주세요">
-	                        <button type="button" id="nicknameBtn" onclick="nicknameCheck();" class="btn btn-light btn-sm">중복 확인</button>
-	                    </div>
-	                    <span id="nicknameCheckMsg" class="guideMsg" style="text-align: center"></span>
-	                    <div>
-	                        <label for="userNickname">전화번호</label>
-	                        <input type="text" name="userTel" id="userTel" class="input" placeholder="전화번호를 입력해주세요">
-	                    </div>
-	                    <div id="genderBox" class="inputDiv">
-	                        <label for="">성별</label>
-	                        <div id="genderRadio">
-	                            <input type="radio" class="form-check-input" name="userGender" id="gnederM" value="male"><label class="form-check-label" for="genderM">남자</label>
-	                            <input type="radio" class="form-check-input" name="userGender" id="gnederF" value="female"><label class="form-check-label" for="genderM">여자</label>
-	                            <input type="radio" class="form-check-input" name="userGender" id="gnederP" value="private"><label class="form-check-label" for="genderM">비공개</label>
-	                        </div>
-	                    </div>	                    
-		                    <div style="display: flex; align-items: center;">
-		                        <label for="">SMS/메일<br>수신 여부</label>
-		                        <div id="checkDiv">
-		                                <input type="checkbox" name="userEmailStatus" class="form-check-input" id="SMS" <c:if test="${userInfo.userEmailStatus.toString() eq 'Y'}" >checked</c:if>><label class="form-check-label" for="SMS">SMS</label>
-			                            <input type="checkbox" name="userSmsStatus" class="form-check-input" id="mail" value="Y" 
-			                            <c:if test="${userInfo.userSmsStatus.toString() eq 'Y'}" >checked</c:if>
-			                            ><label class="form-check-label" for="mail">메일</label>
-		                        </div>
+        <jsp:include page="/include/nav.jsp"></jsp:include>   
+        <main>
+	        <div class="rContainer">
+	            <p class="pageTitle">회원 정보 수정</p>
+	            <div class="pHead">
+	                <span class="redSpan">*</span><span>은 필수 입력 정보입니다</span>
+	            </div>
+	            <div class="w-line"></div>
+	            <div id="rContainer">
+	                <div class="flex">
+	                	<form id="form" name="userModifyForm" action="/user/modifyKakao.tp" method="post">
+	                		<input type="hidden" name="userNo" value="${userInfo.userNo }">
+		                    <div>
+		                        <label for="userNickname">닉네임<span class="redSpan">*</span></label>
+		                        <input type="text" name="userNickname" id="userNickname" class="input" placeholder="닉네임을 입력해주세요">
+		                        <button type="button" id="nicknameBtn" onclick="nicknameCheck();" class="btn btn-light btn-sm checkBtn" >중복 확인</button>
 		                    </div>
-	                    <div class="registerBox">
-	                        <button id="userModifyBtn" type="button" onclick="modifyCheck();" class="btn btn-info">회원 정보 수정</button>
-	                    </div>
-                	</form>
-                </div>
-            </div>
-        </div>
+		                    <span id="nicknameCheckMsg" class="guideMsg" style="text-align: center"></span>
+		                    <div>
+		                        <label for="userNickname">전화번호</label>
+		                        <input type="text" name="userTel" id="userTel" class="input" placeholder="전화번호를 입력해주세요">
+		                    </div>
+		                    <div id="genderBox" class="inputDiv">
+		                        <label for="">성별</label>
+		                        <div id="genderRadioK">
+		                            <input type="radio" class="form-check-input" name="userGender" id="gnederM" value="male"><label class="form-check-label" for="genderM">남자</label>
+		                            <input type="radio" class="form-check-input" name="userGender" id="gnederF" value="female"><label class="form-check-label" for="genderM">여자</label>
+		                            <input type="radio" class="form-check-input" name="userGender" id="gnederP" value="private"><label class="form-check-label" for="genderM">비공개</label>
+		                        </div>
+		                    </div>	                    
+			                    <div style="display: flex; align-items: center;">
+			                        <label for="">SMS/메일<br>수신 여부</label>
+			                        <div id="checkDiv">
+			                                <input type="checkbox" name="userEmailStatus" class="form-check-input" id="SMS" <c:if test="${userInfo.userEmailStatus.toString() eq 'Y'}" >checked</c:if>><label class="form-check-label" for="SMS">SMS</label>
+				                            <input type="checkbox" name="userSmsStatus" class="form-check-input" id="mail" value="Y" 
+				                            <c:if test="${userInfo.userSmsStatus.toString() eq 'Y'}" >checked</c:if>
+				                            ><label class="form-check-label" for="mail">메일</label>
+			                        </div>
+			                    </div>
+		                    <div class="registerBox">
+		                        <button id="userModifyBtn" type="button" onclick="modifyCheck();" class="btn btn-info">회원 정보 수정</button>
+		                    </div>
+	                	</form>
+	                </div>
+	            </div>
+	        </div>
+        </main>       
                 <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

@@ -2,8 +2,9 @@
 .h-line {
     border-left : thin solid #ccc;
     border: thin solid #ccc;
-    height : 500px;          
+    height : 570px;          
     margin: 10px;
+    margin-right: 20px;
 }
 .flex {
     width: 100%;
@@ -36,8 +37,66 @@ th {
     margin: 10px;   
 }    
 #left > li {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
+    font-size: 23px;
+    padding-top: 10px;
 }      
+li:hover {
+	color: red;
+}
 #right {
     width: 80%;
+}
+#leftNameInfo {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-size: 40px;
+}
+#left {
+    width: 20%;
+    padding-top: 50px;
+}
+#table {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+/*     border : none; */
+  border-spacing: 0px;
+  border-collapse: separate;
+}
+td {
+	border: none;
+}
+#welcome {
+	 display: flex; 
+	 justify-content: end;
+	 padding-right: 15px;
+}
+#recentMsg {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    padding-left: 10px;
+}
+#recentMsg2 {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    padding-left: 10px;
+    color : #707070;
+}
+.th {
+	font-weight: 600;
+	font-size: 20px;
+	border-bottom: 1px thin black;
+}
+td {
+	padding: 5px;
 }

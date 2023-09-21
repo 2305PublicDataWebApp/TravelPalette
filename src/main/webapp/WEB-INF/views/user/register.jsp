@@ -20,7 +20,7 @@
 	        <div class="registerContainer">
 	            <p class="pageTitle">회원가입</p>
 	            <div class="pHead">
-	                <span class="redSpan">*</span><span>은 필수 입력 정보입니다</span>
+	                <span class="redSpan">*</span><span class="pageTitleMsg">은 필수 입력 정보입니다</span>
 	            </div>
 	            <div class="w-line"></div>
 	            <div id="container">
@@ -58,16 +58,13 @@
 		                        <input type="text" name="userEmail" id="userEmail" class="input" placeholder="이메일을 입력해주세요">
 		                        <button type="button" id="mailClickBtn" class="btn btn-light btn-sm checkBtn" onclick="emailCheck();">이메일 인증</button>
 		                    </div>
-		                    <%
-	  							  // 세션에서 "code" 가져오기
-	    							Integer code = (Integer) session.getAttribute("code");
-	    						%>
 		                    <span id="emailCheckMsg" class="guideMsg"></span>
 		                    <div id="emailCodeDiv" class="inputDiv" style="display : none">
 			                    <div id="emailCheckDiv">
 			                        <label for="mailCheck"></label>
 			                        <input type="text" name="mailChek" id="mailCheck" placeholder="인증번호를 입력해주세요">
 			                        <button type="button" class="btn btn-light btn-sm checkBtn" onclick="checkEmailCode();">인증번호 확인</button>
+			                    	<input type="hidden" name="authCode" id="authCode" >
 			                    </div>
 			                    <span id="emailCodeCheckMsg" class="guideMsg"></span>
 		                    </div>
@@ -92,7 +89,9 @@
 		                        </div>
 		                    </div>
 		                    <div class="registerBox">
-		                        <button type="button" id="registerBtn" onclick="registerCheck();" class="btn btn-info">회원가입</button>
+		                        <button type="button" id="registerBtn" onclick="registerCheck();" class="btn btn-info"
+		                        		style="color:white; width: 200px; height: 45px;"
+		                        >회원가입</button>
 		                    </div>
 		               	</form>
 	                </div>
@@ -315,7 +314,7 @@
                 return false;
             }else{
                 document.getElementById('nicknameCheckMsg').innerHTML = '';
-            }            
+            }      
         }
         
         function regPhoneCheck() {
@@ -343,82 +342,6 @@
  	      // 정규표현식과 입력받은 값을 비교해서 허용하지 않으면 메시지 출력, 허용되면 메시지 사라짐
         }
         
-//         // 이메일 인증을 위한 함수
-//         $('#mailClickBtn').click(function() {
-//     		const eamil = $('#userEmail1').val() + $('#userEmail2').val(); // 이메일 주소값 얻어오기!
-//     		console.log('완성된 이메일 : ' + eamil); // 이메일 오는지 확인
-//     		const checkInput = $('.mail-check-input') // 인증번호 입력하는곳 
-    		
-//     		$.ajax({
-//     			type : 'get',
-//     			url : '<c:url value ="/user/mailCheck?email="/>'+eamil, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
-//     			success : function (data) {
-//     				console.log("data : " +  data);
-//     				checkInput.attr('disabled',false);
-//     				code =data;
-//     				alert('인증번호가 전송되었습니다.')
-//     			}			
-//     		}); // end ajax
-//     	}); // end send eamil
-    	
-//     	function emailCheck() {
-//     		const email = document.querySelector("#userEmail").value;
-// 			const emailCodeDiv = document.getElementById('emailCodeDiv');
-    		
-//     		if(email != '') {
-// 	    		document.getElementById('mailClickBtn').addEventListener('click', function() {
-// 	    			// "인증번호 보내기" 버튼을 클릭하면 버튼을 비활성화
-// 	    	        document.getElementById('mailClickBtn').disabled = true;    
-	    			
-// 	    			const email = document.getElementById('userEmail').value;
-// 	    		    console.log('이메일: ' + email);
-// 	    		    const checkInput = document.querySelectorAll('.mail-check-input');
-// 	    		    // XMLHttpRequest 객체 생성
-// 	    		    // XMLHttpRequest : 객체를 사용하여 서버에 동기 또는 비동기식 요청을 보낼 수 있음, 요청에 대한 응답 정보를 웹에 로드할 수 있음
-// 	    		    const xhr = new XMLHttpRequest();
-	
-// 	    		    // .open() : 요청에 필요한 정보 설정
-// 	    		    xhr.open('GET', '/user/mailCheck.tp?userEmail=' + email, true);
-// 	    		    // 여기까지 성공!!!!!!!!!!!!!!!!!!!
-// 	    		    // 요청 실패 해결해야 함
-	    		    
-<%-- 	    		    const authCode = <%= code %>; --%>
-	    		    
-// 	    		    if(authCode != null) {
-// 	    		    	alert('인증번호가 전송되었습니다.');
-// 		    			// 버튼 누르면 인증번호 입력 div flex로
-// 						 emailCodeDiv.style.opacity = '1';
-// 						 emailCodeDiv.style.display = 'flex';
-// 	    		    } else {
-// 	    		    	alert('인증번호 전송이 실패되었습니다. 이메일을 확인해주세요.');
-// 	    	        document.getElementById('mailClickBtn').disabled = false;    
-// 						 emailCodeDiv.style.display = 'none';
-	    		    	
-// 			        }
-	    		    
-// 	    		    // Set up a callback function for when the request completes
-// 	    		    xhr.onload = function() {
-// 	    		    	// 200 HTTP 응답 코드(OK)
-// 	    		        if (xhr.status === 200) {
-// 	    		            const data = xhr.responseText;
-// 	    		            console.log('data: ' + data);
-// 	    		            checkInput.forEach(function(input) {
-// 	    		                input.disabled = false;
-// 	    		            });
-// 	    		            const code = data;
-// 	    		            alert('인증번호가 전송되었습니다.');
-// 	    		        } else {
-// 	    		            console.error('요청 실패');
-// 	    		        }
-// 	    		    };
-// 	    		    // Send the request
-// 	    		    xhr.send();
-// 	    		});    		
-    			
-//     		}else {
-//     			alert("이메일을 입력해주세요.")
-//     		}
-//     	}
 
 		// AJAX로
 		function emailCheck() {
@@ -434,77 +357,45 @@
 		                if (response.isDuplicate) {
 		                    alert('이미 등록된 이메일입니다.');
 		                } else {
-           	    		    const authCode = <%= code %>;
-			    		    
+		                	const authCode = response.code;
 		 	    		    if(authCode != null) {
-		 	    		    	alert('인증번호가 전송되었습니다.');
-		 		    			// 버튼 누르면 인증번호 입력 div flex로
-		 		    			document.getElementById('mailClickBtn').disabled = true;    
-		 						 emailCodeDiv.style.opacity = '1';
-		 						 emailCodeDiv.style.display = 'flex';
-		                }else {
-	 	    		    	alert('인증번호 전송이 실패되었습니다. 이메일을 확인해주세요.');
-		 	    	        document.getElementById('mailClickBtn').disabled = false;    
-		 						 emailCodeDiv.style.display = 'none';
-		                }
+			 	    		    	alert('인증번호가 전송되었습니다.');
+			 		    			// 버튼 누르면 인증번호 입력 div flex로
+			 		    			document.getElementById('mailClickBtn').disabled = true;    
+			 						 emailCodeDiv.style.opacity = '1';
+			 						 emailCodeDiv.style.display = 'flex';
+			 						 document.getElementById('authCode').value = authCode;
+			                }else {
+		 	    		    	alert('인증번호 전송이 실패되었습니다. 이메일을 확인해주세요.');
+			 	    	        document.getElementById('mailClickBtn').disabled = false;    
+			 						 emailCodeDiv.style.display = 'none';
+			                }
 		                }
 		            },
 		            error: function() {
-		            	alert('인증번호가 전송되었습니다.');
- 		    			// 버튼 누르면 인증번호 입력 div flex로
- 		    			document.getElementById('mailClickBtn').disabled = true;    
- 						 emailCodeDiv.style.opacity = '1';
- 						 emailCodeDiv.style.display = 'flex';
+		            	alert('서버와 통신에 실패했습니다.');
 		            }
 		        });
 		    } else {
 		        alert('이메일을 입력하세요.');
 		    }
 		}
-
-
-    	// 인증번호 비교
+		
 		function checkEmailCode() {
-			const email = document.querySelector("#userEmail").value;
-		    const code = document.getElementById('mailCheck').value; // 사용자가 입력한 인증번호
-		    const authCode = <%= code %>;
-		    console.log('전송된 인증번호 : ' + authCode);
-		    console.log('사용자가 입력한 인증번호: ' + code);
-		    
-		    // XMLHttpRequest 객체 생성
-		    const xhr = new XMLHttpRequest();
-		    
-		    // .open() : 요청에 필요한 정보 설정
-		    xhr.open('GET', '/user/checkEmailCode.tp?mailCheckCode=' + code, true);
-		    
-		    if(code == authCode) {
-		    	alert('메일 인증이 성공하였습니다');
-                document.getElementById('emailCodeCheckMsg').innerHTML = '메일 인증이 완료되었습니다.';
-                document.getElementById('emailCodeCheckMsg').style.color = 'blue';
+			const inputCode = $('#mailCheck').val();
+			const authCode = $('#authCode').val();
+		    console.log(inputCode);
+		    console.log(authCode);
+
+		    if (inputCode == authCode) {
+		        alert('메일 인증이 성공하였습니다');
+		        $('#emailCodeCheckMsg').html('메일 인증이 완료되었습니다.').css('color', 'blue');
 		    } else {
-		    	alert('인증번호를 확인해주시기 바랍니다.');
-                document.getElementById('emailCodeCheckMsg').innerHTML = '메일 인증이 완료되지 않았습니다.';
-                document.getElementById('emailCodeCheckMsg').style.color = 'red';		    	
+		        alert('인증번호를 확인해주시기 바랍니다.');
+		        $('#emailCodeCheckMsg').html('메일 인증이 완료되지 않았습니다.').css('color', 'red');
 		    }
-		    
-		    xhr.onload = function() {
-		        // 200 HTTP 응답 코드(OK)
-		        if (xhr.status === 200) {
-		            const data = xhr.responseText;
-		            console.log('data: ' + data);
-		            if (data === 'valid') {
-		                alert('인증번호가 올바릅니다.');
-		            } else {
-		                alert('인증번호가 올바르지 않습니다.');
-		            }
-		        } else {
-		            console.error('요청 실패');
-		        }
-		    };
-		    
-		    // Send the request
-		    xhr.send();
-		}    	
+		}
+
     	
         document.getElementById('SMS').addEventListener("click" , (e)=> {
             
