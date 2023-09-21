@@ -13,6 +13,11 @@ a {
 }      
 label {
     width: 120px;
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;	
+    font-size: 20px;
 }
 
 .link {
@@ -40,7 +45,7 @@ label {
 #container {
     display: flex;
     justify-content: center;
-    width: 500px;
+    width: 600px;
     margin: 40px; 
 }
 .input {
@@ -74,13 +79,13 @@ label {
     margin-left: 30px;
     margin-right: 20px;
 }
+#genderRadio > label, #checkDiv > label {
+    width: 60px;
+}
 #checkDiv {
     display: flex;
     /* width: 50%; */
     justify-content: space-between;
-}
-#genderRadio > label, #checkDiv > label {
-    width: 60px;
 }
 .redSpan {
     color: red;
@@ -97,10 +102,11 @@ label {
     margin: 10px;   
 }
 input::placeholder {
-    font-size: 80%;
     padding: 5px;
 }
 .guideMsg {
+	font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
     font-size: 12px;
 	display: flex;
     justify-content: center;
@@ -111,4 +117,9 @@ input::placeholder {
 .inputDiv {
     margin-bottom: 10px;
     margin-top: 10px;
+}
+.checkBtn {
+	font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-size: 15px;
 }

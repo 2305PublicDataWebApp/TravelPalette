@@ -21,14 +21,14 @@ public class EventServiceImpl implements EventService{
 	private EventStore eStore;
 	
 	@Override
-	public List<Event> eventAllListByNew(EventPageInfo pageInfo) {
-		List<Event> eList = eStore.eventAllListByNew(sqlSession, pageInfo);
+	public List<Event> eventAllListByNew(EventPageInfo pageInfo, String eventCondition) {
+		List<Event> eList = eStore.eventAllListByNew(sqlSession, pageInfo, eventCondition);
 		return eList;
 	}
 
 	@Override
-	public int getTotalCount() {
-		int totalCount = eStore.getTotalCount(sqlSession);
+	public int getTotalCount(String eventCondition) {
+		int totalCount = eStore.getTotalCount(sqlSession, eventCondition);
 		return totalCount;
 	}
 

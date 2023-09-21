@@ -8,95 +8,97 @@
         <title>회원가입</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 		<link rel="stylesheet" href="../resources/css/user/register.css">
+		<link rel="stylesheet" href="../resources/css/user/common.css">
     	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
     	<!-- 헤더 -->
         <jsp:include page="/include/header.jsp"></jsp:include>
         <!-- 네비 -->
-        <jsp:include page="/include/nav.jsp"></jsp:include>          
-    <jsp:include page="/include/header.jsp"></jsp:include>
-        <div class="registerContainer">
-            <p>회원가입</p>
-            <div class="pHead">
-                <span class="redSpan">*</span><span>은 필수 입력 정보입니다</span>
-            </div>
-            <div class="w-line"></div>
-            <div id="container">
-                <div class="flex">
-                	<form name="registerForm" action="/user/register.tp"  method="post">
-	                    <div class="inputDiv">
-	                        <label for="userId">아이디<span class="redSpan">*</span></label>
-	                        <input type="text" name="userId" id="userId" class="input" onchange="regIdCheck()"placeholder="5~15글자의 영어 소문자, 숫자만 입력">
-	                        <button id="idCheckBtn" type="button" onclick="idCheck();" class="btn btn-light btn-sm">중복 확인</button>
-	                    </div>
-	                    <span id="idCheckMsg" class="guideMsg"></span>
-	                    <div class="inputDiv">
-	                        <label for="userPw">비밀번호<span class="redSpan">*</span></label>
-	                        <input type="password" name="userPw" id="userPw" class="input" onchange="pwCheck(); regPwCheck();" placeholder="영어, 숫자, 특수문자를 반드시 포함해 8~20글자">
-	                    </div>
-	                    <span id="pwCheckMsg" class="guideMsg"></span>
-	                    <div class="inputDiv">
-	                        <label for="userPwCheck">비밀번호 확인<span class="redSpan">*</span></label>
-	                        <input type="password" name="userPwCheck" id="userPwCheck" class="input" onchange="pwCheck(); regPwCheck();" placeholder="입력 가능한 특수문자(~, !, @, #, $, %, ^)">
-	                    </div>
-	                    <span id="pwCheckMsg" class="guideMsg"></span>
-	                    <div class="inputDiv">
-	                        <label for="userName">이름<span class="redSpan">*</span></label>
-	                        <input type="text" name="userName" id="userName" class="input" onchange="regNameCheck()" placeholder="이름은 2~10글자만 입력할 수 있습니다">
-	                    </div>
-	                    <span id="nameCheckMsg" class="guideMsg"></span>
-	                    <div class="inputDiv">
-	                        <label for="userNickcname">닉네임<span class="redSpan">*</span></label>
-	                        <input type="text" name="userNickname" id="userNickname" class="input" onchange="regNicknameCheck()" placeholder="닉네임을 입력해주세요">
-	                        <button onclick="nicknameCheck();" type="button" class="btn btn-light btn-sm">중복 확인</button>
-	                    </div>
-	                    <span id="nicknameCheckMsg" class="guideMsg"></span>
-	                    <div class="inputDiv">
-	                        <label for="userEmail">이메일<span class="redSpan">*</span></label>
-	                        <input type="text" name="userEmail" id="userEmail" class="input" placeholder="이메일을 입력해주세요">
-	                        <button type="button" id="mailClickBtn" class="btn btn-light btn-sm" onclick="emailCheck();">이메일 인증</button>
-	                    </div>
-	                    <%
-  							  // 세션에서 "code" 가져오기
-    							Integer code = (Integer) session.getAttribute("code");
-    						%>
-	                    <span id="emailCheckMsg" class="guideMsg"></span>
-	                    <div id="emailCodeDiv" class="inputDiv" style="display : none">
-		                    <div id="emailCheckDiv">
-		                        <label for="mailCheck"></label>
-		                        <input type="text" name="mailChek" id="mailCheck" placeholder="인증번호를 입력해주세요">
-		                        <button type="button" class="btn btn-light btn-sm" onclick="checkEmailCode();">인증번호 확인</button>
+        <jsp:include page="/include/nav.jsp"></jsp:include>   
+        <main>
+	        <div class="registerContainer">
+	            <p class="pageTitle">회원가입</p>
+	            <div class="pHead">
+	                <span class="redSpan">*</span><span>은 필수 입력 정보입니다</span>
+	            </div>
+	            <div class="w-line"></div>
+	            <div id="container">
+	                <div class="flex">
+	                	<form name="registerForm" action="/user/register.tp"  method="post">
+		                    <div class="inputDiv">
+		                        <label for="userId">아이디<span class="redSpan">*</span></label>
+		                        <input type="text" name="userId" id="userId" class="input" onchange="regIdCheck()"placeholder="5~15글자의 영어 소문자, 숫자만 입력">
+		                        <button id="idCheckBtn" type="button" onclick="idCheck();" class="btn btn-light btn-sm checkBtn">중복 확인</button>
 		                    </div>
-		                    <span id="emailCodeCheckMsg" class="guideMsg"></span>
-	                    </div>
-	                    <div id="genderBox" class="inputDiv">
-	                        <label for="">성별</label>
-	                        <div id="genderRadio">
-	                            <input type="radio" class="form-check-input" name="userGender" id="gnederM" value="male"><label class="form-check-label" for="genderM">남자</label>
-	                            <input type="radio" class="form-check-input" name="userGender" id="gnederF" value="female"><label class="form-check-label" for="genderM">여자</label>
-	                        </div>
-	                    </div>
-	                    <div class="inputDiv">
-	                        <label for="userTel">전화번호</label>
-	                        <input type="text" name="userTel" id="userTel" class="input" placeholder="전화번호를 입력해주세요">
-	                    </div>
-	                    <span id="telCheckMsg" class="guideMsg"></span>
-	                    <div class="inputDiv" style="display: flex; align-items: center;">
-	                        <label for="">SMS/메일<br>수신 여부</label>
-	                        <div id="checkDiv">
-	                        
-	                            <input type="checkbox" name="userEmailStatus" class="form-check-input" value="Y" id="mail"><label class="form-check-label" for="mail">메일</label>
-	                            <input type="checkbox" name="userSmsStatus" class="form-check-input" value="Y" id="SMS"><label class="form-check-label" for="SMS">SMS</label>
-	                        </div>
-	                    </div>
-	                    <div class="registerBox">
-	                        <button type="button" id="registerBtn" onclick="registerCheck();" class="btn btn-info">회원가입</button>
-	                    </div>
-	               	</form>
-                </div>
-            </div>
-        </div>
+		                    <span id="idCheckMsg" class="guideMsg"></span>
+		                    <div class="inputDiv">
+		                        <label for="userPw">비밀번호<span class="redSpan">*</span></label>
+		                        <input type="password" name="userPw" id="userPw" class="input" onchange="pwCheck();" placeholder="영어, 숫자, 특수문자를 반드시 포함해 8~20글자">
+		                    </div>
+		                    <span id="pwCheckMsg" class="guideMsg"></span>
+		                    <div class="inputDiv">
+		                        <label for="userPwCheck">비밀번호 확인<span class="redSpan">*</span></label>
+		                        <input type="password" name="userPwCheck" id="userPwCheck" class="input" onchange="pwCheck();" placeholder="입력 가능한 특수문자(~, !, @, #, $, %, ^)">
+		                    </div>
+		                    <span id="pwCheckMsg" class="guideMsg"></span>
+		                    <div class="inputDiv">
+		                        <label for="userName">이름<span class="redSpan">*</span></label>
+		                        <input type="text" name="userName" id="userName" class="input" onchange="regNameCheck()" placeholder="이름은 2~10글자만 입력할 수 있습니다">
+		                    </div>
+		                    <span id="nameCheckMsg" class="guideMsg"></span>
+		                    <div class="inputDiv">
+		                        <label for="userNickcname">닉네임<span class="redSpan">*</span></label>
+		                        <input type="text" name="userNickname" id="userNickname" class="input" onchange="regNicknameCheck()" placeholder="닉네임을 입력해주세요">
+		                        <button onclick="nicknameCheck();" type="button" class="btn btn-light btn-sm checkBtn">중복 확인</button>
+		                    </div>
+		                    <span id="nicknameCheckMsg" class="guideMsg"></span>
+		                    <div class="inputDiv">
+		                        <label for="userEmail">이메일<span class="redSpan">*</span></label>
+		                        <input type="text" name="userEmail" id="userEmail" class="input" placeholder="이메일을 입력해주세요">
+		                        <button type="button" id="mailClickBtn" class="btn btn-light btn-sm checkBtn" onclick="emailCheck();">이메일 인증</button>
+		                    </div>
+		                    <%
+	  							  // 세션에서 "code" 가져오기
+	    							Integer code = (Integer) session.getAttribute("code");
+	    						%>
+		                    <span id="emailCheckMsg" class="guideMsg"></span>
+		                    <div id="emailCodeDiv" class="inputDiv" style="display : none">
+			                    <div id="emailCheckDiv">
+			                        <label for="mailCheck"></label>
+			                        <input type="text" name="mailChek" id="mailCheck" placeholder="인증번호를 입력해주세요">
+			                        <button type="button" class="btn btn-light btn-sm checkBtn" onclick="checkEmailCode();">인증번호 확인</button>
+			                    </div>
+			                    <span id="emailCodeCheckMsg" class="guideMsg"></span>
+		                    </div>
+		                    <div id="genderBox" class="inputDiv">
+		                        <label for="">성별</label>
+		                        <div id="genderRadio">
+		                            <input type="radio" class="form-check-input" name="userGender" id="gnederM" value="male"><label class="form-check-label" for="genderM">남자</label>
+		                            <input type="radio" class="form-check-input" name="userGender" id="gnederF" value="female"><label class="form-check-label" for="genderM">여자</label>
+		                        </div>
+		                    </div>
+		                    <div class="inputDiv">
+		                        <label for="userTel">전화번호</label>
+		                        <input type="text" name="userTel" id="userTel" class="input" placeholder="전화번호를 입력해주세요">
+		                    </div>
+		                    <span id="telCheckMsg" class="guideMsg"></span>
+		                    <div class="inputDiv" style="display: flex; align-items: center;">
+		                        <label for="">SMS/메일<br>수신 여부</label>
+		                        <div id="checkDiv">
+		                        
+		                            <input type="checkbox" name="userEmailStatus" class="form-check-input" value="Y" id="mail"><label class="form-check-label" for="mail">메일</label>
+		                            <input type="checkbox" name="userSmsStatus" class="form-check-input" value="Y" id="SMS"><label class="form-check-label" for="SMS">SMS</label>
+		                        </div>
+		                    </div>
+		                    <div class="registerBox">
+		                        <button type="button" id="registerBtn" onclick="registerCheck();" class="btn btn-info">회원가입</button>
+		                    </div>
+		               	</form>
+	                </div>
+	            </div>
+	        </div>
+        </main>       
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
@@ -448,7 +450,11 @@
 		                }
 		            },
 		            error: function() {
-		                alert('서버 요청에 실패했습니다.');
+		            	alert('인증번호가 전송되었습니다.');
+ 		    			// 버튼 누르면 인증번호 입력 div flex로
+ 		    			document.getElementById('mailClickBtn').disabled = true;    
+ 						 emailCodeDiv.style.opacity = '1';
+ 						 emailCodeDiv.style.display = 'flex';
 		            }
 		        });
 		    } else {

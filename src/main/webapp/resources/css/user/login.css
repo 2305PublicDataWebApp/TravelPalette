@@ -8,11 +8,14 @@ input {
     border-radius: 5px;
     padding: 5px;
     width: 100%;
+    height: 45px;
+    margin-bottom: 5px;
 }
 .flex {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 500px;
 }      
 label {
     width: 150px;
@@ -22,9 +25,14 @@ label {
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-bottom: 10px;
 }
 .link > a {
     width: 110px;
+}
+.link > a : hover{
+    width: 110px;
+    color : #209DE8;
 }
 .btnBox {
     width: 100%;
@@ -35,7 +43,7 @@ label {
 .w-line {
     border-left : thin solid #ccc;
     border: thin solid #ccc;
-    width : 135px;  
+    width : 166px;  
     height: 1px;        
     margin: 10px;            
 }
@@ -56,9 +64,13 @@ label {
 .loginBox {
     display: flex;
     flex-direction: column;
-    width: 350px;
+    width: 400px;
     height: 250px;
-    justify-content: space-around;
+    justify-content: space-around;  
+    color"
+}
+.btnBox > button {
+	color : white;
 }
 .loginBtn {
     width: 100%;
@@ -70,4 +82,15 @@ input::placeholder {
 .inputDiv {
     margin-bottom: 10px;
     margin-top: 10px;
+}
+#loginBtn {
+	 background-color: #39B5E0; 
+	 border: #39B5E0; 
+	 height: 45px;" 
+}
+#loginBtn:hover{
+	background-color: #37BBE0;
+	border : #37BBE0;
+	color: black;
+	
 }

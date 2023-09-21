@@ -1,6 +1,7 @@
 package com.semi.travelpalette.community.store;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -72,11 +73,60 @@ public interface CommunityStore {
 	int updateViewCount(SqlSession session, Community community);
 
 	/**
-	 * 좋아요 여부 확인 Store
+	 * 게시물 좋아요 여부 확인 Store
 	 * @param session
 	 * @param like
 	 * @return
 	 */
 	Like selectLikeByClass(SqlSession session, Like like);
+
+	/** 
+	 * 게시물 좋아요 누르기 Store
+	 * @param session
+	 * @param like
+	 * @return
+	 */
+	int insertLike(SqlSession session, Like like);
+
+	/**
+	 * 게시물 좋아요 개수 수정하기 Store
+	 * @param session
+	 * @param cOne
+	 * @return
+	 */
+	int updateLikeNo(SqlSession session, Community cOne);
+
+	/**
+	 * 게시물 좋아요 취소하기 Store
+	 * @param session
+	 * @param like
+	 * @return
+	 */
+	int deleteLike(SqlSession session, Like like);
+
+	/**
+	 * 검색 게시물 총 갯수 Store
+	 * @param session
+	 * @param paraMap
+	 * @return
+	 */
+	int getSearchListCount(SqlSession session, Map<String, String> paraMap);
+
+	/**
+	 * 검색 게시물 리스트 불러오기 Store
+	 * @param session
+	 * @param paraMap
+	 * @param pInfo
+	 * @return
+	 */
+	List<Community> searchListByKeyword(SqlSession session, Map<String, String> paraMap, PageInfo pInfo);
+
+	/**
+	 * 여행인증 게시판 정렬 Store
+	 * @param session
+	 * @param pInfo
+	 * @return
+	 */
+	List<Community> selectSortList(SqlSession session, PageInfo pInfo);
 
 }

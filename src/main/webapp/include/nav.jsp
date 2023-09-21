@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html>
 	<html>
 	<head>
-		<meta charset="EUC-KR">
+		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<link rel="stylesheet" href="/resources/css/include/nav.css">
 	</head>
@@ -16,10 +17,15 @@
                     <li><a href="/travel/list.tp">여행정보</a></li>
                     <li><a href="/map/view.tp">여행지도</a></li>
                     <li><a href="/community/certify.tp">커뮤니티</a></li>
-                    <li><a href="/user/mypage.tp">회원</a></li>
+                    <c:if test="${userId ne 'admin'}">
+	                    <li><a href="/user/mypage.tp">회원</a></li>
+                    </c:if>
+                    <c:if test="${userId eq 'admin'}">
+	                    <li><a href="#">관리자</a></li>
+                    </c:if>
                 </ul>
             </div>
-            <div id="navArea" class="animatedNav" >
+            <div id="navArea" class="animatedNav" style="border-top:2px solid #BA704F;" >
                 <div class="menuContent">
                     <ul>
                         <li></li>
@@ -56,12 +62,22 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/user/mypage.tp">
-                                마이페이지<br>
-                            </a>
-                            <a href="#">
-                                1 : 1 문의사항
-                            </a>
+                        	<c:if test="${userId ne 'admin' }">
+	                            <a href="/user/mypage.tp">
+	                                마이페이지<br>
+	                            </a>
+	                            <a href="/inquiry/list.tp">
+	                                1 : 1 문의사항
+	                            </a>
+                        	</c:if>
+                        	<c:if test="${userId eq 'admin' }">
+	                            <a href="#">
+	                                 회원 정보<br>
+	                            </a>
+	                            <a href="#">
+	                                회원 문의사항
+	                            </a>
+                        	</c:if>
                         </li>
                     </ul>
                 </div>

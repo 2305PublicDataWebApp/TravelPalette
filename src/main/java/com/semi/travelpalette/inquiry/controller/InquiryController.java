@@ -137,7 +137,7 @@ public class InquiryController {
 				System.out.println(inquiry.toString());
 				int result = inquiryService.insertInquiry(inquiry);
 				if(result > 0) {
-			        mv.setViewName("/inquiry/list.tp");
+			        mv.setViewName("/inquiry/list");
 				}
 			} else {
 				mv.addObject("msg", "로그인 정보가 존재하지 않습니다.");

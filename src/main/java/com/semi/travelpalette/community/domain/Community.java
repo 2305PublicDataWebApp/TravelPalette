@@ -27,7 +27,12 @@ public class Community {
 		this.boardType = boardType;
 	}
 
-
+	public Community(int boardNo, String boardType, String userId) {
+		super();
+		this.boardNo = boardNo;
+		this.boardType = boardType;
+		this.userId = userId;
+	}
 	public int getBoardNo() {
 		return boardNo;
 	}

@@ -1,6 +1,7 @@
 package com.semi.travelpalette.community.store.logic;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -45,13 +46,13 @@ public class CommunityStoreLogic implements CommunityStore{
 
     @Override
     public int updateBoard(SqlSession session, Community community) {
-        int result = session.delete("CommunityMapper.updateBoard", community);
+        int result = session.update("CommunityMapper.updateBoard", community);
         return result;
     }
     
     @Override
     public int deleteBoard(SqlSession session, Community community) {
-        int result = session.delete("CommunityMapper.deleteBoard", community);
+        int result = session.update("CommunityMapper.deleteBoard", community);
         return result;
     }
 
@@ -63,7 +64,7 @@ public class CommunityStoreLogic implements CommunityStore{
 
 	@Override
 	public int updateViewCount(SqlSession session, Community community) {
-		int result = session.delete("CommunityMapper.updateViewCount", community);
+		int result = session.update("CommunityMapper.updateViewCount", community);
         return result;
 	}
 
@@ -71,6 +72,49 @@ public class CommunityStoreLogic implements CommunityStore{
 	public Like selectLikeByClass(SqlSession session, Like like) {
 		Like cLike = session.selectOne("LikeMapper.selectLikeByClass", like);
 		return cLike;
+	}
+
+	@Override
+	public int insertLike(SqlSession session, Like like) {
+		int result = session.insert("LikeMapper.insertLike", like);
+        return result;
+	}
+
+	@Override
+	public int updateLikeNo(SqlSession session, Community cOne) {
+		int result = session.update("CommunityMapper.updateLikeNo", cOne);
+        return result;
+	}
+
+	@Override
+	public int deleteLike(SqlSession session, Like like) {
+		int result = session.delete("LikeMapper.deleteLike", like);
+        return result;
+	}
+
+	@Override
+	public int getSearchListCount(SqlSession session, Map<String, String> paraMap) {
+		int result = session.selectOne("CommunityMapper.getSearchListCount", paraMap);
+		return result;
+	}
+
+	@Override
+	public List<Community> searchListByKeyword(SqlSession session, Map<String, String> paraMap, PageInfo pInfo) {
+		int limit = pInfo.getRecordCountPerPage(); // 가져오는 행의 갯수
+		int offset = (pInfo.getCurrentPage()-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Community> cList = session.selectList("CommunityMapper.searchListByKeyword", paraMap, rowBounds);
+		return cList;
+	}
+
+	@Override
+	public List<Community> selectSortList(SqlSession session, PageInfo pInfo) {
+		int limit = pInfo.getRecordCountPerPage();
+        int offset = (pInfo.getCurrentPage() - 1) * limit;
+        RowBounds rowBounds = new RowBounds(offset, limit);
+        
+        List<Community> cList = session.selectList("CommunityMapper.selectSortList", pInfo ,rowBounds);
+        return cList;
 	}
 
 }

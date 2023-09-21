@@ -1,5 +1,7 @@
 package com.semi.travelpalette.user.service;
 
+import com.semi.travelpalette.common.domain.Like;
+import com.semi.travelpalette.inquiry.domain.PageInfo;
 import com.semi.travelpalette.user.domain.User;
 import com.semi.travelpalette.user.domain.UserMypageDto;
 
@@ -12,7 +14,7 @@ public interface UserService {
 	 * @param user
 	 * @return
 	 */
-	void insertUser(User user);
+	int insertUser(User user);
 
 	/**
 	 * 일반 회원가입 상세 정보 저장 Service
@@ -70,8 +72,61 @@ public interface UserService {
 	 * @return
 	 */
 	int deleteUser(int userNo);
-
+	
+	/**
+	 * 활동 내역
+	 * @param userId
+	 * @return
+	 */
 	List<UserMypageDto> selectUserActivity(String userId);
+	
+	/**
+	 * 좋아요 갯수
+	 * @param userId
+	 * @return
+	 */
+	int selectLikeCount(String userId);
+
+	PageInfo getPageInfo(Integer currentPage, String userId, int totalCount);
+
+	List<Like> selectLikes(PageInfo pInfo);
+
+	/**
+	 * 아이디 찾기(이름, 이메일)
+	 * @param findId
+	 * @return
+	 */
+	User selectFindId(User findId);
+
+	String displayId(String userId);
+	/**
+	 * 비밀번호 찾기(아이디, 이메일)
+	 * @param findPW
+	 * @return
+	 */
+	User selectFindPw(User findPw);
+
+	/**
+	 * 임시 비번으로 update
+	 * @param updateInfo
+	 * @return
+	 */
+	int updateNewPw(User updateInfo);
+
+	/**
+	 * 이메일로 번호 select
+	 * @param userEmail
+	 * @return
+	 */
+	User selectUserNo(String userEmail);
+
+	Like selectLike(String likeNo);
+
+	User selectKakaoUserNo(String userNickname);
+
+	User selectKakaoUserInfo(int userNo);
+
+	User selectKakaoEmailCheck(String userId);
 
 
 //	int kakaoUserInsert(User kakaouser);

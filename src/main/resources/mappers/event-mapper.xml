@@ -5,7 +5,6 @@
   <mapper namespace="EventMapper">
   	<resultMap id="EventResultMap" type="Event">
 	    <id 	property="eventNo" 			column="EVENT_NO" />
-	    <result property="boardType" 		column="BOARD_TYPE" />
 	    <result property="eventTitle" 		column="EVENT_TITLE" />
 	    <result property="eventFileName" 	column="EVENT_FILE_NAME" />
 	    <result property="eventFileRename" 	column="EVENT_FILE_RENAME" />
@@ -18,49 +17,50 @@
 	    <result property="eventCreateDate" 	column="EVENT_CREATE_DATE" />
 	    <result property="eventUpdateDate" 	column="EVENT_UPDATE_DATE" />
 	    <result property="eventStatus" 		column="EVENT_STATUS" />
+	    <result property="eventMoveUrl" 	column="EVENT_MOVE_URL" />
 	</resultMap>
 	<select id="eventAllListByNew" resultMap="EventResultMap">
 		SELECT	 * 
-		FROM 	 EVENT_TBL
+		FROM 	 EVENT_TBL WHERE EVENT_STATUS = 'Y'
 		<if test="eventCondition =='IngEvent'">
-			WHERE EVENT_START_DATE &lt;= SYSDATE AND EVENT_END_DATE &gt;= SYSDATE
+			AND EVENT_START_DATE &lt;= SYSDATE AND EVENT_END_DATE &gt;= SYSDATE
 		</if>
 		<if test="eventCondition =='EndEvent'">
-			WHERE EVENT_END_DATE &lt; SYSDATE
+			AND EVENT_END_DATE &lt; SYSDATE
 		</if>
 		ORDER BY EVENT_NO DESC
 	</select>
 	
 	<select id="getTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM EVENT_TBL
+		SELECT COUNT(*) FROM EVENT_TBL WHERE EVENT_STATUS = 'Y'
 		<if test="eventCondition =='IngEvent'">
-			WHERE EVENT_START_DATE &lt;= SYSDATE AND EVENT_END_DATE &gt;= SYSDATE
+			AND EVENT_START_DATE &lt;= SYSDATE AND EVENT_END_DATE &gt;= SYSDATE
 		</if>
 		<if test="eventCondition =='EndEvent'">
-			WHERE EVENT_END_DATE &lt; SYSDATE
+			AND EVENT_END_DATE &lt; SYSDATE
 		</if>
 	</select>
 	
 	<select id="selectEventByNo" resultMap="EventResultMap">
 		SELECT	* 
 		FROM 	EVENT_TBL 
-		WHERE	EVENT_NO = #{eventNo}
+		WHERE	EVENT_NO = #{eventNo} AND EVENT_STATUS = 'Y'
 	</select>
 	
 	<insert id="insertEvent">
 		INSERT INTO EVENT_TBL 
-		VALUES (SEQ_EVENT_NO.NEXTVAL, DEFAULT, #{eventTitle}, #{eventFileName}, #{eventFileRename}, #{eventFilePath}, #{eventFileLength}
-				,#{eventStartDate}, #{eventEndDate}, #{eventPrecautions}, #{eventInquiries}, DEFAULT, DEFAULT, DEFAULT)
+		VALUES (SEQ_EVENT_NO.NEXTVAL, #{eventTitle}, #{eventFileName}, #{eventFileRename}, #{eventFilePath}, #{eventFileLength}
+				,#{eventStartDate}, #{eventEndDate}, #{eventPrecautions}, #{eventInquiries}, DEFAULT, DEFAULT, DEFAULT, #{eventMoveUrl})
 	</insert>
 	
 	<update id="updateEvent">
 		UPDATE EVENT_TBL SET EVENT_TITLE = #{eventTitle }, EVENT_FILE_NAME = #{eventFileName }, EVENT_FILE_RENAME = #{eventFileRename }, EVENT_FILE_PATH = #{eventFilePath }
 			, EVENT_FILE_LENGTH = #{eventFileLength }, EVENT_START_DATE = #{eventStartDate }, EVENT_END_DATE = #{eventEndDate }, EVENT_PRECAUTIONS = #{eventPrecautions}
-			, EVENT_INQUIRIES = #{eventInquiries }, EVENT_UPDATE_DATE = DEFAULT WHERE EVENT_NO = #{eventNo }
+			, EVENT_INQUIRIES = #{eventInquiries }, EVENT_UPDATE_DATE = DEFAULT, EVENT_MOVE_URL = #{eventMoveUrl}  WHERE EVENT_NO = #{eventNo }
 	</update>
 	
 	<update id="deleteByNo">
-		UPDATE TRAVEL_TBL
+		UPDATE EVENT_TBL
 		SET EVENT_STATUS = 'N'
 		WHERE EVENT_NO = #{eventNo}
 	</update>

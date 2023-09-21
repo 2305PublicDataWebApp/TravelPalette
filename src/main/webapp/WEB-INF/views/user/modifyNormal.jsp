@@ -27,12 +27,12 @@
                 		<input type="hidden" name="userNo" value="${userInfo.userNo }">
 	                    <div>
 	                        <label for="userPw">비밀번호<span class="redSpan">*</span></label>
-	                        <input type="password" name="userPw" id="userPw" class="input" placeholder="영어, 숫자, 특수문자를 반드시 포함해 8~20글자">
+	                        <input type="password" name="userPw" id="userPw" class="input" onchange="pwCheck();" placeholder="영어, 숫자, 특수문자를 반드시 포함해 8~20글자">
 	                    </div>
 	                    <span id="pwCheckMsg" class="guideMsg"></span>
 	                    <div>
 	                        <label for="userPwCheck">비밀번호 확인<span class="redSpan">*</span></label>
-	                        <input type="password" name="userPwCheck" id="userPwCheck" class="input" placeholder="입력 가능한 특수문자(~, !, @, #, $, %, ^)">
+	                        <input type="password" name="userPwCheck" id="userPwCheck" class="input" onchange="pwCheck();" placeholder="입력 가능한 특수문자(~, !, @, #, $, %, ^)">
 	                    </div>
 	                    <span id="pwCheckMsg" class="guideMsg"></span>
 	                    <div>
@@ -60,21 +60,16 @@
 		                    <span id="emailCodeCheckMsg" class="guideMsg"></span>
 	                    </div>
 	                    <div>
-	                        <label for="">전화번호</label>
-	                        <input type="text" name="" id="" class="input" placeholder="전화번호를 입력해주세요">
+	                        <label for="userTel">전화번호</label>
+	                        <input type="text" name="userTel" id="userTel" class="input" placeholder="전화번호를 입력해주세요">
 	                    </div>
 	                    <div style="display: flex; align-items: center;">
 	                        <label for="">SMS/메일<br>수신 여부</label>
 	                        <div id="checkDiv">
-
 		                                <input type="checkbox" name="userEmailStatus" class="form-check-input" id="SMS" <c:if test="${userInfo.userEmailStatus.toString() eq 'Y'}" >checked</c:if>><label class="form-check-label" for="SMS">SMS</label>
-	                 
-
 		                            <input type="checkbox" name="userSmsStatus" class="form-check-input" id="mail" value="Y" 
 		                            <c:if test="${userInfo.userSmsStatus.toString() eq 'Y'}" >checked</c:if>
-		                   
 		                            ><label class="form-check-label" for="mail">메일</label>
-
 	                        </div>
 	                    </div>
 	                    <div class="registerBox">
@@ -105,6 +100,30 @@
 //     		  console.log(sms)
     		  
     		}); 
+    	
+        function pwCheck() {
+            let userPw = document.querySelector("#userPw").value;
+            let userPwCheck = document.querySelector("#userPwCheck").value;
+
+            if(userPw === '' && userPwCheck === '') {
+                window.alert('비밀번호를 입력해주세요.');
+                return false;
+            }
+            if (userPw.length >= 6 && userPw.length <= 16) {
+                if (userPw === userPwCheck) {
+                    document.getElementById('pwCheckMsg').innerHTML = '비밀번호가 일치합니다.';
+                    document.getElementById('pwCheckMsg').style.color = 'blue';
+                } else {
+                    document.getElementById('pwCheckMsg').innerHTML = '비밀번호가 일치하지 않습니다.';
+                    document.getElementById('pwCheckMsg').style.color = 'red';
+                    return false;
+                }
+            } else {
+                window.alert('비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.');
+                document.getElementById('pwCheckMsg').innerHTML = '';
+                return false;
+            }
+        }
     	
     	
 	     // 닉네임 중복 검사
@@ -339,7 +358,6 @@
 		        return false;
 		    }
 		    
-		
 
 		    if (isNicknameChecked && isEmailChecked) {
 		        document.userModifyForm.submit();

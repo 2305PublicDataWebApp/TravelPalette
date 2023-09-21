@@ -154,11 +154,11 @@ public class EventController {
 		try {
 			int result = eService.deleteByNo(eventNo);
 			if(result > 0) {
-				mv.addObject("msg", "여행정보가 삭제되었습니다");
+				mv.addObject("msg", "이벤트가 삭제되었습니다");
 				mv.addObject("url", "/event/list.tp");
 				mv.setViewName("common/successPage");
 			} else {
-				mv.addObject("msg", "[서비스실패] 삭제가 완료되지 않았습니다.");
+				mv.addObject("msg", "[서비스실패] 이벤트 삭제가 완료되지 않았습니다.");
 				mv.addObject("url", "/event/detail.tp?eventNo="+eventNo);
 				mv.setViewName("common/errorPage");
 			}
@@ -177,9 +177,10 @@ public class EventController {
 			, @RequestParam(value = "eventCondition", required=false) String eventCondition
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
 		try {
-			int totalCount = eService.getTotalCount();
+			System.out.println(eventCondition);
+			int totalCount = eService.getTotalCount(eventCondition);
 			EventPageInfo pageInfo = getPageInfo(currentPage, totalCount);
-			List<Event> eList = eService.eventAllListByNew(pageInfo);
+			List<Event> eList = eService.eventAllListByNew(pageInfo, eventCondition);
 			if(eList.size() > 0) {
 				mv.addObject("eventCondition", eventCondition);
 				mv.addObject("pageInfo", pageInfo);
