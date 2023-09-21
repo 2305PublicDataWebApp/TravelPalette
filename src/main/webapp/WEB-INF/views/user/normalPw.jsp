@@ -18,7 +18,7 @@
         <jsp:include page="/include/nav.jsp"></jsp:include>          
         <div class="flex">
 	        <c:if test="${sessionScope.platformType == 'normal'}">
-	            <p class="pageTitle">${titleMsg }</p>
+	            <p class="pageTitle" style="margin-top: 100px;">${titleMsg }</p>
 	            <div class="confirmBox">
 	                <div class="inputDiv">
 	                    <!-- <label for="">아이디</label> -->
@@ -47,6 +47,8 @@
 	                </div>
 	            </div>	        
 	        </c:if>
+	    </div>
+	    <div style="width: 100%;height: 50px;"></div>
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

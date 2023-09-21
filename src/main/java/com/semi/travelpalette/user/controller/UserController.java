@@ -542,7 +542,7 @@ public class UserController {
 		int result = userService.insertUser(user);
 		if(result > 0) {
 			mv.addObject("msg", "회원가입이 성공적으로 완료되었습니다.").addObject("url", "redirect:/index.jsp");
-			mv.setViewName("/common/seccessPage");
+			mv.setViewName("/user/login.tp");
 		}else {
 			mv.addObject("msg", "회원가입이 완료되지 않았습니다.").addObject("url", "redirect:/index.jsp");
 			mv.setViewName("/common/errorPage");

@@ -47,6 +47,7 @@
 	                    		style="color: white; height: 45px;padding: 10px 0px;"
 	                    >카카오 로그인/회원가입</a></button>
 	                </div>
+	                <div style="width: 100%;height: 110px;"></div>
 	            </div>
         </main>       
         <!-- 푸터 -->

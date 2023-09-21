@@ -17,11 +17,11 @@
         <!-- 네비 -->
         <jsp:include page="/include/nav.jsp"></jsp:include>      	
         <div class="container">
-            <p>1:1 문의 내역</p>
-            <div class="w-line"></div>
+            <p style="padding: 20px;margin-top: 20px;font-size: 30px;font-family: 'KCC-Ganpan';">1:1 문의 내역</p>
+            <div class="w-line" style="margin-bottom: 30px;"></div>
             <div>
-                <span>${sessionScope.userNickname }님의 문의 내역입니다</span>
-                <table class="table table-bordered text-center">
+                <span style="font-family: 'SUITE-Regular';font-weight: 600;padding: 20px 10px;">${sessionScope.userNickname }님의 문의 내역입니다</span>
+                <table class="table table-bordered text-center" style="margin-top: 30px;">
                     <thead class="table-light">
                         <tr>
                             <th>문의일</th>
@@ -30,7 +30,7 @@
                             <th>삭제</th>
                         </tr>
                     </thead>
-                    <tbody class="table-group-divider">
+                    <tbody class="table-group-divider" style="font-family: 'HakgyoansimWoojuR';">
 <%--                         <fmt:formatDate pattern="yyyy-MM-dd" value="${iList.inquiryCreateDate }"/> --%>
 						<c:forEach items="${iList}" var="item">
                         <tr id="sample">
@@ -78,10 +78,11 @@
 					</c:if>
                 </nav>
                 <div class="d-flex justify-content-end">
-                    <a href="/inquiry/insert.tp"><button class="btn btn-info">문의글 작성</button></a>
+                    <a href="/inquiry/insert.tp"><button class="btn btn-info" style="color: white;font-weight: 600;">문의글 작성</button></a>
                 </div>
             </div>
         </div>		
+        <div style="width: 100%;height: 100px;"></div>
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

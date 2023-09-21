@@ -133,7 +133,7 @@ public class CommunityController {
 	    			Reply setReply = new Reply(boardNo, boardType, userId);
 	            	for(int i = 0; i < rList.size(); i++) {
 	            		Reply reply = rList.get(i);
-	            		setReply.setReplyNo(i+1);
+	            		setReply.setReplyNo(reply.getReplyNo());
 	            		Like checkLike = rService.selectLikeByReply(setReply);
 	            		if(checkLike != null) {	            			
 	            			if(userId.equals(checkLike.getUserId())){
@@ -367,7 +367,6 @@ public class CommunityController {
 		// put() 메소드를 사용해서 key-value 설정을 하는데
 		// key 값(파란색)이 mapper.xml에서 사용됌
 		List<Community> cList = cService.searchListByKeyword(paraMap, pInfo);
-		
 		if(!cList.isEmpty()) {
 			mv.addObject("pInfo", pInfo);
 			mv.addObject("cList", cList);
@@ -377,7 +376,7 @@ public class CommunityController {
 		}else {
 			mv.addObject("msg", "게시물 검색에 실패하였습니다.");
             mv.addObject("url", "/");
-            mv.setViewName("community/errorPage");
+            mv.setViewName("common/errorPage");
             return mv;
 		}
 	}
@@ -409,7 +408,7 @@ public class CommunityController {
 		}else {
 			mv.addObject("msg", "게시물 검색에 실패하였습니다.");
             mv.addObject("url", "/");
-            mv.setViewName("community/errorPage");
+            mv.setViewName("common/errorPage");
             return mv;
 		}
 	}
