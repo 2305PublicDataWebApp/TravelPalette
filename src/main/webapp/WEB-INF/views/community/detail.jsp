@@ -132,8 +132,14 @@
 	                <div style="width: 1000px;margin: 0 auto;font-family: 'SUITE-Regular';position: relative;">
 	                    <div style="width: 100%;height: 200px;background-color: #FDF6F0;border-bottom: 2px solid #eedecf;">
 	                        <div style="float: left;padding: 20px;padding-left:50px;">
-	                            <h4 style="float: left;font-weight: 600;padding-left: 15px;">${reply.userNickname }</h4>
-<%-- 	                            ${reply } --%>
+	                            <h4 style="float: left;font-weight: 600;padding-left: 15px;">
+	                            	<c:if test="${reply.userNickname eq community.userNickname}">
+										글쓴이	                            	
+	                            	</c:if>
+	                            	<c:if test="${reply.userNickname ne community.userNickname}">
+		                            	${reply.userNickname }
+	                            	</c:if>
+	                            </h4>
 	                            <p style="float: left;padding: 5px;padding-left: 8px;">
 									<fmt:formatDate pattern="yyyy-MM-dd" value="${reply.replyCreateDate }"/>
 									<c:if test="${reply.replyCreateDate ne reply.replyUpdateDate }">
@@ -210,7 +216,14 @@
         	<jsp:include page="/include/navjs.jsp"></jsp:include>
             
 	        document.getElementById("goBackButton").addEventListener("click", function() {
-	            location.href = "/community/certify.tp"
+	        	if("${community.boardType}" === "travelCompanion"){
+	        		location.href = "/community/qList.tp?boardType=travelCompanion";
+	        	}else if("${community.boardType}" === "QnABoard"){
+	        		location.href = "/community/qList.tp?boardType=QnABoard";
+	        	}
+	        	else {	        		
+	            	location.href = "/community/certify.tp"
+	        	}
 	        });
 	        
 			function goModifyButton(){
