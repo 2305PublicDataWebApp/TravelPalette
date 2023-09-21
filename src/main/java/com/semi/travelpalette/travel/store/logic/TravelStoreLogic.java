@@ -102,11 +102,11 @@ public class TravelStoreLogic implements TravelStore{
 
 
 	@Override
-	public List<Travel> searchListByKeyword(SqlSession session, PageInfo searchPInfo, String searchKeyword) {
+	public List<Travel> searchListByKeyword(SqlSession session, PageInfo searchPInfo, Map<String, Object> searchMap) {
 		int limit = searchPInfo.getRecordCountPerPage();
 		int offset = (searchPInfo.getCurrentPage() - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<Travel> searchList = session.selectList("TravelMapper.searchListByKeyword", searchKeyword, rowBounds);
+		List<Travel> searchList = session.selectList("TravelMapper.searchListByKeyword", searchMap, rowBounds);
 		return searchList;
 	}
 

@@ -218,21 +218,24 @@
 	                </c:if>
                 </ul>
             </div>
-            <div class="infoLike">
-                <h3>여행정보가 마음에 드시나요?</h3>
-                <p>더 좋은 여행정보를 위해 소중한 평가 부탁드립니다.</p>
-                <hr />
-                <div class="likeDislike">
-                    <div class="like">
-                        <label for="infoLikBtn">😊</label><span>도움이 됐어요</span>
-                        <input type="radio" id="infoLikBtn" name="like" value="infoLike"> 
-                    </div>
-                    <div class="dislike">
-                        <label for="infoDislikBtn">😒</label><span>별로예요</span>
-                        <input type="radio" id="infoDislikBtn" name="like" value="infoDislike"> 
-                    </div>
-                </div>
-            </div>
+            <form id="likeDislikeForm" action="/travel/like.tp" method="POST">
+	            <div class="infoLike">
+	            <input type="hidden" name="userId" value="${sessionScope.userId}">
+	                <h3>여행정보가 마음에 드시나요?</h3>
+	                <p>더 좋은 여행정보를 위해 소중한 평가 부탁드립니다.</p>
+	                <hr />
+	                <div class="likeDislike">
+	                    <div class="like">
+	                        <label for="infoLikBtn">😊 도움이 됐어요</label>
+	                        <input type="radio" id="infoLikBtn" name="like" value="like"> 
+	                    </div>
+	                    <div class="dislike">
+	                        <label for="infoDislikBtn">😒 별로예요</label>
+	                        <input type="radio" id="infoDislikBtn" name="like" value="dislike"> 
+	                    </div>
+	                </div>
+	            </div>
+            </form>
         </main>
     </body>
     <!-- 푸터 -->
@@ -367,6 +370,18 @@
 
                     // 스크롤 이동 후, detailTop 영역을 상단에 고정
                     detailTop.classList.add("fixed");
+                });
+            });
+        });
+		
+        document.addEventListener("DOMContentLoaded", function () {
+            const likeDislikeForm = document.getElementById("likeDislikeForm");
+            
+            // 라디오버튼이 클릭되었을 때 자동으로 폼 제출
+            const radioButtons = document.querySelectorAll("input[type=radio]");
+            radioButtons.forEach(function (radioButton) {
+                radioButton.addEventListener("click", function () {
+                    likeDislikeForm.submit(); // 폼 제출
                 });
             });
         });

@@ -88,11 +88,11 @@ public interface TravelService {
 
 	/**
 	 * 여행지역 키워드 검색 Service
-	 * @param searchPInfo
-	 * @param searchKeyword
+	 * @param searchPInfo 
+	 * @param searchMap
 	 * @return
 	 */
-	List<Travel> searchListByKeyword(PageInfo searchPInfo, String searchKeyword);
+	List<Travel> searchListByKeyword(PageInfo searchPInfo, Map<String, Object> searchMap);
 
 
 	

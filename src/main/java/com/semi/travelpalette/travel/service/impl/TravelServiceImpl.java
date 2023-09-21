@@ -213,9 +213,10 @@ public class TravelServiceImpl implements TravelService{
 		return searchListCount;
 	}
 
+
 	@Override
-	public List<Travel> searchListByKeyword(PageInfo searchPInfo, String searchKeyword) {
-		List<Travel> searchList = tStore.searchListByKeyword(session, searchPInfo, searchKeyword);
+	public List<Travel> searchListByKeyword(PageInfo searchPInfo, Map<String, Object> searchMap) {
+		List<Travel> searchList = tStore.searchListByKeyword(session, searchPInfo, searchMap);
 		return searchList;
 	}
 

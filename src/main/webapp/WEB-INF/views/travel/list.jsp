@@ -25,10 +25,10 @@
                 	<c:if test="${userId eq 'admin' }">
 	    				<button style="float: right" onClick="travelRegGo();">관리자글등록</button><br>
                 	</c:if>
-                    <p style="font-size: 30px; font-weight: bold; padding-bottom: 5px; ">#전체</p>
+                    <p class="searchTitle">#전체</p>
                 </div>
-                <div class="totalCheck" style="font-size: 20px;">
-                    <b>총<span id="totalCount">${totalCount }</span>건</b>
+                <div class="totalCheck" style="font-size: 20px; margin-top: 10px;">
+                    <b>총<span class="searchColor">${totalCount }</span>건</b>
                     <ul style="float: right;">
                         <li><a href="/travel/list.tp?order=latest">최신순</a></li>
         				<li><a href="/travel/list.tp?order=views">조회순</a></li>
@@ -58,32 +58,6 @@
                     </c:forEach>
                     </ul>
                 </div>
-                <div class="navi">
-                    <ul>
-	                    <li>
-	                    	<c:if test="${pageInfo ne null }">
-	                    		<c:if test="${pageInfo.startNavi != 1 }">
-	                    			<c:url var="pageUrl" value="/travel/list.tp">
-	                    				<c:param name="page" value="${pageInfo.startNavi -1 }"></c:param>
-	                    			</c:url>
-	                    			<a href="${pageUrl }">이전</a>
-	                    		</c:if>
-		                    	<c:forEach begin="${pageInfo.startNavi}" end="${pageInfo.endNavi}" var="p">
-		                    		<c:url var="pageUrl" value="/travel/list.tp">
-		                    			<c:param name="page" value="${p }"></c:param>
-		                    		</c:url>
-		                    		<a href="${pageUrl }">${p }</a>
-		                    	</c:forEach>
-		                    	<c:if test="${pageInfo.endNavi != pageInfo.naviTotalCount }">
-		                    		<c:url var="pageUrl" value="/travel/list.tp">
-		                    			<c:param name="page" value="${pageInfo.endNavi +1 }"></c:param>
-		                    		</c:url>
-		                    		<a href="${pageUrl }">다음</a>
-		                    	</c:if>
-	                    	</c:if>
-	                    </li>
-                    </ul>
-                </div>
             </div>
             <div class="rightBox">
                 <div class="selectTag">
@@ -101,6 +75,36 @@
                     </ul>
                 </div>
             </div>
+            <div aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center" style="width: 100%;height: 100px;padding-top: 30px;">
+                    	<c:if test="${pageInfo ne null }">
+                    		<c:if test="${pageInfo.startNavi != 1 }">
+                    			<c:url var="pageUrl" value="/travel/list.tp">
+                    				<c:param name="page" value="${pageInfo.startNavi -1 }"></c:param>
+                    			</c:url>
+			                    <li class="page-item">
+	                    			<a style="color: black;" class="page-link" href="${pageUrl }">이전</a>
+	                    		</li>
+                    		</c:if>
+	                    	<c:forEach begin="${pageInfo.startNavi}" end="${pageInfo.endNavi}" var="p">
+	                    		<c:url var="pageUrl" value="/travel/list.tp">
+	                    			<c:param name="page" value="${p }"></c:param>
+	                    		</c:url>
+	                    		<li class="page-item">
+	                    			<a style="color: black;" class="page-link"  href="${pageUrl }">${p }</a>
+	                    		</li>
+	                    	</c:forEach>
+	                    	<c:if test="${pageInfo.endNavi != pageInfo.naviTotalCount }">
+	                    		<c:url var="pageUrl" value="/travel/list.tp">
+	                    			<c:param name="page" value="${pageInfo.endNavi +1 }"></c:param>
+	                    		</c:url>
+	                    		<li class="page-item">
+	                    			<a style="color: black;" class="page-link"  href="${pageUrl }">다음</a>
+	                    		</li>
+	                    	</c:if>
+                    	</c:if>
+                    </ul>
+                </div>
         </main>
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
@@ -136,6 +140,19 @@
 		        keywordList.appendChild(listItem);
 		    });
 
+		    // 여행 이름을 처리하는 함수
+		    function truncateTravelName() {
+		        const travelNameElements = document.querySelectorAll(".areaTitle a");
+		        travelNameElements.forEach(element => {
+		            const originalName = element.textContent;
+		            if (originalName.length > 10) {
+		                element.textContent = originalName.slice(0, 30) + "...";
+		            }
+		        });
+		    }
+
+		    // 페이지 로드 후 실행
+		    window.addEventListener("load", truncateTravelName);
 		</script>
     </body>
 </html>

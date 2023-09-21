@@ -110,9 +110,9 @@ public interface TravelStore {
 	 * 여행지역 키워드 검색 Store
 	 * @param session
 	 * @param searchPInfo 
-	 * @param searchKeyword
+	 * @param searchMap
 	 * @return
 	 */
-	List<Travel> searchListByKeyword(SqlSession session, PageInfo searchPInfo, String searchKeyword);
+	List<Travel> searchListByKeyword(SqlSession session, PageInfo searchPInfo, Map<String, Object> searchMap);
 
 }

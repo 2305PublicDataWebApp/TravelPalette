@@ -19,7 +19,7 @@
                 	</a>
                 </div>
                <div style="float:right;display: flex;">
-                	<form action="/travel/search.tp" method="POST">
+                	<form action="/travel/search.tp" method="GET">
 					    <input type="text" name="searchKeyword" style="float:left;" class="searchInput" placeholder="가보고 싶은 여행지 있으신가요?">
 					    <button type="submit" class="travelSearchButton">
 						<img src="../resources/images/main/searchicon.png" alt="검색 아이콘" style="width:20px;float: left;padding: 14px 0px 0px 0px;"></button>

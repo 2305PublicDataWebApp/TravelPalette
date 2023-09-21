@@ -220,16 +220,22 @@ public class TravelController {
 		return mv;
 	}
 
-	@RequestMapping(value="/search.tp", method=RequestMethod.POST)
+	@RequestMapping(value="/search.tp", method=RequestMethod.GET)
 	public ModelAndView searchTravel( 
 			ModelAndView mv
-			, @RequestParam("searchKeyword") String searchKeyword
+			, @RequestParam(value = "order", required=false) String order
+			, @RequestParam(value="searchKeyword", required=false, defaultValue = "") String searchKeyword
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
 		int totalCount = tService.getSearchListCount(searchKeyword);
 		int recordCountPerPage = 10;
 		int naviCountPerPage = 5;
 		PageInfo searchPInfo = this.getPageInfo(currentPage, totalCount, recordCountPerPage, naviCountPerPage);
-		List<Travel> searchList = tService.searchListByKeyword(searchPInfo, searchKeyword);
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("order", order);
+		searchMap.put("searchKeyword", searchKeyword);
+		
+		List<Travel> searchList = tService.searchListByKeyword(searchPInfo,searchMap);
 		if(!searchList.isEmpty()) {
 			mv.addObject("searchKeyword", searchKeyword);
 			mv.addObject("searchPInfo", searchPInfo);
@@ -307,6 +313,12 @@ public class TravelController {
 			mv.addObject("msg", "[서비스실패] 관리자에 문의바랍니다.");
 			mv.setViewName("common/errorPage");
 		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/like.tp", method=RequestMethod.POST) 
+	public ModelAndView submitLike(ModelAndView mv) {
+		
 		return mv;
 	}
 	
