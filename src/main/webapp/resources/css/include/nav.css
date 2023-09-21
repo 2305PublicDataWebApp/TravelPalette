@@ -1,4 +1,4 @@
-@charset "EUC-KR";
+@charset "UTF-8";
 	.navContainer{
         width: 100%;
         height: 80px;
@@ -34,8 +34,8 @@
         height: 0;
         border-bottom: 2px solid #ccc;
         overflow: hidden;
-        transition: height 0.8s, visibility 0.6s; /* ³ôÀÌ¿Í °¡½Ã¼º¿¡ ´ëÇÑ ¾Ö´Ï¸ŞÀÌ¼Ç Àû¿ë */
-        visibility: hidden; /* ÃÊ±â¿¡´Â ¼û±è »óÅÂ·Î ¼³Á¤ */
+        transition: height 0.8s, visibility 0.6s; /* ë†’ì´ì™€ ê°€ì‹œì„±ì— ëŒ€í•œ ì• ë‹ˆë©”ì´ì…˜ ì ìš© */
+        visibility: hidden; /* ì´ˆê¸°ì—ëŠ” ìˆ¨ê¹€ ìƒíƒœë¡œ ì„¤ì • */
         position: absolute;
         top: 200px;
         margin: 0 auto;
@@ -55,6 +55,6 @@
                 padding: 5px;
             }
     nav .show {
-        height: 200px; /* ³ªÅ¸³¯ ³ôÀÌ */
-        visibility: visible; /* ³ªÅ¸³¯ ¶§ °¡½Ã¼º º¯°æ */
+        height: 200px; /* ë‚˜íƒ€ë‚  ë†’ì´ */
+        visibility: visible; /* ë‚˜íƒ€ë‚  ë•Œ ê°€ì‹œì„± ë³€ê²½ */
     }

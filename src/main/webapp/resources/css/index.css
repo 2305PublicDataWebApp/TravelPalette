@@ -180,6 +180,7 @@ header, nav, footer{
         height: 60px;
         line-height: 60px;
         font-size: 20px;
+        font-weight: 600;
     }
     /* 이벤트 영역 */
     .eventImg{
