@@ -23,27 +23,27 @@
                     </div>
                     <div class="footerIconContainer">
                         <div class="footerIconBG">
-                            <a href="#">
+                            <a href="https://www.instagram.com/">
                                 <img class="footerIcon" src="../resources/images/main/instagram.png" alt="">
                             </a>
                         </div>
                         <div class="footerIconBG">
-                            <a href="#">
+                            <a href="https://www.youtube.com/">
                                 <img class="footerIcon" src="../resources/images/main/youtube.png" alt="">
                             </a>
                         </div>
                         <div class="footerIconBG">
-                            <a href="#">
+                            <a href="https://www.kakaocorp.com/page/service/service/KakaoTalk?lang=ko">
                                 <img class="footerIcon" src="../resources/images/main/kakao-talk.png" alt="">
                             </a>
                         </div>
                         <div class="footerIconBG">
-                            <a href="#">
+                            <a href="https://www.naver.com/">
                                 <img class="footerIcon" src="../resources/images/main/naver.png" alt="">
                             </a>
                         </div>
                         <div class="footerIconBG">
-                            <a href="#">
+                            <a href="https://www.facebook.com/?locale=ko_KR">
                                 <img class="footerIcon" src="../resources/images/main/facebook.png" alt="">
                             </a>
                         </div>
@@ -51,19 +51,19 @@
                     <div class="footerWebContainer">
                         <p>참고한 사이트</p>
                         <div>
-                            <a href="#">
+                            <a href="https://www.tripadvisor.co.kr/">
                                 <img class="tripAdvisor" src="../resources/images/main/tripadvisor.svg" alt="">
                             </a>
                             <div class="left naverContainer">
-                                <a href="#">
+                                <a href="https://travel.naver.com/domestic">
                                     <img class="naverLogo" src="../resources/images/main/naver_pc.svg" alt="">
                                     <img class="naverText" src="../resources/images/main/naver_traveltext_pc.svg" alt="">
                                 </a>
                             </div>
-                            <a href="#">
+                            <a href="https://zrr.kr/mhfN">
                                 <img class="interPartTour" src="../resources/images/main/logo_tour.png" alt="">
                             </a>
-                            <a href="#">
+                            <a href="https://zrr.kr/Nt8a">
                                 <img class="myRealTrip" src="../resources/images/main/myrealtrip.svg" alt="">
                             </a>
                         </div>

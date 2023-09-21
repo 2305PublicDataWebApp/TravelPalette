@@ -9,11 +9,6 @@
         <title>Document</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         <link rel="stylesheet" href="../resources/css/index.css">
-        <style type="text/css">
-        	header{
-        		border: 0px;
-        	}
-        </style>
     </head>
     <body>
 		<!-- 헤더 -->
@@ -64,7 +59,7 @@
 						</div>
                     </div>
                     <div class="item">
-                    	<div class="content" style="width:23%;height:220px;float:left;background-color:#FFB9B9;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);text-align: center;">
+                    	<div class="content" style="width:23%;height:220px;float:left;background-color:#FC9D9D;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);text-align: center;">
 						    <div>
 							    <h2 style="font-size: 30px; font-family: 'TmoneyRoundWindExtraBold';color:#FFEDED;">
 							    	*휴애리<br>자연생활<br> 공원
@@ -74,14 +69,14 @@
 					    <div class="content pink" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent 70%), url(../resources/images/main/휴애리자연생활공원1.bmp); background-size: cover; 
 					    background-repeat: no-repeat;background-position: center center; width: 66%; height: 600px;float: right;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);">
 					    </div>
-						<div class="content" style="width:23%;float:left;height:330px;background-color:#FFACAC;margin-top:50px;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);">
+						<div class="content" style="width:23%;float:left;height:330px;background-color:#FB8691;margin-top:50px;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);">
 						    <h4 style="font-family: 'SUITE-Regular'; font-size: 23px;font-weight:600;color: #fbeeee;line-height: 33px;">
 								휴애리는 <br>수많은 꽃들과 <br>한라산 풍경이 더해져 <br>더욱 아름다움을 <br>자랑하는<br> 꽃 정원이다
 							</h4>
 						</div>
                     </div>
                     <div class="item">
-						<div class="content" style="width:23%;height:220px;float:left;background-color:#FC9D9D;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);text-align: center;">
+						<div class="content" style="width:23%;height:220px;float:left;background-color:#FF847C;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);text-align: center;">
 						    <div>
 							    <h2 style="font-size: 30px; font-family: 'TmoneyRoundWindExtraBold';color:#FFEDED;">
 							    	*아침 고요<br>수목원
@@ -91,7 +86,7 @@
 					    <div class="content pink" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.3), transparent 70%), url(../resources/images/main/아침고요수목원1.jpg); background-size: cover; 
 					    background-repeat: no-repeat;background-position: center center; width: 66%; height: 600px;float: right;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);">
 					    </div>
-						<div class="content" style="width:23%;float:left;height:330px;background-color:#FF8585;margin-top:50px;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);">
+						<div class="content" style="width:23%;float:left;height:330px;background-color:#FF6464;margin-top:50px;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);">
 						    <h4 style="font-family: 'SUITE-Regular'; font-size: 23px;font-weight:600;color: #FFE1E1;line-height: 33px;">
 							여러 가지 <br>특색 있는 정원을<br> 갖추고 있고,<br><br> 울창한 잣나무 <br>숲 아래에서 <br>삼림욕을 즐길 수 있는<br> 도시민들의 쉼터
 							</h4>
@@ -185,26 +180,25 @@
                     <div style="width: 100%;height: 50px;"></div>
                     <div style="display: flex;flex-direction: row;justify-content: space-evenly;">
                         <div class="card guideBookMsg" style="float: left;">
-<!--                         	<a href="../resources/pdf/guidebook.pdf" download>  -->
+                        	<a href="../resources/pdf/매거진 남해.pdf" download> 
 	                            <img src="../resources/images/main/가이드북1.png" class="card-img-top" alt="">
-<!--                         	</a> -->
+                        	</a>
                             <div class="card-body">
                                 <p class="card-text">한국의 숨은 골목 맛집</p>
                             </div>
                         </div>
                         <div class="card guideBookMsg" style="float:left;">
-<!--                         	<a href="../resources/pdf/guidebook.pdf" download> -->
+                        	<a href="../resources/pdf/한국의 숨은골목 맛집 여행_국문.pdf" download>
 	                            <img style="border-radius:5px;" src="../resources/images/main/가이드북2.jpg" class="card-img-top" alt="">
-<!--                         	</a> -->
+                        	</a>
                             <div class="card-body">
                                 <p class="card-text">아름다운 한국의 건축물 순례</p>
                             </div>
                         </div>
                         <div class="card guideBookMsg">
-<!--                         pdf경로로 쓰기 -->
-<!--                         	<a href="../resources/pdf/guidebook.pdf" download> -->
+                        	<a href="../resources/pdf/봄.pdf" download>
 	                            <img src="../resources/images/main/가이드북3.png" class="card-img-top" alt="">
-<!--                         	</a> -->                        	
+                        	</a>                        	
                             <div class="card-body">
                                 <p class="card-text">동행! 동네 한바퀴(봄)</p>
                             </div>
@@ -357,9 +351,9 @@
             items.style.left = left + 'px';
             }
 
-            // setInterval(() => {
-            //     next.click();
-            // }, 5000);
+            setInterval(() => {
+                next.click();
+            }, 5000);
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     </body>
