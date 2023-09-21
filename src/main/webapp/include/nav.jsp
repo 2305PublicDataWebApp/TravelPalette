@@ -21,7 +21,7 @@
 	                    <li><a href="/user/mypage.tp">회원</a></li>
                     </c:if>
                     <c:if test="${userId eq 'admin'}">
-	                    <li><a href="#">관리자</a></li>
+	                    <li><a href="/admin/inquirylist.tp">문의 목록</a></li>
                     </c:if>
                 </ul>
             </div>
@@ -30,12 +30,14 @@
                     <ul>
                         <li></li>
                         <li>
-                            <a href="/event/list.tp">
-                                진행중인 리스트<br>
-                            </a>
-                            <a href="/event/list.tp">
-                                종료된 이벤트<br>
-                            </a>
+                            <c:url var="eventUrl" value="/event/list.tp">
+               					<c:param name="eventCondition" value="IngEvent"></c:param>
+	               			</c:url>
+	               			<a style="float:left;" href="${eventUrl }">#진행중인 이벤트</a>&nbsp;&nbsp;|&nbsp;
+							<c:url var="eventUrl2" value="/event/list.tp">
+								<c:param name="eventCondition" value="EndEvent"></c:param>
+							</c:url>
+		           			<a href="${eventUrl2 }">#종료된 이벤트</a>
                         </li>
                         <li>
                             <a href="/travel/list.tp">
@@ -71,10 +73,7 @@
 	                            </a>
                         	</c:if>
                         	<c:if test="${userId eq 'admin' }">
-	                            <a href="#">
-	                                 회원 정보<br>
-	                            </a>
-	                            <a href="#">
+	                            <a href="/admin/inquirylist.tp">
 	                                회원 문의사항
 	                            </a>
                         	</c:if>
