@@ -33,7 +33,7 @@
                             <c:url var="eventUrl" value="/event/list.tp">
                					<c:param name="eventCondition" value="IngEvent"></c:param>
 	               			</c:url>
-	               			<a style="float:left;" href="${eventUrl }">#진행중인 이벤트</a>&nbsp;&nbsp;|&nbsp;
+	               			<a style="float:left;" href="${eventUrl }">#진행중인 이벤트</a>
 							<c:url var="eventUrl2" value="/event/list.tp">
 								<c:param name="eventCondition" value="EndEvent"></c:param>
 							</c:url>
