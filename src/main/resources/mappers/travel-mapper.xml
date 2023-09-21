@@ -90,7 +90,7 @@
 	<select id="searchListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM TRAVEL_TBL
-		WHERE (TRAVEL_ADDR LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_TAGS LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_NAME LIKE '%'||#{searchKeyword}||'%')
+		WHERE (TRAVEL_LOCATION LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_ADDR LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_TAGS LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_NAME LIKE '%'||#{searchKeyword}||'%')
 	</select>
 	
 	<select id="searchListByKeyword" resultMap="TravelResultMap">
@@ -101,17 +101,17 @@
 	    AND B.TRAVEL_FILE_NO = (SELECT MAX(TRAVEL_FILE_NO) FROM TRAVEL_FILE_TBL WHERE TRAVEL_NO = A.TRAVEL_NO)
 	    
 	    <if test="searchKeyword != null and order == 'latest'">
-	        AND (TRAVEL_ADDR LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_TAGS LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_NAME LIKE '%'||#{searchKeyword}||'%')
+	        AND (TRAVEL_LOCATION LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_ADDR LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_TAGS LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_NAME LIKE '%'||#{searchKeyword}||'%')
 	        ORDER BY A.TRAVEL_CREATE_DATE DESC
 	    </if>
 	    
 	    <if test="searchKeyword != null and order == 'views'">
-	        AND(TRAVEL_ADDR LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_TAGS LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_NAME LIKE '%'||#{searchKeyword}||'%')
+	        AND (TRAVEL_LOCATION LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_ADDR LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_TAGS LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_NAME LIKE '%'||#{searchKeyword}||'%')
 	        ORDER BY A.TRAVEL_VIEW_COUNT DESC
 	    </if>
 	    
 	    <if test="searchKeyword != null and (order != 'latest' and order != 'views')">
-	        AND (TRAVEL_ADDR LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_TAGS LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_NAME LIKE '%'||#{searchKeyword}||'%')
+	        AND (TRAVEL_LOCATION LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_ADDR LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_TAGS LIKE '%'||#{searchKeyword}||'%' OR TRAVEL_NAME LIKE '%'||#{searchKeyword}||'%')
 	    </if>
 	    
 	    <if test="searchKeyword == null and order == 'latest'">

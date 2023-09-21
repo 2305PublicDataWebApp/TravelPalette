@@ -154,7 +154,7 @@
                        </div>
                        <div class="myReviewReg">
                            <span>${myReview.reviewCreateDate }</span>
-                           <span style="padding-left: 10px;">${myReview.userId }</span>
+                           <span class="reviewUserIdSpan" style="padding-left: 10px;">${myReview.userId }</span>
                        </div>
                    </div>
 				</c:if>
@@ -184,7 +184,7 @@
 	                            </div>
 	                            <div class="reviewReg">
 	                                <span><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reviewCreateDate }"/></span>
-	                                <span>${review.userId }</span>
+	                                <span class="reviewUserIdSpan">${review.userId }</span>
 	                            </div>
 	                        </li>      
 	                    </c:forEach>	
@@ -336,6 +336,28 @@
                     likeDislikeForm.submit(); // 폼 제출
                 });
             });
+        });
+        
+     // reviewUserIdSpan 클래스를 가진 요소들을 모두 찾습니다.
+        var reviewUserIdSpans = document.querySelectorAll(".reviewUserIdSpan");
+
+        // userId를 가리기 위한 함수를 정의합니다.
+        function hideUserId(element, originalUserId) {
+            // userId가 3글자 미만인 경우 원래 값을 그대로 표시합니다.
+            if (originalUserId.length < 3) {
+                element.textContent = originalUserId;
+            } else {
+                // userId의 앞 3글자와 나머지 부분을 가려서 표시합니다.
+                var visiblePart = originalUserId.substring(0, 3);
+                var hiddenPart = '*'.repeat(originalUserId.length - 3);
+                element.textContent = visiblePart + hiddenPart;
+            }
+        }
+
+        // 모든 reviewUserIdSpan 클래스를 가진 요소에 대해 userId를 가리는 함수를 호출합니다.
+        reviewUserIdSpans.forEach(function (element) {
+            var originalUserId = element.textContent;
+            hideUserId(element, originalUserId);
         });
 	</script>
 </html>
