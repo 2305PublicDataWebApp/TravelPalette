@@ -36,8 +36,8 @@
 	                    </h4>
 	                    <button id="goBackButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-primary">목록으로</button>
 	                    <c:if test="${userId eq community.userId}">
-		                    <button id="goModifyButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-secondary">수정하기</button>
-		                    <button id="deleteButton" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-dark">삭제하기</button>
+		                    <button onclick="goModifyButton();" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-secondary">수정하기</button>
+		                    <button onclick="deleteButton();" style="float: right;margin: 50px 10px 0px 0px;" type="button" class="btn btn-dark">삭제하기</button>
 	                    </c:if>
 	                </div>
 	                <table class="table caption-top" style="padding: 0px 20px; font-family: 'SUITE-Regular'; font-size: 18px; width: 100%;">
@@ -136,6 +136,9 @@
 <%-- 	                            ${reply } --%>
 	                            <p style="float: left;padding: 5px;padding-left: 8px;">
 									<fmt:formatDate pattern="yyyy-MM-dd" value="${reply.replyCreateDate }"/>
+									<c:if test="${reply.replyCreateDate ne reply.replyUpdateDate }">
+										(수정됨)
+									</c:if>
 								</p>
 								<input type="hidden" value="${reply.replyWriter}">
 								<input type="hidden" value="${reply.replyNo}"> 
@@ -209,37 +212,45 @@
 	        document.getElementById("goBackButton").addEventListener("click", function() {
 	            location.href = "/community/certify.tp"
 	        });
-            document.getElementById("deleteButton").addEventListener("click", function() {
-            	if(confirm("게시물을 삭제하시겠습니까?")){            		
-                	location.href= "/community/delete.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
-            	}
-            });
+	        
+			function goModifyButton(){
+				if(confirm("게시물 수정 페이지로 이동하시겠습니까?")) {
+	              	location.href = "/community/modify.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
+	            }
+			}
+	        function deleteButton(){	        	
+	            if(confirm("게시물을 삭제하시겠습니까?")) {
+	              	location.href = "/community/delete.tp?boardType=${community.boardType}&boardNo=${community.boardNo}";
+	            }
+	        }
             
-            if("${community.boardType}" === "travelcertify"){            	
-	            // 이미지 모달 기능
-	            // 이미지를 클릭하면 모달 열기
-				const modalTrigger = document.querySelector('.modal-trigger');
-				const modal = document.getElementById('myModal');
-				const modalImage = document.getElementById('modalImage');
-				const closeModal = document.querySelector('.close');
-				
-				modalTrigger.addEventListener('click', () => {
-				    modal.style.display = 'block';
-				    modalImage.src = modalTrigger.style.backgroundImage.replace('url("', '').replace('")', '');
-				});
-				
-				// 모달 닫기
-				closeModal.addEventListener('click', () => {
-				    modal.style.display = 'none';
-				});
-				
-				// 모달 외부를 클릭하면 모달 닫기
-				window.addEventListener('click', (event) => {
-				    if (event.target == modal) {
-				        modal.style.display = 'none';
-				    }
-				});
-            }
+            document.addEventListener('DOMContentLoaded', () => {            	  
+	            if("${community.boardType}" === "travelcertify"){            	
+		            // 이미지 모달 기능
+		            // 이미지를 클릭하면 모달 열기
+					const modalTrigger = document.querySelector('.modal-trigger');
+					const modal = document.getElementById('myModal');
+					const modalImage = document.getElementById('modalImage');
+					const closeModal = document.querySelector('.close');
+					
+					modalTrigger.addEventListener('click', () => {
+					    modal.style.display = 'block';
+					    modalImage.src = modalTrigger.style.backgroundImage.replace('url("', '').replace('")', '');
+					});
+					
+					// 모달 닫기
+					closeModal.addEventListener('click', () => {
+					    modal.style.display = 'none';
+					});
+					
+					// 모달 외부를 클릭하면 모달 닫기
+					window.addEventListener('click', (event) => {
+					    if (event.target == modal) {
+					        modal.style.display = 'none';
+					    }
+					});
+	            }
+            });
             //댓글 등록 ajax
            	
             function insertReplyBtn() {
