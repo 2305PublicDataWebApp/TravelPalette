@@ -8,7 +8,7 @@ a {
     flex-direction: column;
     /* align-items: center; */
     width: 100%;
-    height: 600px;
+    height: 100%;
     justify-content: space-around;
 }      
 label {
@@ -53,6 +53,7 @@ label {
     border-radius: 5px;
     padding: 5px;
     width: 55%;
+    height: 40px
 }
 #mailCheck {
     border : thin solid #ccc;
@@ -72,7 +73,7 @@ label {
 }
 #genderRadio {
     display: flex;
-    width: 50%;
+    width: 56%;
     justify-content: space-between;
 }
 #genderRadio > input, #checkDiv > input {
@@ -82,9 +83,21 @@ label {
 #genderRadio > label, #checkDiv > label {
     width: 60px;
 }
-#checkDiv {
+#genderRadioK {
     display: flex;
-    /* width: 50%; */
+    width: 56%;
+    justify-content: space-between;
+}
+#genderRadioK > input {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+#genderRadioK > label {
+    width: 60px;
+}
+#checkDiv {
+	display: flex;
+    width: 56%;
     justify-content: space-between;
 }
 .redSpan {
@@ -104,13 +117,6 @@ label {
 input::placeholder {
     padding: 5px;
 }
-.guideMsg {
-	font-family: 'SUITE-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
-    font-size: 12px;
-	display: flex;
-    justify-content: center;
-}
 #emailCodeDiv {
 	flex-direction: column;
 }
@@ -122,10 +128,52 @@ input::placeholder {
 	font-family: 'SUITE-Regular';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
     font-size: 15px;
+    padding: 7px;
+    margin-bottom: 3px;
+    
 }
 .pageTitleMsg {
 	font-family: 'SUITE-Regular';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
     font-size: 15px;
+	
+}
+#registerBtn {
+	font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.rContainer {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+}
+#rContainer {
+	width : 555px;
+	margin-top: 30px;
+}
+#form > div {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.infoBtn {
+	color:white; 
+	width: 200px; 
+	height: 45px;
+	font-family: 'SUITE-Regular';
+    src: url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2) format('woff2');
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+#userModifyBtn {
+	color:white; 
+	width: 200px; 
+	height: 45px;
+	font-family: 'SUITE-Regular';
+    src: url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2) format('woff2');
+    font-size: 20px;
+    margin-bottom: 50px;
 	
 }

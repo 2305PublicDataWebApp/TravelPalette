@@ -1,14 +1,15 @@
 package com.semi.travelpalette.user.controller;
 
-import java.net.http.HttpHeaders;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.semi.travelpalette.user.domain.UserMypageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -25,8 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.semi.travelpalette.common.domain.Like;
 import com.semi.travelpalette.inquiry.domain.PageInfo;
-import com.semi.travelpalette.inquiry.service.InquiryService;
 import com.semi.travelpalette.user.domain.User;
+import com.semi.travelpalette.user.domain.UserMypageDto;
 import com.semi.travelpalette.user.service.KakaoService;
 import com.semi.travelpalette.user.service.UserService;
 
@@ -507,7 +508,7 @@ public class UserController {
     		response.put("url", "/user/login.tp");
     	} else {
         	response.put("success", false);
-            response.put("message", "아이디와 비밀번호를 확인해주세요."); // 실패 메시지 설정
+            response.put("msg", "아이디와 비밀번호를 확인해주세요."); // 실패 메시지 설정
     	}
     	return response;
     }
@@ -655,11 +656,13 @@ public class UserController {
 	    } else {
 	        // 이메일이 등록되어 있지 않은 경우 (중복 아님)
 	        response.put("isDuplicate", false);
-	        joinEmail(userEmail, session);	// 메일 전송
+	        joinEmail(userEmail, session);
+	        int code = (int)session.getAttribute("code");
+	        System.out.println("하" + code);
+	        response.put("code", code);	// 메일 전송
 	    }
 
 	    return response;
-//		return joinEmail(userEmail, session);
 	}
 
 
@@ -674,6 +677,11 @@ public class UserController {
 	public String joinEmail(String userEmail
 			, HttpSession session) {
 		makeRandomNumber();
+		System.out.println("세션에 저장된 번호1 : " + session.getAttribute("code"));
+		session.removeAttribute("code");
+		System.out.println("세션에 저장된 번호2 : " + session.getAttribute("code"));
+		session.setAttribute("code", authNumber);
+		System.out.println("세션에 저장된 번호3 : " + session.getAttribute("code"));
 		String setFrom = "travelpalette0901@gmail.com"; // email-config에 설정한 자신의 이메일 주소를 입력
 		String toMail = userEmail;
 		String title = "여행 팔레트 회원 가입 인증 이메일 입니다."; // 이메일 제목
@@ -682,13 +690,8 @@ public class UserController {
 			    "<br>" +
 			    "해당 인증번호를 인증번호 확인란에 기입하여 주세요."; //이메일 내용 삽입
 		this.mailSend(setFrom, toMail, title, content);
-		int code = authNumber; // 인증번호를 code 변수에 저장
-
-	        session.removeAttribute("code");
-	        session.setAttribute("code", code);
 
 		System.out.println("세션에 저장된 번호 : " + session.getAttribute("code"));
-		System.out.println("인증번호!!!!!!!!!!!! : " + code);
 		return Integer.toString(authNumber);
 	}
 	

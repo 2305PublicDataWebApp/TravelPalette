@@ -15,7 +15,6 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 500px;
 }      
 label {
     width: 150px;
@@ -94,4 +93,25 @@ input::placeholder {
 	border : #37BBE0;
 	color: black;
 	
+}
+.infoBtn {
+	margin-bottom: 100px;
+	font-family: 'SUITE-Regular';
+    src: url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2) format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.confirmBox {
+	display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+.msg {
+	font-family: 'SUITE-Regular';
+    src: url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2) format('woff2');
+    font-weight: 400;
+    font-style: normal;
+	margin-bottom: 10px;
 }

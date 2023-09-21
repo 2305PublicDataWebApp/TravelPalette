@@ -7,78 +7,78 @@
 		<meta charset="UTF-8">
         <title>회원 정보 수정</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    	<link rel="stylesheet" href="../resources/css/user/modify.css">
+    	<link rel="stylesheet" href="../resources/css/user/register.css">
+    	<link rel="stylesheet" href="../resources/css/user/common.css">
     	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
     	<!-- 헤더 -->
         <jsp:include page="/include/header.jsp"></jsp:include>
         <!-- 네비 -->
-        <jsp:include page="/include/nav.jsp"></jsp:include>          
-        <div class="container">
-            <p>회원 정보 수정</p>
-            <div class="pHead">
-                <span class="redSpan">*</span><span>은 필수 입력 정보입니다</span>
-            </div>
-            <div class="w-line"></div>
-            <div id="container">
-                <div class="flex">
-                	<form name="userModifyForm" action="/user/modifyNormal.tp" method="post">
-                		<input type="hidden" name="userNo" value="${userInfo.userNo }">
-	                    <div>
-	                        <label for="userPw">비밀번호<span class="redSpan">*</span></label>
-	                        <input type="password" name="userPw" id="userPw" class="input" onchange="pwCheck();" placeholder="영어, 숫자, 특수문자를 반드시 포함해 8~20글자">
-	                    </div>
-	                    <span id="pwCheckMsg" class="guideMsg"></span>
-	                    <div>
-	                        <label for="userPwCheck">비밀번호 확인<span class="redSpan">*</span></label>
-	                        <input type="password" name="userPwCheck" id="userPwCheck" class="input" onchange="pwCheck();" placeholder="입력 가능한 특수문자(~, !, @, #, $, %, ^)">
-	                    </div>
-	                    <span id="pwCheckMsg" class="guideMsg"></span>
-	                    <div>
-	                        <label for="userNickname">닉네임<span class="redSpan">*</span></label>
-	                        <input type="text" name="userNickname" id="userNickname" class="input" value="${userInfo.userNickname }" placeholder="닉네임을 입력해주세요">
-	                        <button id="nicknameBtn" onclick="nicknameCheck();" type="button" class="btn btn-light btn-sm" disabled="true">중복 확인</button>
-	                    </div>
-	                    <span id="nicknameCheckMsg" class="guideMsg"></span>
-	                    <div>
-	                        <label for="userEmail">이메일<span class="redSpan">*</span></label>
-	                        <input type="text" name="userEmail" id="userEmail" class="input" value="${userInfo.userEmail }" placeholder="닉네임을 입력해주세요">
-	                        <button id="emailBtn" class="btn btn-light btn-sm" disabled="true">이메일 인증</button>
-	                    </div>
-	                    <%
-  							  // 세션에서 "code" 가져오기
-    							Integer code = (Integer) session.getAttribute("code");
-    						%>
-	                    <span id="emailCheckMsg" class="guideMsg"></span>
-	                    <div id="emailCodeDiv" class="inputDiv" style="display : none">
-		                    <div id="emailCheckDiv">
-		                        <label for="mailCheck"></label>
-		                        <input type="text" name="mailChek" id="mailCheck" placeholder="인증번호를 입력해주세요">
-		                        <button type="button" class="btn btn-light btn-sm" onclick="checkEmailCode();">인증번호 확인</button>
+        <jsp:include page="/include/nav.jsp"></jsp:include> 
+        <main>
+	        <div class="rContainer">
+	            <p class="pageTitle">회원 정보 수정</p>
+	            <div class="pHead">
+	                <span class="redSpan">*</span><span>은 필수 입력 정보입니다</span>
+	            </div>
+	            <div class="w-line"></div>
+	            <div id="rContainer">
+	                <div class="flex">
+	                	<form id="form" name="userModifyForm" action="/user/modifyNormal.tp" method="post">
+	                		<input type="hidden" name="userNo" value="${userInfo.userNo }">
+		                    <div>
+		                        <label for="userPw">비밀번호<span class="redSpan">*</span></label>
+		                        <input type="password" name="userPw" id="userPw" class="input" onchange="pwCheck();" placeholder="영어, 숫자, 특수문자를 반드시 포함해 8~20글자">
 		                    </div>
-		                    <span id="emailCodeCheckMsg" class="guideMsg"></span>
-	                    </div>
-	                    <div>
-	                        <label for="userTel">전화번호</label>
-	                        <input type="text" name="userTel" id="userTel" class="input" placeholder="전화번호를 입력해주세요">
-	                    </div>
-	                    <div style="display: flex; align-items: center;">
-	                        <label for="">SMS/메일<br>수신 여부</label>
-	                        <div id="checkDiv">
-		                                <input type="checkbox" name="userEmailStatus" class="form-check-input" id="SMS" <c:if test="${userInfo.userEmailStatus.toString() eq 'Y'}" >checked</c:if>><label class="form-check-label" for="SMS">SMS</label>
-		                            <input type="checkbox" name="userSmsStatus" class="form-check-input" id="mail" value="Y" 
-		                            <c:if test="${userInfo.userSmsStatus.toString() eq 'Y'}" >checked</c:if>
-		                            ><label class="form-check-label" for="mail">메일</label>
-	                        </div>
-	                    </div>
-	                    <div class="registerBox">
-	                        <button type="button" id="userModifyBtn" onclick="modifyCheck();" class="btn btn-info">회원 정보 수정</button>
-	                    </div>
-                	</form>
-                </div>
-            </div>
-        </div>
+		                    <span id="pwCheckMsg" class="guideMsg"></span>
+		                    <div>
+		                        <label for="userPwCheck">비밀번호 확인<span class="redSpan">*</span></label>
+		                        <input type="password" name="userPwCheck" id="userPwCheck" class="input" onchange="pwCheck();" placeholder="입력 가능한 특수문자(~, !, @, #, $, %, ^)">
+		                    </div>
+		                    <span id="pwCheckMsg" class="guideMsg"></span>
+		                    <div>
+		                        <label for="userNickname">닉네임<span class="redSpan">*</span></label>
+		                        <input type="text" name="userNickname" id="userNickname" class="input" value="${userInfo.userNickname }" placeholder="닉네임을 입력해주세요">
+		                        <button id="nicknameBtn" onclick="nicknameCheck();" type="button" class="btn btn-light btn-sm checkBtn" disabled="true">중복 확인</button>
+		                    </div>
+		                    <span id="nicknameCheckMsg" class="guideMsg"></span>
+		                    <div>
+		                        <label for="userEmail">이메일<span class="redSpan">*</span></label>
+		                        <input type="text" name="userEmail" id="userEmail" class="input" value="${userInfo.userEmail }" placeholder="닉네임을 입력해주세요">
+		                        <button id="emailBtn" class="btn btn-light btn-sm checkBtn" disabled="true">이메일 인증</button>
+		                    </div>
+		                    <span id="emailCheckMsg" class="guideMsg"></span>
+		                    <div id="emailCodeDiv" class="inputDiv" style="display : none">
+			                    <div id="emailCheckDiv">
+			                        <label for="mailCheck"></label>
+			                        <input type="text" name="mailChek" id="mailCheck" placeholder="인증번호를 입력해주세요">
+			                        <input type="hidden" name="authCode" id="authCode" >
+			                        <button type="button" class="btn btn-light btn-sm" onclick="checkEmailCode();">인증번호 확인</button>
+			                    </div>
+			                    <span id="emailCodeCheckMsg" class="guideMsg"></span>
+		                    </div>
+		                    <div>
+		                        <label for="userTel">전화번호</label>
+		                        <input type="text" name="userTel" id="userTel" class="input" placeholder="전화번호를 입력해주세요">
+		                    </div>
+		                    <div style="display: flex; align-items: center;">
+		                        <label for="">SMS/메일<br>수신 여부</label>
+		                        <div id="checkDiv">
+			                                <input type="checkbox" name="userEmailStatus" class="form-check-input" id="SMS" <c:if test="${userInfo.userEmailStatus.toString() eq 'Y'}" >checked</c:if>><label class="form-check-label" for="SMS">SMS</label>
+			                            <input type="checkbox" name="userSmsStatus" class="form-check-input" id="mail" value="Y" 
+			                            <c:if test="${userInfo.userSmsStatus.toString() eq 'Y'}" >checked</c:if>
+			                            ><label class="form-check-label" for="mail">메일</label>
+		                        </div>
+		                    </div>
+		                    <div class="registerBox">
+		                        <button type="button" id="userModifyBtn" onclick="modifyCheck();" class="btn btn-info">회원 정보 수정</button>
+		                    </div>
+	                	</form>
+	                </div>
+	            </div>
+	        </div>
+        </main>         
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
@@ -228,6 +228,7 @@
         
         
         
+		// AJAX로
 		function emailCheck() {
 		    const email = document.getElementById('userEmail').value;
 		
@@ -241,72 +242,44 @@
 		                if (response.isDuplicate) {
 		                    alert('이미 등록된 이메일입니다.');
 		                } else {
-           	    		    const authCode = <%= code %>;
-			    		    
+		                	const authCode = response.code;
 		 	    		    if(authCode != null) {
-		 	    		    	alert('인증번호가 전송되었습니다.');
-		 		    			// 버튼 누르면 인증번호 입력 div flex로
-		 						 emailCodeDiv.style.opacity = '1';
-		 						 emailCodeDiv.style.display = 'flex';
-		                }else {
-	 	    		    	alert('인증번호 전송이 실패되었습니다. 이메일을 확인해주세요.');
-		 	    	        document.getElementById('mailClickBtn').disabled = false;    
-		 						 emailCodeDiv.style.display = 'none';
-		                }
+			 	    		    	alert('인증번호가 전송되었습니다.');
+			 		    			// 버튼 누르면 인증번호 입력 div flex로
+			 		    			document.getElementById('mailClickBtn').disabled = true;    
+			 						 emailCodeDiv.style.opacity = '1';
+			 						 emailCodeDiv.style.display = 'flex';
+			 						 document.getElementById('authCode').value = authCode;
+			                }else {
+		 	    		    	alert('인증번호 전송이 실패되었습니다. 이메일을 확인해주세요.');
+			 	    	        document.getElementById('mailClickBtn').disabled = false;    
+			 						 emailCodeDiv.style.display = 'none';
+			                }
 		                }
 		            },
 		            error: function() {
-		                alert('서버 요청에 실패했습니다.');
+		            	alert('서버와 통신에 실패했습니다.');
 		            }
 		        });
 		    } else {
 		        alert('이메일을 입력하세요.');
 		    }
 		}
-
-
-    	// 인증번호 비교
+		
 		function checkEmailCode() {
-			const email = document.querySelector("#userEmail").value;
-		    const code = document.getElementById('mailCheck').value; // 사용자가 입력한 인증번호
-		    const authCode = <%= code %>;
-		    console.log('전송된 인증번호 : ' + authCode);
-		    console.log('사용자가 입력한 인증번호: ' + code);
-		    
-		    // XMLHttpRequest 객체 생성
-		    const xhr = new XMLHttpRequest();
-		    
-		    // .open() : 요청에 필요한 정보 설정
-		    xhr.open('GET', '/user/checkEmailCode.tp?mailCheckCode=' + code, true);
-		    
-		    if(code == authCode) {
-		    	alert('메일 인증이 성공하였습니다');
-                document.getElementById('emailCodeCheckMsg').innerHTML = '메일 인증이 완료되었습니다.';
-                document.getElementById('emailCodeCheckMsg').style.color = 'blue';
+			const inputCode = $('#mailCheck').val();
+			const authCode = $('#authCode').val();
+		    console.log(inputCode);
+		    console.log(authCode);
+
+		    if (inputCode == authCode) {
+		        alert('메일 인증이 성공하였습니다');
+		        $('#emailCodeCheckMsg').html('메일 인증이 완료되었습니다.').css('color', 'blue');
 		    } else {
-		    	alert('인증번호를 확인해주시기 바랍니다.');
-                document.getElementById('emailCodeCheckMsg').innerHTML = '메일 인증이 완료되지 않았습니다.';
-                document.getElementById('emailCodeCheckMsg').style.color = 'red';		    	
-		    }
-		    
-		    xhr.onload = function() {
-		        // 200 HTTP 응답 코드(OK)
-		        if (xhr.status === 200) {
-		            const data = xhr.responseText;
-		            console.log('data: ' + data);
-		            if (data === 'valid') {
-		                alert('인증번호가 올바릅니다.');
-		            } else {
-		                alert('인증번호가 올바르지 않습니다.');
-		            }
-		        } else {
-		            console.error('요청 실패');
-		        }
-		    };
-		    
-		    // Send the request
-		    xhr.send();
-		}    	     
+		        alert('인증번호를 확인해주시기 바랍니다.');
+		        $('#emailCodeCheckMsg').html('메일 인증이 완료되지 않았습니다.').css('color', 'red');
+		    }   
+		}
  
     	
     	
@@ -362,8 +335,8 @@
 		    if (isNicknameChecked && isEmailChecked) {
 		        document.userModifyForm.submit();
 		    }
-		}   
-        
-    	</script>
+		};
+		
+        </script>
     </body>
 </html>

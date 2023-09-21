@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>비밀번호 찾기</title>
+        <title>아이디 찾기</title>
         <link rel="stylesheet" href="../resources/css/user/userInfo.css">
         <link rel="stylesheet" href="../resources/css/user/common.css">        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -27,14 +27,14 @@
 	                    <div class="w-line"></div>
                         <div class="infoBox">
                             <label for="">이름</label>
-                            <input type="text" name="userName" id="userName" class="input" placeholder="아이디를 입력해주세요">
+                            <input type="text" name="userName" id="userName" class="input" placeholder="이름을 입력해주세요">
                         </div>
                         <div class="infoBox">
                             <label for="">이메일</label>
                             <input type="text" name="userEmail" id="userEmail" class="input" placeholder="이메일을 입력해주세요">
                         </div>
-                        <span id="idCheckMsg" class="guideMsg"></span>
-                        <button onclick="findId()" class="btn btn-info">아이디 찾기</button>
+                        <span id="idCheckMsg" class="alertMsg" style="display: none;">입력하신 정보를 확인해주세요</span>
+                        <button id="infoBtn" onclick="findId()" class="btn btn-info">아이디 찾기</button>
                     </div>
                 </div>
 	        </div>
@@ -48,6 +48,7 @@
     	function findId() {
             const userName = $('#userName').val();
             const userEmail = $('#userEmail').val();
+            const idCheckMsg = $('#idCheckMsg');
             
             if(userName != '' || userEmail != '') {
             	
@@ -64,7 +65,8 @@
 						location.href = url;
 	                },
 	                error: function () {
-	                    alert('입력하신 정보를 확인해주세요.');
+	                    const idCheckMsg = $('#idCheckMsg'); // HTML 요소를 선택합니다.
+	                    idCheckMsg.show();
 	                }
 	            });
             } else {

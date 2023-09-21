@@ -7,30 +7,33 @@
         <title>회원 탈퇴</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 		<link rel="stylesheet" href="../resources/css/user/delete.css">
+		<link rel="stylesheet" href="../resources/css/user/common.css">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	</head>
     <body>
     	<!-- 헤더 -->
         <jsp:include page="/include/header.jsp"></jsp:include>
         <!-- 네비 -->
-        <jsp:include page="/include/nav.jsp"></jsp:include>          
-        <div class="container">
-            <p class="d-flex justify-content-center">회원 탈퇴</p>
-            <div id="container">
+        <jsp:include page="/include/nav.jsp"></jsp:include>         
+        <main>
+	        <div class="container">
+	            <p class="d-flex justify-content-center pageTitle">회원 탈퇴</p>
                 <div class="w-line"></div>
-                <input type="hidden" name="userId" id="userId" value="${sessionScope.userId }">
-                <div>
-                    <label for="userPw">비밀번호</label>
-                    <input type="password" name="userPw" id="userPw" onchange="pwCheck();">
-                </div>
-                <div>
-                    <label for="userPwCheck">비밀번호 확인</label>
-                    <input type="password" name="userPwCheck" id="userPwCheck" onchange="pwCheck();">
-                </div>
-                <span id="pwCheckMsg" class="guideMsg"></span>
-                <button onclick="deleteBtn()" class="btn btn-info">회원 탈퇴</button>
-            </div>
-        </div>
+	            <div id="container">
+	                <input type="hidden" name="userId" id="userId" value="${sessionScope.userId }">
+	                <div>
+	                    <label for="userPw">비밀번호</label>
+	                    <input type="password" name="userPw" id="userPw" class="input" onchange="pwCheck();">
+	                </div>
+	                <div>
+	                    <label for="userPwCheck">비밀번호 확인</label>
+	                    <input type="password" name="userPwCheck" id="userPwCheck" class="input" onchange="pwCheck();">
+	                </div>
+	                <span id="pwCheckMsg" class="guideMsg"></span>
+	                <button id="infoBtn" onclick="deleteBtn()" class="btn btn-info">회원 탈퇴</button>
+	            </div>
+	        </div>
+        </main> 
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

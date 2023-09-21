@@ -3,19 +3,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 0 auto;
 }        
 .w-line {
     border-left : thin solid #ccc;
     border: thin solid #ccc;
-    width : 80%;  
+    width : 100%;  
     height: 1px;        
     margin: 10px;   
+    margin-bottom : 30px;
 }   
 .input {
-    border : thin solid #ccc;
+border: thin solid #ccc;
     border-radius: 5px;
     padding: 5px;
-    width: 60%;
+    width: 65%;
+    height: 40px;
 }        
 input::placeholder {
     padding: 5px;
@@ -25,7 +28,7 @@ input::placeholder {
     width: 500px;
     flex-direction: column;
     align-items: center;
-    height: 230px
+    height: 280px;
 }      
 label {
     width: 120px;
@@ -41,8 +44,18 @@ label {
     justify-content: center;
     margin-top: 10px;
     margin-bottom: 10px;
+    align-items: center;
 }              
 button.btn.btn-info {
     margin-bottom: 50px;
-    margin-top: 20px;
+    margin-top: 10px;
 }     
+#infoBtn {
+	color:white; 
+	width: 200px; 
+	height: 45px;
+	font-family: 'SUITE-Regular';
+    src: url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2) format('woff2');
+    font-size: 20px;
+    margin-bottom: 50px;
+}
