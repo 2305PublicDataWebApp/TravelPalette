@@ -20,7 +20,7 @@
 	        <div class="registerContainer">
 	            <p class="pageTitle">회원가입</p>
 	            <div class="pHead">
-	                <span class="redSpan">*</span><span>은 필수 입력 정보입니다</span>
+	                <span class="redSpan">*</span><span class="pageTitleMsg">은 필수 입력 정보입니다</span>
 	            </div>
 	            <div class="w-line"></div>
 	            <div id="container">
@@ -92,7 +92,9 @@
 		                        </div>
 		                    </div>
 		                    <div class="registerBox">
-		                        <button type="button" id="registerBtn" onclick="registerCheck();" class="btn btn-info">회원가입</button>
+		                        <button type="button" id="registerBtn" onclick="registerCheck();" class="btn btn-info"
+		                        		style="color:white; width: 200px; height: 45px;"
+		                        >회원가입</button>
 		                    </div>
 		               	</form>
 	                </div>
