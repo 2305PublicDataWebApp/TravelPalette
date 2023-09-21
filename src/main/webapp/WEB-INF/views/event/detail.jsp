@@ -44,8 +44,8 @@
 								<col width="70%">
 							</colgroup>
 							<tr>
-								<td>이벤트 문의</td>
-								<td>${event.eventInquiries }</td>
+								<td style="text-align: center;">이벤트 문의</td>
+								<td>* ${event.eventInquiries }</td>
 							</tr>
 						</table>
 					</div>
@@ -58,8 +58,8 @@
 								<col width="70%">
 							</colgroup>
 							<tr>
-								<td>이벤트 유의사항</td>
-								<td>${event.eventPrecautions }</td>
+								<td style="text-align: center;">이벤트 유의사항</td>
+								<td>* ${event.eventPrecautions }</td>
 							</tr>
 						</table>
 					</div>

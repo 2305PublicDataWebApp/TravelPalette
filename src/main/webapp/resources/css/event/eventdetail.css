@@ -9,6 +9,8 @@ main {
 }
 .eventContent h1 {
     text-align: center;
+    padding: 10px 0px 25px 0px;
+    font-family: 'TmoneyRoundWindExtraBold';
 }
 .eventAdd table {
     min-height: 100px; /* 최소 높이 설정 */

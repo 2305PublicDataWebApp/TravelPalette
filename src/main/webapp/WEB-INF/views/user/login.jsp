@@ -15,7 +15,7 @@
         <jsp:include page="/include/header.jsp"></jsp:include>
         <!-- 네비 -->
         <jsp:include page="/include/nav.jsp"></jsp:include>
-        <maim>
+        <main>
 	        <div class="flex">
 	            <p class="pageTitle">로그인</p>
 	            <div class="loginBox">
@@ -44,11 +44,11 @@
 	                        <div class="w-line"></div><p class="commonFont" >또는</p><div class="w-line"></div>
 	                    </div>
 	                    <button onclick="kakao();" class="btn btn-warning loginBtn commonFont"
-	                    		style="color: white; height: 45px;"
+	                    		style="color: white; height: 45px;padding: 10px 0px;"
 	                    >카카오 로그인/회원가입</a></button>
 	                </div>
 	            </div>
-        </maim>       
+        </main>       
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
