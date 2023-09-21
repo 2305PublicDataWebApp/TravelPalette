@@ -27,22 +27,24 @@
                   <div class="items">
                     <div class="item"></div>
                     <div class="item">
-						<div class="content" style="width:23%;height:220px;float:left;background-color:#FFEFBC;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);text-align: center;">
-						    <div>
-							    <h2 style="font-size: 30px; font-family: 'TmoneyRoundWindExtraBold';color:#CC9B6D;">
-							    	*부소담악(추소정)
-							    </h2>
-							</div>						
-						</div>
-					    <div class="content pink" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent), url(../resources/images/main/부소담악.jpg); background-size: cover; 
-					    background-repeat: no-repeat;background-position: center center; width: 66%; height: 600px;float: right;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);">
-					    </div>
-						<div class="content" style="width:23%;float:left;height:330px;background-color:#F7D098;margin-top:50px;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);">
-							    <h4 style="font-family: 'SUITE-Regular'; font-size: 23px;font-weight:600;color: #fffdee;line-height: 33px;">호수 위에 떠 있는 병풍바위,<br><br>충북 옥천군 군북면<br> 부소무늬마을에 가면 <br>부소담악이라는 <br>절경을 만날 수 있다. </h4>
-						</div>
+                    	<a href="#">
+							<div class="content" style="width:23%;height:220px;float:left;background-color:#FFEFBC;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);text-align: center;">
+							    <div>
+								    <h2 style="font-size: 30px; font-family: 'TmoneyRoundWindExtraBold';color:#CC9B6D;">
+								    	*부소담악(추소정)
+								    </h2>
+								</div>						
+							</div>
+						    <div class="content pink" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent), url(../resources/images/main/부소담악.jpg); background-size: cover; 
+						    background-repeat: no-repeat;background-position: center center; width: 66%; height: 600px;float: right;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);">
+						    </div>
+							<div class="content" style="width:23%;float:left;height:330px;background-color:#F7D098;margin-top:50px;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);">
+								    <h4 style="font-family: 'SUITE-Regular'; font-size: 23px;font-weight:600;color: #fffdee;line-height: 33px;">호수 위에 떠 있는 병풍바위,<br><br>충북 옥천군 군북면<br> 부소무늬마을에 가면 <br>부소담악이라는 <br>절경을 만날 수 있다. </h4>
+							</div>
+                    	</a>
 					</div>
                     <div class="item">
-                    	<div class="content" style="width:23%;height:220px;float:left;background-color:#FFCCCC;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);text-align: center;">
+                    	<div class="content" style="width:23%;height:220px;float:left;background-color:#FFD1D1;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);text-align: center;">
 						    <div>
 							    <h2 style="font-size: 30px; font-family: 'TmoneyRoundWindExtraBold';color:#FF8989;">
 							    	*섬진강<br>기차마을
@@ -59,7 +61,7 @@
 						</div>
                     </div>
                     <div class="item">
-                    	<div class="content" style="width:23%;height:220px;float:left;background-color:#FC9D9D;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);text-align: center;">
+                    	<div class="content" style="width:23%;height:220px;float:left;background-color:#FBA1A1;margin-left:85px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);text-align: center;">
 						    <div>
 							    <h2 style="font-size: 30px; font-family: 'TmoneyRoundWindExtraBold';color:#FFEDED;">
 							    	*휴애리<br>자연생활<br> 공원
@@ -92,7 +94,6 @@
 								</h4>
 							</div>
 						</div>
-<!--                     </a> -->
                     <div class="item"></div>
                   </div> 
                 </div>  
@@ -332,9 +333,9 @@
             }
 
             // 5초마다 다음버튼 누르게 하기
-            setInterval(() => {
-                next.click();
-            }, 5000);
+//             setInterval(() => {
+//                 next.click();
+//             }, 5000);
             
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

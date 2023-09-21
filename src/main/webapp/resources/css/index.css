@@ -212,6 +212,7 @@ header, nav, footer{
     .eventHighlight{
         float: left;
         color: #f57373;
+        padding-left: 10px;
     }
 /* 가이드북 */
     .guideBookMsg{
