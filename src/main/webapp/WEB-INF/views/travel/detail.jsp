@@ -193,29 +193,35 @@
                     </ul>
                 </div>
             </div>
-            <div class="reviewNav">
-                <ul>
+            <div aria-label="Page navigation example" class="reviewNav">
+                <ul class="pagination justify-content-center" style="width: 100%;height: 100px;padding-top: 30px;">
 	                <c:if test="${reviewPageInfo ne null }">
 	                    <c:if test="${reviewPageInfo.startNavi != 1 }">
 	                  			<c:url var="prevUrl" value="/travel/detail.tp">
 	                  				<c:param name="page" value="${reviewPageInfo.startNavi -1 }"></c:param>
 	                  				<c:param name="travelNo" value="${travel.travelNo}"/>
 	                  			</c:url>
-	                  			<a href="${prevUrl }">이전</a>
+	                  			<li class="page-item">
+	                  				<a href="${prevUrl }">이전</a>
+	                  			</li>
 	                  		</c:if>
 	                   	<c:forEach begin="${reviewPageInfo.startNavi}" end="${reviewPageInfo.endNavi}" var="p">
 	                   		<c:url var="pageUrl" value="/travel/detail.tp">
 	                   			<c:param name="page" value="${p }"></c:param>
 	                   			<c:param name="travelNo" value="${travel.travelNo}"/>
 	                   		</c:url>
-	                   		<a href="${pageUrl }">${p }</a>
+	                   		<li class="page-item">
+	                   			<a href="${pageUrl }">${p }</a>
+	                   		</li>
 	                   	</c:forEach>
 	                   	<c:if test="${reviewPageInfo.endNavi != reviewPageInfo.naviTotalCount }">
 	                   		<c:url var="nextUrl" value="/travel/detail.tp">
 	                   			<c:param name="page" value="${reviewPageInfo.endNavi +1 }"></c:param>
 	                   			<c:param name="travelNo" value="${travel.travelNo}"/>
 	                   		</c:url>
-	                   		<a href="${nextUrl }">다음</a>
+	                   		<li class="page-item">
+	                   			<a href="${nextUrl }">다음</a>
+	                   		</li>
 	                   	</c:if>
 	                </c:if>
                 </ul>
@@ -291,6 +297,12 @@
 	        const userId = "${sessionScope.userId}"; 
 	        const selectedRating = document.querySelector('input[name="reviewRating"]:checked');
 	        const reviewContent = document.querySelector('textarea[name="reviewContent"]').value.trim();
+	        // 로그인하지 않은 경우
+	        if (!userId) {
+	            alert("로그인 후 이용해 주세요.");
+	            window.location.href = "/user/login.tp"; 
+	            return false;
+	        }
 	        // 별점이 선택되지 않은 경우
 	        if (!selectedRating) {
 	            alert("별점을 선택하세요.");
@@ -299,12 +311,6 @@
 	        // 리뷰 내용이 없는 경우
 	        if (reviewContent === "") {
 	            alert("리뷰 내용을 작성하세요.");
-	            return false;
-	        }
-	        // 로그인하지 않은 경우
-	        if (!userId) {
-	            alert("로그인 후 이용해 주세요.");
-	            window.location.href = "/user/login.tp"; 
 	            return false;
 	        }
 	        const confirmed = confirm("리뷰를 등록하시겠습니까?");
@@ -352,9 +358,9 @@
                 element.textContent = originalUserId;
             } else {
                 // userId의 앞 3글자와 나머지 부분을 가려서 표시합니다.
-                var visiblePart = originalUserId.substring(0, 3);
+                var visiblePart = originalUserId.substring(0, 2)
                 var hiddenPart = '*'.repeat(originalUserId.length - 3);
-                element.textContent = visiblePart + hiddenPart;
+                element.textContent = visiblePart + hiddenPart + originalUserId.slice(-1);
             }
         }
 

@@ -100,16 +100,9 @@
 						</c:forEach>
 					</li>
 	                <li>
-	                    <b>첨부파일1</b>
-	                    <input type="file" name="uploadFiles">
-	                </li>
-	                <li>
-	                    <b>첨부파일2</b>
-	                    <input type="file" name="uploadFiles">
-	                </li>
-	                <li>
-	                    <b>첨부파일3</b>
-	                    <input type="file" name="uploadFiles">
+	                    <div id="addFile">
+	                    </div>
+	                    <button class="btn btn-light" type="button" onClick="addFileBtn();">사진추가</button>
 	                </li>
 	            </ul>
 	            <div class="button-container">
@@ -122,6 +115,16 @@
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script>
         	<jsp:include page="/include/navjs.jsp"></jsp:include>
+        	
+        	function addFileBtn() {
+        		var fileInput = document.createElement("input");
+        	    fileInput.type = "file";
+        	    fileInput.name = "uploadFiles";
+        	    var lineBreak = document.createElement("br");
+        	    document.querySelector("#addFile").appendChild(fileInput);
+        	    document.querySelector("#addFile").appendChild(lineBreak);
+        	}        
+        	
         	// 라디오버튼 체크
         	document.addEventListener("DOMContentLoaded", function() {
         		const selectedLocation = "${travel.travelLocation}";

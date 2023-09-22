@@ -110,6 +110,43 @@
         	    document.querySelector("#addFile").appendChild(fileInput);
         	    document.querySelector("#addFile").appendChild(lineBreak);
         	}
+        	
+        	// 폼을 제출하기 전에 필수 필드가 비어 있는지 확인하는 함수
+			function validateForm() {
+			    var travelName = document.getElementById("tName").value;
+			    var travelAddr = document.getElementById("tAddr").value;
+			    var selectedLocation = document.querySelector("input[name='travelLocation']:checked");
+			    var selectedTag = document.querySelector("input[name='travelTags']:checked");
+			    var fileInputs = document.querySelectorAll("input[name='uploadFiles']");
+			
+			    // 파일 업로드 필드의 개수를 세기 위한 변수
+			    var fileCount = 0;
+			
+			    // 파일 업로드 필드를 순회하면서 선택된 파일의 개수를 센다
+			    for (var i = 0; i < fileInputs.length; i++) {
+			        if (fileInputs[i].files.length > 0) {
+			            fileCount++;
+			        }
+			    }
+			
+			    // 여행지명, 여행지주소, 지역선택, 파일 업로드 필드가 하나 이상 선택되지 않았을 경우 경고 표시
+			    if (travelName === "" || travelAddr === "" || !selectedLocation || !selectedTag || fileCount === 0) {
+			        alert("여행지명, 여행지주소, 지역선택, 테마선택 및 하나 이상의 파일 업로드는 필수 입력 항목입니다.");
+			        return false;
+			    }
+			
+			    return true;
+			}
+			
+			// 폼 제출 버튼 클릭 시 validateForm 함수를 호출
+			var submitButton = document.querySelector("input[type='submit']");
+			if (submitButton) {
+			    submitButton.addEventListener("click", function (event) {
+			        if (!validateForm()) {
+			            event.preventDefault(); // 폼 제출을 막습니다.
+			        }
+			    });
+			}
         </script>
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>

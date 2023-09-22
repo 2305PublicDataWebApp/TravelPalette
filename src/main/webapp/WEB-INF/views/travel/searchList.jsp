@@ -22,7 +22,7 @@
         <main>      	
            <div class="ListTitle">
            	<c:if test="${userId eq 'admin' }">
-				<button style="float: right" onClick="travelRegGo();">관리자글등록</button><br>
+				<button class="btn btn-light" style="float: right" onClick="travelRegGo();">관리자글등록</button><br>
            	</c:if>
                <span class="searchTitle">검색결과</span><span class="searchTitle searchColor">#${searchKeyword}</span>
                <br>

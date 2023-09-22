@@ -129,7 +129,8 @@ main {
     padding: 15px;
     margin-left: 50px;
 }
-/*별점(공통으로 일단 써둠)*/
+/*수정 전 css 별점(공통으로 일단 써둠)*/
+
 .starRating {
     direction: rtl; /*Right to Left : 별점이 반대로 찍히는 것을 반전해줌*/
     margin-bottom: 10px;
@@ -153,6 +154,16 @@ main {
 .starRating input[type=radio]:checked ~ label {
     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 }
+
+.starRating label:hover {
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+
+.starRating input[type=radio]:checked ~ label,
+.starRating input[type=radio]:checked ~ label:hover {
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+
 
 /* 등록한 나의 리뷰칸(작성완) */
 .myReview {
@@ -290,4 +301,8 @@ main {
     z-index: 9999; /* 다른 요소 위에 표시되도록 설정 */
     font-weight:600;
     font-family: 'SUITE-Regular';
+}
+
+.page-item{
+	margin:0;
 }
