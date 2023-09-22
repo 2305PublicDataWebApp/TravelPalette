@@ -66,6 +66,7 @@ main {
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
 .selectdLike {
 	background-color: #ccc;
 }
@@ -280,4 +281,13 @@ main {
     background: linear-gradient(to top, rgba(87, 147, 247, 0.3) 50%, transparent 50%);
     display: inline;
     font-weight:bold;
+}
+
+#fixedButton {
+    position: fixed;
+    bottom: 50px; /* 아래 여백 조정 */
+    right: 300px; /* 오른쪽 여백 조정 */
+    z-index: 9999; /* 다른 요소 위에 표시되도록 설정 */
+    font-weight:600;
+    font-family: 'SUITE-Regular';
 }
