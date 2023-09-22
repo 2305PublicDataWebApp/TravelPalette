@@ -19,7 +19,7 @@
 	                    <img style="position: absolute;z-index: -1;top: -53px;width: 300px;opacity: 0.8;" src="../resources/images/main/수채화1.png" alt="">
                 	</a>
                 </div>
-               <div style="float:right;display: flex;">
+               <div style="float:right;display: flex;padding-top: 4px;">
                 	<form action="/travel/search.tp" method="GET">
 					    <input type="text" name="searchKeyword" style="float:left;" class="searchInput" placeholder="가보고 싶은 여행지 있으신가요?">
 					    <button type="submit" class="travelSearchButton">

@@ -50,13 +50,25 @@
 	                    <button id="goInsertBoardPage" type="button" style="float: right;width: 80px;" class="btn btn-primary">글 등록</button>
                     </c:if>
                     <p style="margin: 0;padding: 7px 13px 0px 8px;margin-left: 3px;float: right;">
-                    	<c:if test="${sortType eq 'no' }">
-                    		<a href="/community/qList.tp" style="text-decoration:underline;">최신순 </a>|
-               	        	<a href="/community/qList.tp?sortType=likeDESC">추천순</a>
+                    	<c:if test="${pInfo.boardType eq 'QnABoard' }">
+	                    	<c:if test="${sortType eq 'no' }">
+	                    		<a href="/community/qList.tp" style="text-decoration:underline;">최신순 </a>|
+	               	        	<a href="/community/qList.tp?sortType=likeDESC">추천순</a>
+	                    	</c:if>
+	               	        <c:if test="${sortType ne 'no' }">
+	               	        	<a href="/community/qList.tp">최신순 </a>|
+		                        <a href="/community/qList.tp?sortType=likeDESC" style="text-decoration:underline;">추천순</a> 
+	                    	</c:if>
                     	</c:if>
-               	        <c:if test="${sortType ne 'no' }">
-               	        	<a href="/community/qList.tp">최신순 </a>|
-	                        <a href="/community/qList.tp?sortType=likeDESC" style="text-decoration:underline;">추천순</a> 
+                    	<c:if test="${pInfo.boardType ne 'QnABoard' }">
+                    		<c:if test="${sortType eq 'no' }">
+	                    		<a href="/community/qList.tp?boardType=travelCompanion" style="text-decoration:underline;">최신순 </a>|
+	               	        	<a href="/community/qList.tp?sortType=likeDESC&boardType=travelCompanion">추천순</a>
+	                    	</c:if>
+	               	        <c:if test="${sortType ne 'no' }">
+	               	        	<a href="/community/qList.tp?boardType=travelCompanion">최신순 </a>|
+		                        <a href="/community/qList.tp?sortType=likeDESC&boardType=travelCompanion" style="text-decoration:underline;">추천순</a> 
+	                    	</c:if>
                     	</c:if>
                     </p>
                 </div>

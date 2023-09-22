@@ -84,6 +84,7 @@
                     boardContentTextarea.value = "";
                 } else if (selectedOption === "travelCompanion") {
                     boardTitleInput.textContent = "동행 구인 글 제목을 입력해주세요";
+                    boardContentLable.textContent = "동행 구인 양식은 변경 가능합니다~";
                     boardContentTextarea.value = "예상 동행 인원 :\n\n주로 활동하는 날 :\n\n모임의 특징 :\n\n예상 회비 :\n\n전화번호 :";
                     document.getElementById("imageFile").style.display = "none";
                 } else if (selectedOption === "travelcertify") {

@@ -158,11 +158,11 @@
                     <div>
                         <h4 style="width: 465px;float:left">주요 이벤트</h4>
                         <a href="/event/list.tp">
-	                        <img style="width:28px;" src="../resources/images/main/plus.png" alt="">
+	                        <img style="width:28px;padding-bottom: 10px;" src="../resources/images/main/plus.png" alt="">
                         </a>
                     </div>
                    	<a href="/event/detail.tp?eventNo=58">
-	                    <div style="width: 100%;height: 50px;background-color: rgba(224, 224, 224, 0.32);padding-top: 10px;padding-left: 15px;margin-top:6px;">
+	                    <div style="width: 100%;height: 50px;background-color: rgba(224, 224, 224, 0.32);padding-top: 10px;padding-left: 15px;">
 	                        <p style="float: left;background-color: #222;color: white;border-radius: 5px;width: 182px;text-align: center;margin: 0;font-weight: 100;">
 	                            HOT 이벤트
 	                        </p>

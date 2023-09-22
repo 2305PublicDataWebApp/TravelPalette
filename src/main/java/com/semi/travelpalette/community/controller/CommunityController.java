@@ -284,8 +284,19 @@ public class CommunityController {
             int result = cService.deleteBoard(community);
             
             if(result > 0) {
-                mv.setViewName("redirect:/community/qList.tp");
-                return mv;
+            	if(community.getBoardType().equals("QnABoard")) {
+            		mv.setViewName("redirect:/community/qList.tp");
+            		return mv;
+            	}
+            	else if(community.getBoardType().equals("travelcertify")) {
+            		mv.setViewName("redirect:/community/certify.tp");
+            		return mv;
+            	}
+            	else if(community.getBoardType().equals("travelCompanion")) {
+            		mv.setViewName("redirect:/community/qList.tp?boardType=travelCompanion");
+            		return mv;
+            	}
+            	return mv;
             }else {
                 mv.addObject("msg", "게시물 삭제에 실패하였습니다.");
                 mv.addObject("url", "/");

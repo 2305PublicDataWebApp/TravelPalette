@@ -273,6 +273,7 @@
                 // 값의 길이를 확인하고 5보다 작으면 경고창을 띄웁니다.
                 if (replyContent.length < 5) {
                   alert('댓글 내용은 5자 이상 작성하셔야 합니다.');
+                  return;
                 }
                 // 체크되었는지 여부를 확인합니다.
                 var replySecretType = document.getElementById('secretCheck').checked ? 'Y' : 'N';
