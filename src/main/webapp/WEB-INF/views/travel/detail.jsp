@@ -24,16 +24,18 @@
 		        	<button class="btn btn-light" style="float:right; margin-right: 10px;" onClick="travelModifyGo(${travel.travelNo});">관리자글수정</button>
         		</div>
 	        </c:if>
-        	<div id="detailTop">
+        	<div id="detailTop" style="margin-top: 50px;">
 	          	<div>
-	                <h1 style="margin-top: 50px">${travel.travelName}</h1>
-	                <h4>${travel.travelAddr}</h4>
+	                <h1 style="background:linear-gradient(to top, rgba(87, 147, 247, 0.3) 50%, transparent 50%); display: inline; font-weight:600;">
+	                	${travel.travelName}
+	                </h1>
+	                <h4 style="margin-top: 10px;">${travel.travelAddr}</h4>
 	                <div class="center">
 	                    <!-- <div id="like"><span>💖</span><span style="padding-left:5px;]">12,345</span></div> -->
 	                    <div id="view"><span>👀</span><span style="padding-left:5px;]">${travel.travelViewCount}</span></div>
 	                </div>
 	            </div>
-	            <div class="menuTab fixed">
+	            <div class="menuTab fixed" id="menuTab">
 	                <ul>
 	                    <li><a class ="btn btn-light" href="#photo">사진</a></li>
 	                    <li><a class ="btn btn-light" href="#detailInfo">상세정보</a></li>
@@ -218,6 +220,7 @@
 	                </c:if>
                 </ul>
             </div>
+            
 <%--             <form id="likeDislikeForm" action="/travel/like.tp" method="POST">
 	            <div class="infoLike">
 	            <input type="hidden" name="userId" value="${sessionScope.userId}">
@@ -237,6 +240,7 @@
 	            </div>
             </form> --%>
         </main>
+        <a href="#menuTab" id="fixedButton" class="btn btn-light">↑</a>
     </body>
     <!-- 푸터 -->
     <jsp:include page="/include/footer.jsp"></jsp:include>
@@ -359,5 +363,31 @@
             var originalUserId = element.textContent;
             hideUserId(element, originalUserId);
         });
+        
+     // 버튼 요소를 가져옵니다.
+        var fixedButton = document.getElementById("fixedButton");
+
+        // 페이지 로드 시 버튼 가시성 초기화
+        window.addEventListener("load", function () {
+            updateButtonVisibility();
+        });
+
+        // 스크롤 이벤트 리스너를 추가합니다.
+        window.addEventListener("scroll", function () {
+            updateButtonVisibility();
+        });
+
+        // 버튼의 가시성을 업데이트하는 함수 정의
+        function updateButtonVisibility() {
+            // 스크롤 위치를 가져옵니다.
+            var scrollY = window.scrollY;
+            
+            // 스크롤 위치가 상단에 있으면 버튼을 숨깁니다.
+            if (scrollY === 0) {
+                fixedButton.style.display = "none";
+            } else {
+                fixedButton.style.display = "block"; // 다른 값을 원하면 수정하세요.
+            }
+        }
 	</script>
 </html>
