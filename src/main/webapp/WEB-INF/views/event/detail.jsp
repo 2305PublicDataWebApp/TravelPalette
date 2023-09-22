@@ -25,8 +25,8 @@
 			<div class="eventContent">
                	<c:if test="${userId eq 'admin' }">
                 	<ul style="float: right">
-						<li><button id="modifyButton" type="button">수정하기</button></li>
-						<li><button id="deleteButton" type="button">삭제하기</button></li>
+						<li><button class="btn btn-primary" id="modifyButton" type="button">수정하기</button></li>
+						<li><button style="margin-top: 8px;" class="btn btn-primary" id="deleteButton" type="button">삭제하기</button></li>
                 	</ul>
 				</c:if>
 				<h1>${event.eventTitle }</h1><br>

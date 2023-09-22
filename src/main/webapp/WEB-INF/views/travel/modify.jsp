@@ -17,8 +17,9 @@
         <!-- 네비 -->
         <jsp:include page="/include/nav.jsp"></jsp:include>
         <main>
+        	<div style="width: 100%;height: 40px;"></div>
 	        <h1>여행 정보 게시판 수정</h1>
-	        <form action="/travel/modify.tp" method="POST" enctype="multipart/form-data">
+	        <form style="padding: 30px;line-height: 24px;" action="/travel/modify.tp" method="POST" enctype="multipart/form-data">
 	        <input type="hidden" name="travelNo" value="${travel.travelNo}"> 
 	            <ul>
 	                <li>
@@ -115,6 +116,7 @@
 	                <input type="submit" value="수정">
 	            </div>
 	        </form>
+	        <div style="width: 100%;height: 100px;"></div>
         </main>
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>

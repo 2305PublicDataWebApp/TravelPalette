@@ -27,7 +27,7 @@
                 <div class="ListTitle">
                     <span style="font-size: 30px; font-weight: bold">#전체</span>
           			<c:if test="${userId eq 'admin' }">
-	                    <button style="float: right" onClick="eventRegGo();">관리자글등록</button>
+	                    <button class="btn btn-primary" style="float: right" onClick="eventRegGo();">관리자글등록</button>
 	                </c:if>
                 </div>
                 <div class="totalCheck" style="padding-left: 10px;margin-top: 10px;width: 75%;float: left;">

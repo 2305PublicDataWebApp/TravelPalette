@@ -16,8 +16,9 @@
         <!-- 네비 -->
         <jsp:include page="/include/nav.jsp"></jsp:include>
         <main>
+        	<div style="width: 100%;height: 40px;"></div>
 	        <h1>여행 정보 게시판 작성</h1>
-	        <form action="/travel/insert.tp" method="POST" enctype="multipart/form-data">
+	        <form style="padding: 30px;line-height: 24px;" action="/travel/insert.tp" method="POST" enctype="multipart/form-data">
 	            <ul>
 	                <li>
 	                    <label for="tName"><b>여행지명</b></label>
@@ -97,6 +98,7 @@
 	                <input type="submit" value="등록">
 	            </div>
 	        </form>
+	        <div style="width: 100%;height: 100px;"></div>
         </main>
         <script>
         	<jsp:include page="/include/navjs.jsp"></jsp:include>
