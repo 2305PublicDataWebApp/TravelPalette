@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.semi.travelpalette.admin.domain.Response;
 import com.semi.travelpalette.common.domain.Like;
 import com.semi.travelpalette.inquiry.domain.Inquiry;
 import com.semi.travelpalette.inquiry.domain.PageInfo;
@@ -81,5 +82,7 @@ public interface InquiryService {
 	 * @return
 	 */
 	int updateInquiry(Inquiry inquiry);
+
+	Response selectInquiryResponse(Integer inquiryNo);
 
 }

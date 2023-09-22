@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.semi.travelpalette.admin.domain.Response;
 import com.semi.travelpalette.inquiry.domain.Inquiry;
 import com.semi.travelpalette.inquiry.domain.PageInfo;
 import com.semi.travelpalette.inquiry.service.InquiryService;
@@ -71,8 +72,9 @@ public class InquiryController {
 		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
 		Inquiry inquiryInfo = new Inquiry(inquiryNo, userId);
 		Inquiry iPost = inquiryService.selectOneInquiryPost(inquiryInfo);
+		Response rPost = inquiryService.selectInquiryResponse(inquiryNo);
 		if(uOne != null) {
-			mv.addObject("iPost", iPost);
+			mv.addObject("iPost", iPost).addObject("rPost", rPost);
 			mv.setViewName("/inquiry/detail");
 		}else {
 			mv.setViewName("/temp"); 
@@ -137,7 +139,7 @@ public class InquiryController {
 				System.out.println(inquiry.toString());
 				int result = inquiryService.insertInquiry(inquiry);
 				if(result > 0) {
-			        mv.setViewName("/inquiry/list");
+			        mv.setViewName("redirect:/inquiry/list.tp");
 				}
 			} else {
 				mv.addObject("msg", "로그인 정보가 존재하지 않습니다.");
@@ -166,7 +168,7 @@ public class InquiryController {
 		Inquiry iPost = inquiryService.selectOneInquiryPost(inquiryInfo);
 		if(uOne != null) {
 			mv.addObject("iPost", iPost);
-//			mv.setViewName("inquiry/modify.tp?inquiryNo="+inquiryNo);
+			mv.setViewName("inquiry/modify.tp?inquiryNo="+inquiryNo);
 		}else {
 			mv.setViewName("/temp"); 
 		}	

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.semi.travelpalette.admin.domain.Response;
 import com.semi.travelpalette.inquiry.domain.Inquiry;
 import com.semi.travelpalette.inquiry.domain.PageInfo;
 import com.semi.travelpalette.inquiry.service.InquiryService;
@@ -24,48 +25,46 @@ import com.semi.travelpalette.inquiry.store.InquiryStore;
 @Transactional
 @Service
 public class InquiryServiceImpl implements InquiryService {
-
-	@Autowired
-	private SqlSession session;
+	
 	@Autowired
 	private InquiryStore inquiryStore;
 	
 	
 	@Override
 	public List<Inquiry> selectInquiryList(PageInfo pInfo) {
-		List<Inquiry>  iList = inquiryStore.selectInquiryList(session, pInfo);
+		List<Inquiry>  iList = inquiryStore.selectInquiryList(pInfo);
 		return iList;
 	}
 	
 
 	@Override
 	public int selectInquiryListCount(String userId) {
-		int result = inquiryStore.selectInquiryListCount(session, userId);
+		int result = inquiryStore.selectInquiryListCount(userId);
 		return result;
 	}
 	
 
 	@Override
 	public Inquiry selectOneInquiryPost(Inquiry inquiryInfo) {
-		Inquiry inquiry = inquiryStore.selectOneInquiryPost(session, inquiryInfo);
+		Inquiry inquiry = inquiryStore.selectOneInquiryPost(inquiryInfo);
 		return inquiry;
 	}
 
 	@Override
 	public int deleteInquiry(Inquiry inquiryInfo) {
-		int result = inquiryStore.deleteInquiry(session, inquiryInfo);
+		int result = inquiryStore.deleteInquiry(inquiryInfo);
 		return result;
 	}
 	
 	@Override
 	public int insertInquiry(Inquiry inquiry) {
-		int result = inquiryStore.insertInquiry(session, inquiry);
+		int result = inquiryStore.insertInquiry(inquiry);
 		return result;
 	}
 
 	@Override
 	public int updateInquiry(Inquiry inquiry) {
-		int result = inquiryStore.updateInquiry(session, inquiry);
+		int result = inquiryStore.updateInquiry(inquiry);
 		return result;
 	}
 
@@ -148,6 +147,12 @@ public class InquiryServiceImpl implements InquiryService {
 		infoMap.put("fileLength", fileLength);
 
 		return infoMap;
+	}
+
+
+	@Override
+	public Response selectInquiryResponse(Integer inquiryNo) {
+		return this.inquiryStore.selectInquiryResponse(inquiryNo);
 	}
 
 

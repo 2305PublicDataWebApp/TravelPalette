@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.semi.travelpalette.admin.domain.Response;
 import com.semi.travelpalette.inquiry.domain.Inquiry;
 import com.semi.travelpalette.inquiry.domain.PageInfo;
 
@@ -16,7 +17,7 @@ public interface InquiryStore {
 	 * @param pInfo
 	 * @return
 	 */
-	List<Inquiry> selectInquiryList(SqlSession session, PageInfo pInfo);
+	List<Inquiry> selectInquiryList(PageInfo pInfo);
 
 	/**
 	 * 유저가 작성한 게시글 총 갯수 구해오기
@@ -24,7 +25,7 @@ public interface InquiryStore {
 	 * @param userId
 	 * @return
 	 */
-	int selectInquiryListCount(SqlSession session, String userId);
+	int selectInquiryListCount(String userId);
 
 	/**
 	 * 문의사항 디테일 
@@ -32,7 +33,7 @@ public interface InquiryStore {
 	 * @param inquiryInfo
 	 * @return
 	 */
-	Inquiry selectOneInquiryPost(SqlSession session, Inquiry inquiryInfo);
+	Inquiry selectOneInquiryPost(Inquiry inquiryInfo);
 
 	/**
 	 * 문의사항 삭제
@@ -40,7 +41,7 @@ public interface InquiryStore {
 	 * @param inquiryInfo
 	 * @return
 	 */
-	int deleteInquiry(SqlSession session, Inquiry inquiryInfo);
+	int deleteInquiry(Inquiry inquiryInfo);
 
 	/**
 	 * 문의사항 등록
@@ -48,7 +49,7 @@ public interface InquiryStore {
 	 * @param inquiry
 	 * @return
 	 */
-	int insertInquiry(SqlSession session, Inquiry inquiry);
+	int insertInquiry(Inquiry inquiry);
 
 	/**
 	 * 문의사항 수정
@@ -56,6 +57,8 @@ public interface InquiryStore {
 	 * @param inquiry
 	 * @return
 	 */
-	int updateInquiry(SqlSession session, Inquiry inquiry);
+	int updateInquiry(Inquiry inquiry);
+
+	Response selectInquiryResponse(Integer inquiryNo);
 
 }

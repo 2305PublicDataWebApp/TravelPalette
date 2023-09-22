@@ -1,6 +1,8 @@
 @charset "UTF-8";
 .container {
+	display: flex;
     width: 1200px;
+    flex-direction: column;
 }
 .content {
     resize: none;

@@ -18,6 +18,15 @@
  		<result property="inquiryResponse" 		column="INQUIRY_RESPONSE"/>
  		<result property="inquiryStatus" 		column="INQUIRY_STATUS"/>
  	</resultMap>
+ 	
+	<resultMap type="Response" id="responseResultMap" >
+	    <id 	property="responseNo" 			column="RESPONSE_NO" />
+	    <result property="inquiryNo" 			column="INQUIRY_NO" />
+	    <result property="responseContent" 		column="RESPONSE_CONTENT" />
+	    <result property="responseCreateDate" 	column="RESPONSE_CREATE_DATE" />
+	    <result property="responseUpdateDate" 	column="RESPONSE_UPDATE_DATE" />
+	</resultMap>
+	
  	<insert id="insertInquiry">
  		INSERT INTO INQUIRY_TBL VALUES(SEQ_INQUIRY_NO.NEXTVAL, #{inquiryTitle }, #{inquiryContent }, #{userId }, DEFAULT, null, null, #{inquiryFileName }
  		, #{inquiryFileRename }, #{inquiryFilePath }, #{inquiryFileLength }, 'N', 'Y')
@@ -41,5 +50,11 @@
  	<select id="selectOneInquiryPost" resultMap="inquiryResultMap">
  		SELECT * FROM INQUIRY_TBL WHERE USER_ID=#{userId } AND INQUIRY_NO=#{inquiryNo } AND INQUIRY_STATUS='Y'
  	</select>
+ 	<select id="selectInquiryResponse" resultMap="responseResultMap">
+ 		SELECT *
+		FROM RESPONSE_TBL
+		WHERE INQUIRY_NO = #{inquiryNo }
+ 	</select>
+ 	
 	
 </mapper>
