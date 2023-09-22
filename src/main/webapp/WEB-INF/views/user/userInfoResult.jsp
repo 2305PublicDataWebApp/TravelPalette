@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>회원 정보 찾기 결과</title>
         <link rel="stylesheet" href="../resources/css/user/userInfoResult.css">
+        <link rel="stylesheet" href="../resources/css/user/common.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     </head>
     <style>
@@ -22,13 +23,15 @@
                 <div id="container">
                     <!-- <div class="infoBox">? -->
                     <c:if test="${userId ne null }">
-                        <p class="resultTitle msg">아이디 찾기 결과</p>
+                        <p class="pageTitle msg">아이디 찾기 결과</p>
 	                    <div class="w-line"></div>
                         <div class="infoBox">
-                            <p clss="successMsg msg">아이디 찾기에 성공했습니다.</p><br/>
-                            <p class="infoMsg msg">아이디 : <span class="infoData">${userId }</span></p>
+                            <p class="successMsg commonFont">아이디 찾기에 성공했습니다.</p><br/>
+                            <p class="infoMsg commonFont">아이디 : <span class="infoData commonFont">${userId }</span></p>
                         </div>
-                        <a href="/user/login.tp"><button class="btn btn-info">로그인 페이지로 이동</button></a>
+                        <div style="margin-bottom : 60px; color: white;">
+	                        <a href="/user/login.tp"><button class="btn btn-info" >로그인 페이지로 이동</button></a>
+                        </div>
                     </c:if>
                     <c:if test="${mailSend ne null }">
                         <p>비밀번호 찾기</p>
@@ -42,6 +45,7 @@
                         </div>
                         <button class="btn btn-info">비밀번호 찾기</button>
                     </c:if>
+                    </div>
                     </div>
 
         </div>

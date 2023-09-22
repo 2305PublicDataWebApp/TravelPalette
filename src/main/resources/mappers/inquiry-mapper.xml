@@ -36,7 +36,7 @@
  		, INQUIRY_FILE_PATH=#{inquiryFilePath }, INQUIRY_FILE_LENGTH=#{inquiryFileLength } WHERE INQUIRY_NO=#{inquiryNo }
  	</update>
  	<delete id="deleteInquiry">
- 		UPDATE FROM INQUIRY_TBL WHERE USER_ID=#{userId } AND INQUIRY_NO=#{inquiryNo }
+ 		UPDATE INQUIRY_TBL SET INQUIRY_STATUS = 'N' WHERE USER_ID=#{userId } AND INQUIRY_NO=#{inquiryNo }
  	</delete>
  	
  	<select id="selectInquiryListCount" resultType="_int">

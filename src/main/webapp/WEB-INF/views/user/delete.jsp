@@ -44,6 +44,7 @@
                 let userPw = document.querySelector("#userPw").value;
                 let userPwCheck = document.querySelector("#userPwCheck").value;
                 
+                
                 if(userPw === '' && userPwCheck === '') {
                     window.alert('비밀번호를 입력해주세요.');
                     return false;
@@ -60,6 +61,12 @@
         	}
         
             function deleteBtn() {
+            	const userId = document.querySelector("#userId").value;
+                let userPw = document.querySelector("#userPw").value;
+            	
+            	console.log(userPw);
+            	console.log(userPw);
+            	console.log(userId);
 
                 // AJAX 요청 보내기
                 $.ajax({
@@ -67,12 +74,15 @@
                     url: "/user/delete.tp", // 로그인 처리를 하는 URL로 변경
                     data: {
                     	userId: userId,
-                        userPw: userPw
+                    	userPw: userPw
                     },
+                    dataType: 'json',
+//                     contentType: false,
+//                     processData: false,
                     success: function (data) {
                         if (data.success) {
                             // 로그인 성공 시 리다이렉트 또는 다음 동작 수행
-        					if (confirm("정말 삭제하시겠습니까?")) {
+        					if (confirm("정말 탈퇴하시겠습니까?")) {
 			                // POST 요청을 보내는 부분
 				                $.ajax({
 				                    method: "POST",
@@ -80,6 +90,9 @@
 				                    data: {
 				                    	userId: userId
 				                    },
+				                    dataType: 'json',
+// 				                    contentType: false,
+// 				                    processData: false,
 				                    success: function (postData) {
 				                        // POST 요청 성공 시 수행할 작업
 				                        alert("회원 탈퇴가 완료되었습니다.");

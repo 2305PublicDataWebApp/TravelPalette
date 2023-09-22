@@ -20,7 +20,7 @@
             <p style="padding: 20px;margin-top: 20px;font-size: 30px;font-family: 'KCC-Ganpan';">1:1 문의 내역</p>
             <div class="w-line" style="margin-bottom: 30px;"></div>
             <div>
-                <span style="font-family: 'SUITE-Regular';font-weight: 600;padding: 20px 10px;">${sessionScope.userNickname }님의 문의 내역입니다</span>
+                <span style="font-family: 'SUITE-Regular';font-weight: 600;padding: 20px 10px;">${userNickname }님의 문의 내역입니다</span>
                 <table class="table table-bordered text-center" style="margin-top: 30px;">
                     <thead class="table-light">
                         <tr>

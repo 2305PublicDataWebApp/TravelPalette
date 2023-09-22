@@ -151,8 +151,8 @@
     <select id="selectLike" resultMap="LikeResultMap">
     	SELECT * FROM LIKE_TBL WHERE LIKE_NO=#{likeNo }
     </select>
-    <select id="selectKakaoUserNo" resultMap="userInfoResultMap">
-    	SELECT USER_NO FROM USER_INFO_TBL WHERE USER_NICKNAME=#{userNickname }
+    <select id="selectKakaoUserNo" resultMap="userResultMap">
+    	SELECT USER_NO FROM USER_TBL WHERE USER_ID=#{userId }
     </select>
     <select id="selectKakaoUserInfo" resultMap="userResultMap, userInfoResultMap" >
     	SELECT * FROM USER_TBL JOIN USER_INFO_TBL USING(USER_NO) WHERE USER_NO=#{userNo }
