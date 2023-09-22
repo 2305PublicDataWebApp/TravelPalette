@@ -332,10 +332,10 @@
             items.style.left = left + 'px';
             }
 
-            // 5초마다 다음버튼 누르게 하기
-//             setInterval(() => {
-//                 next.click();
-//             }, 5000);
+//             5초마다 다음버튼 누르게 하기
+            setInterval(() => {
+                next.click();
+            }, 5000);
             
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

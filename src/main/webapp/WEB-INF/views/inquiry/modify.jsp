@@ -16,27 +16,34 @@
     	<!-- 헤더 -->
         <jsp:include page="/include/header.jsp"></jsp:include>
         <!-- 네비 -->
-        <jsp:include page="/include/nav.jsp"></jsp:include>          
+        <jsp:include page="/include/nav.jsp"></jsp:include>     
+        <div style="width: 100%;height: 50px;"></div>     
         <div class="container">
-            <p>1:1 문의 수정</p>
+            <p style="font-family: 'TmoneyRoundWindExtraBold';font-size: 30px;margin-bottom: 33px;">1:1 문의 수정</p>
             <hr>
             <div id="container">
             <form action="/inquiry/insert.tp" name="insertForm" method="post" enctype="multipart/form-data">
-                <div class="d-flex justify-content-around">
+                <div class="d-flex justify-content-around" style="padding-top: 5px;">
                     <label for="title">제목</label>
                     <input type="text" id="title" class="input" name="inquiryTitle" value="${iPost.inquiryTitle }"placeholder="제목을 입력해주세요">
                     <label for="writeDate">작성일</label>
                     <span><fmt:formatDate pattern="yyyy-MM-dd" value="${iPost.inquiryCreateDate}" ></fmt:formatDate></span>
                 </div>
+                <div style="width: 100%;height: 20px;"></div>
                 <div class=" d-flex justify-content-center">
                     <textarea class="content" id="textarea" name="inquiryContent"placeholder="내용을 입력해주세요">${iPost.inquiryContent }</textarea>
                 </div>
+                <div style="width: 100%;height: 20px;"></div>
                 <div class="fileBox d-flex justify-content-center">
                     <input class="upload-name" value="${iPost.inquiryFileName }" placeholder="첨부파일">
                     <label for="fileBtn" class="d-flex justify-content-center">파일첨부</label> 
                     <input type="file" name="uploadFile" id="fileBtn">
                 </div>
-                <button type="button" onclick="inquiryInert()">문의글 작성</button>
+                <div style="width: 100%;height: 50px;"></div>
+                <div style="width: 100%;height: 50px;text-align: center;">
+	                <button type="button" class="btn btn-primary" onclick="inquiryInert()">문의글 수정</button>
+                </div>
+                <div style="width: 100%;height: 50px;"></div>
                 </form>
             </div>
         </div>

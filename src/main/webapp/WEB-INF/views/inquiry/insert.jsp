@@ -28,15 +28,21 @@
 <!--                     <label for="writeDate">작성일</label> -->
 <!--                     <span>2023-09-13</span> -->
                 </div>
+                <div style="width: 100%;height: 20px;"></div>
                 <div class=" d-flex justify-content-center">
                     <textarea class="content" id="textarea" name="inquiryContent" placeholder="내용을 입력해주세요"></textarea>
                 </div>
-                <div class="fileBox d-flex justify-content-center">
+                <div style="width: 100%;height: 20px;"></div>
+                <div class="fileBox d-flex justify-content-center" style="padding-top: 5px;">
                     <input class="upload-name" value="첨부파일" placeholder="첨부파일">
                     <label for="fileBtn" class="d-flex justify-content-center">파일첨부</label> 
                     <input type="file" name="uploadFile" id="fileBtn">
                 </div>
-                <button type="button" onclick="inquiryInert()">문의글 작성</button>
+                <div style="width: 100%;height: 50px;"></div>
+                <div style="width: 100%;height: 50px;text-align: center;">
+	                <button type="button" class="btn btn-primary" onclick="inquiryInert()">문의글 수정</button>
+                </div>
+                <div style="width: 100%;height: 50px;"></div>
                 </form>
             </div>
         </div>
