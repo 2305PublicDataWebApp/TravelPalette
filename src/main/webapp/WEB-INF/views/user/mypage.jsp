@@ -33,9 +33,9 @@
                 <div class="h-line"></div>
                 <div id="right">
                 	<div id="welcome">
-	                    <span id="leftNameInfo">${sessionScope.userNickname }님 환영합니다</span>
+	                    <span id="leftNameInfo">${userNickname }님 환영합니다</span>
                 	</div>
-                    <p id="recentMsg">${sessionScope.userNickname }님의 최근 활동 내역</p>
+                    <p id="recentMsg">${userNickname }님의 최근 활동 내역</p>
                     <table id="table" class="table table-bordered text-center">
                         <thead class="table-light">
                             <tr>

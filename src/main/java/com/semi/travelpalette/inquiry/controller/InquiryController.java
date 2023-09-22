@@ -46,7 +46,7 @@ public class InquiryController {
 			) {
 		String userId = (String) session.getAttribute("userId");
 		User uOne = uService.checkUserId((String)session.getAttribute("userId"));
-		String userNickname = (String) session.getAttribute("userNickname");
+		String userNickname = uOne.getUserNickname();
 		int totalCount = inquiryService.selectInquiryListCount(userId);
 		PageInfo pInfo = inquiryService.getPageInfo(currentPage, userId, totalCount);
 		
@@ -54,10 +54,13 @@ public class InquiryController {
 		List<Inquiry> iList = inquiryService.selectInquiryList(pInfo);
 		
 		if(uOne != null) {
-			mv.addObject("iList", iList).addObject("pInfo", pInfo);
+			mv.addObject("iList", iList).addObject("pInfo", pInfo).addObject("userNickname", userNickname);
 			mv.setViewName("/inquiry/list");
 		}else {
-			mv.setViewName("/temp"); 
+			mv.addObject("msg", "로그인 정보가 존재하지 않습니다.");
+			mv.addObject("error", "로그인이 필요합니다.");
+			mv.addObject("url", "/index.jsp");
+			mv.setViewName("/common/errorPage");
 		}		
 		return mv;
 	}
@@ -77,7 +80,7 @@ public class InquiryController {
 			mv.addObject("iPost", iPost).addObject("rPost", rPost);
 			mv.setViewName("/inquiry/detail");
 		}else {
-			mv.setViewName("/temp"); 
+			mv.setViewName("redirect:/inquiry/list.tp"); 
 		}	
 		return mv;
 	}
@@ -94,7 +97,7 @@ public class InquiryController {
 		if(uOne != null && result > 0) {
 			return "redirect:/inquiry/list.tp";
 		}else {
-			return "/temp"; 
+			return "redirect:/inquiry/list.tp"; 
 		}	
 	}
 	
@@ -108,7 +111,10 @@ public class InquiryController {
 		if(uOne != null) {
 			mv.setViewName("/inquiry/insert");
 		}else {
-			mv.setViewName("/temp");
+			mv.addObject("msg", "로그인 정보가 존재하지 않습니다.");
+			mv.addObject("error", "로그인이 필요합니다.");
+			mv.addObject("url", "/index.jsp");
+			mv.setViewName("/common/errorPage");
 		}	
 		return mv;
 	}
@@ -150,7 +156,7 @@ public class InquiryController {
 		} catch (Exception e) {
 			mv.addObject("msg", "게시글 등록이 완료되지 않았습니다.");
 			mv.addObject("error", e.getMessage());
-			mv.addObject("url", "/inquiry/insert.tp");
+			mv.addObject("url", "/inquiry/list");
 			mv.setViewName("common/errorPage");
 		}
 		return mv;
@@ -204,21 +210,22 @@ public class InquiryController {
 				// 완료했으면 비즈니스 로직 태우기
 				System.out.println(inquiry.toString());
 				int result = inquiryService.updateInquiry(inquiry);
+				System.out.println("결과는?" + result);
 				if(result > 0) {
-			        mv.setViewName("/inquiry/list");
+			        mv.setViewName("redirect:/inquiry/list.tp");
 				}
 			} else {
 				mv.addObject("msg", "로그인 정보가 존재하지 않습니다.");
 				mv.addObject("error", "로그인이 필요합니다.");
-				mv.addObject("url", "/index.jsp");
+				mv.addObject("url", "/user/login");
 				mv.setViewName("/common/errorPage");
 			}
 			}
 		 
 		}catch (Exception e) {
-			mv.addObject("msg", "게시글 등록이 완료되지 않았습니다.");
+			mv.addObject("msg", "게시글 수정이 완료되지 않았습니다.");
 			mv.addObject("error", e.getMessage());
-			mv.addObject("url", "/inquiry/insert.tp");
+			mv.addObject("url", "/inquiry/list");
 			mv.setViewName("common/errorPage");
 		}
 		return mv;

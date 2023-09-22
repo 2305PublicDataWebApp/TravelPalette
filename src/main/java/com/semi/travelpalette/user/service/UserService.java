@@ -118,7 +118,7 @@ public interface UserService {
 	 * @param userEmail
 	 * @return
 	 */
-	User selectUserNo(String userEmail);
+	User selectUserNo(String id);
 
 	Like selectLike(String likeNo);
 

@@ -27,7 +27,6 @@ input::placeholder {
     width: 500px;
     flex-direction: column;
     align-items: center;
-    height: 450px
 }      
 label {
     width: 120px;
@@ -38,7 +37,10 @@ label {
     justify-content: center;
 	flex-direction: column;
     align-items: center;    
+    padding: 50px;
+    font-size: 20px;
 }   
 .msg {
 	padding: 20px;
-}                
+}      
+        

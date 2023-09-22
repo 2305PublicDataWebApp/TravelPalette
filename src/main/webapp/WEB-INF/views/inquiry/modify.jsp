@@ -22,7 +22,8 @@
             <p style="font-family: 'TmoneyRoundWindExtraBold';font-size: 30px;margin-bottom: 33px;">1:1 문의 수정</p>
             <hr>
             <div id="container">
-            <form action="/inquiry/insert.tp" name="insertForm" method="post" enctype="multipart/form-data">
+            <form action="/inquiry/modify.tp" name="insertForm" method="post" enctype="multipart/form-data">
+            	<input type="hidden" name="inquiryNo" value="${iPost.inquiryNo }">
                 <div class="d-flex justify-content-around" style="padding-top: 5px;">
                     <label for="title">제목</label>
                     <input type="text" id="title" class="input" name="inquiryTitle" value="${iPost.inquiryTitle }"placeholder="제목을 입력해주세요">

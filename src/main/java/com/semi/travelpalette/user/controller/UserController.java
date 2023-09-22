@@ -129,13 +129,14 @@ public class UserController {
 		//토큰으로 사용자 정보 담은 list 가져오기
 		Map<String, Object> list = kService.getUserInfo(access_token);
 		
+		String id = (String)list.get("userEmail");
 		String email = (String)list.get("userEmail");
 		String userNickname = (String)list.get("userNickname");
 		
 		System.out.println(email);
 		System.out.println(userNickname);
 		
-		User kakaoUserNo = userService.selectKakaoUserNo(userNickname);
+		User kakaoUserNo = userService.selectKakaoUserNo(id);
 		
 		User kakaoUserInfo = userService.selectKakaoUserInfo(kakaoUserNo.getUserNo());
 		
@@ -542,7 +543,7 @@ public class UserController {
 		int result = userService.insertUser(user);
 		if(result > 0) {
 			mv.addObject("msg", "회원가입이 성공적으로 완료되었습니다.").addObject("url", "redirect:/index.jsp");
-			mv.setViewName("/user/login.tp");
+			mv.setViewName("/user/login");
 		}else {
 			mv.addObject("msg", "회원가입이 완료되지 않았습니다.").addObject("url", "redirect:/index.jsp");
 			mv.setViewName("/common/errorPage");

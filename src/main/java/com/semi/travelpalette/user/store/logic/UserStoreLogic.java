@@ -22,12 +22,14 @@ public class UserStoreLogic implements UserStore {
 
     @Override
     public int kakaoUserInsert(User kakaoUser) {
+    	System.out.println("왜?" + kakaoUser.toString());
         int user = session.insert("UserMapper.kakaoUserInsert", kakaoUser);
         return user;
     }
 
     @Override
     public int kakaoUserInfoInsert(User kakaoUser) {
+    	System.out.println("왜?????" + kakaoUser.toString());
         int user = session.insert("UserMapper.kakaoUserInfoInsert", kakaoUser);
         return user;
     }

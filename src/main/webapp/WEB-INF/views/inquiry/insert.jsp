@@ -40,7 +40,7 @@
                 </div>
                 <div style="width: 100%;height: 50px;"></div>
                 <div style="width: 100%;height: 50px;text-align: center;">
-	                <button type="button" class="btn btn-primary" onclick="inquiryInert()">문의글 수정</button>
+	                <button type="button" class="btn btn-primary" onclick="inquiryInert()">문의글 작성</button>
                 </div>
                 <div style="width: 100%;height: 50px;"></div>
                 </form>
