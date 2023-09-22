@@ -9,6 +9,7 @@
 	        <title>1:1 문의 작성</title>
 			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 			<link rel="stylesheet" href="../resources/css/inquiry/insert.css">
+			<link rel="stylesheet" href="../resources/css/user/common.css">
 			<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		</head>
     <body>
@@ -17,15 +18,15 @@
         <!-- 네비 -->
         <jsp:include page="/include/nav.jsp"></jsp:include>          
         <div class="container">
-            <p>1:1 문의 작성</p>
+            <p class="pageTitle">1:1 문의 작성</p>
             <hr>
             <div id="container">
             <form action="/inquiry/insert.tp" name="insertForm" method="post" enctype="multipart/form-data">
                 <div class="d-flex justify-content-around">
                     <label for="title">제목</label>
                     <input type="text" id="title" class="input" name="inquiryTitle" placeholder="제목을 입력해주세요">
-                    <label for="writeDate">작성일</label>
-                    <span>2023-09-13</span>
+<!--                     <label for="writeDate">작성일</label> -->
+<!--                     <span>2023-09-13</span> -->
                 </div>
                 <div class=" d-flex justify-content-center">
                     <textarea class="content" id="textarea" name="inquiryContent" placeholder="내용을 입력해주세요"></textarea>
