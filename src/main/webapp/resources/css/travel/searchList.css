@@ -109,3 +109,6 @@ main {
     float: left;
     padding: 10px;
 }
+.page-item{
+	margin:0;
+}
