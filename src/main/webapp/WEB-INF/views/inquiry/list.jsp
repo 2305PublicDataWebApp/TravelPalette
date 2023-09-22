@@ -30,7 +30,7 @@
                             <th>삭제</th>
                         </tr>
                     </thead>
-                    <tbody class="table-group-divider" style="font-family: 'HakgyoansimWoojuR';">
+                    <tbody class="table-group-divider" style="font-family: 'SUITE-Regular';">
 <%--                         <fmt:formatDate pattern="yyyy-MM-dd" value="${iList.inquiryCreateDate }"/> --%>
 						<c:forEach items="${iList}" var="item">
                         <tr id="sample">
@@ -59,7 +59,7 @@
                     <c:if test="${pInfo.startNavi != 1 }">
                     	<c:url var="prevUrl" value="/inquiry/list.tp">
 							<c:param name="page" value="${pInfo.startNavi - 1 }"></c:param>	                        
-	                        <li class="page-item"><a class="page-link" href="${prevUrl }"><</a></li>
+	                        <li class="page-item"><a class="page-link" style="width: 32px;height: 39px;" href="${prevUrl }"><</a></li>
                     	</c:url>
                     </c:if>
 					<!-- 페이지 네비 -->
@@ -67,14 +67,14 @@
 						<c:url var="pageUrl" value="/inquiry/list.tp?userId=${userId }">
 							<c:param name="page" value="${p }"></c:param>
 						</c:url>
-						<a class="page-link" href="${pageUrl }">${p }</a>
+						<a class="page-link" style="width: 32px;height: 39px;" href="${pageUrl }">${p }</a>
 					</c:forEach>
 					<!-- 다음 -->
 					<c:if test="${pInfo.startNavi != 1 }">
 						<c:url var="nextUrl" value="/inquiry/list.tp">
 							<c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
 						</c:url>
-						<a href="${nextUrl }">></a>
+						<a style="width: 32px;height: 39px;" href="${nextUrl }">></a>
 					</c:if>
                 </nav>
                 <div class="d-flex justify-content-end">

@@ -80,7 +80,7 @@
                 <h4 style="font-family: 'TmoneyRoundWindExtraBold';font-size: 28px;padding: 20px;margin-top: 80px;">해당 게시물이 마음에 드셨나요?</h4>
                 </div>
                 <div style="width: 100%;height: 130px;border-bottom: 1px solid #ccc;">
-                <h4 style="float: left;;font-family: 'SUITE-Regular';font-size: 25px;padding: 20px;margin-top: 30px;">추천 버튼으로 마음을 표현해보세요 ^O^!</h4>
+                <h4 style="float: left;;font-family: 'SUITE-Regular';font-size: 25px;padding: 20px;margin-top: 30px;">추천 버튼으로 마음을 표현해보세요 🥰</h4>
                 <div style="float: right;padding: 10px;margin-top: 27px;">
                     <span style="float: right;font-size: 23px;font-weight: 600;margin-top: 12px;margin-left: 5px;">${community.likeNo}</span>
                     <c:if test="${userId eq null}">

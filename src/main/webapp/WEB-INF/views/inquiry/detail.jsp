@@ -15,12 +15,12 @@
     	<!-- 헤더 -->
         <jsp:include page="/include/header.jsp"></jsp:include>
         <!-- 네비 -->
-        <jsp:include page="/include/nav.jsp"></jsp:include>          
+        <jsp:include page="/include/nav.jsp"></jsp:include>
+        <div style="width: 100%;height: 50px;"></div>          
         <div class="d-flex justify-content-center">
-
             <div id="inquiries" >
-                <h1>문의글 상세조회</h1><br>
-                <h3>나의 문의</h3>
+                <h1 style="font-family: 'TmoneyRoundWindExtraBold';font-size: 32px;margin-bottom: 25px;">문의글 상세조회</h1><br>
+                <h3 style="font-size: 24px;font-family: 'SUITE-Regular';font-weight: 600;padding-left: 21px;padding-bottom: 20px;">나의 문의</h3>
                 <div id="question" class="inquiries">
                     <table class="table table-borderless">
                         <thead id="tHead" style="border-bottom: thin solid black;">
@@ -67,26 +67,26 @@
                     </table>
                 </div>
                 <c:if test='${iPost.inquiryResponse.toString() eq "Y" }'>
-	                <h3>답변</h3>
+	                <h3 style="font-size: 24px;font-family: 'SUITE-Regular';font-weight: 600;padding-left: 21px;">답변</h3>
 	                <div class="respones inquiries">
-	                    <table id="responesTable" class="table table-borderless table-warning" style="--bs-table-bg: #f4f4f2;">
+	                    <table id="responesTable" class="table table-borderless table-warning" style="--bs-table-bg: #F4F4F2;">
 	                        <thead style="border-top: none; border-bottom: thin solid #AD8E70;">
 	                            <tr>
 	                                <td>
-	                                    <span>답변일 : </span><span>${responesDate}</span>
+	                                    <span>답변일 : </span><span><fmt:formatDate pattern="yyyy-MM-dd" value="${rPost.responseCreateDate}" /></span>
 	                                </td>
 	                            </tr>
 	                        </thead>
 	                        <tbody>
 	                            <tr>
 	                                <td colspan="2" style="padding: 20px;">
-	                                    <p>이건답변내용이에용아기다리고기다리던추석이왔으면좋겠다람쥐가노래를한다람쥐가 간장공장콩장장어쩌구저쩌구얼씨구야어절씨구</p>
+	                                    <textarea>${rPost.responseContent }</textarea>
 	                                </td>
 	                            </tr>
 	                        </tbody>
 	                    </table>
 	                </div>
-	                <p>답변이 작성된 후에는 문의글을 수정할 수 없습니다.</p>
+	                <p style="font-family: 'SUITE-Regular';">* 답변이 작성된 후에는 문의글을 수정할 수 없습니다.</p>
                 </c:if>
                 <div id="btnBox">
                 	<c:if test='${iPost.inquiryResponse.toString() eq "N" }'>
@@ -97,6 +97,7 @@
                 </div>
 	        </div>
 	    </div>
+	    <div style="width: 100%;height: 50px;"></div> 
         <!-- 푸터 -->
         <jsp:include page="/include/footer.jsp"></jsp:include>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
