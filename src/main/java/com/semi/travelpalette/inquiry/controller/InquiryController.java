@@ -168,7 +168,7 @@ public class InquiryController {
 		Inquiry iPost = inquiryService.selectOneInquiryPost(inquiryInfo);
 		if(uOne != null) {
 			mv.addObject("iPost", iPost);
-			mv.setViewName("inquiry/modify.tp?inquiryNo="+inquiryNo);
+//			mv.setViewName("inquiry/modify.tp?inquiryNo="+inquiryNo);
 		}else {
 			mv.setViewName("/temp"); 
 		}	
