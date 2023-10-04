@@ -50,12 +50,6 @@
 기능명 | 상세
 -------|-----
 하루기록 작성 | 하루기록은 해당 회원만 열람할 수 있으며 작성 시 10P를 적립받는다. 제목, 내용의 수정과 글 삭제가 가능하다.
-### 커뮤니티
-기능명 | 상세
--------|-----
-소셜링 | 소셜링은 해당 회원만 접근 할 수 있으며, 주최자는 원하는 날짜와 인원을 지정하여 소셜링을 오픈할 수 있고 회원은 소셜링을 자유롭게 참여할 수 있다.
-SNS | 프로필 사진과 한줄소개를 수정할 수 있으며, 본인이 원하는 사진과 글을 자유롭게 등록, 삭제할 수 있다. 회원은 글에 댓글을 남길 수 있다. sns 팔로우 기능을 통해 원하는 회원의 sns를 팔로우 할 수 있고 팔로잉, 팔로워 수가 sns 페이지에 공개되며, 버튼 선택 시 팔로잉 목록을 볼 수 있다.
-쪽지 | 검색 기능을 이용하여 회원 검색을 하고 쪽지를 발송할 회원을 선택할 수 있다. 발송한 쪽지는 읽음 여부를 확인할 수 있다.
 ### 게시판
 기능명 | 상세
 -------|-----
@@ -120,20 +114,20 @@ SNS | 프로필 사진과 한줄소개를 수정할 수 있으며, 본인이 원
 <img width="1440" alt="1:1 문의 작성" src="https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674356/bee542b3-39e5-4751-bf3c-e683c630e096">
 
 
-### 6. 커뮤니티
-6-1 여행 정보 게시판
+### 7. 커뮤니티
+7-1 여행 정보 게시판
 ![FireShot Capture 002 - Document - 127 0 0 1](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674342/5980fe70-d097-42f5-ad1a-5dbe8efa7129)
 
-6-2 질의 문답 게시판
+7-2 질의 문답 게시판
 ![FireShot Capture 004 - Document - 127 0 0 1](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674342/2fa8615a-dc4e-4dc3-bdb9-52a501e07187)
 
-6-3 동행 구인 게시판
+7-3 동행 구인 게시판
 ![FireShot Capture 005 - Document - 127 0 0 1](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674342/d897252f-2684-4a3f-a3a6-9fb33b46052b)
 
-6-4 게시글 상세보기
+7-4 게시글 상세보기
 ![FireShot Capture 006 - Document - 127 0 0 1](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674342/a32f83b3-a9f5-4d57-a445-3103e63c743c)
 
-6-5 게시글 작성, 수정폼과 거의 동일
+7-5 게시글 작성, 수정폼과 거의 동일
 ![FireShot Capture 007 - Document - 127 0 0 1](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674342/761f3ad1-d755-4acd-8a3f-79a2be8413a6)
 
 
