@@ -62,18 +62,13 @@
 기능명 | 상세
 -------|-----
 회원관리 | 회원 정보를 조회할 수 있으며, 회원을 탈퇴시킬 수 있다. 아이디와 이름으로 회원 검색이 가능하다.
-커뮤니티 관리 | 커뮤니티의 모든 글을 삭제할 수 있으며, 댓글도 삭제 가능하다. // 이거 제가 쓴거에요 지우지 마세여..
-포인트 | 각 회원의 포인트 내역을 볼 수 있으며 포인트를 조정할 수 있다.
+커뮤니티 관리 | 커뮤니티의 모든 글을 삭제할 수 있으며, 댓글도 삭제 가능하다.
+
 공지사항 | 관리자만 공지사항을 작성할 수 있다.
 문의게시판 | 답변을 달지 않은 문의사항리스트를 통해 오래된 문의사항부터 차례로 답변해줄 수 있다. 관리자가 댓글로 답변을 달아주면 답변완료처리되며 제목에 답변완료라는 표시가 생긴다.
 예약관리 | 예약자들의 예약 정보 내역을 조회 가능하며, 문의게시판으로부터 예약취소요청이 들어오는 경우 취소 버튼이 활성화되어 관리자가 취소할 수 있다. 이용일이 지난 건은 음영처리된다.
 
-### 시설예약
-기능명 | 상세
--------|-----
-시설예약 | 지점, 시설, 날짜, 시간, 인원수 예약시 요금이 출력되며, 캘린더 상에 타인의 기예약건이 표시되어 비어있는 시간을 한눈에 파악할 수 있다. 
-예약결제 | 입력한 정보가 출력되고 회원이 사용할 수 있는 포인트를 입력하여 최종 결제할 수 있다. 카카오간편결제가 가능하다.
-예약내역 | 날짜가 지나지 않은 내역은 예약일이 다가오는 순으로 정렬, 지난 목록은 버튼 클릭시 현재 날짜와 가까운 순서로 정렬된다. 예약취소가 가능하며 이용 1일 전 예약 알림 메일이 자동 전송된다.
+
 
 
 
@@ -81,7 +76,7 @@
 ## 🚌 여행팔레트 살펴보기
 
 ### 1. 메인화면
-![127 0 0 1_8999_](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/fa480a0d-9d60-4077-988c-d00bdf748b5c)
+![FireShot Capture 003 - Document - 127 0 0 1](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674342/90c1c96b-1cab-4b2b-a769-98778f2d93d5)
 
 ### 2. 회원가입
 <img width="1440" alt="회원가입" src="https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674356/a06426ff-8be8-4bc7-bf8d-f699eee8bc92">
@@ -101,14 +96,14 @@
 
 ### 5. 마이페이지
 
-4-1 마이페이지(최근 활동 내역)
+5-1 마이페이지(최근 활동 내역)
 <img width="1440" alt="마이페이지" src="https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674356/c8c7db69-4b0a-4692-81f0-c90fa740617e">
 
-4-2 회원 정보 수정
+5-2 회원 정보 수정
 <img width="1440" alt="비밀번호 확인" src="https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674356/49138e7a-c66a-479b-973a-2426a0bc0abe">
 <img width="1440" alt="회원 정보 수정" src="https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674356/e688ffb1-4f92-47cd-8649-89a8a73c77d4">
 
-4-3 회원 탈퇴
+5-3 회원 탈퇴
 <img width="1440" alt="회원 탈퇴" src="https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674356/7700b7ad-3b51-4421-b918-3f60ccc4c7c3">
 
 ### 6. 1:1 문의
@@ -134,22 +129,6 @@
 ![FireShot Capture 007 - Document - 127 0 0 1](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674342/761f3ad1-d755-4acd-8a3f-79a2be8413a6)
 
 
-### 7. 마켓
-![sonof iptime org_9511_shop_main](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/253e958c-aa86-467b-aa8b-004aeaef8683)
-
-7-1 제품리스트
-![sonof iptime org_9511_shop_productList](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/abe38f36-50d5-433f-b60c-c5dd7e26bd7f)
-
-7-2 장바구니
-![sonof iptime org_9511_shop_cartView](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/0849d74d-b216-4ad7-8034-405313dda8b1)
-
-7-3 주문서
-![127 0 0 1_8999_cart_orderView](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/fc31676a-b90d-4520-a2cc-4e192122c1c3)
-
-7-4 결제
-![127 0 0 1_8999_cart_orderView (2)](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/99e712e3-ee0b-4801-b09a-6c17f474e98e)
-
-
 ### 8. 커뮤니티
 8-1 소셜링
 ![sonof iptime org_9511_meeting](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/a5f73abd-85ac-4cef-b136-705c466db560)
@@ -160,25 +139,3 @@
 ![sonof iptime org_9511_sns_userNo=3](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/44e84ecc-302c-49c6-96dd-fe8784b39de5)
 ![sonof iptime org_9511_sns_detail_snsPhotoNo=143](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/18b8b824-a4ed-402f-8992-ffa91f8f7127)
 ![sonof iptime org_9511_sns_uploadPage](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/7dd2c363-f040-4cb4-ae5c-0220853b5213)
-
-### 9. 게시판
-9-1 공지사항
-![sonof iptime org_9511_notice_list (1)](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/f48f65ae-fad2-4789-ac5c-5aec0473d47b)
-![sonof iptime org_9511_notice_detail_noticeNo=305](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/4433528b-a99f-4f5e-9f45-a23027bfaac6)
-<img width="1440" alt="스크린샷 2023-05-15 오후 3 27 05" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/9b516676-5734-4e9f-b403-3b4293e8ed8f">
-
-9-2 문의사항
-![sonof iptime org_9511_inquiry_list](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/ddc689f0-7a2e-4b7a-b8b9-faf52b4b3377)
-![sonof iptime org_9511_inquiry_detail_inquiriesNo=185](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/6d3fdfde-0941-4706-88fc-b94dba254cc2)
-![sonof iptime org_9511_inquiry_checkSecretNo_inquiriesNo=191](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/93033b91-cc45-4c67-916a-3aff13f7e25b)
-
-
-### 10. 하루기록
-![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/f5fa34b6-25e6-45a4-a6f1-384577254c5a)
-![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/f6429092-a02d-4fda-9a4c-faaf75c48265)
-![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/593a49da-b768-4fbf-a192-b712d0d9aa77)
-
-### 11. 포인트
-![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/fd2fffff-c76e-44dd-b1ea-1eb2d8345a70)
-![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/422ed7f9-a215-4d03-b076-e52f0823ae78)
-![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/42863835-1c95-4f0e-982a-4b9bf0f8b21f)
