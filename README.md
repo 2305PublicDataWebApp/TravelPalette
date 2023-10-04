@@ -123,6 +123,7 @@
 8-1 1:1 문의 목록
 
 8-2 1:1 문의 답변 상세
+![responseDetail](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674363/b7b863a1-da93-49c4-8cad-fe4c519ce764)
 
 8-3 1:1 문의 답변 작성, 수정폼과 거의 동일 
 ![responseWrite](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674363/9db23e36-2f9a-4a56-8969-8dda4e04f15d)
