@@ -44,8 +44,10 @@
 ### 이벤트 게시판
 기능명 | 상세
 -------|-----
+이벤트 게시판 | 사용자는 이벤트 게시판 목록을 조회 가능하다.
 진행중이벤트 | 사용자는 진행중 이벤트 조회 가능하다.
 완료된이벤트 | 사용자는 완료된 이벤트 조회 가능하다.
+이벤트 게시판 상세 | 사용자는 이벤트 게시판 상세정보를 조회 가능하다.
 이벤트 게시글 작성 | 관리자는 이벤트 게시판에 글 작성이 가능하다. 사진 첨부도 가능하다.
 이벤트 게시글 수정 | 관리자는 이벤트 게시판에 글 수정이 가능하다. 저장된 자료가 불러와지고 사진이 있다면 조회할 수 있다. 사진 변경도 가능하다
 이벤트 게시글 삭제 | 관리자는 이벤트 게시판에 글 삭제가 가능하다.
@@ -53,6 +55,7 @@
 기능명 | 상세
 -------|-----
 지도 | 마커를 누르면 커스텀오버레이가 튀어나오고 커스텀오버레이를 클릭하면 해당 여행지 상세페이지로 이동한다. 커스텀 오버레이가 켜져있는 마커를 누르면 커스텀 오버레이가 꺼진다.
+여행상세정보지도 | 여행상세정보에 지도를 누르면 카카오맵으로 연결된다.
 ### 게시판
 기능명 | 상세
 -------|-----
@@ -129,13 +132,19 @@
 ![FireShot Capture 007 - Document - 127 0 0 1](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674342/761f3ad1-d755-4acd-8a3f-79a2be8413a6)
 
 
-### 8. 커뮤니티
-8-1 소셜링
-![sonof iptime org_9511_meeting](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/a5f73abd-85ac-4cef-b136-705c466db560)
-![sonof iptime org_9511_meetingDetailPage_meetingNo=201 readerNo=4](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/a262f250-5b22-46b9-a784-17d6716271b2)
-![sonof iptime org_9511_meetingOpenPage](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/ff2751d9-3a23-498a-a2d7-e695632d34d1)
+### 8. 이벤트 게시판
+8-1 이벤트 게시판 목록
 
-8-2 SNS
-![sonof iptime org_9511_sns_userNo=3](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/44e84ecc-302c-49c6-96dd-fe8784b39de5)
-![sonof iptime org_9511_sns_detail_snsPhotoNo=143](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/18b8b824-a4ed-402f-8992-ffa91f8f7127)
-![sonof iptime org_9511_sns_uploadPage](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/7dd2c363-f040-4cb4-ae5c-0220853b5213)
+8-2 이벤트 게시판 상세
+
+8-3 이벤트 게시판 
+
+
+### 9. 이벤트 게시판
+9-1 이벤트 게시판 목록
+
+9-2 이벤트 게시판 상세
+
+9-3 이벤트 게시판 작성, 수정폼과 거의 동일
+
+### 10. 지도
