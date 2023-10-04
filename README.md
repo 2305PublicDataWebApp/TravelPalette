@@ -121,6 +121,7 @@
 
 ### 8. 1:1 문의 답변
 8-1 1:1 문의 목록
+![responseList](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674363/83ebe5a6-dbf3-465e-8f9b-d98af6bafa69)
 
 8-2 1:1 문의 답변 상세
 ![responseDetail](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674363/b7b863a1-da93-49c4-8cad-fe4c519ce764)
@@ -130,9 +131,13 @@
 
 ### 9. 이벤트 게시판
 9-1 이벤트 게시판 목록
+![eventList](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674363/720fd051-9408-4cd4-a1c9-ff245ae22531)
 
 9-2 이벤트 게시판 상세
+![eventDetail](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674363/c25541a6-54c3-444e-a848-0ea0b2722adf)
 
 9-3 이벤트 게시판 작성, 수정폼과 거의 동일
+![eventWrite](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674363/f6f7b2af-79dc-400c-aa79-24d333518a73)
 
 ### 10. 지도
+![map](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674363/caf1e839-599b-4167-b675-0c674c0bcf3f)
