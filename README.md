@@ -125,7 +125,7 @@
 8-2 1:1 문의 답변 상세
 
 8-3 1:1 문의 답변 작성, 수정폼과 거의 동일 
-
+![responseWrite](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674363/9db23e36-2f9a-4a56-8969-8dda4e04f15d)
 
 ### 9. 이벤트 게시판
 9-1 이벤트 게시판 목록
