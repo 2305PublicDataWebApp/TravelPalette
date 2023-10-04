@@ -119,12 +119,12 @@
 ![FireShot Capture 007 - Document - 127 0 0 1](https://github.com/2305PublicDataWebApp/TravelPalette/assets/134674342/761f3ad1-d755-4acd-8a3f-79a2be8413a6)
 
 
-### 8. 이벤트 게시판
-8-1 이벤트 게시판 목록
+### 8. 1:1 문의 답변
+8-1 1:1 문의 목록
 
-8-2 이벤트 게시판 상세
+8-2 1:1 문의 답변 상세
 
-8-3 이벤트 게시판 
+8-3 1:1 문의 답변 작성, 수정폼과 거의 동일 
 
 
 ### 9. 이벤트 게시판
