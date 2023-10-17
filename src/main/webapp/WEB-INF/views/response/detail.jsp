@@ -20,7 +20,7 @@
         <div class="d-flex justify-content-center">
 
             <div id="inquiries" >
-                <h1 style="text-align: center; margin-top: 50px;">문의글 상세조회</h1><br>
+                <h1 style="text-align: center; margin-top: 50px;">문의글 상세 조회</h1><br>
                 <h3>${iPost.userId }님의 문의</h3>
                 <div id="question" class="inquiries">
                     <table class="table table-borderless">

@@ -20,7 +20,7 @@
         
         <!-- 메인 -->
         <main class="eventContent">
-	        <h1>이벤트 게시판 작성</h1>
+	        <h1>이벤트 게시판 수정</h1>
 	        <form action="/event/modify.tp" method="post" enctype="multipart/form-data">
 	   			<!-- 수정할 때, 리다이렉트 될 때 사용 -->
 				<input type="hidden" name="eventNo" value="${event.eventNo }">
